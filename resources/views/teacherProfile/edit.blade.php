@@ -6,7 +6,7 @@
   <form action="{{ url('/teacherProfile/'.$profile->id) }}" method="POST">
     {{ method_field('PUT') }}
     {{ csrf_field() }}
-    <input type="hidden" name="user_id" />
+    <input type="hidden" name="user_id" value="{{ $profile->user_id }}"/>
     <div class="form-group">
       <label for="fname">First Name</label>
       <input type="text" class="form-control" id="fname" name="fname" value="{{$profile['fname']}}" placeholder="First Name" required>
@@ -34,15 +34,16 @@
       <label for="address">Home Address</label>
       <textarea class="form-control" id="address" name="address" rows="2" required>{{$profile['address']}}</textarea>
     </div>
+    <!--
     <div class="form-group">
-    <label for="gender">Gender</label>
+    <label for="gender">Country</label>
     <select class="form-control" id="country" name="country">
       <?php $country = empty($profile['country'])? "VN" :  $profile['country']; ?>
       @foreach ($common->getCountries() as $k => $v)
       <option value="{{$k}}" {{ $country==$k? 'selected' : '' }}>{{$v}}</option>
       @endforeach
     </select>
-  </div>
+    </div> -->
     <div class="form-group">
       <input type="submit" class="btn btn-primary" value="Submit">
       <a href="{{url('/teacherProfile')}}" class="btn btn-default">Cancel</a>

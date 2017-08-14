@@ -70,9 +70,9 @@ class Student extends Eloquent
 	];
 
 	// Mutator
-	public function setUserIdAttribute($value) {
-		$this->attributes['user_id'] = Auth::user()->id;
-	}
+	//public function setUserIdAttribute($value) {
+	//	$this->attributes['user_id'] = Auth::user()->id;
+	//}
 
 	// Setter
 	public function getIdAttribute($value) {

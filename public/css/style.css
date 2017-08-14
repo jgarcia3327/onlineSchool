@@ -1,3 +1,13 @@
 .ui-datepicker {
   width: 100%;
 }
+.sched-time {
+  float: left;
+  width: 141px;
+}
+span.span-row {
+  display: block;
+  width: 100%;
+  text-align: right;
+  padding-right: 18px;
+}

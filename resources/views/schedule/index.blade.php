@@ -17,17 +17,17 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Time</th>
-                          <th>Date</th>
+                          <th>Date / Time</th>
                           <th>Student</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($schedules[0] AS $v)
                         <tr>
-                          <td>Lorem Ipsum</td>
-                          <td>Lorem Ipsum</td>
-                          <td>Lorem Ipsum</td>
+                          <td>{{$v->date_time}}</td>
+                          <td>Student here... [ Call ]</td>
                         </tr>
+                        @endforeach
                       </tbody>
                     </table>
                 </div>
@@ -39,19 +39,19 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Time</th>
-                          <th>Date</th>
+                          <th>Date / Time</th>
                           <th>Student</th>
                           <th>Memo</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($schedules[1] AS $v)
                         <tr>
-                          <td>Lorem Ipsum</td>
-                          <td>Lorem Ipsum</td>
-                          <td>Lorem Ipsum</td>
-                          <td>Lorem Ipsum</td>
+                          <td>{{ $v->date_time}}</td>
+                          <td>Studend here...</td>
+                          <td>Memo here...</td>
                         </tr>
+                        @endforeach
                       </tbody>
                     </table>
                 </div>

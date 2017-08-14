@@ -69,8 +69,8 @@ class Teacher extends Eloquent
 	];
 
 	// Mutator
-	public function setUserIdAttribute($value) {
-		$this->attributes['user_id'] = Auth::user()->id;
-	}
+	//public function setUserIdAttribute($value) {
+	//	$this->attributes['user_id'] = Auth::user()->id;
+	//}
 
 }

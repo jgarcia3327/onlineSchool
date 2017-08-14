@@ -7,11 +7,13 @@
 
 namespace App\Models;
 
+use Auth;
+
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Schedule
- * 
+ *
  * @property int $id
  * @property int $teacher_id
  * @property \Carbon\Carbon $date_time
@@ -36,6 +38,10 @@ class Schedule extends Eloquent
 		'modify_date'
 	];
 
+	protected $hidden = [
+		'teacher_id'
+	];
+
 	protected $fillable = [
 		'teacher_id',
 		'date_time',
@@ -43,4 +49,10 @@ class Schedule extends Eloquent
 		'create_date',
 		'modify_date'
 	];
+
+	// Mutator
+	public function setTeacherIdAttribute($value) {
+		$this->attributes['teacher_id'] = Auth::user()->id;
+	}
+
 }

@@ -17,11 +17,12 @@
 
                 <div class="panel-body">
                   <ul class="list-group">
-                    <li class="list-group-item"><strong>First Name:</strong> {{ $profile['fname'] }}</li>
-                    <li class="list-group-item"><strong>Last Name:</strong> {{ $profile['lname'] }}</li>
-                    <li class="list-group-item"><strong>Nick Name:</strong> {{ $profile['nname'] }}</li>
-                    <li class="list-group-item"><strong>Gender:</strong> {{ $profile['gender'] }}</li>
-                    <li class="list-group-item"><strong>Date of Birth:</strong> {{ $profile['dob'] }}</li>
+                    <li class="list-group-item"><strong>First Name:</strong> {{ $profile->fname }}</li>
+                    <li class="list-group-item"><strong>Last Name:</strong> {{ $profile->lname }}</li>
+                    <li class="list-group-item"><strong>Gender:</strong> {{ $profile->gender }}</li>
+                    <li class="list-group-item"><strong>Skype ID:</strong> {{ $profile->skype }}</li>
+                    <li class="list-group-item"><strong>Contact #:</strong> {{ $profile->contact }}</li>
+                    <li class="list-group-item"><strong>Home Address:</strong> {{ $profile->address }}</li>
                   </ul>
                 </div>
             </div>

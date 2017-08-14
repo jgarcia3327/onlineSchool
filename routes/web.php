@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::resource('teacherProfile', 'TeacherProfileController');
       Route::resource('teacherEducation', 'TeacherEducationController');
       Route::resource('schedule', 'ScheduleController');
+      Route::get('/schedule/ajax/{date}', 'ScheduleController@ajax');
 });
 
 Route::get('/profile/{profile}', 'ProfileController@show');

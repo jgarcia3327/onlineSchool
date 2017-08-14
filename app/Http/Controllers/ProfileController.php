@@ -88,7 +88,15 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+      $profile = Student::findOrFail($id);
+
+      if (!$this->isStudent() || $profile->user_id != Auth::user()->id) {
+          return redirect('/home');
+      }
+
+      $profile->update($request->all());
+
+      return redirect('/profile');
     }
 
     public function destroy($id)

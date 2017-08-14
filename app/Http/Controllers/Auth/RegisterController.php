@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
+use App\Models\Teacher;
+use App\Models\Student;
+
 class RegisterController extends Controller
 {
     /*
@@ -64,19 +67,55 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        Student::create([
+          'user_id' => $user->id,
+          'fname' => $data['fname'],
+          'lname' => $data['lname'],
+          'gender' => $data['gender'],
+          'skype' => $data['skype'],
+          'contact' => $data['contact'],
+          'address' => $data['address']
+        ]);
+
+        return $user;
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        //return $request;
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return redirect('/profile');
     }
 
     protected function createTeacher(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'is_student' => 0,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        Teacher::create([
+          'user_id' => $user->id,
+          'fname' => $data['fname'],
+          'lname' => $data['lname'],
+          'gender' => $data['gender'],
+          'skype' => $data['skype'],
+          'contact' => $data['contact'],
+          'address' => $data['address']
+        ]);
+
+        return $user;
     }
 
     public function registerTeacher(Request $request)
@@ -87,8 +126,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        return redirect('/teacherProfile');
     }
 
 }
