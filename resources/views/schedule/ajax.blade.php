@@ -23,7 +23,7 @@
               @elseif(date("Y-m-d H:i:s") >= $time[3]." ".$k)
                 <i class="text-danger">Past due date and time</i>
               @else
-                <label class="form-check-label"><input data-start-time="{{ $k }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input">Open</label>
+                <label class="form-check-label"><input data-start-time="{{ $k }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input"> Open</label>
               @endif
           </td>
           </tr>

@@ -28,7 +28,8 @@ class Schedule extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'teacher_id' => 'int',
+		'teacher_user_id' => 'int',
+		'student_user_id' => 'int',
 		'active' => 'bool'
 	];
 
@@ -39,11 +40,12 @@ class Schedule extends Eloquent
 	];
 
 	protected $hidden = [
-		'teacher_id'
+		'teacher_user_id'
 	];
 
 	protected $fillable = [
-		'teacher_id',
+		'teacher_user_id',
+		'student_user_id',
 		'date_time',
 		'active',
 		'create_date',
@@ -52,7 +54,7 @@ class Schedule extends Eloquent
 
 	// Mutator
 	public function setTeacherIdAttribute($value) {
-		$this->attributes['teacher_id'] = Auth::user()->id;
+		$this->attributes['teacher_user_id'] = Auth::user()->id;
 	}
 
 }

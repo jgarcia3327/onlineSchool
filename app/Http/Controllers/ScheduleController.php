@@ -24,10 +24,10 @@ class ScheduleController extends Controller
         if (!$this->isTeacher())
           return redirect('/home');
 
-        $condition = [['teacher_id','=',Auth::user()->id],
+        $condition = [['teacher_user_id','=',Auth::user()->id],
           ['date_time', '>=', date("Y-m-d H:i:s")]];
         $futureScheds = Schedule::where($condition)->orderBy('date_time', 'asc')->get();
-        $condition = [['teacher_id','=',Auth::user()->id],
+        $condition = [['teacher_user_id','=',Auth::user()->id],
           ['date_time', '<', date("Y-m-d H:i:s")]];
         $pastScheds = Schedule::where($condition)->orderBy('date_time', 'desc')->get();
 
@@ -65,12 +65,12 @@ class ScheduleController extends Controller
         $dataSet = [];
         foreach($request->date_time AS $timeSched) {
           $dataSet[] = [
-              'teacher_id' => Auth::user()->id,
+              'teacher_user_id' => Auth::user()->id,
               'date_time' => $timeSched
           ];
         }
         $sched->insert($dataSet);
-        return redirect('/schedule/create');
+        return redirect('/schedule');
     }
 
     /**
@@ -122,7 +122,7 @@ class ScheduleController extends Controller
       if (!$this->isTeacher()) {
           return null;
       }
-      $condition = [['teacher_id','=',Auth::user()->id],
+      $condition = [['teacher_user_id','=',Auth::user()->id],
         ['date_time', '>=', $date." 00:00:00"],
         ['date_time', '<=', $date." 23:59:59"]];
       $schedules = Schedule::where($condition)->get();

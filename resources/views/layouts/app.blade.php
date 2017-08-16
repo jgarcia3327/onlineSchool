@@ -51,6 +51,7 @@
 
                             <!-- Student -->
                             @if ($auth->is_student == 1)
+                              <li><a href="{{ url('/reserveTeacher') }}">Reserve Teachers</a></li>
                               <li><a href="{{ url('/profile') }}">My Profile</a></li>
                             @else
                               <!-- Teacher -->
