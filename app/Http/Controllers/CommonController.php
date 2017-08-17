@@ -3,6 +3,29 @@ namespace App\Http\Controllers;
 
 class CommonController
 {
+
+  public function getFormattedDateTimeRange($date) {
+    $dateFormat = date('l, F j, Y', strtotime($date));
+    $time = substr(strstr($date," "),1,5);
+    $hour = $hourTo = strstr($time,":",true);
+    if (strstr($time,":") == ":30"){
+      $hourTo += 1;
+      $ampmTo = $hourTo >= 12? "PM" : "AM";
+      $ampmTo = $hourTo == 24? "AM" : $ampmTo;
+      $hourTo = $hourTo >= 13 ? $hourTo - 12 : $hourTo;
+      $hourMinuteTo = $hourTo.":00";
+    }
+    else {
+      $ampmTo = $hourTo >= 12? "PM" : "AM";
+      $hourTo = $hourTo >= 13 ? $hourTo - 12 : $hourTo;
+      $hourMinuteTo =  $hourTo.":30";
+    }
+    $ampmFrom = $hour >= 12? "PM" : "AM";
+    $hourMinuteFrom = $hour >= 13? ($hour-12).strstr($time,":") : $time;
+    $dateFormat = date('l, F j, Y', strtotime($date));
+    return $dateFormat." | ".$hourMinuteFrom." ".$ampmFrom." - ".$hourMinuteTo." ".$ampmTo;
+  }
+
   public function getDeleteModal($id, $link) {
       return '<!-- Modal -->
   <div class="modal fade" id="'.$id.'" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

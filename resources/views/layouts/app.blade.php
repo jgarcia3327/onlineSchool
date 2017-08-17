@@ -56,6 +56,7 @@
                             @else
                               <!-- Teacher -->
                               <li><a href="{{ url('/schedule') }}">My Schedule</a></li>
+                              <li><a href="{{ url('/schedule/create') }}">Create Schedule</a></li>
                               <li><a href="{{ url('/teacherProfile') }}">My Profile</a></li>
                             @endif
 

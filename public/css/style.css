@@ -11,3 +11,6 @@ span.span-row {
   text-align: right;
   padding-right: 18px;
 }
+#selected-sched span.sel {
+  display: block;
+}

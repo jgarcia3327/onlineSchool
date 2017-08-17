@@ -17,11 +17,25 @@
                   </div>
                 </div>
             </div>
-            <!-- Per hour scheduling -->
-            <p class="loader text-center"><img src="{{ asset('images/ajax-loader.gif') }}"/></p>
-            <div class="panel panel-default" id="available-time">
 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <div id="selected-sched">
+                  <i class="text-danger none-selected">No schedule selected</i>
+                  </div>
+                  <span class="span-row pull-right"><button onclick="$('form#create-schedule').submit()" type="submit" class="btn btn-primary" id="submit-selected" disabled>Reserve</button></span>
+                </div>
             </div>
+
+            <p class="loader text-center"><img src="{{ asset('images/ajax-loader.gif') }}"/></p>
+
+            <form id="create-schedule" action="/reserveTeacher/{{ $teacher->user_id }}" method="POST">
+              {{ method_field('PUT') }}
+              {{ csrf_field() }}
+            <div id="available-time"></div>
+
+          </form>
+
         </div>
     </div>
 </div>

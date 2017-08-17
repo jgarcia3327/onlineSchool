@@ -1,8 +1,7 @@
-<form id="create-schedule" action="/schedule" method="POST">
-  {{ csrf_field() }}
+<?php $dateFormat = date('l, F j, Y', strtotime($time[3])); ?>
+<div class="panel panel-default schedule-load {{ $time[3] }}">
   <div class="panel-heading">
-    <h3 class="current-day"></h3>
-    <span class="span-row pull-right"><button type="submit" class="btn btn-primary" >Submit</button></span>
+    <h3>{{ $dateFormat }}</h3>
   </div>
   <div class="panel-body">
     <div class="col-md-6">
@@ -23,7 +22,7 @@
               @elseif(date("Y-m-d H:i:s") >= $time[3]." ".$k)
                 <i class="text-danger">Past due date and time</i>
               @else
-                <label class="form-check-label"><input data-start-time="{{ $k }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input"> Open</label>
+                <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input"> Open</label>
               @endif
           </td>
           </tr>
@@ -48,7 +47,7 @@
               @elseif(date("Y-m-d H:i:s") >= $time[3]." ".$k)
                 <i class="text-danger">Past due date and time</i>
               @else
-                <label class="form-check-label"><input data-start-time="{{ $k }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input">Open</label>
+                <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input">Open</label>
               @endif
             </td>
           </tr>
@@ -56,6 +55,5 @@
         </tbody>
       </table>
     </div>
-    <span class="span-row pull-right"><button type="submit" class="btn btn-primary" >Submit</button></span>
   </div>
-</form>
+</div>

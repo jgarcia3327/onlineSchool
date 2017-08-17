@@ -6,19 +6,28 @@ $(document).ready(function(){
     });
 
     // Display current date
-    var date = new Date($( "#datepicker" ).val());
-    getSavedDateTime(date, $( "#datepicker" ).val());
+    var dateStr = $( "#datepicker" ).val();
+    getSavedDateTime(dateStr);
     // Display current date on-change
     $("#datepicker").change(function(){
         $(".loader").css({"display":"block"});
-        $("#available-time").css({"display":"none"});
+        $(".schedule-load").css({"display":"none"});
         date = new Date($( "#datepicker" ).val());
-        getSavedDateTime(date, $( "#datepicker" ).val());
+        dateStr = $( "#datepicker" ).val();
+        //Find if selected date is already loaded
+        if ($("#available-time").find(".schedule-load").hasClass(dateStr)){
+          $("#available-time .schedule-load."+dateStr).css({"display":"block"});
+          $(".loader").css({"display":"none"});
+        }
+        //load page if not
+        else{
+          getSavedDateTime(dateStr);
+        }
     });
 
 });
 
-function getSavedDateTime(date, dateStr) {
+function getSavedDateTime(dateStr) {
   var slicePoint = window.location.pathname.lastIndexOf('/');
   var length = window.location.pathname.length;
   var teacherId = window.location.pathname.substring(slicePoint+1, length);
@@ -30,43 +39,30 @@ function getSavedDateTime(date, dateStr) {
 
   request.done(function( result ) {
     console.log(result);
-    $( "#available-time" ).html( result );
-    $(".current-day").html(dateDisplayFormat(date));
-    //populateCheckboxVal(date);
+    $( "#available-time" ).append( result );
     $(".loader").css({"display":"none"});
-    $("#available-time").css({"display":"block"});
+    //Checkbox change value
+    $("input[type='checkbox']").change(function(){
+      var sel = $(this).val();
+      if(this.checked){
+        $("#selected-sched").append("<span class='text-success sel "+sel+"'>"+$(this).data("sched-date")+"</span>");
+      }
+      else{
+        $("span").remove("."+sel);
+      }
+      //activate submit button
+      if($("#selected-sched span").hasClass("sel")){
+        $("#submit-selected").removeAttr("disabled");
+        $(".none-selected").css({"display":"none"});
+      }
+      else{
+        $("#submit-selected").attr({disabled : "disabled"});
+        $(".none-selected").css({"display":"block"});
+      }
+    });
   });
 
   request.fail(function( jqXHR, textStatus ) {
     alert( "Request failed: " + textStatus );
   });
-}
-
-/*
-function populateCheckboxVal(date) {
-  //Populate create-schedule form
-  var yyyy = date.getFullYear();
-  var mm = date.getMonth()+1 < 10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
-  var dd = date.getDate() < 10 ? "0"+date.getDate() : date.getDate();
-  var mysqlDateFormat = yyyy + '-' + mm + '-' + dd;
-  $("#create-schedule input[type='checkbox']").each(function(){
-    $(this).val(mysqlDateFormat + ' ' + $(this).data("start-time"));
-  });
-}*/
-
-function dateDisplayFormat(date) {
-  var months = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-  ];
-  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-  var dayName = days[date.getDay()];
-  var day = date.getDate();
-  var month = months[date.getMonth()];
-  var year = date.getFullYear();
-
-  return dayName + ', ' + month + ', ' + day + ' ' + year;
 }

@@ -36,7 +36,7 @@ class ReserveTeacherController extends Controller
       $condition = [['teacher_user_id','=',$teacherUserId],
         ['date_time', '>=', $date." 00:00:00"],
         ['date_time', '<=', $date." 23:59:59"]];
-      $schedules = Schedule::where($condition)->get();
+      $schedules = Schedule::where($condition)->orderBy('date_time', 'asc')->get();
       $scheds = array();
       $enrolees = array();
       foreach($schedules AS $schedule ) {

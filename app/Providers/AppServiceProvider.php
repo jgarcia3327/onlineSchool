@@ -20,10 +20,9 @@ class AppServiceProvider extends ServiceProvider
     {
       Schema::defaultStringLength(191);
 
-      View::share ('common', new CommonController());
-
       View::composer('*', function($view) {
           $view->with('auth', Auth::user());
+          $view->with('common', new CommonController());
       });
     }
 
