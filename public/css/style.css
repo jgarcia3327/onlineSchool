@@ -1,5 +1,16 @@
-.ui-datepicker {
+#week-datepicker .ui-datepicker, #datepicker .ui-datepicker {
   width: 100%;
+}
+#week-datepicker tbody .ui-datepicker-week-col {
+  font-weight: bold;
+  text-align: center;
+  background-color: #74bce4;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#week-datepicker tbody .ui-datepicker-week-col:hover {
+  background-color: #c7e5f5;
 }
 .sched-time {
   float: left;

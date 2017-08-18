@@ -12,7 +12,6 @@ $(document).ready(function(){
     $("#datepicker").change(function(){
         $(".loader").css({"display":"block"});
         $(".schedule-load").css({"display":"none"});
-        date = new Date($( "#datepicker" ).val());
         dateStr = $( "#datepicker" ).val();
         //Find if selected date is already loaded
         if ($("#available-time").find(".schedule-load").hasClass(dateStr)){

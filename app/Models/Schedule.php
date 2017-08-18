@@ -47,6 +47,7 @@ class Schedule extends Eloquent
 		'teacher_user_id',
 		'student_user_id',
 		'date_time',
+		'memo',
 		'active',
 		'create_date',
 		'modify_date'

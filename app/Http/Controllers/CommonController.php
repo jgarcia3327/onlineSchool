@@ -4,6 +4,21 @@ namespace App\Http\Controllers;
 class CommonController
 {
 
+  public function getStartAndEndDate($week, $year) {
+
+    $time = strtotime("1 January $year", time());
+    $day = date('w', $time);
+    $time += ((7*$week)+1-$day)*24*3600;
+    $return[0] = date('Y-m-d', $time);
+    $time += 6*24*3600;
+    $return[1] = date('Y-m-d', $time);
+    return $return;
+  }
+
+  public function getFormattedDate($date) {
+    return date('l, F j, Y', strtotime($date));
+  }
+
   public function getFormattedDateTimeRange($date) {
     $dateFormat = date('l, F j, Y', strtotime($date));
     $time = substr(strstr($date," "),1,5);

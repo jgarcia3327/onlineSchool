@@ -8,53 +8,28 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <!-- Future lessons -->
-            <div class="panel panel-default">
-                <div class="panel-heading">Future Lessons</div>
-                <div class="panel-body">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Date / Time</th>
-                          <th>Student</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($schedules[0] AS $v)
-                        <tr>
-                          <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
-                          <td>Student here... [ Call ]</td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
+
+          <!-- Calendar display -->
+          <div class="panel panel-default">
+              <div class="panel-heading">Choose a day or week to display your lessons</div>
+              <div class="panel-body">
+                <div class="col-md-8 col-md-offset-2">
+                  <div id="week-datepicker"></div>
                 </div>
-            </div>
-            <!-- Past Lessons -->
-            <div class="panel panel-default">
-                <div class="panel-heading">Past Lessons</div>
-                <div class="panel-body">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Date / Time</th>
-                          <th>Student</th>
-                          <th>Memo</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($schedules[1] AS $v)
-                        <tr>
-                          <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
-                          <td>Studend here...</td>
-                          <td>Memo here...</td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                </div>
-            </div>
+              </div>
+          </div>
+
+          <p class="loader text-center"><img src="{{ asset('images/ajax-loader.gif') }}"/></p>
+
+          <div id="lessons-list">
+
+          </div>
+
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript" src="{{ asset('js/display-teacher.js') }}"></script>
 @endsection
