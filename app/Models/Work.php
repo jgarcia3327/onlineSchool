@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Work
- * 
+ *
  * @property int $id
  * @property int $teacher_id
  * @property int $student_id
@@ -31,8 +31,7 @@ class Work extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'teacher_id' => 'int',
-		'student_id' => 'int',
+		'user_id' => 'int',
 		'active' => 'bool'
 	];
 
@@ -44,8 +43,7 @@ class Work extends Eloquent
 	];
 
 	protected $fillable = [
-		'teacher_id',
-		'student_id',
+		'user_id',
 		'company',
 		'start_date',
 		'end_date',

@@ -34,16 +34,14 @@
       <label for="address">Home Address</label>
       <textarea class="form-control" id="address" name="address" rows="2" required>{{$profile['address']}}</textarea>
     </div>
-    <!--
     <div class="form-group">
-    <label for="gender">Country</label>
-    <select class="form-control" id="country" name="country">
-      <?php $country = empty($profile['country'])? "VN" :  $profile['country']; ?>
-      @foreach ($common->getCountries() as $k => $v)
-      <option value="{{$k}}" {{ $country==$k? 'selected' : '' }}>{{$v}}</option>
-      @endforeach
-    </select>
-    </div> -->
+      <select class="form-control" id="esl_experience" name="esl_experience" required>
+        <option value="1-5 Years" {{$profile->esl_experience == "1-5 Years"? "selected" : ""}}>1-5 Years</option>
+        <option value="6-10 Years" {{$profile->esl_experience == "6-10 Years"? "selected" : ""}}>6-10 Years</option>
+        <option value="11-15 Years" {{$profile->esl_experience == "11-15 Years"? "selected" : ""}}>11-15 Years</option>
+        <option value="15+ Years" {{$profile->esl_experience == "15+ Years"? "selected" : ""}}>15+ Years</option>
+      </select>
+    </div>
     <div class="form-group">
       <input type="submit" class="btn btn-primary" value="Submit">
       <a href="{{url('/teacherProfile')}}" class="btn btn-default">Cancel</a>

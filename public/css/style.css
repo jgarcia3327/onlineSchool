@@ -25,3 +25,11 @@ span.span-row {
 #selected-sched span.sel {
   display: block;
 }
+.profile-photo img{
+  margin-bottom: 21px;
+  border-radius: 50%;
+  width: 180px;
+}
+.photo-form input[type=file], .audio-form input[type=file] {
+  display: inline;
+}

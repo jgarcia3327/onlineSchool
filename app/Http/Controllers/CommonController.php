@@ -4,6 +4,27 @@ namespace App\Http\Controllers;
 class CommonController
 {
 
+  public function getMonthStr($month){
+    return $this->getMonths()[intval($month)];
+  }
+
+  public function getMonths(){
+    return array(
+      1 => "January",
+      2 => "February",
+      3 => "March",
+      4 => "April",
+      5 => "May",
+      6 => "June",
+      7 => "July",
+      8 => "August",
+      9 => "September",
+      10 => "October",
+      11 => "November",
+      12 => "December"
+    );
+  }
+
   public function getStartAndEndDate($week, $year) {
 
     $time = strtotime("1 January $year", time());

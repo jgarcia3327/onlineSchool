@@ -55,6 +55,7 @@ class Teacher extends Eloquent
 		'mname',
 		'lname',
 		'nname',
+		'esl_experience',
 		'dob',
 		'gender',
 		'skype',

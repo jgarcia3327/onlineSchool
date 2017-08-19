@@ -49,7 +49,17 @@ class TeacherEducationController extends Controller
       if (!$this->isTeacher()) {
           return redirect('/home');
       }
-      $id = Education::create($request->all())->id;
+      $education = new Education;
+      $dataSet[] = [
+            'user_id' => Auth::user()->id,
+            'school_name' => $request->school_name,
+            'degree' => $request->degree,
+            'start_date' => $request->start_year."-".$request->start_month."-"."01",
+            'end_date' => $request->end_year."-".$request->end_month."-"."01"
+        ];
+      $education->insert($dataSet);
+
+      $id = $education->id;
       return redirect('/teacherProfile/'.Auth::user()->id);
     }
 
@@ -92,7 +102,11 @@ class TeacherEducationController extends Controller
         if ($education->user_id != Auth::user()->id) {
             return redirect('/home');
         }
-        $education->update($request->all());
+        $education->school_name = $request->school_name;
+        $education->degree = $request->degree;
+        $education->start_date = $request->start_year."-".$request->start_month."-"."01";
+        $education->end_date = $request->end_year."-".$request->end_month."-"."01";
+        $education->save();
 
         return redirect('/teacherProfile');
     }

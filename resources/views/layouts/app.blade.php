@@ -55,9 +55,17 @@
                               <li><a href="{{ url('/profile') }}">My Profile</a></li>
                             @else
                               <!-- Teacher -->
-                              <li><a href="{{ url('/schedule') }}">My Schedule</a></li>
-                              <li><a href="{{ url('/schedule/create') }}">Create Schedule</a></li>
                               <li><a href="{{ url('/teacherProfile') }}">My Profile</a></li>
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                      Schedule <span class="caret"></span>
+                                  </a>
+
+                                  <ul class="dropdown-menu" role="menu">
+                                      <li><a href="{{ url('/schedule') }}">My Schedule</a></li>
+                                      <li><a href="{{ url('/schedule/create') }}">Create Schedule</a></li>
+                                  </ul>
+                              </li>
                             @endif
 
                             <li class="dropdown">

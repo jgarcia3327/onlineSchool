@@ -112,7 +112,8 @@ class RegisterController extends Controller
           'gender' => $data['gender'],
           'skype' => $data['skype'],
           'contact' => $data['contact'],
-          'address' => $data['address']
+          'address' => $data['address'],
+          'esl_experience' => $data['esl_experience']
         ]);
 
         return $user;

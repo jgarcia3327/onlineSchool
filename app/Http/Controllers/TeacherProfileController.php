@@ -8,6 +8,7 @@ use View;
 use Auth;
 use App\Models\Teacher;
 use App\Models\Education;
+use Image;
 
 class TeacherProfileController extends Controller
 {
@@ -119,7 +120,46 @@ class TeacherProfileController extends Controller
     public function update(Request $request, $id)
     {
 
+        //dd(base_path());
         $teacherProfile = Teacher::findOrFail($id);
+
+        if($request->hasFile('photo')) {
+          $imageFiles = array(
+            'image/gif',
+            'image/jpeg',
+            'image/png'
+          );
+          if (in_array($request->photo->getClientMimeType(), $imageFiles)) {
+            $file = $request->file('photo');
+            $location = public_path('images/profile/');
+            $file->move($location, $teacherProfile->user_id.strrchr($request->photo->getClientOriginalName(), "."));
+            $img = Image::make(sprintf($location.'%s', $teacherProfile->user_id.strrchr($request->photo->getClientOriginalName(), ".")));
+            $img->fit(180, 180);
+            $img->save();
+            $teacherProfile->photo = $teacherProfile->user_id.strrchr($request->photo->getClientOriginalName(), ".");
+            $teacherProfile->save();
+          }
+          return redirect('/teacherProfile');
+        }
+
+        if($request->hasFile('audio')) {
+          //dd($request->audio);
+          $audioFiles = array(
+            'audio/mpeg',
+            'audio/mp3',
+            'audio/mp4',
+            'audio/ogg',
+            'audio/vnd.wav'
+          );
+          if (in_array($request->audio->getClientMimeType(), $audioFiles)) {
+            $file = $request->file('audio');
+            $location = public_path('audio/');
+            $file->move($location, $teacherProfile->user_id.strrchr($request->audio->getClientOriginalName(), "."));
+            $teacherProfile->audio = $teacherProfile->user_id.strrchr($request->audio->getClientOriginalName(), ".");
+            $teacherProfile->save();
+          }
+          return redirect('/teacherProfile');
+        }
 
         if (!$this->isTeacher() || $teacherProfile->user_id != Auth::user()->id) {
             return redirect('/home');
