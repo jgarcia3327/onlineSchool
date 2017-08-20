@@ -81,13 +81,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    English Hours
+                    Page not found : 404 error
                 </div>
 
                 <div class="links">
-                    <a href="{{url('/register')}}">Student Registration</a>
-                    <a href="{{url('/register/teacher')}}">Teacher Registration</a>
-                    <a href="{{ url('/login') }}">Login</a>
+                    <a href="{{url('')}}">Home</a>
                 </div>
             </div>
         </div>

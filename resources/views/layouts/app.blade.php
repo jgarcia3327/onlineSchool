@@ -31,7 +31,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'OnlineSchool') }}
+                        EnglishHours.net
                     </a>
                 </div>
 
@@ -46,7 +46,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <!--<li><a href="{{ route('register') }}">Register</a></li>-->
                         @else
 
                             <!-- Student -->
