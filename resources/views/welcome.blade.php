@@ -32,15 +32,31 @@
 						</div>
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a href="#courses">Courses</a></li>
+								<li role="presentation" class="active"><a href="#courses">Các khóa học</a></li>
                 @if (Auth::check() && $auth->is_student == 1)
-                <li role="presentation"><a href="{{ url('/lessons') }}">My Lessons</a></li>
+                <li role="presentation"><a href="{{ url('/lessons') }}">Những bài học của tôi</a></li>
+                <li role="presentation"><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                    Đăng xuất
+                </a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
                 @elseif(Auth::check() && $auth->is_student == 0)
                 <li role="presentation"><a href="{{ url('/schedule') }}">My Schedule</a></li>
+                <li role="presentation"><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                    Logout
+                </a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
                 @else
-								<li role="presentation"><a href="{{ url('/register') }}">Student Registration</a></li>
-								<li role="presentation"><a href="{{ url('/register/teacher') }}">Teacher Registration</a></li>
-								<li role="presentation"><a href="{{ url('/login') }}">Login</a></li>
+								<li role="presentation"><a href="{{ url('/register') }}">Đăng ký sinh viên</a></li>
+								<li role="presentation"><a href="{{ url('/register/teacher') }}">Đăng ký giáo viên</a></li>
+								<li role="presentation"><a href="{{ url('/login') }}">Đăng nhập</a></li>
                 @endif
 							</ul>
 						</div>
@@ -61,9 +77,9 @@
 							<div class="slide-body" data-group="slide">
 								<img src="{{ asset('img/2a.jpg') }}" alt="">
 								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-									<button class="btn btn-primary"><h2>Our system can run using desktop</h2></button>
-									<div class="caption-sub" data-animate="slideAppearDownToUp" data-delay="1200" data-length="300"><button class="btn btn-primary"><h4><span>Try it now, it's free for a limited time offer only</span></h4></button></div>
-									<div class="caption-sub" data-animate="slideAppearLeftToRight" data-delay="900" data-length="300"><button class="btn btn-primary"><h3>Easy to use online english tutorial</h3></button></div>
+									<button class="btn btn-primary"><h2>Chạy trong máy tính để bàn</h2></button>
+									<div class="caption-sub" data-animate="slideAppearDownToUp" data-delay="1200" data-length="300"><button class="btn btn-primary"><h4><span>Đăng ký MIỄN PHÍ TRƯỚC</span></h4></button></div>
+									<div class="caption-sub" data-animate="slideAppearLeftToRight" data-delay="900" data-length="300"><button class="btn btn-primary"><h3>Chỉ cung cấp hạn chế</h3></button></div>
 								</div>
 							</div>
 						</li>
@@ -71,9 +87,9 @@
 							<div class="slide-body" data-group="slide">
 								<img src="{{ asset('img/1.jpg') }}" alt="">
 								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
-									<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><h2>You can use tablets / mobile phones</h2></button>
-									<div class="caption-sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300"><button class="btn btn-primary"><h4><span>Just visit www.englishhours.net with your favorite tablet/mobile browser</span></h4></button></div>
-									<div class="caption-sub" data-animate="slideAppearRightToLeft" data-delay="1200" data-length="300"><button class="btn btn-primary"><h3>And your ready to have a class</h3></button></div>
+									<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><h2>Đáp ứng</h2></button>
+									<div class="caption-sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300"><button class="btn btn-primary"><h4><span>Chạy trong máy tính bảng và điện thoại di động</span></h4></button></div>
+									<div class="caption-sub" data-animate="slideAppearRightToLeft" data-delay="1200" data-length="300"><button class="btn btn-primary"><h3>Thử ngay bây giờ</h3></button></div>
 								</div>
 							</div>
 						</li>
@@ -81,9 +97,9 @@
 							<div class="slide-body" data-group="slide">
 								<img src="{{ asset('img/10.jpg') }}" alt="">
 								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-								  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><h2>Learning is easy with us</h2></button>
-								  <div class="caption-sub" data-animate="slideAppearLeftToRight" data-delay="800" data-length="300"><button class="btn btn-primary"><h4>Try our system</h4></button></div>
-								  <div class="caption-sub" data-animate="slideAppearDownToUp" data-delay="1200" data-length="300"><button class="btn btn-primary"><h3><span>And register</span></h3></button></div>
+								  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><h2>Học tập thật dễ dàng</h2></button>
+								  <div class="caption-sub" data-animate="slideAppearLeftToRight" data-delay="800" data-length="300"><button class="btn btn-primary"><h4>Học tập dễ dàng với chúng tôi</h4></button></div>
+								  <div class="caption-sub" data-animate="slideAppearDownToUp" data-delay="1200" data-length="300"><button class="btn btn-primary"><h3>Hãy thử hệ thống của chúng tôi ngay bây giờ</h3></button></div>
 
 								</div>
 							</div>
@@ -104,9 +120,9 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="contents">
-					<h2>Easy to use apps.</h2>
-          <p>Can be used in desktop, tablet, and in mobile phone.</p>
-					<p><a href="{{ url('/register') }}">SIGN UP FOR FREE TRIAL</a></p>
+					<h2>Dễ dàng sử dụng ứng dụng</h2>
+          <p>Có thể được sử dụng trong máy tính để bàn, máy tính bảng và điện thoại di động</p>
+					<p><a href="{{ url('/register') }}">Đăng ký MIỄN PHÍ TRƯỚC</a></p>
 				</div>
 			</div>
 		</div>
@@ -117,7 +133,7 @@
 	<div class="container" id="courses">
 		<div class="row">
 			<div class="recent">
-				<button class="btn-primarys"><h3>Courses</h3></button>
+				<button class="btn-primarys"><h3>Các khóa học</h3></button>
 				<hr>
 			</div>
 		</div>
@@ -133,24 +149,17 @@
 							<div class="icon">
 								<i class="fa fa-list fa-3x"></i>
 							</div>
-							<p>
-							 We have teachers that are highly qualified to teach IELTS/TOEIC/TOEFL courses.
-							</p>
-
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.8s">
 						<div class="align-center">
-							<h4>BUSINESS/OFFICE ENGLISH</h4>
+							<h4>VĂN PHÒNG KINH DOANH / VĂN PHÒNG</h4>
 							<div class="icon">
 								<i class="fa fa-location-arrow fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english courses that are suitable for business and office.
-							</p>
 						</div>
 					</div>
 				</div>
@@ -162,84 +171,76 @@
 								<i class="fa fa-cloud fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english FREETALK course for conversational english exercises.
-							</p>
 						</div>
 					</div>
 				</div>
+      </div>
+    </div>
+    <div class="row">
+			<div class="content">
         <div class="col-md-4">
 					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
 						<div class="align-center">
-							<h4>ENGLISH FOR KIDS</h4>
+							<h4>TIẾNG ANH CHO CON</h4>
 							<div class="icon">
 								<i class="fa fa-comments fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english courses for kids.
-							</p>
 						</div>
 					</div>
 				</div>
         <div class="col-md-4">
 					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
 						<div class="align-center">
-							<h4>PUBLIC SPEAKING</h4>
+							<h4>NÓI TRƯỚC CÔNG CHÚNG</h4>
 							<div class="icon">
 								<i class="fa fa-bullhorn fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english courses for public speaking.
-							</p>
 						</div>
 					</div>
 				</div>
         <div class="col-md-4">
 					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
 						<div class="align-center">
-							<h4>WRITING AND COMPOSITION</h4>
+							<h4>Viết và thành phần</h4>
 							<div class="icon">
 								<i class="fa fa-file-text fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english courses for writing and composition.
-							</p>
 						</div>
 					</div>
 				</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="content">
         <div class="col-md-4">
 					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
 						<div class="align-center">
-							<h4>READING AND COMPREHENSION</h4>
+							<h4>ĐỌC VÀ THAM GIA</h4>
 							<div class="icon">
 								<i class="fa fa-book fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english courses for reading and comprehension.
-							</p>
 						</div>
 					</div>
 				</div>
         <div class="col-md-4">
 					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
 						<div class="align-center">
-							<h4>LISTENING</h4>
+							<h4>Nghe</h4>
 							<div class="icon">
 								<i class="fa fa-play fa-3x"></i>
 
 							</div>
-							<p>
-							 We offer english courses for listening.
-							</p>
 						</div>
 					</div>
 				</div>
 
+        <div class="col-md-4">
 
+				</div>
 			</div>
 		</div>
 	</div>
