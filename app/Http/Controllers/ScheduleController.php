@@ -149,16 +149,18 @@ class ScheduleController extends Controller
         //dd($scheds);
         $futureScheds = $pastScheds = null;
         $teachersArray = array();
-        foreach($scheds AS $sched){
-          if ($sched->teacher_user_id != null ) $teachersArray[] = $sched->teacher_user_id;
-          if ($sched->date_time >= date("Y-m-d H:i:s")){
-            $futureScheds[] = $sched;
-          }
-          else{
-            $pastScheds[] = $sched;
+        if ($scheds != null && count($scheds) > 0) {
+          foreach($scheds AS $sched){
+            if ($sched->teacher_user_id != null ) $teachersArray[] = $sched->teacher_user_id;
+            if ($sched->date_time >= date("Y-m-d H:i:s")){
+              $futureScheds[] = $sched;
+            }
+            else{
+              $pastScheds[] = $sched;
+            }
           }
         }
-        $teachers = array();
+        $teachers = null;
         if ($teachersArray != null && count($teachersArray) > 0) {
           $teachersArray = array_unique($teachersArray);
           foreach($teachersArray AS $v) {
@@ -166,7 +168,9 @@ class ScheduleController extends Controller
           }
         }
 
-        $pastScheds = array_reverse($pastScheds);
+        if($pastScheds != null) {
+          $pastScheds = array_reverse($pastScheds);
+        }
 
         $schedules = array($futureScheds, $pastScheds, $date, $dateRange, $teachers);
 
@@ -221,7 +225,9 @@ class ScheduleController extends Controller
         }
       }
 
-      $pastScheds = array_reverse($pastScheds);
+      if($pastScheds != null) {
+        $pastScheds = array_reverse($pastScheds);
+      }
 
       $schedules = array($futureScheds, $pastScheds, $date, $dateRange, $students);
 

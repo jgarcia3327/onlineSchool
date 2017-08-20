@@ -38,6 +38,10 @@ class TeacherProfileController extends Controller
 
     public function index()
     {
+      if (!$this->isTeacher()) {
+        return redirect('');
+      }
+
       if (!$this->hasProfile()) {
             return redirect('/teacherProfile/create');
       }
