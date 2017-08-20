@@ -33,10 +33,15 @@
 						<div class="menu">
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active"><a href="#courses">Courses</a></li>
-
+                @if (Auth::check() && $auth->is_student == 1)
+                <li role="presentation"><a href="{{ url('/lessons') }}">My Lessons</a></li>
+                @elseif(Auth::check() && $auth->is_student == 0)
+                <li role="presentation"><a href="{{ url('/schedule') }}">My Schedule</a></li>
+                @else
 								<li role="presentation"><a href="{{ url('/register') }}">Student Registration</a></li>
 								<li role="presentation"><a href="{{ url('/register/teacher') }}">Teacher Registration</a></li>
 								<li role="presentation"><a href="{{ url('/login') }}">Login</a></li>
+                @endif
 							</ul>
 						</div>
 					</div>
