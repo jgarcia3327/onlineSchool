@@ -32,7 +32,7 @@
               $vformat = $hour.$min." ".$ampm." - ".$hour.":30 ".$ampm;
             }
           ?>
-
+          @if( $time[1][$k] == $auth->id || date("Y-m-d H:i:s") < $time[2]." ".$v )
           <tr>
             <td>{{ $vformat }}</td>
             <td>
@@ -47,6 +47,7 @@
               @endif
           </td>
           </tr>
+          @endif
           @endforeach()
           @if($counter == 0)
           <tr>

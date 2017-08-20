@@ -10,9 +10,16 @@
                 <div class="panel-body">
                   <div class="row text-center">
                   <?php $counter = 0; ?>
-                  @foreach($teachers AS $k => $v)
-                    <div class="col-md-4">
-                      <a href="{{ url('reserveTeacher/'.$k) }}">{{ $v }}</a>
+                  @foreach($teachers AS $v)
+                    <div class="col-md-4 profile-photo">
+                      <a href="{{ url('reserveTeacher/'.$v->user_id) }}">
+                      @if(Auth::check() && $v->photo != null)
+                      <img src="{{ asset('images/profile/') }}/{{ $v->photo }}"/>
+                      @else
+                      <img src="{{ asset('images/profile/default_') }}{{ $v->gender }}.png"/>
+                      @endif
+                      </a>
+                      <a href="{{ url('reserveTeacher/'.$v->user_id) }}">{{ $v->fname }} {{ $v->lname }}</a>
                     </div>
                     <?php $counter++; ?>
                     @if ($counter % 3 == 0)

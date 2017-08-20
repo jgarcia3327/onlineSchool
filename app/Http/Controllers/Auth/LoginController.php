@@ -63,10 +63,10 @@ class LoginController extends Controller
 
         //Redirect after login
         if ($this->guard()->user()->is_student == 0) {
-          $redirectTo = '/teacherDashboard';
+          $redirectTo = '/schedule';
         }
         else {
-          $redirectTo = '/dashboard';
+          $redirectTo = '/lessons';
         }
 
         return $this->authenticated($request, $this->guard()->user())

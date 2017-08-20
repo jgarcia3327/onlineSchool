@@ -22,7 +22,23 @@
             @foreach($schedules[0] AS $v)
             <tr>
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
-              <td>Student here... [ Call ]</td>
+              <td>
+                @if($v->student_user_id != null && $schedules[4][$v->student_user_id] != null)
+                  {{ $schedules[4][$v->student_user_id]->fname }} {{ $schedules[4][$v->student_user_id]->lname }}
+                  @if($v->called == null)
+                  <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+                    <input type="hidden" name="called" value="1">
+                    <input type="submit" value="Call"/>
+                  </form>
+                  @else
+                  [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
+                  @endif
+                @else
+                  Open
+                @endif
+              </td>
             </tr>
             @endforeach
             @endif
@@ -47,8 +63,41 @@
             @foreach($schedules[1] AS $v)
             <tr>
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
-              <td>Studend here...</td>
-              <td>Memo here...</td>
+              <td>
+                @if($v->student_user_id != null && $schedules[4][$v->student_user_id] != null)
+                  {{ $schedules[4][$v->student_user_id]->fname }} {{ $schedules[4][$v->student_user_id]->lname }}
+                @else
+                  Open
+                @endif
+              </td>
+              <td>
+                @if($v->student_user_id != null && $schedules[4][$v->student_user_id] != null)
+                  @if($v->memo != null)
+                  <p>Memo: {{ $v->memo }}</p>
+                  <p>Memo Book: {{ $v->memo_book }}</p>
+                  <p>Memo Next Page: {{ $v->memo_book }}</p>
+                  @elseif($v->called == 1)
+                  <form action="{{ url('schedule/'.$v->id) }}" method="POST">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                      <select class="form-control" id="memo" name="memo" required placeholder="Memo">
+                        <option value=""></option>
+                        <option>Reading</option>
+                        <option>Writing</option>
+                        <option>Speaking</option>
+                        <option>Listening</option>
+                      </select>
+                      <input class="form-control" type="text" id="memo_book" name="memo_book" required placeholder="Memo Book">
+                      <input class="form-control" type="text" id="memo_next_page" name="memo_next_page" required placeholder="Memo Next Page">
+                      <input class="form-control btn btn-primary" type="submit" value="Submit" />
+                    </div>
+                  </form>
+                  @else
+                  <i class="text-danger">Missed Session</i>
+                  @endif
+                @endif
+              </td>
             </tr>
             @endforeach
             @endif

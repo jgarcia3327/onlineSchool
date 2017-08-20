@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Schedule;
 use App\Http\Controllers\CommonController;
+use App\Models\Student;
+use App\Models\Teacher;
 
 class ScheduleController extends Controller
 {
@@ -23,7 +25,7 @@ class ScheduleController extends Controller
     public function index()
     {
         if (!$this->isTeacher())
-          return redirect('/home');
+          return view('schedule.lesson');
 
         return view('schedule.index');
     }
@@ -62,7 +64,7 @@ class ScheduleController extends Controller
           ];
         }
         $sched->insert($dataSet);
-        return redirect('/schedule/create');
+        return redirect('/schedule');
     }
 
     /**
@@ -96,7 +98,13 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!$this->isTeacher()) {
+            return redirect('/schedule');
+        }
+
+        $schedule = Schedule::findOrFail($id);
+        $schedule->update($request->all());
+        return redirect('/schedule');
     }
 
     /**
@@ -112,8 +120,62 @@ class ScheduleController extends Controller
 
     public function index_ajax($date) {
       if (!$this->isTeacher()) {
-          return null;
+        //Student
+        //Check if it is per week
+        $dateRange = null;
+        if (strpos($date, "_") !== false) {
+          $week = strstr($date,"_",true);
+          $year = substr(strstr($date,"_"),1);
+          //JS release week number per year in advance of 1 week and we need to -1 to inline with JS
+          $week = $week != 0 ? ($week-1) : 1;
+          $dates = new CommonController();
+          $dateStart = $dates->getStartAndEndDate($week, $year)[0];
+          $dateEnd = $dates->getStartAndEndDate($week, $year)[1];
+          $condition = [['student_user_id','=',Auth::user()->id],
+            ['date_time', '>=', $dateStart." 00:00:00"],
+            ['date_time', '<=', $dateEnd." 23:59:59"]
+          ];
+          $date = null;
+          $dateRange = array($dateStart, $dateEnd);
+        }
+        else {
+          $condition = [['student_user_id','=',Auth::user()->id],
+            ['date_time', '>=', $date." 00:00:00"],
+            ['date_time', '<=', $date." 23:59:59"]
+          ];
+          //dd($condition);
+        }
+        $scheds = Schedule::where($condition)->orderBy('date_time', 'asc')->get();
+        //dd($scheds);
+        $futureScheds = $pastScheds = null;
+        $teachersArray = array();
+        foreach($scheds AS $sched){
+          if ($sched->teacher_user_id != null ) $teachersArray[] = $sched->teacher_user_id;
+          if ($sched->date_time >= date("Y-m-d H:i:s")){
+            $futureScheds[] = $sched;
+          }
+          else{
+            $pastScheds[] = $sched;
+          }
+        }
+        $teachers = array();
+        if ($teachersArray != null && count($teachersArray) > 0) {
+          $teachersArray = array_unique($teachersArray);
+          foreach($teachersArray AS $v) {
+            $teachers[$v] = Teacher::where(array('user_id'=>$v))->first();
+          }
+        }
+
+        $pastScheds = array_reverse($pastScheds);
+
+        $schedules = array($futureScheds, $pastScheds, $date, $dateRange, $teachers);
+
+        //dd($schedules);
+
+        return view('schedule.lesson_ajax', compact('schedules'));
       }
+
+
       //Check if it is per week
       $dateRange = null;
       if (strpos($date, "_") !== false) {
@@ -141,8 +203,9 @@ class ScheduleController extends Controller
       $scheds = Schedule::where($condition)->orderBy('date_time', 'asc')->get();
       //dd($scheds);
       $futureScheds = $pastScheds = null;
+      $studentsArray = array();
       foreach($scheds AS $sched){
-
+        if ($sched->student_user_id != null ) $studentsArray[] = $sched->student_user_id;
         if ($sched->date_time >= date("Y-m-d H:i:s")){
           $futureScheds[] = $sched;
         }
@@ -150,11 +213,21 @@ class ScheduleController extends Controller
           $pastScheds[] = $sched;
         }
       }
+      $students = array();
+      if ($studentsArray != null && count($studentsArray) > 0) {
+        $studentsArray = array_unique($studentsArray);
+        foreach($studentsArray AS $v) {
+          $students[$v] = Student::where(array('user_id'=>$v))->first();
+        }
+      }
 
-      $schedules = array($futureScheds, $pastScheds, $date, $dateRange);
-      //dd($schedules);
+      $pastScheds = array_reverse($pastScheds);
+
+      $schedules = array($futureScheds, $pastScheds, $date, $dateRange, $students);
+
       return view('schedule.index_ajax', compact('schedules'));
     }
+
 
     public function ajax($date) {
       if (!$this->isTeacher()) {

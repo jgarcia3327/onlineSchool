@@ -33,3 +33,9 @@ span.span-row {
 .photo-form input[type=file], .audio-form input[type=file] {
   display: inline;
 }
+.call-form {
+  display: inline;
+}
+.profile-photo.sched-photo img{
+  margin-bottom: 0px;
+}

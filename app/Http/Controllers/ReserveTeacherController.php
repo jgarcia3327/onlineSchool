@@ -14,12 +14,7 @@ class ReserveTeacherController extends Controller
     //
     public function index() {
 
-      $activeTeachers = Teacher::where('active', 1)->orderBy('fname', 'asc')->orderBy('lname', 'asc')->get();
-      //dd($activeTeachers);
-      $teachers = array();
-      foreach($activeTeachers AS $v) {
-        $teachers[$v->user_id] = $v->fname." ".$v->lname;
-      }
+      $teachers = Teacher::where('active', 1)->orderBy('fname', 'asc')->orderBy('lname', 'asc')->get();
       return view('reserveTeacher.index', compact('teachers'));
     }
 
@@ -53,6 +48,6 @@ class ReserveTeacherController extends Controller
         Schedule::findOrFail($sched_id)->update(['student_user_id' => Auth::user()->id]);
       }
 
-      return redirect('/reserveTeacher');
+      return redirect('/lessons');
     }
 }

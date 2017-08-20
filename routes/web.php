@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@show');
       Route::get('/reserveTeacher/ajax/{date}', 'ReserveTeacherController@ajax');
       Route::put('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@update');
+      Route::get('/lessons', 'ScheduleController@index');
 });
 
 Route::get('/profile/{profile}', 'ProfileController@show');

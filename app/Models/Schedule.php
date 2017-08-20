@@ -40,7 +40,8 @@ class Schedule extends Eloquent
 	];
 
 	protected $hidden = [
-		'teacher_user_id'
+		'teacher_user_id',
+		'called'
 	];
 
 	protected $fillable = [
@@ -48,6 +49,9 @@ class Schedule extends Eloquent
 		'student_user_id',
 		'date_time',
 		'memo',
+		'memo_book',
+		'memo_next_page',
+		'called',
 		'active',
 		'create_date',
 		'modify_date'
