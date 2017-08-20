@@ -135,7 +135,8 @@ class TeacherProfileController extends Controller
           );
           if (in_array($request->photo->getClientMimeType(), $imageFiles)) {
             $file = $request->file('photo');
-            $location = public_path('images/profile/');
+            $location = public_path('../../englishhours.net/images/profile/');
+            //$location = public_path('images/profile/');
             $file->move($location, $teacherProfile->user_id.strrchr($request->photo->getClientOriginalName(), "."));
             $img = Image::make(sprintf($location.'%s', $teacherProfile->user_id.strrchr($request->photo->getClientOriginalName(), ".")));
             $img->fit(180, 180);
@@ -157,7 +158,8 @@ class TeacherProfileController extends Controller
           );
           if (in_array($request->audio->getClientMimeType(), $audioFiles)) {
             $file = $request->file('audio');
-            $location = public_path('audio/');
+            $location = public_path('../../englishhours.net/audio/');
+            //$location = public_path('audio/');
             $file->move($location, $teacherProfile->user_id.strrchr($request->audio->getClientOriginalName(), "."));
             $teacherProfile->audio = $teacherProfile->user_id.strrchr($request->audio->getClientOriginalName(), ".");
             $teacherProfile->save();
