@@ -25,15 +25,24 @@
               <td>
                 @if($v->student_user_id != null && $schedules[4][$v->student_user_id] != null)
                   {{ $schedules[4][$v->student_user_id]->fname }} {{ $schedules[4][$v->student_user_id]->lname }}
-                  @if($v->called == null)
-                  <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
-                    {{ method_field('PUT') }}
-                    {{ csrf_field() }}
-                    <input type="hidden" name="called" value="1">
-                    <input type="submit" value="Call"/>
-                  </form>
-                  @else
-                  [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
+                  <?php
+                    $tmpDateTime =  strstr(substr($v->date_time, -5),":",true);
+                    $tmpDateTime2 = strstr(substr($v->date_time, -8),":",true);
+                    $tmpDateTime2 = ($tmpDateTime2-1) < 10 ? '0'.($tmpDateTime2-1) : ($tmpDateTime2-1);
+                    $expireDateTime = substr($v->date_time, 0, -5).($tmpDateTime+10).':00'; // 10 mins
+                    $startDateTime = $tmpDateTime == '30' ? substr($v->date_time, 0, -5).($tmpDateTime-5).':00' : substr($v->date_time, 0, -8).$tmpDateTime2.":55:00";
+                  ?>
+                  @if( date("Y-m-d H:i:s") >= $startDateTime && date("Y-m-d H:i:s") <= $expireDateTime )
+                    @if($v->called == null)
+                    <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                      {{ method_field('PUT') }}
+                      {{ csrf_field() }}
+                      <input type="hidden" name="called" value="1">
+                      <input type="submit" value="Call"/>
+                    </form>
+                    @else
+                    [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
+                    @endif
                   @endif
                 @else
                   Open

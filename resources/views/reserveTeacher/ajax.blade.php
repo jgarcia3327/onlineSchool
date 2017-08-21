@@ -32,15 +32,13 @@
               $vformat = $hour.$min." ".$ampm." - ".$hour.":30 ".$ampm;
             }
           ?>
-          @if( $time[1][$k] == $auth->id || date("Y-m-d H:i:s") < $time[2]." ".$v )
+          @if( date("Y-m-d H:i:s") <= $time[2]." ".$v )
           <tr>
             <td>{{ $vformat }}</td>
             <td>
-              @if($time[1][$k] == $auth->id && date("Y-m-d H:i:s") >= $time[2]." ".$v)
-                <i class="text-warning">Enrolled (Closed)</i>
-              @elseif($time[1][$k] == $auth->id)
+              @if($time[1][$k] == $auth->id )
                   <i class="text-primary">Enrolled</i>
-              @elseif( $time[1][$k] != null || date("Y-m-d H:i:s") >= $time[2]." ".$v )
+              @elseif( $time[1][$k] != null )
                 <i class="text-danger">Closed</i>
               @else
                 <label class="form-check-label"><input type="checkbox" name="schedule_id[{{ $counter++ }}]" data-sched-date="{{ $dateFormat }} | {{ $vformat }}" value="{{ $k }}" class="form-check-input"> Reserve</label>

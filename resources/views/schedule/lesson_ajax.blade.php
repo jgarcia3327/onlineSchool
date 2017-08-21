@@ -14,7 +14,7 @@
           <thead>
             <tr>
               <th>Date / Time</th>
-              <th>Student</th>
+              <th>Teacher</th>
             </tr>
           </thead>
           <tbody>
@@ -40,7 +40,7 @@
           <thead>
             <tr>
               <th>Date / Time</th>
-              <th>Student</th>
+              <th>Teacher</th>
               <th>Memo</th>
             </tr>
           </thead>
@@ -53,7 +53,9 @@
                 {{$schedules[4][$v->teacher_user_id]->fname}} {{$schedules[4][$v->teacher_user_id]->lname}}
               </td>
               <td>
-                  @if($v->memo != null)
+                  @if($v->called == null)
+                    <i class="text-danger">Missed Session</i>
+                  @elseif($v->memo != null)
                     <p>Memo: {{ $v->memo }}</p>
                     <p>Memo Book: {{ $v->memo_book }}</p>
                     <p>Memo Next Page: {{ $v->memo_book }}</p>

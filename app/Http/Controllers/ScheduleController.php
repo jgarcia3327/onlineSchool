@@ -174,12 +174,10 @@ class ScheduleController extends Controller
 
         $schedules = array($futureScheds, $pastScheds, $date, $dateRange, $teachers);
 
-        //dd($schedules);
-
         return view('schedule.lesson_ajax', compact('schedules'));
       }
 
-
+      //TEACHER
       //Check if it is per week
       $dateRange = null;
       if (strpos($date, "_") !== false) {
@@ -210,7 +208,8 @@ class ScheduleController extends Controller
       $studentsArray = array();
       foreach($scheds AS $sched){
         if ($sched->student_user_id != null ) $studentsArray[] = $sched->student_user_id;
-        if ($sched->date_time >= date("Y-m-d H:i:s")){
+        //if ($sched->date_time >= date("Y-m-d H:i:s")){
+        if( strtotime($sched->date_time) + 600 >= strtotime(date("Y-m-d H:i:s")) ) {
           $futureScheds[] = $sched;
         }
         else{

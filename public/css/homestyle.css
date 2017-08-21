@@ -14,11 +14,15 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#fff;
-	background-color:#fff;
+	background-color:#0d4416;
 }
 
 a:hover {
-	text-decoration:none;	
+	text-decoration:none;
+}
+
+.container-fluid {
+	background-color: #c3f5d5;
 }
 
 .navbar-default {
@@ -26,7 +30,7 @@ a:hover {
 	border-radius:0;
 	border-right:0;
 	border-left:0;
-	border-top:0;	
+	border-top:0;
 }
 
 
@@ -50,7 +54,7 @@ a:hover {
 	padding: 20px;
 	font-size: 30px;
 	margin-top:-23px;
-	color:#50c0e9;		
+	color:#50c0e9;
 }
 .navbar-brand h1:hover {
   background-color:#fff;
@@ -60,11 +64,11 @@ a:hover {
 	font-size:14px;
 	float:right;
 	text-transform:uppercase;
-	font-weight:600;	
+	font-weight:600;
 }
 
 .menu ul.nav-tabs li {
-	color:#000;	
+	color:#000;
 }
 
 .nav-tabs {
@@ -84,7 +88,7 @@ a:hover {
 	color:#000;
 	border-top:0;
 	border-right:0;
-	border-left:0;	
+	border-left:0;
 }
 
 .nav-tabs > li > a:hover {
@@ -101,25 +105,25 @@ a:hover {
   background-color: #50c0e9;
   border: 0;
   border-bottom-color: transparent;
-  cursor:pointer;  
+  cursor:pointer;
 }
 
 .slides {
-	margin-top:-21px;	
+	margin-top:-21px;
 }
 
 button {
   -webkit-appearance: none;
-  padding: 0;	
+  padding: 0;
   background: transparent;
   border: 0;
 }
 
 button.btn-primary h2 {
-	padding:0;	
+	padding:0;
 }
 .btn {
-  display: inline-block; 
+  display: inline-block;
   margin-bottom: 0;
   font-weight: normal;
   text-align: center;
@@ -127,7 +131,7 @@ button.btn-primary h2 {
   vertical-align: middle;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
-  
+
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -147,25 +151,24 @@ button.btn-primary h2 {
 }
 
 .contents {
-	background-color:#fff;
 	padding:50px;
 	text-align:center;
-	color:#50c0e9;	
+	color:#50c0e9;
 }
 .contents p {
 	color:#50c0e9;
 	text-transform:uppercase;
 }
 
-.contents h2 {	
+.contents h2 {
 	font-size:40px;
 }
 
 .recent button.btn-primarys h3 {
 	padding:10px;
-	font-size:30px;	
+	font-size:30px;
 	text-decoration:0;
-	color:#50c0e9;	
+	color:#50c0e9;
 }
 
 .content {
@@ -209,13 +212,13 @@ button.btn-primary h2 {
 .thumnails h4 {
 	color:#50c0e9;
 	text-align:center;
-	margin-bottom:20px;	
+	margin-bottom:20px;
 }
 .thumnails .ficon {
 	text-align:center;
 }
 .company {
-	color:#000;	
+	color:#000;
 }
 .responsive-slider .slides ul li .slide-bodys  img {
   max-width: 100%;
@@ -223,7 +226,7 @@ button.btn-primary h2 {
 
 .slide-bodys {
 	margin-top:55px;
-	margin-bottom:30px;	
+	margin-bottom:30px;
 }
 section.portfolio {
 	margin-top:50px;
@@ -253,7 +256,7 @@ section.portfolio {
 }
 .blog img {
 	margin-top:10px;
-	margin-bottom:10px;	
+	margin-bottom:10px;
 }
 
 .blog h3,p {
@@ -265,7 +268,7 @@ section.portfolio {
 	margin-bottom:30px;
 }
 .form-search .form-control {
-	margin-top:20px;	
+	margin-top:20px;
 }
 
 .media h4 {
@@ -301,7 +304,7 @@ section.portfolio {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  text-align:center; 
+  text-align:center;
 }
 
 .panel-default {
@@ -329,7 +332,7 @@ section.portfolio {
 	text-align:center;
 	margin-bottom:-5px;
 	background:#50c0e9;
-	
+
 	padding:15px 20px;
 }
 .list-group-item {
@@ -366,7 +369,7 @@ section.portfolio {
 	margin:0;
 	margin-left: 0;
 	padding-left:0;
-	
+
 }
 .popular-tags ul.tags li {
 	margin:0 5px 15px 0;
@@ -461,7 +464,7 @@ ul.social-network li {
 	margin: 0 5px;
 	color:#50c0e9;
 }
-ul.social-network li a {	
+ul.social-network li a {
 	color:#50c0e9;
 }
 
@@ -472,7 +475,7 @@ ul.social-network li a {
 	padding-top:10px;
 	padding-bottom:50px;
 	margin:20px 0 0 0;
-	background-color:#fff;
+	background-color:#c3f5d5;
 }
 
 #sub-footer p{
@@ -570,8 +573,8 @@ footer .widget .flickr_badge img {
     padding-bottom: 5px;
 
 }
-.twitter li{    
-    border-bottom: 1px dashed #efefef;    
+.twitter li{
+    border-bottom: 1px dashed #efefef;
     padding-bottom: 20px;
     margin-bottom: 20px;
     list-style: none;
@@ -607,7 +610,3 @@ footer ul.link-list li a:hover {
 footer .widget ul li a {
 	color:#000;
 }
-
-
-
-
