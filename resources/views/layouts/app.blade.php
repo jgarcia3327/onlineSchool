@@ -47,7 +47,7 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register as Student</a></li>
-                            <li><a href="{{ route('register/teacher') }}">Register as Teacher</a></li>
+                            <li><a href="{{ url('register/teacher') }}">Register as Teacher</a></li>
                         @else
 
                             <!-- Student -->
