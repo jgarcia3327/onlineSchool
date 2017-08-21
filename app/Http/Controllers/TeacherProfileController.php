@@ -92,7 +92,8 @@ class TeacherProfileController extends Controller
      */
     public function show($id)
     {
-      $profile = $this->getTeacherProfile($id);
+      //$profile = $this->getTeacherProfile($id);
+      $profile = findOrFail($id)->first();
       $education = Education::where('user_id', Auth::user()->id)->get();
       $profiles = array("profile" => $profile, "education" => $education);
       return view('teacherProfile.index', compact('profiles'));

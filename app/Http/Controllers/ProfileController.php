@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use View;
 use App\Models\Student;
 use Auth;
+use App\Models\Schedule;
 
 class ProfileController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('auth');
     }
 
     private function hasProfile() {
@@ -41,11 +42,16 @@ class ProfileController extends Controller
 
     public function index()
     {
-        if (!$this->hasProfile()) {
-              return redirect('/profile/create');
+        if (!$this->isStudent()) {
+              return redirect('');
         }
         $profile = $this->getProfile();
-        return view('profile.index', compact('profile'));
+        $condition = [['student_user_id','=',Auth::user()->id],
+          ['date_time', '<=', date("Y-m-d H:i:s")]
+        ];
+        $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
+        $profiles = array($profile, $scheds);
+        return view('profile.index', compact('profiles'));
     }
 
     public function create()
@@ -72,16 +78,29 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        $profile = $this->getStudentProfile($id);
-        return view('profile.index', compact('profile'));
+        $profile = Student::where('id',$id)->first();
+        //dd($profile);
+        if ($this->isStudent() && $profile->user_id != Auth::user()->id){
+            return redirect('/profile');
+        }
+        $condition = [['student_user_id','=',$profile->user_id],
+          ['date_time', '<=', date("Y-m-d H:i:s")]
+        ];
+        $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
+        $profiles = array($profile, $scheds);
+        return view('profile.index', compact('profiles'));
+
     }
 
     public function edit($id)
     {
-        $profile = $this->getStudentProfile($id);
-        if($profile == null || $profile->user_id !== Auth::user()->id) {
-            if ($profile == null) return redirect('/profile/create');
-            return redirect('/profile/'.$profile->id.'/edit');
+        if (!$this->isStudent()) {
+          return redirect('');
+        }
+        $profile = Student::findOrFail($id);
+        //dd($profile);
+        if($profile->user_id != Auth::user()->id) {
+            return redirect('/profile');
         }
         return view('profile.edit', compact('profile'));
     }

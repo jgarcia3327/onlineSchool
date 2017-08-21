@@ -45,7 +45,10 @@ class ReserveTeacherController extends Controller
     public function update(Request $request, $id) {
 
       foreach($request->schedule_id AS $sched_id) {
-        Schedule::findOrFail($sched_id)->update(['student_user_id' => Auth::user()->id]);
+        $schedule = Schedule::findOrFail($sched_id);
+        if($schedule->student_user_id == null) {
+          $schedule->update(['student_user_id' => Auth::user()->id]);
+        }
       }
 
       return redirect('/lessons');

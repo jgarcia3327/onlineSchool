@@ -23,7 +23,15 @@
             <tr>
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
               <td>
-                {{$schedules[4][$v->teacher_user_id]->fname}} {{$schedules[4][$v->teacher_user_id]->lname}}
+                {{ $v->fname }} {{ $v->lname }}
+                @if ( (strtotime($v->date_time)-360) >= strtotime(date("Y-m-d H:i:s")) )
+                <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                  {{ method_field('PUT') }}
+                  {{ csrf_field() }}
+                  <input type="hidden" name="cancel" value="1">
+                  <input type="submit" value="Cancel Reservation"/>
+                </form>
+                @endif
               </td>
             </tr>
             @endforeach
@@ -50,7 +58,7 @@
             <tr>
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
               <td>
-                {{$schedules[4][$v->teacher_user_id]->fname}} {{$schedules[4][$v->teacher_user_id]->lname}}
+                {{ $v->fname }} {{ $v->lname }}
               </td>
               <td>
                   @if($v->called == null)

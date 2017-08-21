@@ -46,5 +46,3 @@ Route::group(['middleware' => 'auth'], function() {
       Route::put('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@update');
       Route::get('/lessons', 'ScheduleController@index');
 });
-
-Route::get('/profile/{profile}', 'ProfileController@show');

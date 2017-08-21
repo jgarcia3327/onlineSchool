@@ -98,11 +98,31 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $schedule = Schedule::findOrFail($id);
+
+        // STUDENT CANCEL RESERVATION
+        if ($request->has('cancel')) {
+          if ( (strtotime($schedule->date_time)-360) >= strtotime(date("Y-m-d H:i:s")) ) {
+            if ($schedule->student_user_id === Auth::user()->id) {
+              $schedule->student_user_id = null;
+              $schedule->save();
+            }
+          }
+          return redirect('/lessons');
+        }
+
         if (!$this->isTeacher()) {
             return redirect('/schedule');
         }
 
-        $schedule = Schedule::findOrFail($id);
+        // TEACHER ATTEMPT CALL
+        if ($request->has('called')) {
+            if ( strtotime(date("Y-m-d H:i:s")) <= (strtotime($schedule->date_time)+600) ) {
+              $schedule->update($request->all());
+            }
+            return redirect('/schedule');
+        }
         $schedule->update($request->all());
         return redirect('/schedule');
     }
@@ -119,8 +139,9 @@ class ScheduleController extends Controller
     }
 
     public function index_ajax($date) {
+
+      // STUDENT
       if (!$this->isTeacher()) {
-        //Student
         //Check if it is per week
         $dateRange = null;
         if (strpos($date, "_") !== false) {
@@ -145,7 +166,7 @@ class ScheduleController extends Controller
           ];
           //dd($condition);
         }
-        $scheds = Schedule::where($condition)->orderBy('date_time', 'asc')->get();
+        $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftJoin("teachers","schedules.teacher_user_id","=","teachers.user_id")->where($condition)->orderBy('date_time', 'asc')->get();
         //dd($scheds);
         $futureScheds = $pastScheds = null;
         $teachersArray = array();
@@ -160,19 +181,12 @@ class ScheduleController extends Controller
             }
           }
         }
-        $teachers = null;
-        if ($teachersArray != null && count($teachersArray) > 0) {
-          $teachersArray = array_unique($teachersArray);
-          foreach($teachersArray AS $v) {
-            $teachers[$v] = Teacher::where(array('user_id'=>$v))->first();
-          }
-        }
 
         if($pastScheds != null) {
           $pastScheds = array_reverse($pastScheds);
         }
 
-        $schedules = array($futureScheds, $pastScheds, $date, $dateRange, $teachers);
+        $schedules = array($futureScheds, $pastScheds, $date, $dateRange);
 
         return view('schedule.lesson_ajax', compact('schedules'));
       }
@@ -208,8 +222,8 @@ class ScheduleController extends Controller
       $studentsArray = array();
       foreach($scheds AS $sched){
         if ($sched->student_user_id != null ) $studentsArray[] = $sched->student_user_id;
-        //if ($sched->date_time >= date("Y-m-d H:i:s")){
-        if( strtotime($sched->date_time) + 600 >= strtotime(date("Y-m-d H:i:s")) ) {
+        //add 15 minutes to be moved to past lessons 15 x 60sec = 900
+        if( strtotime($sched->date_time) + 900 >= strtotime(date("Y-m-d H:i:s")) ) {
           $futureScheds[] = $sched;
         }
         else{
