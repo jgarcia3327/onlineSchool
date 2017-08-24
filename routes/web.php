@@ -45,4 +45,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/reserveTeacher/ajax/{date}', 'ReserveTeacherController@ajax');
       Route::put('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@update');
       Route::get('/lessons', 'ScheduleController@index');
+      Route::get('/books', 'BookController@index');
+      Route::post('/books', 'BookController@store');
+      Route::delete('/books/{book_id}', 'BookController@destroy');
 });

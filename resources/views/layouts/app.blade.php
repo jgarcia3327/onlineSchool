@@ -54,9 +54,11 @@
                             @if ($auth->is_student == 1)
                               <li><a href="{{ url('/reserveTeacher') }}">Reserve Teachers</a></li>
                               <li><a href="{{ url('/lessons') }}">My Lessons</a></li>
+                              <li><a href="{{ url('/books') }}">Books</a></li>
                               <li><a href="{{ url('/profile') }}">My Profile</a></li>
                             @else
                               <!-- Teacher -->
+                              <li><a href="{{ url('/books') }}">Books</a></li>
                               <li><a href="{{ url('/teacherProfile') }}">My Profile</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -76,9 +78,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
+                                    <!-- <li>
                                         <a href="/home">My Dasboard</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Book
- * 
+ *
  * @property int $id
  * @property int $teacher_id
  * @property string $title
@@ -38,10 +38,10 @@ class Book extends Eloquent
 	];
 
 	protected $fillable = [
-		'teacher_id',
+		'user_id',
 		'title',
 		'description',
-		'path',
+		'file_name',
 		'active',
 		'create_date',
 		'modify_date'
