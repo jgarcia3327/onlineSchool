@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use View;
 use App\Models\Book;
+use File;
 
 class BookController extends Controller
 {
@@ -34,8 +35,8 @@ class BookController extends Controller
           );
           $book = Book::create($data);
           $file = $request->file('book');
-          //$location = public_path('../../englishhours.net/uploaded_books/');
-          $location = public_path('uploaded_books/'.$book->id.'/');
+          $location = public_path('../../englishhours.net/uploaded_books/');
+          //$location = public_path('uploaded_books/'.$book->id.'/');
           $file->move($location, $request->book->getClientOriginalName());
         }
         return redirect()->back()->with('success', 'File uploaded successfully.');
@@ -49,6 +50,9 @@ class BookController extends Controller
         if (Auth::user()->is_admin != 1) {
             return redirect()->back()->with('error', 'Delete not permitted.');
         }
+        //Delete physical pdf file
+        $location = public_path('uploaded_books/'.$book->id.'/');
+        File::deleteDirectory($location);
         $book->delete();
 
         return redirect()->back()->with('success', 'File deleted successfully.');
