@@ -35,7 +35,7 @@ class BookController extends Controller
           );
           $book = Book::create($data);
           $file = $request->file('book');
-          $location = public_path('../../englishhours.net/uploaded_books/');
+          $location = public_path('../../englishhours.net/uploaded_books/'.$book->id.'/');
           //$location = public_path('uploaded_books/'.$book->id.'/');
           $file->move($location, $request->book->getClientOriginalName());
         }
