@@ -8,6 +8,8 @@ use View;
 use App\Models\Student;
 use Auth;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Validator;
+use Hash;
 
 class ProfileController extends Controller
 {
@@ -107,6 +109,34 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
+
+      // Student and teacher password update
+      if ($request->has('current_password')){
+        //dd("OK!");
+        $user = Auth::user();
+        $password = array(
+            'current_password' => $request->current_password,
+            'new_password' => $request->new_password,
+            'new_password_confirmation' => $request->new_password_confirmation
+        );
+        Validator::extend('current_password_match', function($attribute, $value, $parameters, $validator) {
+            return Hash::check($value, Auth::user()->password);
+        });
+        $validator = Validator::make($password, [
+            'current_password' => 'required|current_password_match',
+            'new_password'     => 'required|min:6|confirmed',
+        ]);
+        if ( $validator->fails() )
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        $updated = $user->update([ 'password' => bcrypt($password['new_password']) ]);
+        if($updated)
+            return back()->with('success', 1);
+
+        return back()->with('success', 0);
+      }
+
       $profile = Student::findOrFail($id);
 
       if (!$this->isStudent() || $profile->user_id != Auth::user()->id) {

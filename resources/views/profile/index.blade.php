@@ -12,6 +12,56 @@
                 <div class="panel-heading">My Profile
                   @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
                   [ <a href="{{url('/profile/'.$profiles[0]->id.'/edit')}}">Edit</a> ]
+
+                  <!-- change-password -->
+                  [ <a href="#" data-toggle="collapse" data-target="#change-password">Change Password</a> ]
+                  @if (session('success') == 1)
+                  <span class="help-block">
+                      <strong class="text-success">Password changed successfully.</strong>
+                  </span>
+                  @endif
+                  @if ($errors->has('current_password'))
+                  <span class="help-block">
+                      <strong class="text-danger">Current password did not match.</strong>
+                  </span>
+                  @endif
+                  @if ($errors->has('new_password'))
+                  <span class="help-block">
+                      <strong class="text-danger">New password error. <br/>Password should have 6 characters mininum. <br/>New password and confirm password should match.</strong>
+                  </span>
+                  @endif
+                  <div id="change-password" class="collapse">
+                    <form class="form-horizontal" action="{{ url('/profile/'.$profiles[0]->id) }}" method="post">
+                      {{ method_field('PUT') }}
+                      {{ csrf_field() }}
+                      <div class="form-group">
+                          <label for="old-password" class="col-md-4 control-label">Current Password</label>
+                          <div class="col-md-6">
+                              <input id="old-password" type="password" class="form-control" name="current_password" required>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="password" class="col-md-4 control-label">New Password</label>
+                          <div class="col-md-6">
+                              <input id="password" type="password" class="form-control" name="new_password" required>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="confirm-password" class="col-md-4 control-label">Confirm New Password</label>
+                          <div class="col-md-6">
+                              <input id="confirm-password" type="password" class="form-control" name="new_password_confirmation" required>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="password" class="col-md-4 control-label"></label>
+                          <div class="col-md-6">
+                              <input type="submit" class="btn btn-primary" value="Change Password" >
+                          </div>
+                      </div>
+                    </form>
+                  </div><!-- end change-password -->
+
+
                   @endif
                 </div>
 
