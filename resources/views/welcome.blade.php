@@ -27,7 +27,7 @@
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<div class="navbar-brand">
-								<a href="{{ url('') }}"><h1>EnglishHours.net</h1></a>
+								<a href="{{ url('') }}" title="EnglishHours.net"><img class="logo" src="{{asset('images/logo2.png')}}" /></a>
 							</div>
 						</div>
 						<div class="menu">
@@ -129,6 +129,18 @@
 	</div>
 
 
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+          <ul class="social-network">
+            <li><a href="mailto:info@englishhours.net" data-placement="top" title="info@englishhours.net"><i class="fa fa-envelope fa-3x"></i></a></li>
+            <li><a href="skype:live:julius.garcia3?call" data-placement="top" title="julius.garcia3"><i class="fa fa-skype fa-3x"></i></a></li>
+            <li><a href="#" data-placement="top" title="Phone Numbers"><i class="fa fa-phone fa-3x"></i></a></li>
+            <li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-3x"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
 
 	<div class="container" id="courses">
 		<div class="row">
@@ -143,8 +155,8 @@
 		<div class="row">
 			<div class="content">
 				<div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
+						<div class="align-center ielts-course">
 							<h4>IELTS/TOEIC/TOEFL</h4>
 							<div class="icon">
 								<i class="fa fa-list fa-3x"></i>
@@ -153,8 +165,8 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.8s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.8s">
+						<div class="align-center business-course">
 							<h4>VĂN PHÒNG KINH DOANH / VĂN PHÒNG</h4>
 							<div class="icon">
 								<i class="fa fa-location-arrow fa-3x"></i>
@@ -164,8 +176,8 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
+						<div class="align-center freetalk-course">
 							<h4>FREETALK</h4>
 							<div class="icon">
 								<i class="fa fa-cloud fa-3x"></i>
@@ -179,8 +191,8 @@
     <div class="row">
 			<div class="content">
         <div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
+						<div class="align-center kids-course">
 							<h4>TIẾNG ANH CHO CON</h4>
 							<div class="icon">
 								<i class="fa fa-comments fa-3x"></i>
@@ -190,8 +202,8 @@
 					</div>
 				</div>
         <div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
+						<div class="align-center public-course">
 							<h4>NÓI TRƯỚC CÔNG CHÚNG</h4>
 							<div class="icon">
 								<i class="fa fa-bullhorn fa-3x"></i>
@@ -201,8 +213,8 @@
 					</div>
 				</div>
         <div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
+						<div class="align-center writing-course">
 							<h4>Viết và thành phần</h4>
 							<div class="icon">
 								<i class="fa fa-file-text fa-3x"></i>
@@ -216,8 +228,8 @@
     <div class="row">
       <div class="content">
         <div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
+						<div class="align-center reading-course">
 							<h4>ĐỌC VÀ THAM GIA</h4>
 							<div class="icon">
 								<i class="fa fa-book fa-3x"></i>
@@ -227,8 +239,8 @@
 					</div>
 				</div>
         <div class="col-md-4">
-					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
+						<div class="align-center listening-course">
 							<h4>Nghe</h4>
 							<div class="icon">
 								<i class="fa fa-play fa-3x"></i>
@@ -239,11 +251,12 @@
 				</div>
 
         <div class="col-md-4">
-
+          <!-- empty here -->
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 		<div class="container">
 			<div class="row">
@@ -257,18 +270,12 @@
 					<div class="col-lg-6">
 						<div class="copyright">
 							<p>
-								<span>&copy; EnglishHours.net {{ date('Y') }} All right reserved.
+								<span>&copy; EnglishHours.net {{ date('Y') }}. All right reserved.
 							</p>
 						</div>
 					</div>
 					<div class="col-lg-6">
-						<ul class="social-network">
-							<li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
-							<li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
-							<li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin fa-1x"></i></a></li>
-							<li><a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest fa-1x"></i></a></li>
-							<li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
-						</ul>
+
 					</div>
 				</div>
 			</div>

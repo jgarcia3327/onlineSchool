@@ -7,14 +7,13 @@
 @import url('overwrite.css');
 @import url('animate.css');
 
-
 body {
 	font-family:'Open Sans', Arial, sans-serif;
 	font-size:14px;
 	font-weight:300;
 	line-height:1.6em;
 	color:#fff;
-	background-color:#0d4416;
+	background-color:#b5debc;
 }
 
 a:hover {
@@ -610,3 +609,72 @@ footer ul.link-list li a:hover {
 footer .widget ul li a {
 	color:#000;
 }
+
+/*Custom edits*/
+.menu ul.nav.nav-tabs{
+  padding-top: 63px;
+}
+.navbar .logo{
+  width: 100%;
+}
+ul.social-network li{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.ielts-course{
+	background-image: url('../images/s1.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.business-course{
+	background-image: url('../images/s3.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.freetalk-course{
+	background-image: url('../images/s4.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.kids-course{
+	background-image: url('../images/s5.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.public-course{
+	background-image: url('../images/s7.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.writing-course{
+	background-image: url('../images/s6.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.reading-course{
+	background-image: url('../images/s8.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+.listening-course{
+	background-image: url('../images/s9.jpg');
+  background-size: cover;
+	background-repeat: no-repeat;
+  background-position: center center;
+  text-shadow: 1px 1px 3px #fff;
+}
+/*end custom-edits*/
