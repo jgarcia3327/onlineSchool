@@ -1,10 +1,42 @@
 <?php
 namespace App\Http\Controllers;
 
+use Auth;
+use APP\User;
+
 class CommonController
 {
 
-  public function getMonthStr($month){
+  public function getActiveTeachers() {
+    $condition = [
+      ['users.active','=',1],
+      ['users.id','<>',Auth::user()->id],
+      ['users.is_student', '=', 0]
+    ];
+    $users = User::select("users.*","teachers.fname","teachers.lname")->leftJoin("teachers","teachers.user_id","users.id")->where($condition)->get();
+    return $users;
+  }
+
+  public function getActiveStudents() {
+    $condition = [
+      ['users.active','=',1],
+      ['users.id','<>',Auth::user()->id],
+      ['users.is_student', '=', 1]
+    ];
+    $users = User::select("users.*","students.fname","students.lname")->leftJoin("students","students.user_id","users.id")->where($condition)->get();
+    return $users;
+  }
+
+  public function getActiveUsers() {
+    $condition = [
+      ['users.active','=',1],
+      ['users.id','<>',Auth::user()->id]
+    ];
+    $users = User::select("users.*","teachers.fname AS tfname","teachers.lname AS tlname","students.fname","students.lname")->leftJoin("teachers","teachers.user_id","users.id")->leftJoin("students","students.user_id","users.id")->where($condition)->get();
+    return $users;
+  }
+
+  public function getMonthStr($month) {
     return $this->getMonths()[intval($month)];
   }
 

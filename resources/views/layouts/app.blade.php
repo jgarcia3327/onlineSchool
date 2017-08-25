@@ -55,10 +55,32 @@
                               <li><a href="{{ url('/reserveTeacher') }}">Reserve Teachers</a></li>
                               <li><a href="{{ url('/lessons') }}">My Lessons</a></li>
                               <li><a href="{{ url('/books') }}">Books</a></li>
-                              <li><a href="{{ url('/profile') }}">My Profile</a></li>
+                              <!-- <li><a href="{{ url('/messages') }}">Messages</a></li> -->
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                      {{ Auth::user()->email }} <span class="caret"></span>
+                                  </a>
+
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/profile') }}">My Profile</a></li>
+                                      <!-- <li>
+                                          <a href="/home">My Dasboard</a>
+                                      </li> -->
+                                      <li>
+                                          <a href="{{ route('logout') }}"
+                                              onclick="event.preventDefault();
+                                                       document.getElementById('logout-form').submit();">
+                                              Logout
+                                          </a>
+
+                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                              {{ csrf_field() }}
+                                          </form>
+                                      </li>
+                                  </ul>
+                              </li>
                             @else
                               <!-- Teacher -->
-                              <li><a href="{{ url('/books') }}">Books</a></li>
                               <li><a href="{{ url('/teacherProfile') }}">My Profile</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -70,30 +92,32 @@
                                       <li><a href="{{ url('/schedule/create') }}">Create Schedule</a></li>
                                   </ul>
                               </li>
+                              <!-- <li><a href="{{ url('/messages') }}">Messages</a></li> -->
+                              <li><a href="{{ url('/books') }}">Books</a></li>
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                      {{ Auth::user()->email }} <span class="caret"></span>
+                                  </a>
+
+                                  <ul class="dropdown-menu" role="menu">
+                                      <!-- <li>
+                                          <a href="/home">My Dasboard</a>
+                                      </li> -->
+                                      <li>
+                                          <a href="{{ route('logout') }}"
+                                              onclick="event.preventDefault();
+                                                       document.getElementById('logout-form').submit();">
+                                              Logout
+                                          </a>
+
+                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                              {{ csrf_field() }}
+                                          </form>
+                                      </li>
+                                  </ul>
+                              </li>
                             @endif
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->email }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <!-- <li>
-                                        <a href="/home">My Dasboard</a>
-                                    </li> -->
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
                         @endif
                     </ul>
                 </div>

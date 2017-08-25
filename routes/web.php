@@ -48,4 +48,5 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/books', 'BookController@index');
       Route::post('/books', 'BookController@store');
       Route::delete('/books/{book_id}', 'BookController@destroy');
+      Route::get('/messages', 'MessageController@index');
 });
