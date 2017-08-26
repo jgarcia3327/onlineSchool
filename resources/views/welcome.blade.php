@@ -145,7 +145,7 @@
 	<div class="container" id="courses">
 		<div class="row">
 			<div class="recent">
-				<button class="btn-primarys"><h3>Các khóa học</h3></button>
+				<h2>Các khóa học</h2>
 				<hr>
 			</div>
 		</div>

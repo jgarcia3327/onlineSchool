@@ -617,9 +617,33 @@ footer .widget ul li a {
 .navbar .logo{
   width: 100%;
 }
+ul.social-network {
+	padding: 0px;
+	min-width: 264px;
+}
 ul.social-network li{
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+.contents {
+	padding-top: 24px;
+  padding-bottom: 3px;
+}
+.nav-tabs > li > a {
+	margin-bottom: 0px;
+	border: 1px solid #61d443;
+}
+.container-fluid > .navbar-header {
+	margin-top: 3px;
+}
+.container-fluid {
+	padding-bottom: 6px;
+}
+hr {
+	border-top: 1px solid #61d443;
+}
+#courses h2 {
+	color: #72a0f3;
 }
 .ielts-course{
 	background-image: url('../images/s1.jpg');
