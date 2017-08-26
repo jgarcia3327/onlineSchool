@@ -10,6 +10,7 @@ use App\Models\Message;
 use DB;
 use App\Models\Teacher;
 use App\Models\Student;
+use Carbon\Carbon;
 
 class MessageController extends Controller
 {
@@ -39,7 +40,7 @@ class MessageController extends Controller
         ["message_to","=",$id],
         ["message_from","=",Auth::user()->id]
       ];
-      $message = Message::where($condition1)->orWhere($condition2)->limit(12)->get(); //Load more TODO
+      $message = Message::where($condition1)->orWhere($condition2)->get(); //Load more TODO
 
       // Student
       if (Auth::user()->is_student == 1) {
@@ -60,7 +61,8 @@ class MessageController extends Controller
       $data = array(
         "message_from" => Auth::user()->id,
         "message_to" => $request->message_to,
-        "message" => $request->message
+        "message" => $request->message,
+        "create_date" => Carbon::now()
       );
       Message::create($data);
       //return back()->with("success", 1);
