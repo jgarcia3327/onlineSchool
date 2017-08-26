@@ -39,3 +39,18 @@ span.span-row {
 .profile-photo.sched-photo img{
   margin-bottom: 0px;
 }
+a.navbar-brand {
+  padding-top: 3px;
+}
+li.message-owner {
+  text-align: right;
+  background-color: #ddffd3;
+}
+li.message-owner .badge.message{
+  float: left;
+}
+.badge.message {
+  background-color: #ccc;
+  margin-left: 3px;
+  font-weight: normal;
+}

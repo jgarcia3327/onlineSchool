@@ -30,8 +30,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        EnglishHours.net
+                    <a class="navbar-brand" href="{{ url('/') }}" title="EnglishHours.net">
+                        <img src="{{ asset('images/logo3.png') }}"/>
                     </a>
                 </div>
 
@@ -55,7 +55,7 @@
                               <li><a href="{{ url('/reserveTeacher') }}">Reserve Teachers</a></li>
                               <li><a href="{{ url('/lessons') }}">My Lessons</a></li>
                               <li><a href="{{ url('/books') }}">Books</a></li>
-                              <!-- <li><a href="{{ url('/messages') }}">Messages</a></li> -->
+                              <li><a href="{{ url('/messages') }}">Messages</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                       {{ Auth::user()->email }} <span class="caret"></span>
@@ -92,7 +92,7 @@
                                       <li><a href="{{ url('/schedule/create') }}">Create Schedule</a></li>
                                   </ul>
                               </li>
-                              <!-- <li><a href="{{ url('/messages') }}">Messages</a></li> -->
+                              <li><a href="{{ url('/messages') }}">Messages</a></li>
                               <li><a href="{{ url('/books') }}">Books</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

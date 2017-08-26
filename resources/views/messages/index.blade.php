@@ -14,19 +14,20 @@
                     <div class="form-group">
                       <select class="form-control" id="message_to" name="message_to" required>
                         <option value=""></option>
-                        @foreach($common->getActiveUsers() AS $v)
+                        <?php
+                          $others = $auth->is_student == 1? $common->getActiveTeachers() : $common->getActiveStudents();
+                        ?>
+                        @foreach($others AS $v)
                           @if (empty($v->fname) && empty($v->tfname))
                             <!-- empty name -->
-                          @elseif($v->is_student == 1)
-                            <option value="{{ $v->id }}">{{ $v->fname }} {{ $v->lname }}</option>
                           @else
-                            <option value="{{ $v->id }}">Teacher: {{ $v->tfname }} {{ $v->tlname }}</option>
+                            <option value="{{ $v->id }}">{{ $v->fname }} {{ $v->lname }}</option>
                           @endif
                         @endforeach
                       </select>
                     </div>
                     <textarea class="form-control" name="message" placeholder="Your message"></textarea>
-                    <input class="form-control btn btn-primary" type="submit" value="Submit" />
+                    <input class="form-control btn btn-primary" type="submit" value="Send" />
                   </div>
                 </form>
               </div>
@@ -41,12 +42,8 @@
                     @else
                       @foreach($messages AS $v)
                         <li class="list-group-item">
-                          <span class="badge">9</span>
-                          @if($v->message_to != $auth->id)
-                          {{$v->message_to}}
-                          @else
-                          {{$v->message_from}}
-                          @endif
+                          <span class="badge">{{ $v->msgcount }}</span>
+                          <a href="{{ url('/messages/'.$v->uid) }}" >{{ $v->fname }} {{ $v->lname }}</a>
                         </li>
                       @endforeach
                     @endif
