@@ -58,6 +58,9 @@ class ScheduleController extends Controller
         $sched = new Schedule;
         $dataSet = [];
         foreach($request->date_time AS $timeSched) {
+          if ( strtotime($timeSched) <= strtotime(date("Y-m-d H:i:s")) ) {
+            continue;
+          }
           $dataSet[] = [
               'teacher_user_id' => Auth::user()->id,
               'date_time' => $timeSched

@@ -8,6 +8,21 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+
+          <!-- Credits -->
+          <div class="panel panel-default">
+              <div class="panel-heading">Schedule Credits
+                @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
+                [ <a href="{{url('/scheduleCredit')}}">Buy credits</a> ]
+                @endif
+              </div>
+
+              <div class="panel-body">
+                  Credits: <strong>{{ $profiles[2] }}</strong>
+              </div>
+          </div>
+
+          <!-- My profile -->
             <div class="panel panel-default">
                 <div class="panel-heading">My Profile
                   @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
@@ -77,6 +92,7 @@
                 </div>
             </div>
 
+            <!-- History -->
             <div class="panel panel-default">
                 <div class="panel-heading">History</div>
 

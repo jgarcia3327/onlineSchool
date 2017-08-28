@@ -8,6 +8,7 @@ use View;
 use Auth;
 use App\Models\Teacher;
 use App\Models\Schedule;
+use App\Http\Controllers\CreditController;
 
 class ReserveTeacherController extends Controller
 {
@@ -21,7 +22,9 @@ class ReserveTeacherController extends Controller
     public function show($teacher_user_id) {
 
       $teacher = Teacher::where('user_id', $teacher_user_id)->first();
-      return view('reserveTeacher.schedule', compact('teacher'));
+      $credits = CreditController::getCreditCount(Auth::user()->id);
+      $reservations = array($teacher, $credits);
+      return view('reserveTeacher.schedule', compact('reservations'));
     }
 
     public function ajax($dateId) {
@@ -44,9 +47,16 @@ class ReserveTeacherController extends Controller
 
     public function update(Request $request, $id) {
 
+      $creditLeft = CreditController::getCreditCount(Auth::user()->id);
+      if($creditLeft < count($request->schedule_id)){
+        //dd($creditLeft."===".count($request->schedule_id));
+        return back()->with("success", -1);
+      }
+
       foreach($request->schedule_id AS $sched_id) {
-        $schedule = Schedule::findOrFail($sched_id);
-        if($schedule->student_user_id == null) {
+        $schedule = Schedule::where("id",$sched_id)->first();
+        if ( $schedule->student_user_id == null && strtotime($schedule->date_time) > strtotime(date("Y-m-d H:i:s")) ) {
+          CreditController::updateCreditSchedule(Auth::user()->id, $schedule->id);
           $schedule->update(['student_user_id' => Auth::user()->id]);
         }
       }

@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
@@ -50,6 +51,10 @@
                             <li><a href="{{ url('register/teacher') }}">Register as Teacher</a></li>
                         @else
 
+                            <!-- Admin -->
+                            @if ($auth->is_admin == 1)
+                              <li><a href="{{ url('/scheduleCredit') }}">Activate Credits</a></li>
+                            @endif
                             <!-- Student -->
                             @if ($auth->is_student == 1)
                               <li><a href="{{ url('/reserveTeacher') }}">Reserve Teachers</a></li>
@@ -62,6 +67,7 @@
                                   </a>
 
                                   <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/scheduleCredit') }}">My Credits</a></li>
                                     <li><a href="{{ url('/profile') }}">My Profile</a></li>
                                       <!-- <li>
                                           <a href="/home">My Dasboard</a>

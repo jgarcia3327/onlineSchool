@@ -51,4 +51,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/messages', 'MessageController@index');
       Route::post('/messages', 'MessageController@store');
       Route::get('/messages/{user_id}', 'MessageController@show');
+      Route::get('/scheduleCredit', 'CreditController@index');
+      Route::post('/scheduleCredit', 'CreditController@store');
+      Route::put('/scheduleCredit/{credit_id}', 'CreditController@update');
 });

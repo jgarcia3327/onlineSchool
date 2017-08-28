@@ -54,3 +54,8 @@ li.message-owner .badge.message{
   margin-left: 3px;
   font-weight: normal;
 }
+.credit-num {
+  border: 1px solid #aaa;
+  padding: 9px 15px;
+  font-size: 21px;
+}

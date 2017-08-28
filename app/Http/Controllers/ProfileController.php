@@ -10,6 +10,7 @@ use Auth;
 use App\Models\Schedule;
 use Illuminate\Support\Facades\Validator;
 use Hash;
+use App\Http\Controllers\CreditController;
 
 class ProfileController extends Controller
 {
@@ -52,7 +53,10 @@ class ProfileController extends Controller
           ['date_time', '<=', date("Y-m-d H:i:s")]
         ];
         $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
-        $profiles = array($profile, $scheds);
+
+        $credits = CreditController::getCreditCount(Auth::user()->id);
+
+        $profiles = array($profile, $scheds, $credits);
         return view('profile.index', compact('profiles'));
     }
 
@@ -89,7 +93,10 @@ class ProfileController extends Controller
           ['date_time', '<=', date("Y-m-d H:i:s")]
         ];
         $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
-        $profiles = array($profile, $scheds);
+
+        $credits = CreditController::getCreditCount($id);
+
+        $profiles = array($profile, $scheds, $credits);
         return view('profile.index', compact('profiles'));
 
     }
