@@ -11,7 +11,13 @@
 
           <!-- Calendar display -->
           <div class="panel panel-default">
-              <div class="panel-heading">Choose a day or week to display your lessons</div>
+              <div class="panel-heading">Choose a day or week to display your lessons
+                @if (!empty(session('success')))
+                <span class="help-block">
+                    <strong class="text-danger">Schedule deleted successfully. <br/>-{{ $common->getFormattedDateTimeRange(session('success')) }} </strong>
+                </span>
+                @endif
+              </div>
               <div class="panel-body">
                 <div class="col-md-8 col-md-offset-2">
                   <div id="week-datepicker"></div>

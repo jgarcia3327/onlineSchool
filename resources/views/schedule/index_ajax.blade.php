@@ -44,7 +44,12 @@
                     @endif
                   @endif
                 @else
-                  Open
+                  Open <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+                    <input type="hidden" name="cancel" value="1">
+                    <input type="submit" value="Cancel Schedule"/>
+                  </form>
                 @endif
               </td>
             </tr>

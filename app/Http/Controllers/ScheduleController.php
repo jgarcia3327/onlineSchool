@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Http\Controllers\CommonController;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Credit;
 
 class ScheduleController extends Controller
 {
@@ -104,15 +105,30 @@ class ScheduleController extends Controller
 
         $schedule = Schedule::findOrFail($id);
 
+        // TEACHER CANCEL SCHEDULE
+        if ($request->has('cancel') && $this->isTeacher()) {
+            if ($schedule->teacher_user_id === Auth::user()->id) {
+              $date = $schedule->date_time;
+              $schedule->delete();
+              return back()->with("success",$date);
+            }
+          return back()->with("success",0);
+        }
+
         // STUDENT CANCEL RESERVATION
-        if ($request->has('cancel')) {
+        if ($request->has('cancel') && !$this->isTeacher()) {
           if ( (strtotime($schedule->date_time)-360) >= strtotime(date("Y-m-d H:i:s")) ) {
             if ($schedule->student_user_id === Auth::user()->id) {
               $schedule->student_user_id = null;
               $schedule->save();
+              // Restore credits //TODO record student cancellations
+              $credit = Credit::where([["user_id","=",Auth::user()->id],["schedule_id","=",$schedule->id]])->first();
+              $credit->schedule_id = null;
+              $credit->save();
+              return back()->with("success",$schedule->date_time);
             }
           }
-          return redirect('/lessons');
+          return back()->with("success",0);
         }
 
         if (!$this->isTeacher()) {

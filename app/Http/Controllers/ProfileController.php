@@ -94,7 +94,7 @@ class ProfileController extends Controller
         ];
         $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
 
-        $credits = CreditController::getCreditCount($id);
+        $credits = CreditController::getCreditCount($profile->user_id);
 
         $profiles = array($profile, $scheds, $credits);
         return view('profile.index', compact('profiles'));
