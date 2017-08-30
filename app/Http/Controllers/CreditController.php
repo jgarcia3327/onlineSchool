@@ -7,10 +7,33 @@ use App\Models\Credit;
 use App\Models\Buycredit;
 use Auth;
 use Carbon\Carbon;
+use App\Models\Schedule;
 
 class CreditController extends Controller
 {
     public static function getCreditCount($user_id){
+
+      //Redeem teacher missed session
+      $conditionSched = [
+        ["active","=",1],
+        ["student_user_id","=",$user_id],
+        ["called","=",null],
+        ["date_time","<",Carbon::now()->subMinutes(15)],
+        ["date_time",">=",Carbon::now()->subMonth()]
+      ];
+      $schedules = Schedule::where($conditionSched)->get();
+      if (count($schedules) > 0) {
+        $updateCredits = array();
+        foreach($schedules AS $v) {
+          $v->active = 0;
+          $updateCredits[] = $v->id;
+          $v->save();
+        }
+        if(count($updateCredits) > 0){
+          Credit::whereIn("schedule_id", $updateCredits)->update(["schedule_id" => null]);
+        }
+      }
+
       //Check credit lifetime
       $credits = Credit::where([["user_id","=",$user_id], ["active","=",1], ["schedule_id","=",null]])->get();
       $count = 0;

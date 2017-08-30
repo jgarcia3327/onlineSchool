@@ -12,7 +12,11 @@
           <!-- Calendar display -->
           <div class="panel panel-default">
               <div class="panel-heading">Choose a day or week to display your lessons
-                @if (!empty(session('success')))
+                @if (session('success') === -1)
+                <span class="help-block">
+                    <strong class="text-danger">Schedule cancel IS NOT SUCCESSFUL. <br/>-Schedule selected has student reserved on it.</strong>
+                </span>
+                @elseif (!empty(session('success')))
                 <span class="help-block">
                     <strong class="text-danger">Schedule deleted successfully. <br/>-{{ $common->getFormattedDateTimeRange(session('success')) }} </strong>
                 </span>

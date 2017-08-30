@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Schedule;
 use App\Http\Controllers\CommonController;
+use App\Http\Controllers\CreditController;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Credit;
@@ -25,8 +26,10 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        if (!$this->isTeacher())
-          return view('schedule.lesson');
+        if (!$this->isTeacher()) {
+          $credits = CreditController::getCreditCount(Auth::user()->id);
+          return view('schedule.lesson', compact('credits'));
+        }
 
         return view('schedule.index');
     }
@@ -107,12 +110,12 @@ class ScheduleController extends Controller
 
         // TEACHER CANCEL SCHEDULE
         if ($request->has('cancel') && $this->isTeacher()) {
-            if ($schedule->teacher_user_id === Auth::user()->id) {
+            if ($schedule->teacher_user_id === Auth::user()->id && $schedule->student_user_id == null) {
               $date = $schedule->date_time;
               $schedule->delete();
               return back()->with("success",$date);
             }
-          return back()->with("success",0);
+          return back()->with("success",-1);
         }
 
         // STUDENT CANCEL RESERVATION

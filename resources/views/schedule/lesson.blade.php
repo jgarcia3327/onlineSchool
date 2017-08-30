@@ -9,6 +9,19 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
+          <!-- Credits -->
+          <div class="panel panel-default">
+              <div class="panel-heading">Schedule Credits
+                @if (Auth::check() && $auth->is_student == 1)
+                [ <a href="{{url('/scheduleCredit')}}">Buy credits</a> ]
+                @endif
+              </div>
+
+              <div class="panel-body">
+                  Credits: <strong>{{ $credits }}</strong>
+              </div>
+          </div>
+
           <!-- Calendar display -->
           <div class="panel panel-default">
               <div class="panel-heading">Choose a day or week to display your lessons

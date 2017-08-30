@@ -9,6 +9,7 @@ use Auth;
 use App\Models\Teacher;
 use App\Models\Schedule;
 use App\Http\Controllers\CreditController;
+use Carbon\Carbon;
 
 class ReserveTeacherController extends Controller
 {
@@ -53,12 +54,28 @@ class ReserveTeacherController extends Controller
         return back()->with("success", -1);
       }
 
+      $schedArr = array();
       foreach($request->schedule_id AS $sched_id) {
+        //Update individually
+        $condSched = [
+          ['active','=',1],
+          ['id','=',$sched_id],
+          ['student_user_id','=',null],
+          ['date_time','>',Carbon::now()]
+        ];
         $schedule = Schedule::where("id",$sched_id)->first();
-        if ( $schedule->student_user_id == null && strtotime($schedule->date_time) > strtotime(date("Y-m-d H:i:s")) ) {
+        if ( $schedule != null ) {
+          //Update credit
           CreditController::updateCreditSchedule(Auth::user()->id, $schedule->id);
-          $schedule->update(['student_user_id' => Auth::user()->id]);
+          //Update schedule
+          //$schedule->update(['student_user_id' => Auth::user()->id]);
+          $schedArr[] = $sched_id;
         }
+      }
+      //Update schedule at once
+      if (count($schedArr) > 0) {
+        //Update schedule
+        Schedule::whereIn("id", $schedArr)->update(['student_user_id' => Auth::user()->id]);
       }
 
       return redirect('/lessons');
