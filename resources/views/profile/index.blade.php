@@ -24,12 +24,12 @@
 
           <!-- My profile -->
             <div class="panel panel-default">
-                <div class="panel-heading">My Profile
+                <div class="panel-heading">
                   @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
-                  [ <a href="{{url('/profile/'.$profiles[0]->id.'/edit')}}">Edit</a> ]
+                  My Profile [ <a href="{{url('/profile/'.$profiles[0]->id.'/edit')}}">Edit</a> ]
 
                   <!-- change-password -->
-                  [ <a href="#" data-toggle="collapse" data-target="#change-password">Change Password</a> ]
+                  [ <a href="javascript:void(0)" data-toggle="collapse" data-target="#change-password">Change Password</a> ]
                   @if (session('success') == 1)
                   <span class="help-block">
                       <strong class="text-success">Password changed successfully.</strong>
@@ -71,12 +71,13 @@
                           <label for="password" class="col-md-4 control-label"></label>
                           <div class="col-md-6">
                               <input type="submit" class="btn btn-primary" value="Change Password" >
+                              <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#change-password">Cancel</button>
                           </div>
                       </div>
                     </form>
                   </div><!-- end change-password -->
-
-
+                  @else
+                  {{ $profiles[0]->fname }} {{ $profiles[0]->lname }} - Profile
                   @endif
                 </div>
 
@@ -91,6 +92,59 @@
                   </ul>
                 </div>
             </div>
+
+            <!-- Site Feedback -->
+            @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
+            <div class="panel panel-default">
+                <div class="panel-heading">My Feedback
+                  [ <a href="javascript:void(0)" data-toggle="collapse" data-target="#create-feedback">Create {{config('app.name')}} feedback</a> ]
+                  @if (!empty(session('successFeedback')))
+                  <span class="help-block">
+                      <strong class="text-success">{{ session('successFeedback') }}</strong>
+                  </span>
+                  @endif
+                </div>
+
+                <div class="panel-body">
+                  <!-- create-feedback -->
+                  <div id="create-feedback" class="collapse">
+                    <form class="form-horizontal" action="{{ url('/feedback/') }}" method="post">
+                      {{ csrf_field() }}
+                      <div class="form-group">
+                          <label for="feedback-remark" class="col-md-4">Feedback to {{ config('app.name') }}</label>
+                          <div class="col-md-12">
+                              <textarea id="feedback-remark" class="form-control" name="remark" required></textarea>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="password" class="control-label"></label>
+                          <div class="col-md-12">
+                              <input type="submit" class="btn btn-primary" value="Submit Feedback" >
+                              <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#create-feedback">Cancel</button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- End create-feedback -->
+
+                  <!-- List of feedbacks -->
+                  <ul class="list-group">
+                    @foreach($profiles[3] AS $v)
+                    <li class="list-group-item"><a href="javascript:void(0)" data-toggle="collapse" data-target="#feedback{{$v->id}}"> {{ substr($v->remark,0,60) }}{{strlen($v->remark) > 60? '...' : ''}}</a>  <span class="badge">{{ $v->create_date->diffForHumans() }}</span>
+                      <div id="feedback{{$v->id}}" class="collapse">
+                        <ul class="list-group">
+                          <li class="list-group-item">{{ $v->remark }}</li>
+                          <li class="list-group-item bg-info">{!! $v->reply === null? '<i>No reply yet from '.config('app.name').'</i>' : $v->reply !!}</li>
+                        </ul>
+                      </div>
+                    </li>
+                    @endforeach
+                  </ul>
+                  <!-- end list of feedbacks -->
+                </div>
+            </div>
+            @endif
+            <!-- end site feedback -->
 
             <!-- History -->
             <div class="panel panel-default">

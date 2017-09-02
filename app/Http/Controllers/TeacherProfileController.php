@@ -47,7 +47,8 @@ class TeacherProfileController extends Controller
       }
       $profile = $this->getProfile();
       $education = Education::where('user_id', Auth::user()->id)->get();
-      $profiles = array("profile" => $profile, "education" => $education);
+      $feedback = FeedbackController::getUserFeedback(Auth::user()->id);
+      $profiles = array('profile' => $profile, 'education' => $education, 'feedback' => $feedback);
       return view('teacherProfile.index', compact('profiles'));
     }
 
@@ -90,11 +91,14 @@ class TeacherProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
       //$profile = $this->getTeacherProfile($id);
-      $profile = findOrFail($id)->first();
-      $education = Education::where('user_id', Auth::user()->id)->get();
+      if(Auth::user()->id === $user_id) {
+        return redirect('/teacherProfile');
+      }
+      $profile = Teacher::where('user_id',$user_id)->first();
+      $education = Education::where('user_id', $user_id)->get();
       $profiles = array("profile" => $profile, "education" => $education);
       return view('teacherProfile.index', compact('profiles'));
     }
@@ -126,7 +130,7 @@ class TeacherProfileController extends Controller
     {
 
         //dd(base_path());
-        $teacherProfile = Teacher::findOrFail($id);
+        $teacherProfile = Teacher::where('id', $id)->first();
 
         if($request->hasFile('photo')) {
           $imageFiles = array(

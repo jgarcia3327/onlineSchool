@@ -10,11 +10,13 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Book
+ * Class Credit
  *
  * @property int $id
  * @property int $user_id
  * @property int $schedule_id
+ * @property int $consume_days
+ * @property tinyint $active
  * @property \Carbon\Carbon $create_date
  * @property \Carbon\Carbon $modify_date
  *

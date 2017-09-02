@@ -59,3 +59,9 @@ li.message-owner .badge.message{
   padding: 9px 15px;
   font-size: 21px;
 }
+.admin-link {
+  display: block;
+}
+.bg-info {
+  background-color: #ebf6fd;
+}

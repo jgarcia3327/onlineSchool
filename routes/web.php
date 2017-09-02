@@ -54,4 +54,9 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/scheduleCredit', 'CreditController@index');
       Route::post('/scheduleCredit', 'CreditController@store');
       Route::put('/scheduleCredit/{credit_id}', 'CreditController@update');
+      Route::post('/feedback', 'FeedbackController@store');
+      Route::get('/adminCredit', 'CreditController@admin');
+      Route::get('/adminDashboard', 'AdminController@index');
+      Route::get('/adminFeedback', 'FeedbackController@admin');
+      Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
 });

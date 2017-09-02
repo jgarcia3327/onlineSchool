@@ -12,6 +12,9 @@
           <!-- Calendar display -->
           <div class="panel panel-default">
               <div class="panel-heading">Choose a day or week to display your lessons
+                @if($auth->is_student === 0)
+                [ <a href="{{url('/schedule/create')}}">Create Schedule</a> ]
+                @endif
                 @if (session('success') === -1)
                 <span class="help-block">
                     <strong class="text-danger">Schedule cancel IS NOT SUCCESSFUL. <br/>-Schedule selected has student reserved on it.</strong>

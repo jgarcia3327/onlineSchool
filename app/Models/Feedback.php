@@ -10,26 +10,24 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Book
+ * Class Feedback
  *
  * @property int $id
  * @property int $user_id
- * @property int $quantity
- * @property tinyint $status
- * @property int $activate_by
+ * @property text $remark
+ * @property tinyint $active
  * @property \Carbon\Carbon $create_date
  * @property \Carbon\Carbon $modify_date
  *
  * @package App\Models
  */
-class Buycredit extends Eloquent
+class Feedback extends Eloquent
 {
 	public $timestamps = false;
 
 	protected $casts = [
 		'user_id' => 'int',
-		'quantity' => 'int',
-		'activate_by' => 'int'
+		'reply_by' => 'int'
 	];
 
 	protected $dates = [
@@ -39,9 +37,8 @@ class Buycredit extends Eloquent
 
 	protected $fillable = [
 		'user_id',
-		'quantity',
-		'status',
-		'activate_by',
+		'remark',
+		'reply',
 		'create_date',
 		'modify_date'
 	];

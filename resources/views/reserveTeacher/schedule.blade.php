@@ -20,6 +20,7 @@
                   </div>
                   <h3 class="text-center">
                   {{ $reservations[0]->fname }} {{ $reservations[0]->lname }}
+                  <span>[ <a href="{{url('/teacherProfile/'.$reservations[0]->user_id)}}">view profile</a> ]</span>
                   </h3>
                 <div class="text-center profile-audio">
                 @if($reservations[0]->audio != null)

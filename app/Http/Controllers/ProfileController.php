@@ -11,6 +11,7 @@ use App\Models\Schedule;
 use Illuminate\Support\Facades\Validator;
 use Hash;
 use App\Http\Controllers\CreditController;
+use App\Http\Controllers\FeedbackController;
 
 class ProfileController extends Controller
 {
@@ -56,7 +57,9 @@ class ProfileController extends Controller
 
         $credits = CreditController::getCreditCount(Auth::user()->id);
 
-        $profiles = array($profile, $scheds, $credits);
+        $feedback = FeedbackController::getUserFeedback(Auth::user()->id);
+
+        $profiles = array($profile, $scheds, $credits, $feedback);
         return view('profile.index', compact('profiles'));
     }
 
@@ -82,22 +85,25 @@ class ProfileController extends Controller
         return redirect('/profile/'.$id);
     }
 
-    public function show($id)
+    public function show($user_id)
     {
-        $profile = Student::where('id',$id)->first();
-        //dd($profile);
-        if ($this->isStudent() && $profile->user_id != Auth::user()->id){
-            return redirect('/profile');
-        }
-        $condition = [['student_user_id','=',$profile->user_id],
-          ['date_time', '<=', date("Y-m-d H:i:s")]
-        ];
-        $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
 
-        $credits = CreditController::getCreditCount($profile->user_id);
+      if(Auth::user()->id === $user_id) {
+        return redirect('/profile');
+      }
+      $profile = Student::where('user_id',$user_id)->first();
+      if ($this->isStudent() && $profile->user_id != Auth::user()->id){
+          return redirect('/profile');
+      }
+      $condition = [['student_user_id','=',$profile->user_id],
+        ['date_time', '<=', date("Y-m-d H:i:s")]
+      ];
+      $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
 
-        $profiles = array($profile, $scheds, $credits);
-        return view('profile.index', compact('profiles'));
+      $credits = CreditController::getCreditCount($profile->user_id);
+
+      $profiles = array($profile, $scheds, $credits);
+      return view('profile.index', compact('profiles'));
 
     }
 

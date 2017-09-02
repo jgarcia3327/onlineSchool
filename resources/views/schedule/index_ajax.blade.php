@@ -24,7 +24,7 @@
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
               <td>
                 @if($v->student_user_id != null && $schedules[4][$v->student_user_id] != null)
-                  {{ $schedules[4][$v->student_user_id]->fname }} {{ $schedules[4][$v->student_user_id]->lname }} [ <a href="{{url('/profile/'.$schedules[4][$v->student_user_id]->id)}}">Profile</a> ]
+                  {{ $schedules[4][$v->student_user_id]->fname }} {{ $schedules[4][$v->student_user_id]->lname }} [ <a href="{{url('/profile/'.$v->student_user_id)}}">Profile</a> ]
                   <?php
                     $schedTime =  strtotime($v->date_time);
                     $curTime = strtotime(date("Y-m-d H:i:s"));

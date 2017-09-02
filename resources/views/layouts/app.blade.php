@@ -53,7 +53,7 @@
 
                             <!-- Admin -->
                             @if ($auth->is_admin == 1)
-                              <li><a href="{{ url('/scheduleCredit') }}">Activate Credits</a></li>
+                            <li><a href="{{ url('/adminDashboard') }}">Admin Dashboard</a></li>
                             @endif
                             <!-- Student -->
                             @if ($auth->is_student == 1)

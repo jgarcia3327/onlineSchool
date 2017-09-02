@@ -74,20 +74,22 @@ class CreditController extends Controller
         ];
         $pending = Buycredit::where($pendingCond)->orderBy("id", "desc")->get();
 
-        // Admin
-        $all_credits = null;
-        if (Auth::user()->is_admin == 1) {
-          $all_credits = Buycredit::select("buycredits.*","users.email")->leftJoin("users","users.id","buycredits.user_id")->where("status",0)->orWhere("status",1)->orderBy("id", "desc")->get();
-        }
-
         $credits = array(
           CreditController::getCreditCount(Auth::user()->id),
-          $pending,
-          $all_credits
+          $pending
         );
         return view('scheduleCredit.index', compact('credits'));
       }
 
+      return redirect('');
+    }
+
+    public function admin(){
+      // Admin
+      if (Auth::user()->is_admin == 1) {
+        $buyCredits = Buycredit::select("buycredits.*","users.email")->leftJoin("users","users.id","buycredits.user_id")->where("status",0)->orWhere("status",1)->orderBy("id", "desc")->get();
+        return view('admin.credit', compact('buyCredits'));
+      }
       return redirect('');
     }
 
