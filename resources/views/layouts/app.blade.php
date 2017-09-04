@@ -100,6 +100,7 @@
                               </li>
                               <li><a href="{{ url('/messages') }}">Messages</a></li>
                               <li><a href="{{ url('/books') }}">Books</a></li>
+                              <li><a href="{{ url('/wage') }}">Wage</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                       {{ Auth::user()->email }} <span class="caret"></span>

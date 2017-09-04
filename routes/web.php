@@ -59,4 +59,6 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminDashboard', 'AdminController@index');
       Route::get('/adminFeedback', 'FeedbackController@admin');
       Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
+      Route::get('/wage', 'WageController@index');
+      Route::post('/wage', 'WageController@show');
 });
