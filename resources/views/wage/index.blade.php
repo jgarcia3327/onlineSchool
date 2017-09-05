@@ -13,8 +13,7 @@
                 <div class="panel-heading">Wage</div>
 
                 <div class="panel-body">
-                  <form class="" action="{{ url('/wage') }}" method="POST">
-                    {{ csrf_field() }}
+                  <form id="teacher-wage" action="" method="POST">
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="year">Select Year:</label>
@@ -47,10 +46,10 @@
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-12 text-right">
-                      <button class="btn btn-primary" type="submit" >Submit</button>
-                    </div>
                   </form>
+                  <div class="col-md-12 text-right">
+                    <button id="teacher-wage-submit" class="btn btn-primary" type="submit" >Submit</button>
+                  </div>
                 </div>
             </div>
             <!-- form -->
@@ -104,4 +103,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript" src="{{ asset('js/teacher-wage.js') }}"></script>
 @endsection

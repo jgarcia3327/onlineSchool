@@ -45,10 +45,10 @@ class WageController extends Controller
     return back()->with('error', "You don't have permission to visit the page.");
   }
 
-  public function show(Request $request) {
+  public function show($date) {
     if( Auth::user()->is_student === 0 ) {
-
-      $wages = WageController::getTeacherWage($request->year, $request->month, $request->pitch, Auth::user());
+      $datePieces = explode('-', $date);
+      $wages = WageController::getTeacherWage($datePieces[0], $datePieces[1], $datePieces[2], Auth::user());
 
       return view('wage.index', compact('wages'));
     }

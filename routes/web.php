@@ -60,5 +60,5 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminFeedback', 'FeedbackController@admin');
       Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
       Route::get('/wage', 'WageController@index');
-      Route::post('/wage', 'WageController@show');
+      Route::get('/wage/{date}', 'WageController@show');
 });
