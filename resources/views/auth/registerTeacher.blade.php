@@ -49,50 +49,50 @@
                         <div class="form-group">
                           <label for="fname" class="col-md-4 control-label">First Name</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                            <input type="text" class="form-control" id="fname" name="fname" value="{{ old('fname') }}" placeholder="First Name" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="lname" class="col-md-4 control-label">Last Name</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                            <input type="text" class="form-control" id="lname" name="lname" value="{{ old('lname') }}" placeholder="Last Name" required>
                           </div>
                         </div>
                         <div class="form-group">
                         <label for="gender" class="col-md-4 control-label">Gender</label>
                         <div class="col-md-6">
                           <select class="form-control" id="gender" name="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="male" {{ old('gender') == 'male'? "selected" : "" }}>Male</option>
+                            <option value="female" {{ old('gender') == 'female'? "selected" : "" }}>Female</option>
                           </select>
                         </div>
                         </div>
                         <div class="form-group">
                           <label for="skype" class="col-md-4 control-label">Skype ID</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="skype" name="skype" placeholder="Skype ID" required>
+                            <input type="text" class="form-control" id="skype" name="skype" value="{{ old('skype') }}" placeholder="Skype ID" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="contact" class="col-md-4 control-label">Contact</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact Number" required>
+                            <input type="text" class="form-control" id="contact" name="contact" value="{{ old('contact') }}" placeholder="Contact Number" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="address" class="col-md-4 control-label">Home Address</label>
                           <div class="col-md-6">
-                           <textarea class="form-control" id="address" name="address" rows="2" required></textarea>
+                           <textarea class="form-control" id="address" name="address" rows="2" required>{{ old('address') }}</textarea>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="esl_experience" class="col-md-4 control-label">ESL Experience</label>
                           <div class="col-md-6">
                             <select class="form-control" id="esl_experience" name="esl_experience" required>
-                              <option value="1-5 Years">1-5 Years</option>
-                              <option value="6-10 Years">6-10 Years</option>
-                              <option value="11-15 Years">11-15 Years</option>
-                              <option value="15+ Years">15+ Years</option>
+                              <option value="1-5 Years" {{ old('esl_experience') == '1-5 Years'? "selected" : "" }}>1-5 Years</option>
+                              <option value="6-10 Years" {{ old('esl_experience') == '6-10 Years'? "selected" : "" }}>6-10 Years</option>
+                              <option value="11-15 Years" {{ old('esl_experience') == '11-15 Years'? "selected" : "" }}>11-15 Years</option>
+                              <option value="15+ Years" {{ old('esl_experience') == '15+ Years'? "selected" : "" }}>15+ Years</option>
                             </select>
                           </div>
                         </div>

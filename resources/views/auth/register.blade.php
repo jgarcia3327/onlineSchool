@@ -50,40 +50,40 @@
                         <div class="form-group">
                           <label for="fname" class="col-md-4 control-label">First Name</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" value="{{ old('fname') }}" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="lname" class="col-md-4 control-label">Last Name</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" value="{{ old('lname') }}" required>
                           </div>
                         </div>
                         <div class="form-group">
                         <label for="gender" class="col-md-4 control-label">Gender</label>
                         <div class="col-md-6">
                           <select class="form-control" id="gender" name="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="male" {{ old('gender') == 'male'? "selected" : "" }}>Male</option>
+                            <option value="female" {{ old('gender') == 'female'? "selected" : "" }} >Female</option>
                           </select>
                         </div>
                         </div>
                         <div class="form-group">
                           <label for="skype" class="col-md-4 control-label">Skype ID</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="skype" name="skype" placeholder="Skype ID" required>
+                            <input type="text" class="form-control" id="skype" name="skype" placeholder="Skype ID" value="{{ old('skype') }}" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="contact" class="col-md-4 control-label">Contact</label>
                           <div class="col-md-6">
-                            <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact Number" required>
+                            <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact Number" value="{{ old('contact') }}" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="address" class="col-md-4 control-label">Home Address</label>
                           <div class="col-md-6">
-                           <textarea class="form-control" id="address" name="address" rows="2" required></textarea>
+                           <textarea class="form-control" id="address" name="address" rows="2" required>{{ old('address') }}</textarea>
                           </div>
                         </div>
 
