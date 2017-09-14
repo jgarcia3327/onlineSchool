@@ -19,10 +19,6 @@ a:hover {
 	text-decoration:none;
 }
 
-.container-fluid {
-	background-color: #407b55;
-}
-
 .navbar-default {
 	background-color: #fff;
 	border-radius:0;
@@ -30,7 +26,6 @@ a:hover {
 	border-left:0;
 	border-top:0;
 }
-
 
 .container-fluid > .navbar-header {
 	margin-right: 30px;
@@ -632,9 +627,6 @@ ul.social-network li{
 	margin-bottom: 0px;
 	border: 1px solid #61d443;
 }
-.container-fluid > .navbar-header {
-	margin-top: 3px;
-}
 .container-fluid {
 	padding-bottom: 6px;
 }
@@ -736,5 +728,18 @@ hr {
 .feedback .fa-comment {
 	padding-right: 15px;
 	padding-left: 9px;
+}
+.feedback-wrapper {
+	background-color: #eaf2f7;
+  border-radius: 6px;
+}
+header{
+	margin-bottom: 24px;
+}
+header .navbar {
+	border: 0px;
+}
+header, header .row, header .navbar-default {
+	background-color: #407b55;
 }
 /*end custom-edits*/

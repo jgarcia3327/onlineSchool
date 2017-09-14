@@ -272,7 +272,7 @@
     			</div>
     		</div>
     	</div>
-      <div class="row">
+      <div class="row feedback-wrapper">
         <div class="content feedback">
           <div class="col-md-12">
             <!-- List of user's feedback -->
@@ -280,6 +280,18 @@
               <div class="panel-heading"><i class="fa fa-comment"></i> Janet</div>
               <div class="panel-body">
                 Please try our system and give us feedback.
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading"><i class="fa fa-comment"></i> Julius</div>
+              <div class="panel-body">
+                Cool. Run on my phone's web browser @ iphone 5s.
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading"><i class="fa fa-comment"></i> Kenith</div>
+              <div class="panel-body">
+                Great stuff to learn english!
               </div>
             </div>
 
