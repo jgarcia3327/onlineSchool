@@ -13,7 +13,6 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#fff;
-	background-color:#b5debc;
 }
 
 a:hover {
@@ -21,7 +20,7 @@ a:hover {
 }
 
 .container-fluid {
-	background-color: #c3f5d5;
+	background-color: #407b55;
 }
 
 .navbar-default {
@@ -474,7 +473,7 @@ ul.social-network li a {
 	padding-top:10px;
 	padding-bottom:50px;
 	margin:20px 0 0 0;
-	background-color:#c3f5d5;
+	background-color:#407b55;
 }
 
 #sub-footer p{
@@ -642,8 +641,16 @@ ul.social-network li{
 hr {
 	border-top: 1px solid #61d443;
 }
-#courses h2 {
-	color: #72a0f3;
+#courses h2, #user-feedback h2, .course-title {
+	color: #50c0e9;
+}
+.feedback {
+	color: #636b6f;
+}
+.course-wrapper {
+	border-radius: 21px;
+  box-shadow: 6px 6px 7px #407b55;
+  border: 1px solid #61d443;
 }
 .ielts-course{
 	background-image: url('../images/s1.jpg');
@@ -700,5 +707,34 @@ hr {
 	background-repeat: no-repeat;
   background-position: center center;
   text-shadow: 1px 1px 3px #fff;
+}
+.social-network .email-icon {
+	color: #e75a4d;
+}
+.social-network .phone-icon {
+	color: #407b55;
+}
+.social-network .facebook-icon {
+	color: #4267b2;
+}
+.course-title {
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+}
+#courses {
+	padding-right: 12px;
+}
+.feedback .panel-default > .panel-heading {
+	text-align: left;
+	font-weight: bold;
+	border-radius: 9px 9px 3px 3px;
+}
+.feedback .panel-default {
+	border-radius: 9px 9px 6px 6px;
+}
+.feedback .fa-comment {
+	padding-right: 15px;
+	padding-left: 9px;
 }
 /*end custom-edits*/

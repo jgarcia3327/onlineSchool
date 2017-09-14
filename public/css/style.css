@@ -65,3 +65,9 @@ li.message-owner .badge.message{
 .bg-info {
   background-color: #ebf6fd;
 }
+#app #app-navbar-collapse ul.navbar-right > li > a {
+  font-weight: bold;
+}
+.panel-heading {
+  font-weight: bold;
+}

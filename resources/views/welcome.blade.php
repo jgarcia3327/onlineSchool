@@ -122,7 +122,7 @@
 				<div class="contents">
 					<h2>Dễ dàng sử dụng ứng dụng</h2>
           <p>Có thể được sử dụng trong máy tính để bàn, máy tính bảng và điện thoại di động</p>
-					<p><a href="{{ url('/register') }}">Đăng ký MIỄN PHÍ TRƯỚC</a></p>
+					<p><a href="{{ url('/register') }}">ĐĂNG KÝ</a></p>
 				</div>
 			</div>
 		</div>
@@ -133,128 +133,162 @@
     <div class="row">
       <div class="col-lg-12 text-center">
           <ul class="social-network">
-            <li><a href="mailto:info@englishhours.net" data-placement="top" title="info@englishhours.net"><i class="fa fa-envelope fa-3x"></i></a></li>
-            <li><a href="skype:live:julius.garcia3?call" data-placement="top" title="julius.garcia3"><i class="fa fa-skype fa-3x"></i></a></li>
-            <li><a href="#" data-placement="top" title="Phone Numbers"><i class="fa fa-phone fa-3x"></i></a></li>
-            <li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-3x"></i></a></li>
+            <li><a href="mailto:info@englishhours.net" data-placement="top" title="info@englishhours.net" class="email-icon"><i class="fa fa-envelope fa-3x"></i></a></li>
+            <li><a href="skype:live:jhanlay?call" data-placement="top" title="julius.garcia3" class="skype-icon"><i class="fa fa-skype fa-3x"></i></a></li>
+            <li><a href="#" data-placement="top" title="Phone Numbers" class="phone-icon"><i class="fa fa-phone fa-3x"></i></a></li>
+            <li><a href="https://www.facebook.com/Tienganhquaskype/" data-placement="top" title="Facebook" class="facebook-icon"><i class="fa fa-facebook fa-3x"></i></a></li>
           </ul>
       </div>
     </div>
   </div>
 
-	<div class="container" id="courses">
-		<div class="row">
-			<div class="recent">
-				<h2>Các khóa học</h2>
-				<hr>
-			</div>
-		</div>
-	</div>
-
 	<div class="container">
-		<div class="row">
-			<div class="content">
-				<div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
-						<div class="align-center ielts-course">
-							<h4>IELTS/TOEIC/TOEFL</h4>
-							<div class="icon">
-								<i class="fa fa-list fa-3x"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.8s">
-						<div class="align-center business-course">
-							<h4>VĂN PHÒNG KINH DOANH / VĂN PHÒNG</h4>
-							<div class="icon">
-								<i class="fa fa-location-arrow fa-3x"></i>
+  <div class="row">
 
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center freetalk-course">
-							<h4>FREETALK</h4>
-							<div class="icon">
-								<i class="fa fa-cloud fa-3x"></i>
+    <div class="col-md-8">
+      <div id="courses">
+    		<div class="row">
+    			<div class="recent">
+    				<h2>Các khóa học</h2>
+    				<hr>
+    			</div>
+    		</div>
+    	</div>
+      <div class="row">
+        <div class="content">
+          <div class="col-md-6">
+            <h3 class="course-title">IELTS/TOEIC/TOEFL</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="0.4s">
+              <div class="align-center course-wrapper ielts-course">
+                <div class="icon">
+                  <i class="fa fa-list fa-3x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3 class="course-title">TIẾNG ANH THƯƠNG MẠI</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="0.8s">
+              <div class="align-center course-wrapper business-course">
+                <div class="icon">
+                  <i class="fa fa-location-arrow fa-3x"></i>
 
-							</div>
-						</div>
-					</div>
-				</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="content">
+          <div class="col-md-6">
+            <h3 class="course-title">TIẾNG ANH GIAO TIẾP</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+              <div class="align-center course-wrapper freetalk-course">
+                <div class="icon">
+                  <i class="fa fa-cloud fa-3x"></i>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3 class="course-title">TIẾNG ANH THIẾU NHI</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+              <div class="align-center course-wrapper kids-course">
+                <div class="icon">
+                  <i class="fa fa-comments fa-3x"></i>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="content">
+          <div class="col-md-6">
+            <h3 class="course-title">TIẾNG ANH THUYẾT TRÌNH</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+              <div class="align-center course-wrapper public-course">
+                <div class="icon">
+                  <i class="fa fa-bullhorn fa-3x"></i>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3 class="course-title">LUYỆN ĐỌC VÀ VIẾT TIẾNG ANH</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+              <div class="align-center course-wrapper writing-course">
+                <div class="icon">
+                  <i class="fa fa-file-text fa-3x"></i>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="content">
+          <div class="col-md-6">
+            <h3 class="course-title">LUYỆN ĐỌC</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+              <div class="align-center course-wrapper reading-course">
+                <div class="icon">
+                  <i class="fa fa-book fa-3x"></i>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3 class="course-title">NGHE</h3>
+            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+              <div class="align-center course-wrapper listening-course">
+                <div class="icon">
+                  <i class="fa fa-play fa-3x"></i>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div> <!-- end col-md-8 -->
+    <div class="col-md-4">
+      <div id="user-feedback">
+    		<div class="row">
+    			<div class="recent">
+    				<h2>User's Feedback</h2>
+    				<hr>
+    			</div>
+    		</div>
+    	</div>
+      <div class="row">
+        <div class="content feedback">
+          <div class="col-md-12">
+            <!-- List of user's feedback -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><i class="fa fa-comment"></i> Janet</div>
+              <div class="panel-body">
+                Please try our system and give us feedback.
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-			<div class="content">
-        <div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center kids-course">
-							<h4>TIẾNG ANH CHO CON</h4>
-							<div class="icon">
-								<i class="fa fa-comments fa-3x"></i>
 
-							</div>
-						</div>
-					</div>
-				</div>
-        <div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center public-course">
-							<h4>NÓI TRƯỚC CÔNG CHÚNG</h4>
-							<div class="icon">
-								<i class="fa fa-bullhorn fa-3x"></i>
-
-							</div>
-						</div>
-					</div>
-				</div>
-        <div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center writing-course">
-							<h4>Viết và thành phần</h4>
-							<div class="icon">
-								<i class="fa fa-file-text fa-3x"></i>
-
-							</div>
-						</div>
-					</div>
-				</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="content">
-        <div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center reading-course">
-							<h4>ĐỌC VÀ THAM GIA</h4>
-							<div class="icon">
-								<i class="fa fa-book fa-3x"></i>
-
-							</div>
-						</div>
-					</div>
-				</div>
-        <div class="col-md-4">
-					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
-						<div class="align-center listening-course">
-							<h4>Nghe</h4>
-							<div class="icon">
-								<i class="fa fa-play fa-3x"></i>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-        <div class="col-md-4">
-          <!-- empty here -->
-				</div>
-			</div>
-		</div>
+  </div>
 	</div>
 
 

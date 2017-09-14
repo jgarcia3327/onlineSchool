@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('is_student')->default(1);
+            $table->boolean('is_admin')->default(0);
+            $table->text('settings')->nullable();
             $table->boolean('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
@@ -31,6 +33,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //Schema::dropIfExists('users');
+        $table->dropColumn('votes');
     }
 }
