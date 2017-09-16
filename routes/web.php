@@ -37,6 +37,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('auth/{driver}', ['as' => 'socialAuth', 'uses' => 'Auth\SocialController@redirectToProvider']);
 Route::get('auth/{driver}/callback', ['as' => 'socialAuthCallback', 'uses' => 'Auth\SocialController@handleProviderCallback']);
 
+// Public access
+Route::get('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@show');
+Route::get('/reserveTeacher/ajax/{date}', 'ReserveTeacherController@ajax');
+Route::get('teacherProfile/{teacher_id}', 'TeacherProfileController@show');
+
+// Login access
 Route::group(['middleware' => 'auth'], function() {
       Route::resource('profile', 'ProfileController');
       Route::resource('teacherProfile', 'TeacherProfileController');
@@ -45,8 +51,6 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/schedule/ajax/{date}', 'ScheduleController@ajax');
       Route::get('/schedule/index_ajax/{date}', 'ScheduleController@index_ajax');
       Route::get('/reserveTeacher', 'ReserveTeacherController@index');
-      Route::get('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@show');
-      Route::get('/reserveTeacher/ajax/{date}', 'ReserveTeacherController@ajax');
       Route::put('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@update');
       Route::get('/lessons', 'ScheduleController@index');
       Route::get('/books', 'BookController@index');

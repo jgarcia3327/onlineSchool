@@ -42,9 +42,12 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register as Student</a></li>
-                            <li><a href="{{ url('register/teacher') }}">Register as Teacher</a></li>
+                          @if (Route::currentRouteName() != "login")
+                            <li><a href="{{ route('login') }}">ĐĂNG NHẬP</a></li>
+                          @else
+                          <li><a href="{{ url('/register') }}">ĐĂNG KÝ</a></li>
+                          <li><a href="{{ url('/register/teacher') }}">TUTOR'S PORTAL</a></li>
+                          @endif
                         @else
 
                             <!-- Admin -->

@@ -36,7 +36,7 @@
           <tr>
             <td>{{ $vformat }}</td>
             <td>
-              @if($time[1][$k] == $auth->id )
+              @if( Auth::check() && $time[1][$k] == $auth->id )
                   <i class="text-primary">Enrolled</i>
               @elseif( $time[1][$k] != null )
                 <i class="text-danger">Closed</i>

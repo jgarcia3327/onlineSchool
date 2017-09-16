@@ -2,10 +2,15 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use APP\User;
+use App\User;
+use App\Http\Controllers\TeacherProfileController;
 
 class CommonController
 {
+
+  public function getActiveTeacherProfile() {
+    return TeacherProfileController::getActiveTeacherProfile();
+  }
 
   public function getActiveTeachers() {
     $condition = [
@@ -37,7 +42,7 @@ class CommonController
   }
 
   public function getMonthStr($month) {
-    return $this->getMonths()[intval($month)];
+    return $this->getMonths()[$month];
   }
 
   public function getMonths(){

@@ -114,7 +114,11 @@ class CreditController extends Controller
     public function update(Request $request, $id) {
 
       if (Auth::user()->is_admin == 1) {
-        $credit = Buycredit::findOrFail($id)->first();
+        $credit = Buycredit::where('id',$id)->first();
+        // Empty credit
+        if (empty($credit)) {
+          return back()->with("success", -1);
+        }
         $credit->activate_by = Auth::user()->id;
         $credit->status = 1;
         $credit->modify_date = Carbon::now();

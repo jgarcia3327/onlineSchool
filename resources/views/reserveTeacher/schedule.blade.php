@@ -12,7 +12,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                   <div class="text-center profile-photo sched-photo">
-                    @if(Auth::check() && $reservations[0]->photo != null)
+                    @if($reservations[0]->photo != null)
                     <img src="{{ asset('images/profile/') }}/{{ $reservations[0]->photo }}"/>
                     @else
                     <img src="{{ asset('images/profile/default_') }}{{ $reservations[0]->gender }}.png"/>
@@ -35,12 +35,14 @@
                 </div>
               </div>
                 <div class="panel-body">
+                  <p><strong>*Choose a day to display Teacher's schedule</strong></p>
                   <div class="col-md-8 col-md-offset-2">
                     <div id="datepicker"></div>
                   </div>
                 </div>
             </div>
 
+            @if ( Auth::check() && $auth->is_student == 1)
             <div class="panel panel-default">
               <div class="panel-heading">
                 <strong>Credits: {{ $reservations[1] }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">My Credits</a> ]
@@ -58,6 +60,13 @@
                 <span class="span-row pull-right"><button onclick="$('form#create-schedule').submit()" type="submit" class="btn btn-primary" id="submit-selected" disabled>Reserve</button></span>
               </div>
             </div>
+            @else
+            <div class="panel panel-default">
+              <div class="panel-body">
+                Please login to make reservation. <a class="btn btn-success btn-lg" href="{{ route('login') }}">ĐĂNG NHẬP</a>
+              </div>
+            </div>
+            @endif
 
             <p class="loader text-center"><img src="{{ asset('images/ajax-loader.gif') }}"/></p>
 

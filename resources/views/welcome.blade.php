@@ -8,10 +8,10 @@
 
     <!-- Bootstrap -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/responsive-slider.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-	<link href="{{ asset('css/homestyle.css') }}" rel="stylesheet">
+  	<link href="{{ asset('css/responsive-slider.css') }}" rel="stylesheet">
+  	<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+  	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+  	<link href="{{ asset('css/homestyle.css') }}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,9 +54,9 @@
                     {{ csrf_field() }}
                 </form>
                 @else
-								<li role="presentation"><a href="{{ url('/register') }}">Đăng ký sinh viên</a></li>
-								<li role="presentation"><a href="{{ url('/register/teacher') }}">Đăng ký giáo viên</a></li>
-								<li role="presentation"><a href="{{ url('/login') }}">Đăng nhập</a></li>
+								<li role="presentation"><a href="{{ url('/register') }}">ĐĂNG KÝ</a></li>
+								<li role="presentation"><a href="{{ url('/register/teacher') }}">TUTOR'S PORTAL</a></li>
+								<li role="presentation"><a href="{{ url('/login') }}">ĐĂNG NHẬP</a></li>
                 @endif
 							</ul>
 						</div>
@@ -122,13 +122,12 @@
 				<div class="contents">
 					<h2>Dễ dàng sử dụng ứng dụng</h2>
           <p>Có thể được sử dụng trong máy tính để bàn, máy tính bảng và điện thoại di động</p>
-					<p><a href="{{ url('/register') }}">ĐĂNG KÝ</a></p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
+  <!-- Social Network -->
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -141,118 +140,111 @@
       </div>
     </div>
   </div>
+  <!-- end Social Network -->
 
+  <!-- Courses and User Feedback -->
 	<div class="container">
   <div class="row">
 
-    <div class="col-md-8">
+    <div class="col-md-8 courses">
       <div id="courses">
     		<div class="row">
     			<div class="recent">
-    				<h2>Các khóa học</h2>
+    				<h2>KHÓA HỌC</h2>
     				<hr>
     			</div>
     		</div>
     	</div>
       <div class="row">
         <div class="content">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">IELTS/TOEIC/TOEFL</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="0.4s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
               <div class="align-center course-wrapper ielts-course">
                 <div class="icon">
-                  <i class="fa fa-list fa-3x"></i>
+                  <i class="fa fa-list fa-2x"></i>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">TIẾNG ANH THƯƠNG MẠI</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="0.8s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.8s">
               <div class="align-center course-wrapper business-course">
                 <div class="icon">
-                  <i class="fa fa-location-arrow fa-3x"></i>
+                  <i class="fa fa-location-arrow fa-2x"></i>
 
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="content">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">TIẾNG ANH GIAO TIẾP</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper freetalk-course">
                 <div class="icon">
-                  <i class="fa fa-cloud fa-3x"></i>
+                  <i class="fa fa-cloud fa-2x"></i>
 
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">TIẾNG ANH THIẾU NHI</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper kids-course">
                 <div class="icon">
-                  <i class="fa fa-comments fa-3x"></i>
+                  <i class="fa fa-comments fa-2x"></i>
 
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
       <div class="row">
         <div class="content">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">TIẾNG ANH THUYẾT TRÌNH</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper public-course">
                 <div class="icon">
-                  <i class="fa fa-bullhorn fa-3x"></i>
+                  <i class="fa fa-bullhorn fa-2x"></i>
 
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">LUYỆN ĐỌC VÀ VIẾT TIẾNG ANH</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper writing-course">
                 <div class="icon">
-                  <i class="fa fa-file-text fa-3x"></i>
+                  <i class="fa fa-file-text fa-2x"></i>
 
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="content">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">LUYỆN ĐỌC</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper reading-course">
                 <div class="icon">
-                  <i class="fa fa-book fa-3x"></i>
+                  <i class="fa fa-book fa-2x"></i>
 
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <h3 class="course-title">NGHE</h3>
-            <div class="wow" data-wow-offset="0" data-wow-delay="1.2s">
+            <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper listening-course">
                 <div class="icon">
-                  <i class="fa fa-play fa-3x"></i>
+                  <i class="fa fa-play fa-2x"></i>
 
                 </div>
               </div>
@@ -261,6 +253,7 @@
 
         </div>
       </div>
+
 
     </div> <!-- end col-md-8 -->
     <div class="col-md-4">
@@ -302,14 +295,52 @@
 
   </div>
 	</div>
+  <!-- end Courses and User Feedback -->
 
+  <!-- Teacher Profile -->
+  <div class="container">
+    <div class="row">
+      <div class="recent">
+        <h2>TEACHER PROFILE</h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="content">
+        <div class="text-center profile-photo">
+          <?php $teachers = $common->getActiveTeacherProfile();?>
+          <?php $counter = 0; ?>
+          @foreach($teachers AS $v)
+            <div class="col-md-3 profile-photo">
+              <a href="{{ url('reserveTeacher/'.$v->user_id) }}">
+              @if($v->photo != null)
+              <img src="{{ asset('images/profile/') }}/{{ $v->photo }}"/>
+              @else
+              <img src="{{ asset('images/profile/default_') }}{{ $v->gender }}.png"/>
+              @endif
+              </a>
+              <br/>
+              <a href="{{ url('reserveTeacher/'.$v->user_id) }}">{{ $v->fname }} {{ $v->lname }}</a>
+            </div>
+            <?php $counter++; ?>
+            @if ($counter % 4 == 0)
+              </div>
+              <div class="row text-center">
+            @endif
+          @endforeach
+          <?php $remaining = 4 - ($counter % 4); ?>
+          @if($remaining != 4)
+            @for($i = 0; $i < $remaining; $i++)
+              <div class="col-md-3">&nbsp;</div>
+            @endfor
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Teacher Profile -->
 
-		<div class="container">
-			<div class="row">
-				<hr>
-			</div>
-		</div>
-
+  <footer>
 		<div id="sub-footer">
 			<div class="container">
 				<div class="row">

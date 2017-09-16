@@ -16,14 +16,17 @@ class ReserveTeacherController extends Controller
     //
     public function index() {
 
-      $teachers = Teacher::where('active', 1)->orderBy('fname', 'asc')->orderBy('lname', 'asc')->get();
+      $teachers = TeacherProfileController::getActiveTeacherProfile();
       return view('reserveTeacher.index', compact('teachers'));
     }
 
     public function show($teacher_user_id) {
 
       $teacher = Teacher::where('user_id', $teacher_user_id)->first();
-      $credits = CreditController::getCreditCount(Auth::user()->id);
+      $credits = null;
+      if (!Auth::guest()) {
+        $credits = CreditController::getCreditCount(Auth::user()->id);
+      }
       $reservations = array($teacher, $credits);
       return view('reserveTeacher.schedule', compact('reservations'));
     }
@@ -49,7 +52,7 @@ class ReserveTeacherController extends Controller
     public function update(Request $request, $id) {
 
       $creditLeft = CreditController::getCreditCount(Auth::user()->id);
-      if($creditLeft < count($request->schedule_id)){
+      if($creditLeft < count($request->schedule_id) || Auth::user()->is_student != 1){
         //dd($creditLeft."===".count($request->schedule_id));
         return back()->with("success", -1);
       }

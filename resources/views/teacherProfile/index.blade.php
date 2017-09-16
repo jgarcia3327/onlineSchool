@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="text-center profile-photo">
-          @if(Auth::check() && $profile->photo != null)
+          @if($profile->photo != null)
           <img src="{{ asset('images/profile/') }}/{{ $profile->photo }}"/>
           @else
           <img src="{{ asset('images/profile/default_') }}{{ $profile->gender }}.png"/>

@@ -13,6 +13,10 @@ use Image;
 class TeacherProfileController extends Controller
 {
 
+  public static function getActiveTeacherProfile() {
+    return Teacher::where('active', 1)->orderBy('fname', 'asc')->orderBy('lname', 'asc')->get();
+  }
+
     private function hasProfile() {
         if ($this->isTeacher())
             return (Teacher::where('user_id', Auth::user()->id)->count() != 0);
@@ -93,13 +97,13 @@ class TeacherProfileController extends Controller
      */
     public function show($user_id)
     {
-      //$profile = $this->getTeacherProfile($id);
-      if(Auth::user()->id === $user_id) {
-        return redirect('/teacherProfile');
-      }
       $profile = Teacher::where('user_id',$user_id)->first();
       $education = Education::where('user_id', $user_id)->get();
-      $profiles = array("profile" => $profile, "education" => $education);
+      $feedback = null;
+      if (Auth::check() && $this->isTeacher()) {
+        $feedback = FeedbackController::getUserFeedback(Auth::user()->id);
+      }
+      $profiles = array('profile' => $profile, 'education' => $education, 'feedback' => $feedback);
       return view('teacherProfile.index', compact('profiles'));
     }
 
