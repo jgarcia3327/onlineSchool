@@ -75,32 +75,25 @@
 					<ul>
 						<li>
 							<div class="slide-body" data-group="slide">
-								<img src="{{ asset('img/2a.jpg') }}" alt="">
-								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-									<button class="btn btn-primary"><h2>Chạy trong máy tính để bàn</h2></button>
-									<div class="caption-sub" data-animate="slideAppearDownToUp" data-delay="1200" data-length="300"><button class="btn btn-primary"><h4><span>Đăng ký MIỄN PHÍ TRƯỚC</span></h4></button></div>
-									<div class="caption-sub" data-animate="slideAppearLeftToRight" data-delay="900" data-length="300"><button class="btn btn-primary"><h3>Chỉ cung cấp hạn chế</h3></button></div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="slide-body" data-group="slide">
 								<img src="{{ asset('img/1.jpg') }}" alt="">
+								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
+                  <h3>LUÔN CÓ THỜI GIAN HỌC TIẾNG ANH CHO BẠN</h3>
+                </div>
+							</div>
+						</li>
+						<li>
+							<div class="slide-body" data-group="slide">
+								<img src="{{ asset('img/2.jpg') }}" alt="">
 								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
-									<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><h2>Đáp ứng</h2></button>
-									<div class="caption-sub" data-animate="slideAppearUpToDown" data-delay="800" data-length="300"><button class="btn btn-primary"><h4><span>Chạy trong máy tính bảng và điện thoại di động</span></h4></button></div>
-									<div class="caption-sub" data-animate="slideAppearRightToLeft" data-delay="1200" data-length="300"><button class="btn btn-primary"><h3>Thử ngay bây giờ</h3></button></div>
+									<div class="caption-sub"><h3>SỰ TỰ TIN ĐẾN TỪ NHỮNG GIỜ HỌC TIẾNG ANH</h3></div>
 								</div>
 							</div>
 						</li>
 						<li>
 							<div class="slide-body" data-group="slide">
-								<img src="{{ asset('img/10.jpg') }}" alt="">
+								<img src="{{ asset('img/3.jpg') }}" alt="">
 								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-								  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><h2>Học tập thật dễ dàng</h2></button>
-								  <div class="caption-sub" data-animate="slideAppearLeftToRight" data-delay="800" data-length="300"><button class="btn btn-primary"><h4>Học tập dễ dàng với chúng tôi</h4></button></div>
-								  <div class="caption-sub" data-animate="slideAppearDownToUp" data-delay="1200" data-length="300"><button class="btn btn-primary"><h3>Hãy thử hệ thống của chúng tôi ngay bây giờ</h3></button></div>
-
+								  <h3>ENGLISH HOUR LÀ THỜI GIAN TUYỆT NHẤT</h3>
 								</div>
 							</div>
 						</li>
@@ -120,15 +113,53 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="contents">
-					<h2>Dễ dàng sử dụng ứng dụng</h2>
-          <p>Có thể được sử dụng trong máy tính để bàn, máy tính bảng và điện thoại di động</p>
-				</div>
+					<h2>PHƯƠNG PHÁP HỌC TIẾNG ANH HIỆU QUẢ TỪ
+            <br/>ENGLISH HOURS CENTER</h2>
+            <p class="text-left"><strong>Chúng tôi tự tin sẽ mang đến cho bạn một phương pháp học hiệu quả, tiết kiệm và ưu việt nhất từ trước đến nay với những ưu điểm :</strong></p>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">LỚP HỌC TRỰC TIẾP 1 GIÁO VIÊN – 1 HỌC VIÊN</h3>
+              </div>
+              <div class="panel-body text-left">
+                Khác với các phương pháp học trực tuyến khác, học viên được học bằng phương pháp đối thoại trực tiếp với giáo viên nước ngoài, được hướng dẫn, giảng dạy trong suốt buổi học 1 giáo viên /1 học viên.
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">GIÁO VIÊN NƯỚC NGOÀI TRÌNH ĐỘ CAO</h3>
+              </div>
+              <div class="panel-body text-left">
+                100% giáo viên nước ngoài đến từ các quốc gia sử dụng tiếng anh làm ngôn ngữ chính thức, có chứng chỉ giảng dạy quốc tế TESOL, LET, TEFL, ..., có kinh nghiệm, trình độ cao, được tuyển chọn kĩ  bởi đội ngũ giáo viên có nhiều kinh nghiệm của trung tâm.
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">GIÁO TRÌNH EBOOK CHUYÊN NGHIỆP, HIỆN ĐẠI</h3>
+              </div>
+              <div class="panel-body text-left">
+                Hệ thống tài liệu, giáo trình học đa dạng, phong phú,  liên tục được cập nhật phù hợp với nhu cầu của từng học viên ở mọi cấp độ.              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">THỜI GIAN LINH HOẠT – CHI PHÍ TIẾT KIỆM</h3>
+              </div>
+              <div class="panel-body text-left">
+                Thời gian mỗi buổi học được sắp xếp linh động, phù hợp với thời gian của học viên, đặc biệt học viên được hoản tiền buổi học đã đăng ký vào tài khoản gói học nếu học viên nghỉ học có thông báo trước với trung tâm.              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">ĐỘI NGŨ CHĂM SÓC HỌC VIÊN CHU ĐÁO</h3>
+              </div>
+              <div class="panel-body text-left">
+                Đội ngũ tư vấn luôn sẵn sàng hỗ trợ học viên, đồng hành và tư vấn mọi thắc mắc của học viên trong suốt quá trình học. Đồng thời, giúp học viên xây dựng một lộ trình học tập phù hợp, hiệu quả.              </div>
+            </div>
+        </div>
 			</div>
 		</div>
 	</div>
 
   <!-- Social Network -->
-  <div class="container">
+  <div class="container social-wrapper">
     <div class="row">
       <div class="col-lg-12 text-center">
           <ul class="social-network">
@@ -150,7 +181,7 @@
       <div id="courses">
     		<div class="row">
     			<div class="recent">
-    				<h2>KHÓA HỌC</h2>
+    				<h2>CÁC KHÓA HỌC</h2>
     				<hr>
     			</div>
     		</div>
@@ -218,7 +249,7 @@
             </div>
           </div>
           <div class="col-md-3">
-            <h3 class="course-title">LUYỆN ĐỌC VÀ VIẾT TIẾNG ANH</h3>
+            <h3 class="course-title">LUYỆN VIẾT</h3>
             <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper writing-course">
                 <div class="icon">
@@ -240,7 +271,7 @@
             </div>
           </div>
           <div class="col-md-3">
-            <h3 class="course-title">NGHE</h3>
+            <h3 class="course-title">LUYỆN NGHE</h3>
             <div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.2s">
               <div class="align-center course-wrapper listening-course">
                 <div class="icon">
@@ -260,7 +291,7 @@
       <div id="user-feedback">
     		<div class="row">
     			<div class="recent">
-    				<h2>User's Feedback</h2>
+    				<h2>PHẢN HỒI CỦA HỌC VIÊN</h2>
     				<hr>
     			</div>
     		</div>
@@ -301,7 +332,7 @@
   <div class="container">
     <div class="row">
       <div class="recent">
-        <h2>TEACHER PROFILE</h2>
+        <h2>TUTOR'S PROFILE</h2>
         <hr>
       </div>
     </div>
