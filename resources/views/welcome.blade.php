@@ -68,46 +68,46 @@
 
 	<!-- Responsive slider - START -->
 	<div class="slider">
-	<div class="container">
-		<div class="row">
-			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
-				<div class="slides" data-group="slides">
-					<ul>
-						<li>
-							<div class="slide-body" data-group="slide">
-								<img src="{{ asset('img/1.jpg') }}" alt="">
-								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-                  <h3>LUÔN CÓ THỜI GIAN HỌC TIẾNG ANH CHO BẠN</h3>
-                </div>
-							</div>
-						</li>
-						<li>
-							<div class="slide-body" data-group="slide">
-								<img src="{{ asset('img/2.jpg') }}" alt="">
-								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
-									<div class="caption-sub"><h3>SỰ TỰ TIN ĐẾN TỪ NHỮNG GIỜ HỌC TIẾNG ANH</h3></div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="slide-body" data-group="slide">
-								<img src="{{ asset('img/3.jpg') }}" alt="">
-								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-								  <h3>ENGLISH HOUR LÀ THỜI GIAN TUYỆT NHẤT</h3>
-								</div>
-							</div>
-						</li>
+  	<div class="container">
+  		<div class="row">
+  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true" data-interval="5000" data-transitiontime="600">
+  				<div class="slides" data-group="slides">
+  					<ul>
+  						<li>
+  							<div class="slide-body" data-group="slide">
+  								<img src="{{ asset('img/1.jpg') }}" alt="">
+  								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
+                    <h3>LUÔN CÓ THỜI GIAN HỌC TIẾNG ANH CHO BẠN</h3>
+                  </div>
+  							</div>
+  						</li>
+  						<li>
+  							<div class="slide-body" data-group="slide">
+  								<img src="{{ asset('img/2.jpg') }}" alt="">
+  								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
+  									<div class="caption-sub"><h3>SỰ TỰ TIN ĐẾN TỪ NHỮNG GIỜ HỌC TIẾNG ANH</h3></div>
+  								</div>
+  							</div>
+  						</li>
+  						<li>
+  							<div class="slide-body" data-group="slide">
+  								<img src="{{ asset('img/3.jpg') }}" alt="">
+  								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
+  								  <h3>ENGLISH HOUR LÀ THỜI GIAN TUYỆT NHẤT</h3>
+  								</div>
+  							</div>
+  						</li>
 
-					</ul>
-				</div>
+  					</ul>
+  				</div>
 
-				<a class="slider-control left" href="#" data-jump="prev"><i class="fa fa-angle-left fa-2x"></i></a>
-				<a class="slider-control right" href="#" data-jump="next"><i class="fa fa-angle-right fa-2x"></i></a>
-			</div>
-		</div>
+  				<a class="slider-control left" href="#" data-jump="prev"><i class="fa fa-angle-left fa-2x"></i></a>
+  				<a class="slider-control right" href="#" data-jump="next"><i class="fa fa-angle-right fa-2x"></i></a>
+  			</div>
+  		</div>
+  	</div>
 	</div>
-	</div>
-    <!-- Responsive slider - END -->
+  <!-- Responsive slider - END -->
 
 	<div class="container">
 		<div class="row">
@@ -399,10 +399,9 @@
 	<script src="{{ asset('js/responsive-slider.js') }}"></script>
 	<script src="{{ asset('js/wow.min.js') }}"></script>
 	<script>
-	wow = new WOW(
-	 {
 
-		}	)
+	wow = new WOW(
+	 {}	)
 		.init();
 	</script>
   </body>
