@@ -86,7 +86,6 @@
                               </li>
                             @else
                               <!-- Teacher -->
-                              <li><a href="{{ url('/teacherProfile') }}">My Profile</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                       Schedule <span class="caret"></span>
@@ -109,6 +108,7 @@
                                       <!-- <li>
                                           <a href="/home">My Dasboard</a>
                                       </li> -->
+                                      <li><a href="{{ url('/teacherProfile') }}">My Profile</a></li>
                                       <li>
                                           <a href="{{ route('logout') }}"
                                               onclick="event.preventDefault();
