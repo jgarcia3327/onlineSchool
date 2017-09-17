@@ -70,14 +70,18 @@
 	<div class="slider">
   	<div class="container">
   		<div class="row">
-  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true" data-interval="5000" data-transitiontime="600">
+  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true" data-interval="4000" data-transitiontime="600">
   				<div class="slides" data-group="slides">
   					<ul>
   						<li>
   							<div class="slide-body" data-group="slide">
   								<img src="{{ asset('img/1.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-                    <h3>LUÔN CÓ THỜI GIAN HỌC TIẾNG ANH CHO BẠN</h3>
+                    <div class="caption-body">
+                      <h3>There's always an HOUR to learn ENGLISH.<br/>
+                        <span class="sub-caption1">--> LUÔN CÓ THỜI GIAN HỌC TIẾNG ANH CHO BẠN</span>
+                      </h3>
+                    </div>
                   </div>
   							</div>
   						</li>
@@ -85,7 +89,11 @@
   							<div class="slide-body" data-group="slide">
   								<img src="{{ asset('img/2.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
-  									<div class="caption-sub"><h3>SỰ TỰ TIN ĐẾN TỪ NHỮNG GIỜ HỌC TIẾNG ANH</h3></div>
+  									<div class="caption-body">
+                      <h3>Confidence comes from HOURS of learning ENGLISH.<br/>
+                        <span class="sub-caption1">--> SỰ TỰ TIN ĐẾN TỪ NHỮNG GIỜ HỌC TIẾNG ANH</span>
+                      </h3>
+                    </div>
   								</div>
   							</div>
   						</li>
@@ -93,7 +101,11 @@
   							<div class="slide-body" data-group="slide">
   								<img src="{{ asset('img/3.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
-  								  <h3>ENGLISH HOUR LÀ THỜI GIAN TUYỆT NHẤT</h3>
+                    <div class="caption-body">
+                      <h3>ENGLISH HOUR is the best hour<br/>
+                        <span class="sub-caption">--> ENGLISH HOUR LÀ THỜI GIAN TUYỆT NHẤT</span>
+                      </h3>
+                    </div>
   								</div>
   							</div>
   						</li>
@@ -113,7 +125,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="contents">
-					<h2>PHƯƠNG PHÁP HỌC TIẾNG ANH HIỆU QUẢ TỪ
+					<h2 class="intro-title">PHƯƠNG PHÁP HỌC TIẾNG ANH HIỆU QUẢ TỪ
             <br/>ENGLISH HOURS CENTER</h2>
             <p class="text-left"><strong>Chúng tôi tự tin sẽ mang đến cho bạn một phương pháp học hiệu quả, tiết kiệm và ưu việt nhất từ trước đến nay với những ưu điểm :</strong></p>
             <div class="panel panel-default">
@@ -144,7 +156,7 @@
                 <h3 class="panel-title">THỜI GIAN LINH HOẠT – CHI PHÍ TIẾT KIỆM</h3>
               </div>
               <div class="panel-body text-left">
-                Thời gian mỗi buổi học được sắp xếp linh động, phù hợp với thời gian của học viên, đặc biệt học viên được hoản tiền buổi học đã đăng ký vào tài khoản gói học nếu học viên nghỉ học có thông báo trước với trung tâm.              </div>
+                Thời gian mỗi buổi học được sắp xếp linh động, phù hợp với thời gian của học viên, đặc biệt học viên được hoàn tiền buổi học đã đăng ký vào tài khoản gói học nếu học viên nghỉ học có thông báo trước với trung tâm.              </div>
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">

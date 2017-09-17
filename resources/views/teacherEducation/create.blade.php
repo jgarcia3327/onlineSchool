@@ -24,7 +24,7 @@
         @endforeach
       </select>
       <select class="form-control" id="start_year" name="start_year">
-        @for ($y = date('Y'); $y>1999; $y--)
+        @for ($y = date('Y'); $y>$common->getSchoolMaxYear(); $y--)
         <option value="{{$y}}">{{$y}}</option>
         @endfor
       </select>
@@ -37,7 +37,7 @@
         @endforeach
       </select>
       <select class="form-control" id="end_year" name="end_year">
-        @for ($y = date('Y'); $y>1999; $y--)
+        @for ($y = date('Y'); $y>$common->getSchoolMaxYear(); $y--)
         <option value="{{$y}}">{{$y}}</option>
         @endfor
       </select>

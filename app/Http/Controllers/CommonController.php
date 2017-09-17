@@ -8,6 +8,10 @@ use App\Http\Controllers\TeacherProfileController;
 class CommonController
 {
 
+  public function getSchoolMaxYear() {
+    return 1979;
+  }
+
   public function getActiveTeacherProfile() {
     return TeacherProfileController::getActiveTeacherProfile();
   }
