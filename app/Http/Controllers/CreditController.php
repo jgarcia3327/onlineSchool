@@ -95,7 +95,7 @@ class CreditController extends Controller
 
     public function store(Request $request) {
 
-      $acceptedQuantity = array(10, 15, 20);
+      $acceptedQuantity = array(10, 20, 30, 40);
 
       if (in_array($request->quantity, $acceptedQuantity)) {
         $insertData = array(
@@ -104,7 +104,7 @@ class CreditController extends Controller
           "create_date" => Carbon::now()
         );
         Buycredit::insert($insertData);
-        return back()->with("success", $request->quantity*2); //TODO change price
+        return back()->with("success", $request->quantity); //TODO change price
       }
 
       return back()->with("success", 0);
@@ -127,14 +127,16 @@ class CreditController extends Controller
         //Assign credits
         $studentCredit = new Credit;
         switch($credit->quantity) {
-          case 10 : $consume = 14; // in days
+          case 10 : $consume = 30; // in days
           break;
-          case 15 : $consume = 21; // in days
+          case 20 : $consume = 60; // in days
           break;
-          default : $consume = 30; // in days
+          case 30 : $consume = 90; // in days
+          break;
+          default : $consume = 120; // in days
         }
         $dataset = [];
-        $limit = $credit->quantity == 20? (20+2) : $credit->quantity;
+        $limit = $credit->quantity;
         for ($i=0; $i < $limit; $i++) {
           $dataset[] = [
             'user_id' => $credit->user_id,

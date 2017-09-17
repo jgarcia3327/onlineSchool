@@ -15,13 +15,13 @@
                   <?php if($v->status != 0) continue; ?>
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading{{$v->id}}">
-                      <h4 class="panel-title">
+                      <p>
                         <strong class="text-default credit-num">{{$v->email}}</strong>
-                        {{$v->quantity}} credits, Consumable for 2-weeks
+                        {{$v->quantity}} credits.
                         <a class="btn btn-primary" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">
                           Activate
                         </a>
-                      </h4>
+                      </p>
                     </div>
                     <div id="collapse{{$v->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$v->id}}">
                       <div class="panel-body">

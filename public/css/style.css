@@ -56,8 +56,9 @@ li.message-owner .badge.message{
 }
 .credit-num {
   border: 1px solid #aaa;
-  padding: 9px 15px;
+  padding: 9px 54px;
   font-size: 21px;
+  background-color: #cbeccb;
 }
 .admin-link {
   display: block;
