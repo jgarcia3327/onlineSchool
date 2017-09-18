@@ -745,10 +745,41 @@ header .navbar {
 header, header .row, header .navbar-default {
 	background-color: #407b55;
 }
+.slide-body .caption.header {
+	left: 50% !important;
+}
+.slide-body .caption.header .caption-body {
+	position: relative;
+	left: -72%;
+	transform: translateY(-222%);
+}
+.slide-body .caption.header .caption-body-bottom {
+	position: relative;
+	left: -27%;
+	transform: translateY(-18%);
+}
+.caption.header h3 {
+	padding: 30px;
+  background-color: rgba(84, 138, 67, 0.63);
+	text-shadow: 1px 1px 4px #184a2a;
+	text-align: center;
+}
 @media (max-width: 991px) {
 	.courses .content {
 		padding-left: 45px;
 		padding-right: 45px;
+	}
+	.caption.header h3 {
+		padding: 21px;
+		font-size: 18px;
+	}
+	.slide-body .caption.header .caption-body {
+		left: -53%;
+    transform: translateY(-168%);
+	}
+	.slide-body .caption.header .caption-body-bottom {
+		left: -47%;
+    transform: translateY(-54%);
 	}
 }
 @media (max-width: 671px) {
@@ -788,7 +819,14 @@ header, header .row, header .navbar-default {
 	}
 	.caption-body h3 {
 		font-size: 15px;
-		padding: 18px !important;
+		padding: 18px;
+	}
+	.caption.header h3 {
+		padding: 12px;
+		font-size: 15px;
+	}
+	.slide-body .caption.header .caption-body-bottom {
+    transform: translateY(-111%);
 	}
 }
 @media (max-width: 471px) {
@@ -799,17 +837,26 @@ header, header .row, header .navbar-default {
 		padding-left: 12px;
 		padding-right: 12px;
 	}
-}
-@media (max-width: 425px) {
-	.caption-body h3 {
-		font-size: 14px;
-		padding: 3px !important;
+	.caption.header h3 {
+		padding: 8px;
+	}
+	.slide-body .caption.header .caption-body {
+		left: -51%;
+	}
+	.slide-body .caption.header .caption-body-bottom {
+		left: -49%;
 	}
 }
-@media (max-width: 372px) {
-	.caption-body h3 {
-		font-size: 12px;
-		padding: 2px !important;
+@media (max-width: 425px) {
+	.caption.header h3 {
+		font-size: 14px;
+		padding: 3px;
+	}
+}
+@media (max-width: 388px) {
+	.caption.header h3 {
+		font-size: 11px;
+		padding: 2px;
 	}
 }
 @media (max-width: 320px) {
@@ -834,19 +881,6 @@ header, header .row, header .navbar-default {
 .social-wrapper {
   padding-top: 30px;
   padding-bottom: 21px;
-}
-.caption.header h3 {
-	padding: 30px;
-  background-color: rgba(84, 138, 67, 0.63);
-	text-shadow: 1px 1px 4px #184a2a;
-}
-.slide-body .caption.header {
-	left: 50% !important;
-}
-.slide-body .caption.header .caption-body {
-	position: relative;
-	left: -50%;
-	transform: translateY(-50%);
 }
 .responsive-slider .slider-control {
 	top: 40%;

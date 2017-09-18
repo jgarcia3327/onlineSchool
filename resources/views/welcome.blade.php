@@ -70,7 +70,7 @@
 	<div class="slider">
   	<div class="container">
   		<div class="row">
-  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true" data-interval="4000" data-transitiontime="600">
+  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="false" data-interval="4000" data-transitiontime="600">
   				<div class="slides" data-group="slides">
   					<ul>
   						<li>
@@ -78,9 +78,10 @@
   								<img src="{{ asset('img/1.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
                     <div class="caption-body">
-                      <h3>There's always an HOUR to learn ENGLISH.
-                        <span class="sub-caption1">Học tiếng anh MỌI LÚC, MỌI NƠI cùng English Hours</span>
-                      </h3>
+                      <h3>Học tiếng anh MỌI LÚC, MỌI NƠI cùng English Hours</h3>
+                    </div>
+                    <div class="caption-body-bottom">
+                      <h3>There's always an HOUR to learn ENGLISH.<!-- <span class="sub-caption1">Học tiếng anh MỌI LÚC, MỌI NƠI cùng English Hours</span> --></h3>
                     </div>
                   </div>
   							</div>
@@ -90,9 +91,10 @@
   								<img src="{{ asset('img/2.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
   									<div class="caption-body">
-                      <h3>Confidence comes from HOURS of learning ENGLISH.
-                        <span class="sub-caption1">Với English Hours, SỰ TỰ TIN luôn đồng hành cùng bạn</span>
-                      </h3>
+                      <h3>Với English Hours, SỰ TỰ TIN luôn đồng hành cùng bạn</h3>
+                    </div>
+                    <div class="caption-body-bottom">
+                      <h3>Confidence comes from HOURS of learning ENGLISH.</h3>
                     </div>
   								</div>
   							</div>
@@ -102,9 +104,10 @@
   								<img src="{{ asset('img/3.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
                     <div class="caption-body">
-                      <h3>ENGLISH HOUR is the best hour.
-                        <span class="sub-caption1">English Hour - phương pháp ƯU VIỆT SỐ 1 tại Việt Nam</span>
-                      </h3>
+                      <h3>English Hour - phương pháp ƯU VIỆT SỐ 1 tại Việt Nam</h3>
+                    </div>
+                    <div class="caption-body-bottom">
+                      <h3>ENGLISH HOUR is the best hour.</h3>
                     </div>
   								</div>
   							</div>
