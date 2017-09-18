@@ -78,8 +78,8 @@
   								<img src="{{ asset('img/1.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
                     <div class="caption-body">
-                      <h3>There's always an HOUR to learn ENGLISH.<br/>
-                        <span class="sub-caption1">--> LUÔN CÓ THỜI GIAN HỌC TIẾNG ANH CHO BẠN</span>
+                      <h3>There's always an HOUR to learn ENGLISH.
+                        <span class="sub-caption1">Học tiếng anh MỌI LÚC, MỌI NƠI cùng English Hours</span>
                       </h3>
                     </div>
                   </div>
@@ -90,8 +90,8 @@
   								<img src="{{ asset('img/2.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearDownToUp" data-delay="500" data-length="300">
   									<div class="caption-body">
-                      <h3>Confidence comes from HOURS of learning ENGLISH.<br/>
-                        <span class="sub-caption1">--> SỰ TỰ TIN ĐẾN TỪ NHỮNG GIỜ HỌC TIẾNG ANH</span>
+                      <h3>Confidence comes from HOURS of learning ENGLISH.
+                        <span class="sub-caption1">Với English Hours, SỰ TỰ TIN luôn đồng hành cùng bạn</span>
                       </h3>
                     </div>
   								</div>
@@ -102,8 +102,8 @@
   								<img src="{{ asset('img/3.jpg') }}" alt="">
   								<div class="caption header" data-animate="slideAppearUpToDown" data-delay="500" data-length="300">
                     <div class="caption-body">
-                      <h3>ENGLISH HOUR is the best hour<br/>
-                        <span class="sub-caption">--> ENGLISH HOUR LÀ THỜI GIAN TUYỆT NHẤT</span>
+                      <h3>ENGLISH HOUR is the best hour.
+                        <span class="sub-caption1">English Hour - phương pháp ƯU VIỆT SỐ 1 tại Việt Nam</span>
                       </h3>
                     </div>
   								</div>
@@ -344,7 +344,7 @@
   <div class="container">
     <div class="row">
       <div class="recent">
-        <h2>TUTOR'S PROFILE</h2>
+        <h2>THÔNG TIN CỦA GIÁO VIÊN</h2>
         <hr>
       </div>
     </div>
@@ -362,8 +362,7 @@
               <img src="{{ asset('images/profile/default_') }}{{ $v->gender }}.png"/>
               @endif
               </a>
-              <br/>
-              <a href="{{ url('reserveTeacher/'.$v->user_id) }}">{{ $v->fname }} {{ $v->lname }}</a>
+              <p class="profile-name-link"><a class="text-success" href="{{ url('reserveTeacher/'.$v->user_id) }}">{{ ucfirst($v->fname) }} {{ ucfirst($v->lname) }}</a></p>
             </div>
             <?php $counter++; ?>
             @if ($counter % 4 == 0)

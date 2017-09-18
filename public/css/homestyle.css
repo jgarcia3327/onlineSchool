@@ -837,8 +837,8 @@ header, header .row, header .navbar-default {
 }
 .caption.header h3 {
 	padding: 30px;
-  background-color: rgba(84, 138, 67, 0.62);
-	text-shadow: 3px 3px 6px #8adea8;
+  background-color: rgba(84, 138, 67, 0.63);
+	text-shadow: 1px 1px 4px #184a2a;
 }
 .slide-body .caption.header {
 	left: 50% !important;
@@ -854,5 +854,13 @@ header, header .row, header .navbar-default {
 }
 .caption-body .sub-caption1 {
 	font-size: 0.7em;
+	display: block;
+	padding-top: 12px;
+	text-shadow: 1px 1px 4px #fbf41e;
+}
+.profile-name-link {
+	font-size: 1.2em;
+	padding: 0px;
+	font-weight: bold;
 }
 /*end custom-edits*/
