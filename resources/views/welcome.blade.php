@@ -347,7 +347,7 @@
   <div class="container">
     <div class="row">
       <div class="recent">
-        <h2>Video Clips</h2>
+        <h2>VIDEO CLIPS</h2>
         <hr>
       </div>
     </div>

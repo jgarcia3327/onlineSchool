@@ -635,6 +635,7 @@ hr {
 }
 .recent h2, .course-title {
 	color: #548a43;
+	padding-left: 9px;
 }
 .feedback {
 	color: #636b6f;
