@@ -897,4 +897,7 @@ header, header .row, header .navbar-default {
 	padding: 0px;
 	font-weight: bold;
 }
+.content {
+	margin-top: 0;
+}
 /*end custom-edits*/

@@ -30,7 +30,7 @@
                 Your browser does not support the audio element.
                 </audio>
                 @else
-                <span class="text-center">No Audio uploaded</span>
+                <span class="text-center">Chưa có Audio</span>
                 @endif
                 </div>
               </div>
@@ -63,7 +63,7 @@
             @else
             <div class="panel panel-default">
               <div class="panel-body">
-                Please login to make reservation. <a class="btn btn-success btn-lg" href="{{ route('login') }}">ĐĂNG NHẬP</a>
+                Để chọn lịch học, bạn hãy đăng nhập tại đây <a class="btn btn-success btn-lg" href="{{ route('login') }}">ĐĂNG NHẬP</a>
               </div>
             </div>
             @endif

@@ -116,19 +116,29 @@
                       </form>
                     </div><!-- end change-password -->
                     @else
-                    {{ $profile->fname }} {{ $profile->lname }} - Profile [ <a href="{{ url('reserveTeacher/'.$profile->user_id) }}">View teacher schedule</a> ]
+                    Thông tin giáo viên - {{ $profile->fname }} {{ $profile->lname }} [ <a href="{{ url('reserveTeacher/'.$profile->user_id) }}">Xem lịch dạy của giáo viên</a> ]
                     @endif
                   </div>
 
                   <div class="panel-body">
                     <ul class="list-group">
-                      <li class="list-group-item"><strong>First Name:</strong> {{ $profile->fname }}</li>
-                      <li class="list-group-item"><strong>Last Name:</strong> {{ $profile->lname }}</li>
-                      <li class="list-group-item"><strong>Gender:</strong> {{ $profile->gender }}</li>
-                      <li class="list-group-item"><strong>Skype ID:</strong> {{ $profile->skype }}</li>
-                      <li class="list-group-item"><strong>Contact #:</strong> {{ $profile->contact }}</li>
-                      <li class="list-group-item"><strong>Home Address:</strong> {{ $profile->address }}</li>
-                      <li class="list-group-item"><strong>ESL Experience:</strong> {{ $profile->esl_experience }}</li>
+                      @if (Auth::check() && $profile->user_id === Auth::user()->id)
+                        <li class="list-group-item"><strong>First Name:</strong> {{ $profile->fname }}</li>
+                        <li class="list-group-item"><strong>Last Name:</strong> {{ $profile->lname }}</li>
+                        <li class="list-group-item"><strong>Gender:</strong> {{ $profile->gender }}</li>
+                        <li class="list-group-item"><strong>Skype ID:</strong> {{ $profile->skype }}</li>
+                        <li class="list-group-item"><strong>Contact #:</strong> {{ $profile->contact }}</li>
+                        <li class="list-group-item"><strong>Home Address:</strong> {{ $profile->address }}</li>
+                        <li class="list-group-item"><strong>ESL Experience:</strong> {{ $profile->esl_experience }}</li>
+                      @else
+                        <li class="list-group-item"><strong>Tên:</strong> {{ $profile->fname }}</li>
+                        <li class="list-group-item"><strong>Họ:</strong> {{ $profile->lname }}</li>
+                        <li class="list-group-item"><strong>Giới tính:</strong> {{ $profile->gender }}</li>
+                        <li class="list-group-item"><strong>Skype ID:</strong> {{ $profile->skype }}</li>
+                        <li class="list-group-item"><strong>Số điện thoại:</strong> {{ $profile->contact }}</li>
+                        <li class="list-group-item"><strong>Địa chỉ:</strong> {{ $profile->address }}</li>
+                        <li class="list-group-item"><strong>Kinh nghiệm giảng dạy:</strong> {{ str_replace("Years","năm",$profile->esl_experience) }}</li>
+                      @endif
                     </ul>
                   </div>
               </div>
@@ -136,26 +146,32 @@
 
               <!-- Educational background -->
               <div class="panel panel-default">
+                  @if (Auth::check() && $profile->user_id === Auth::user()->id)
                   <div class="panel-heading">Educational Background
-                    @if (Auth::check() && $profile->user_id === Auth::user()->id)
-                      [ <a href="{{url('/teacherEducation/create')}}">Add</a> ]
-                    @endif
+                    [ <a href="{{url('/teacherEducation/create')}}">Add</a> ]
                   </div>
+                  @else
+                  <div class="panel-heading">Trình độ học vấn</div>
+                  @endif
                   <div class="panel-body">
                   @foreach ($educations as $v)
                     <ul class="list-group">
-                      <li class="list-group-item">School Name: {{ $v->school_name }}</li>
-                      <li class="list-group-item">Degree: {{ $v->degree }}</li>
-                      <li class="list-group-item">Date: {{ $common->getMonthStr(date('m', strtotime($v->start_date))) }} {{ date('Y', strtotime($v->start_date)) }} to {{ $common->getMonthStr(date('m', strtotime($v->end_date))) }} {{ date('Y', strtotime($v->end_date)) }}</li>
                       @if (Auth::check() && $profile->user_id === Auth::user()->id)
-                      <li class="list-group-item">
-                        <form action="{{ url('/teacherEducation/'.$v->id) }}" method="POST">
-                          {{ method_field('DELETE') }}
-                          {{ csrf_field() }}
-                          [ <a href="{{ url('/teacherEducation/'.$v->id.'/edit') }}">Edit</a> ]
-                          [ <a class="text-danger" href="javascript:void(0)" onclick="$(this).closest('form').submit()">Delete</a> ]
-                        </form>
-                      </li>
+                        <li class="list-group-item"><strong>School Name:</strong> {{ $v->school_name }}</li>
+                        <li class="list-group-item"><strong>Degree:</strong> {{ $v->degree }}</li>
+                        <li class="list-group-item"><strong>Date:</strong> {{ $common->getMonthStr(date('m', strtotime($v->start_date))) }} {{ date('Y', strtotime($v->start_date)) }} to {{ $common->getMonthStr(date('m', strtotime($v->end_date))) }} {{ date('Y', strtotime($v->end_date)) }}</li>
+                        <li class="list-group-item">
+                          <form action="{{ url('/teacherEducation/'.$v->id) }}" method="POST">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            [ <a href="{{ url('/teacherEducation/'.$v->id.'/edit') }}">Edit</a> ]
+                            [ <a class="text-danger" href="javascript:void(0)" onclick="$(this).closest('form').submit()">Delete</a> ]
+                          </form>
+                        </li>
+                      @else
+                        <li class="list-group-item"><strong>Trường:</strong> {{ $v->school_name }}</li>
+                        <li class="list-group-item"><strong>Bằng cấp:</strong> {{ $v->degree }}</li>
+                        <li class="list-group-item"><strong>Thời gian học:</strong> {{ $common->getMonthStr(date('m', strtotime($v->start_date))) }} {{ date('Y', strtotime($v->start_date)) }} to {{ $common->getMonthStr(date('m', strtotime($v->end_date))) }} {{ date('Y', strtotime($v->end_date)) }}</li>
                       @endif
                     </ul>
                   @endforeach

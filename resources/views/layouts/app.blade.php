@@ -66,22 +66,22 @@
                                   </a>
 
                                   <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/scheduleCredit') }}">My Credits</a></li>
-                                    <li><a href="{{ url('/profile') }}">My Profile</a></li>
-                                      <!-- <li>
-                                          <a href="/home">My Dasboard</a>
-                                      </li> -->
-                                      <li>
-                                          <a href="{{ route('logout') }}"
-                                              onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">
-                                              Logout
-                                          </a>
+                                    <li><a href="{{ url('/scheduleCredit') }}">Tài khoản của tôi<!--My Credits--></a></li>
+                                    <li><a href="{{ url('/profile') }}">Thông tin cá nhân của tôi<!--My Profile--></a></li>
+                                    <!-- <li>
+                                        <a href="/home">My Dasboard</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Đăng xuất<!--Logout-->
+                                        </a>
 
-                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                              {{ csrf_field() }}
-                                          </form>
-                                      </li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
                                   </ul>
                               </li>
                             @else

@@ -179,8 +179,8 @@
       <div class="col-lg-12 text-center">
           <ul class="social-network">
             <li><a href="mailto:info@englishhours.net" data-placement="top" title="info@englishhours.net" class="email-icon"><i class="fa fa-envelope fa-3x"></i></a></li>
-            <li><a href="skype:live:jhanlay?call" data-placement="top" title="julius.garcia3" class="skype-icon"><i class="fa fa-skype fa-3x"></i></a></li>
-            <li><a href="#" data-placement="top" title="Phone Numbers" class="phone-icon"><i class="fa fa-phone fa-3x"></i></a></li>
+            <li><a href="skype:live:aqua.dinh?call" data-placement="top" title="julius.garcia3" class="skype-icon"><i class="fa fa-skype fa-3x"></i></a></li>
+            <li><a href="tel:0935680606" data-placement="top" title="Phone Numbers" class="phone-icon"><i class="fa fa-phone fa-3x"></i></a></li>
             <li><a href="https://www.facebook.com/Tienganhquaskype/" data-placement="top" title="Facebook" class="facebook-icon"><i class="fa fa-facebook fa-3x"></i></a></li>
           </ul>
       </div>
@@ -342,6 +342,30 @@
   </div>
 	</div>
   <!-- end Courses and User Feedback -->
+
+  <!-- Youtube videos -->
+  <div class="container">
+    <div class="row">
+      <div class="recent">
+        <h2>Video Clips</h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="content">
+        <div class="col-md-4">
+          <!-- Video here -->
+        </div>
+        <div class="col-md-4">
+          <iframe src="https://www.youtube.com/embed/-srL9IwaJ0A?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-4">
+          <!-- Video here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Youtube videos -->
 
   <!-- Teacher Profile -->
   <div class="container">
