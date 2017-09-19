@@ -20,7 +20,7 @@
                   </div>
                   <h3 class="text-center">
                   {{ $reservations[0]->fname }} {{ $reservations[0]->lname }}
-                  <span>[ <a href="{{url('/teacherProfile/'.$reservations[0]->user_id)}}">view profile</a> ]</span>
+                  <span>[ <a href="{{url('/teacherProfile/'.$reservations[0]->user_id)}}">Xem thông tin của giáo viên</a> ]</span>
                   </h3>
                 <div class="text-center profile-audio">
                 @if($reservations[0]->audio != null)
@@ -35,7 +35,7 @@
                 </div>
               </div>
                 <div class="panel-body">
-                  <p><strong>*Choose a day to display Teacher's schedule</strong></p>
+                  <p><strong>*Chọn một ngày bạn muốn để hiển thị lịch dạy của giáo viên</strong></p>
                   <div class="col-md-8 col-md-offset-2">
                     <div id="datepicker"></div>
                   </div>
@@ -45,7 +45,7 @@
             @if ( Auth::check() && $auth->is_student == 1)
             <div class="panel panel-default">
               <div class="panel-heading">
-                <strong>Credits: {{ $reservations[1] }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">My Credits</a> ]
+                <strong>Số tiền trong tài khoản: {{ $reservations[1] }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">Tài khoản của tôi</a> ]
                 @if (session('success') == -1)
                 <span class="help-block">
                     <strong class="text-danger">You don't have enough credits on your selected schedules.</strong><br/>
@@ -55,9 +55,9 @@
               </div>
               <div class="panel-body">
                 <div id="selected-sched">
-                <i class="text-danger none-selected">No schedule selected</i>
+                <i class="text-danger none-selected">Không có bài học nào được chọn</i>
                 </div>
-                <span class="span-row pull-right"><button onclick="$('form#create-schedule').submit()" type="submit" class="btn btn-primary" id="submit-selected" disabled>Reserve</button></span>
+                <span class="span-row pull-right"><button onclick="$('form#create-schedule').submit()" type="submit" class="btn btn-primary" id="submit-selected" disabled>Chọn</button></span>
               </div>
             </div>
             @else

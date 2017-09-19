@@ -8,13 +8,13 @@
       <strong>{{ $common->getFormattedDate($schedules[3][0]) }}</strong> - to - <strong>{{ $common->getFormattedDate($schedules[3][1]) }}</strong>
       @endif
       </h3>
-      Future Lessons</div>
+      Bài học sẽ thực hiện</div>
     <div class="panel-body">
         <table class="table">
           <thead>
             <tr>
-              <th>Date / Time</th>
-              <th>Teacher</th>
+              <th>Ngày/Giờ</th>
+              <th>Giáo viên</th>
             </tr>
           </thead>
           <tbody>
@@ -42,14 +42,14 @@
 </div>
 <!-- Past Lessons -->
 <div class="panel panel-default">
-    <div class="panel-heading">Past Lessons</div>
+    <div class="panel-heading">Bài học đã thực hiện</div>
     <div class="panel-body">
         <table class="table">
           <thead>
             <tr>
-              <th>Date / Time</th>
-              <th>Teacher</th>
-              <th>Memo</th>
+              <th>Ngày/Giờ</th>
+              <th>Giáo viên</th>
+              <th>Ghi chú</th>
             </tr>
           </thead>
           <tbody>

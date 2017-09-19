@@ -11,20 +11,20 @@
 
           <!-- Credits -->
           <div class="panel panel-default">
-              <div class="panel-heading">Schedule Credits
+              <div class="panel-heading">Thông tin tài khoản
                 @if (Auth::check() && $auth->is_student == 1)
-                [ <a href="{{url('/scheduleCredit')}}">Buy credits</a> ]
+                [ <a href="{{url('/scheduleCredit')}}">Nạp tiền vào tài khoản</a> ]
                 @endif
               </div>
 
               <div class="panel-body">
-                  Credits: <strong>{{ $credits }}</strong>
+                  Số tiền trong tài khoản: <strong>{{ $credits }}</strong>
               </div>
           </div>
 
           <!-- Calendar display -->
           <div class="panel panel-default">
-              <div class="panel-heading">Choose a day or week to display your lessons
+              <div class="panel-heading">Chọn một ngày hoặc một tuần bạn muốn để hiển thị lịch học của bạn
                 @if (!empty(session('success')))
                 <span class="help-block">
                     <strong class="text-danger">Schedule reservation cancelled successfully. <br/>-{{ $common->getFormattedDateTimeRange(session('success')) }} </strong>

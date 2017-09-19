@@ -7,7 +7,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th colspan="2">Available Schedule</th>
+            <th colspan="2">Lịch dạy</th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@
               @elseif( $time[1][$k] != null )
                 <i class="text-danger">Closed</i>
               @else
-                <label class="form-check-label"><input type="checkbox" name="schedule_id[{{ $counter++ }}]" data-sched-date="{{ $dateFormat }} | {{ $vformat }}" value="{{ $k }}" class="form-check-input"> Reserve</label>
+                <label class="form-check-label"><input type="checkbox" name="schedule_id[{{ $counter++ }}]" data-sched-date="{{ $dateFormat }} | {{ $vformat }}" value="{{ $k }}" class="form-check-input"> Chọn</label>
               @endif
           </td>
           </tr>
@@ -49,7 +49,7 @@
           @endforeach()
           @if($counter == 0)
           <tr>
-            <td colspan="2"><i class="text-danger">No Available Schedule</i></td>
+            <td colspan="2"><i class="text-danger">Không có lịch dạy nào trong ngày</i></td>
           </tr>
           @endif
         </tbody>

@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
 
           <div class="panel panel-default">
-              <div class="panel-heading">Create Message</div>
+              <div class="panel-heading">Tạo tin nhắn</div>
               <div class="panel-body">
                 <form action="{{ url('/messages') }}" method="POST">
                   {{ csrf_field() }}
@@ -26,19 +26,19 @@
                         @endforeach
                       </select>
                     </div>
-                    <textarea class="form-control" name="message" placeholder="Your message"></textarea>
-                    <input class="form-control btn btn-primary" type="submit" value="Send" />
+                    <textarea class="form-control" name="message" placeholder="Viết tin nhắn"></textarea>
+                    <input class="form-control btn btn-primary" type="submit" value="Gửi" />
                   </div>
                 </form>
               </div>
           </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Messages</div>
+                <div class="panel-heading">Hộp thư</div>
                 <div class="panel-body">
                   <ul class="list-group">
                     @if($messages == null || count($messages) <= 0)
-                      <li class="list-group-item"><span class="badge">0</span> No Message Found </li>
+                      <li class="list-group-item"><span class="badge">0</span> Không có tin nhắn nào </li>
                     @else
                       @foreach($messages AS $v)
                         <li class="list-group-item">
