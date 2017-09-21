@@ -29,7 +29,7 @@
                   {{ method_field('PUT') }}
                   {{ csrf_field() }}
                   <input type="hidden" name="cancel" value="1">
-                  <input type="submit" value="Cancel Reservation"/>
+                  <input type="submit" value="Hủy bài học"/>
                 </form>
                 @endif
               </td>
@@ -62,7 +62,7 @@
               </td>
               <td>
                   @if($v->called == null)
-                    <i class="text-danger">Missed Session</i>
+                    <i class="text-danger">Bài học bị bỏ lỡ<!--Missed Session--></i>
                   @elseif($v->memo != null)
                     <p>Memo: {{ $v->memo }}</p>
                     <p>Memo Book: {{ $v->memo_book }}</p>

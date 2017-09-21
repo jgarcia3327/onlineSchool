@@ -4,7 +4,9 @@ $(document).ready(function(){
       //dateFormat: 'DD, M dd, yy'
       dateFormat: 'yy-mm-dd',
       showWeek: true,
-      firstDay: 1
+      firstDay: 1,
+      dayNamesMin: ["CN","T2","T3","T4","T5","T6","T7"],
+      weekHeader: "Tuần"
     });
 
     // Display current date

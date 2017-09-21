@@ -2,7 +2,9 @@ $(document).ready(function(){
 
     $( "#datepicker" ).datepicker({
       //dateFormat: 'DD, M dd, yy'
-      dateFormat: 'yy-mm-dd'
+      dateFormat: 'yy-mm-dd',
+      dayNamesMin: ["CN","T2","T3","T4","T5","T6","T7"],
+      weekHeader: "Tuần"
     });
 
     // Display current date

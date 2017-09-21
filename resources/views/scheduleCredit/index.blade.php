@@ -10,15 +10,15 @@
                 <div class="panel-heading"><strong>Tài khoản của tôi</strong></div>
 
                 <div class="panel-body">
-                    <p>Bạn còn lại <strong class="text-danger">{{ $credits[0] }}</strong> đồng trong tài khoản.</p>
+                    <p>Bạn còn lại <strong class="text-danger">{{ $credits[0] }}</strong> bài học trong tài khoản.</p>
                     @if (session('success') > 0)
                     <span class="help-block">
-                        <strong class="text-success">Thank you for your purchase.
+                        <strong class="text-success">Cảm ơn bạn đã mua gói học<!--Thank you for your purchase.-->
                     </span>
                     @endif
                     @if(count($credits[1]) > 0)
                     @foreach($credits[1] AS $pending)
-                    <p class="text-warning"><strong>Đang chờ:</strong> Gói học gồm {{$pending->quantity}} bài học - Đã đăng kí {{$pending->create_date->diffForHumans()}}</p>
+                    <p class="text-warning"><strong>Đanh chờ kích hoạt:</strong> Gói học gồm {{$pending->quantity}} bài học - Đã đăng kí {{$pending->create_date->diffForHumans()}}</p>
                     @endforeach
                     @endif
                 </div>

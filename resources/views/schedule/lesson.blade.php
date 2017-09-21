@@ -13,12 +13,12 @@
           <div class="panel panel-default">
               <div class="panel-heading">Thông tin tài khoản
                 @if (Auth::check() && $auth->is_student == 1)
-                [ <a href="{{url('/scheduleCredit')}}">Nạp tiền vào tài khoản</a> ]
+                [ <a href="{{url('/scheduleCredit')}}">Mua thêm bài học</a> ]
                 @endif
               </div>
 
               <div class="panel-body">
-                  Số tiền trong tài khoản: <strong>{{ $credits }}</strong>
+                  Số bài học: <strong>{{ $credits }}</strong>
               </div>
           </div>
 
