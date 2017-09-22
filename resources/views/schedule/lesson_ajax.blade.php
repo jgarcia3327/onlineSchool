@@ -64,9 +64,9 @@
                   @if($v->called == null)
                     <i class="text-danger">Bài học bị bỏ lỡ<!--Missed Session--></i>
                   @elseif($v->memo != null)
-                    <p>Memo: {{ $v->memo }}</p>
-                    <p>Memo Book: {{ $v->memo_book }}</p>
-                    <p>Memo Next Page: {{ $v->memo_book }}</p>
+                    <p><strong>Memo:</strong> {{ $v->memo }}</p>
+                    <p><strong>Memo Book:</strong> {{ $v->memo_book }}</p>
+                    <p><strong>Memo Next Page:</strong> {{ $v->memo_book }}</p>
                   @endif
               </td>
             </tr>

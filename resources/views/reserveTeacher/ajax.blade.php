@@ -37,7 +37,7 @@
             <td>{{ $vformat }}</td>
             <td>
               @if( Auth::check() && $time[1][$k] == $auth->id )
-                  <i class="text-primary">Enrolled</i>
+                  <i class="text-primary">Đã được chọn<!--Enrolled--></i>
               @elseif( $time[1][$k] != null )
                 <i class="text-danger">Closed</i>
               @else
