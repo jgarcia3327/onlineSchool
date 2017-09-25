@@ -15,7 +15,7 @@
                          <span class="admin-link">Activate Student Deposits</span>
                         </a>
                       </div>
-                      <!-- Deprecated
+                      <!-- Deprecated with deposit functionality
                       <div class="col-md-3">
                         <a class="text-center" title="Activate paid credits" href="{{ url('/adminCredit') }}">
                          <span class="fa fa-barcode fa-3x admin-link"></span>
