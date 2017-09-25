@@ -70,7 +70,7 @@
 	<div class="slider">
   	<div class="container">
   		<div class="row">
-  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="false" data-interval="4000" data-transitiontime="600">
+  			<div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true" data-interval="4000" data-transitiontime="600">
   				<div class="slides" data-group="slides">
   					<ul>
   						<li>

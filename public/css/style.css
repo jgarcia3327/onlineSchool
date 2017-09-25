@@ -72,3 +72,8 @@ li.message-owner .badge.message{
 .panel-heading {
   font-weight: bold;
 }
+.amount-form {
+  margin-bottom: 12px;
+  max-width: 300px;
+  margin-top: 9px;
+}

@@ -8,6 +8,7 @@ use App\Models\Buycredit;
 use Auth;
 use Carbon\Carbon;
 use App\Models\Schedule;
+use App\Models\Balance;
 
 class CreditController extends Controller
 {
@@ -73,10 +74,13 @@ class CreditController extends Controller
           ["status","=", 0]
         ];
         $pending = Buycredit::where($pendingCond)->orderBy("id", "desc")->get();
+        $balance = Balance::where('user_id', Auth::user()->id)->first();
+        $balanceAmount = $balance == null? 0 : $balance->amount;
 
         $credits = array(
           CreditController::getCreditCount(Auth::user()->id),
-          $pending
+          $pending,
+          $balanceAmount
         );
         return view('scheduleCredit.index', compact('credits'));
       }
@@ -87,7 +91,7 @@ class CreditController extends Controller
     public function admin(){
       // Admin
       if (Auth::user()->is_admin == 1) {
-        $buyCredits = Buycredit::select("buycredits.*","users.email")->leftJoin("users","users.id","buycredits.user_id")->where("status",0)->orWhere("status",1)->orderBy("id", "desc")->get();
+        $buyCredits = Buycredit::select("buycredits.*","users.email","students.fname","students.lname")->leftJoin("users","users.id","buycredits.user_id")->leftJoin("students","students.user_id","buycredits.user_id")->where("status",0)->orWhere("status",1)->orderBy("id", "desc")->get();
         return view('admin.credit', compact('buyCredits'));
       }
       return redirect('');
