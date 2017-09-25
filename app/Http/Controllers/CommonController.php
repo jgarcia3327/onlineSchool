@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Http\Controllers\TeacherProfileController;
+use App\Http\Controllers\CreditController;
 
 class CommonController
 {
+
+  public function getCreditLessonsValidity() {
+    return CreditController::getCreditLessonsValidity();
+  }
+
+  public function getCreditLessons() {
+    return CreditController::getCreditLessons();
+  }
 
   public function getSchoolMaxYear() {
     return 1979;

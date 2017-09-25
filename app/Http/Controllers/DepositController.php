@@ -9,7 +9,7 @@ use App\Models\Balance;
 use App\Models\Student;
 use Auth;
 use Carbon\Carbon;
-use MailController;
+use App\Http\Controllers\MailController;
 
 class DepositController extends Controller
 {
@@ -35,19 +35,21 @@ class DepositController extends Controller
 
     public function store(Request $request) {
       if (Auth::user()->is_student == 1) {
+        $amount = $request->amount;
         $insertData = array(
           'user_id' => Auth::user()->id,
-          'amount' => $request->amount,
+          'amount' => $amount,
           'create_date' => Carbon::now()
         );
         Deposit::insert($insertData);
 
         $student = Student::where("user_id",Auth::user()->id)->first();
         //Send email to student
-        MailController::sendMail(Auth::user()->email, "EnglishHours Deposit Request", "Dear ".$student->fname.",\n\nWe have received you wanted to deposit ".$amount." to our bank:\nBank:AGRIBANK\nAccount Name:Jannet Iucu\nAccount Number:1421205079360\n\nWe will activate your deposit balance right away after we received your payment.\n\nThank you. \n\nEnglishHours.net");
+        MailController::sendMail(Auth::user()->email, "Deposit to EnglishHours.net", "Dear ".$student->fname.",\n\nPlease deposit ".$amount." to our bank account:\nBank:AGRIBANK\nAccount Name:Jannet Iucu\nAccount Number:1421205079360\n\nWe will activate your deposit balance right after we received your payment.\n\nThank you. \n\nEnglishHours.net");
         //Send email to admin
         MailController::sendMail("info@englishhours.net", "Student Deposit Submission", "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has submitted to deposit ".$amount."\n\nPlease activate deposit once received.");
-        return back()->with("success", $request->amount);
+
+        return back()->with("success", $amount);
       }
       return back()->with("error", 1);
     }

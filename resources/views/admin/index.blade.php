@@ -15,12 +15,14 @@
                          <span class="admin-link">Activate Student Deposits</span>
                         </a>
                       </div>
+                      <!-- Deprecated
                       <div class="col-md-3">
                         <a class="text-center" title="Activate paid credits" href="{{ url('/adminCredit') }}">
                          <span class="fa fa-barcode fa-3x admin-link"></span>
                          <span class="admin-link">Activate Student Credit Lessons</span>
                         </a>
                       </div>
+                      -->
                       <div class="col-md-3">
                         <a class="text-center" title="Upload pdf books" href="{{ url('/books') }}">
                          <span class="fa fa-book fa-3x admin-link"></span>
@@ -32,6 +34,9 @@
                          <span class="fa fa-meh-o fa-3x admin-link"></span>
                          <span class="admin-link">User Feedback</span>
                         </a>
+                      </div>
+                      <div class="col-md-3">
+                        <!-- Additional admin stuff here... -->
                       </div>
                     </div>
                 </div>

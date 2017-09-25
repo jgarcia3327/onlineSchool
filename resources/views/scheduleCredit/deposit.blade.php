@@ -14,7 +14,7 @@ $balanceAmount = $deposits[2];
           <div class="panel panel-default">
             <div class="panel-heading">BALANCE</div>
             <div class="panel-body">
-              <strong>Total Balance: {{$balanceAmount}} </strong>
+              <strong>Total Balance: {{$balanceAmount}} </strong> [ <a href="{{url('scheduleCredit')}}">Buy Lesson Credit</a> ]
               @if(!empty(session('success')))
               <p class="text-success">We will credit your balance as soon as we received your <strong class="text-danger">{{ session('success') }}</strong> deposit.</p>
               <p class="text-success">Thank you. -From EnglishHours.net</p>

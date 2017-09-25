@@ -9,9 +9,30 @@ use Auth;
 use Carbon\Carbon;
 use App\Models\Schedule;
 use App\Models\Balance;
+use App\Models\Student;
+use App\Http\Controllers\MailController;
 
 class CreditController extends Controller
 {
+
+    public static function getCreditLessonsValidity() {
+      return array(
+        10 => 30, // in days
+        20 => 60, // in days
+        30 => 90, // in days
+        40 => 120 // in days
+      );
+    }
+
+    public static function getCreditLessons() {
+      return array(
+        10 => 860000,
+        20 => 1660000,
+        30 => 2350000,
+        40 => 2990000
+      );
+    }
+
     public static function getCreditCount($user_id){
 
       //Redeem teacher missed session
@@ -99,24 +120,56 @@ class CreditController extends Controller
 
     public function store(Request $request) {
 
-      $acceptedQuantity = array(10, 20, 30, 40);
+      if(Auth::user()->is_student == 1) {
+        $creditLessons = CreditController::getCreditLessons();
+        $balance = Balance::where("user_id", Auth::user()->id)->first();
+        $quantity = $request->quantity;
+        if (!empty($balance) && array_key_exists($quantity, $creditLessons) && $balance->amount >= $creditLessons[$quantity]) {
+          // Record buy credit lessons
+          $insertData = array(
+            "user_id" => Auth::user()->id,
+            "quantity" => $quantity,
+            "charged" => 1,
+            "create_date" => Carbon::now()
+          );
+          Buycredit::insert($insertData);
 
-      if (in_array($request->quantity, $acceptedQuantity)) {
-        $insertData = array(
-          "user_id" => Auth::user()->id,
-          "quantity" => $request->quantity,
-          "create_date" => Carbon::now()
-        );
-        Buycredit::insert($insertData);
-        return back()->with("success", $request->quantity); //TODO change price
+          // Charge balance
+          $balance->amount -= $creditLessons[$quantity];
+          $balance->save();
+
+          // Activate bought credit lessons
+          $consume = CreditController::getCreditLessonsValidity()[$quantity];
+          $dataset = [];
+          $limit = $quantity;
+          for ($i=0; $i < $limit; $i++) {
+            $dataset[] = [
+              'user_id' => Auth::user()->id,
+              'consume_days' => $consume,
+              'create_date' => Carbon::now()
+            ];
+          }
+          Credit::insert($dataset);
+
+          $student = Student::where("user_id",Auth::user()->id)->first();
+          //Send email to student
+          MailController::sendMail(Auth::user()->email, "EnglishHours.net Lessons Purshase", "Dear ".$student->fname.",\n\nYou have successfully purchased ".$quantity." lesson credits.\n\nThank you. \n\nEnglishHours.net");
+          //Send email to admin
+          MailController::sendMail("info@englishhours.net", $quantity." Lessons purchased from ".$student->fname, "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully purchased ".$quantity." lesson credits, amounting to ".$amount);
+
+          return back()->with("success", $quantity); //TODO change price
+        }
+
+        return back()->with("error", 1);
       }
 
-      return back()->with("success", 0);
+      return back()->with("error", 1);
 
     }
 
+    //Deprecated
     public function update(Request $request, $id) {
-
+      /*
       if (Auth::user()->is_admin == 1) {
         $credit = Buycredit::where('id',$id)->first();
         // Empty credit
@@ -154,6 +207,6 @@ class CreditController extends Controller
       }
 
       return back()->with("success", -1);
-
+      */
     }
 }
