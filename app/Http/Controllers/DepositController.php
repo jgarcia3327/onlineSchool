@@ -94,11 +94,11 @@ class DepositController extends Controller
           $balance->save();
         }
 
-        $student = Student::where("user_id", $user_id)->first();
+        $student = Student::select("students.*","users.email")->leftJoin("users","users.id","students.user_id")->where("user_id", $user_id)->first();
         //Send email to student
-        MailController::sendMail(Auth::user()->email, "EnglishHours Deposit Activated", "Dear ".$student->fname.",\n\nWe have activated ".$amount." to your account balance in EnglishHours.net. You can now use your balance to purchase EnglishHours.net lessons.\n\nThank you.\n\nEnglishHours.net");
+        MailController::sendMail($student->email, "EnglishHours Deposit Activated", "Dear ".$student->fname.",\n\nWe have activated ".$amount." to your account balance in EnglishHours.net. You can now use your balance to purchase EnglishHours.net lessons.\n\nThank you.\n\nEnglishHours.net");
         //Send email to admin
-        MailController::sendMail("info@englishhours.net", "Deposit Activated", "Dear EnglishHours Admin,\n\nYou have just activated ".$student->fname." ".$student->lname." (".Auth::user()->email.") deposit amounting to: ".$amount);
+        MailController::sendMail("info@englishhours.net", "Deposit Activated", "Dear EnglishHours Admin,\n\nYou have just activated ".$student->fname." ".$student->lname." (".$student->email.") deposit amounting to: ".$amount);
         return back()->with("success", 1);
       }
 

@@ -10,7 +10,7 @@
           <div class="panel panel-default">
               <div class="panel-heading"><strong>ACTIVATE STUDENT DEPOSITS</strong>
                 @if (session('success') == 1)
-                  Student deposit was successfully credited to his/her account balance!
+                  <p class="text-success"><strong>Student deposit was successfully credited to his/her account balance!</strong></p>
                 @endif
               </div>
               <div class="panel-body">

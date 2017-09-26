@@ -12,9 +12,11 @@ $balanceAmount = $deposits[2];
 
           <!-- Balance details -->
           <div class="panel panel-default">
-            <div class="panel-heading">BALANCE</div>
+            <!-- <div class="panel-heading">BALANCE</div> -->
+            <div class="panel-heading">SỐ DƯ TÀI KHOẢN</div>
             <div class="panel-body">
-              <strong>Total Balance: {{$balanceAmount}} </strong> [ <a href="{{url('scheduleCredit')}}">Buy Lesson Credit</a> ]
+              <!-- <strong>Total Balance: {{$balanceAmount}} </strong> [ <a href="{{url('scheduleCredit')}}">Buy Lesson Credit</a> ] -->
+              <strong>Tổng số dư tài khoản: {{$balanceAmount}} </strong> [ <a href="{{url('scheduleCredit')}}">Mua gói học</a> ]
               @if(!empty(session('success')))
               <p class="text-success">We will credit your balance as soon as we received your <strong class="text-danger">{{ session('success') }}</strong> deposit.</p>
               <p class="text-success">Thank you. -From EnglishHours.net</p>
@@ -25,12 +27,14 @@ $balanceAmount = $deposits[2];
           <!-- Deposit -->
           <div class="panel panel-default">
             <div class="panel-heading">
-              ADD BALANCE
+              <!-- ADD BALANCE -->
+              NẠP THÊM SỐ DƯ VÀO TÀI KHOẢN
             </div>
             <div class="panel-body" role="tab" id="headingOne">
               <form action="{{ url('/deposit') }}" method="POST">
                 <div class="form-group">
-                  <label for="amount">Amount:</label>
+                  <!-- <label for="amount">Amount:</label> -->
+                  <label for="amount">Số tiền:</label>
                   <select class="form-control amount-form" id="amount" name="amount">
                     <option value="860000">860.000</option>
                     <option value="1000000">1.000.000</option>
@@ -53,16 +57,18 @@ $balanceAmount = $deposits[2];
                   </select>
                 </div>
                 <a class="btn btn-success deposit-btn" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <span class="fa fa-money"></span> Deposit
+                  <span class="fa fa-money"></span>
+                  <!-- Deposit -->
+                  Nạp tiền
                 </a>
                 <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                   {{ csrf_field() }}
                   <input type="hidden" name="quantity" value="10" />
                   <ul class="list-group">
                     <li class="list-group-item">*Please deposit amount to:</li>
-                    <li class="list-group-item">Bank: <strong>AGRIBANK</strong></li>
-                    <li class="list-group-item">Account Name: <strong>Jannet Iucu</strong></li>
-                    <li class="list-group-item">Account Number: <strong>1421205079360</strong></li>
+                    <li class="list-group-item">Ngân hàng: <strong>AGRIBANK</strong></li>
+                    <li class="list-group-item">Tên tài khoản: <strong>Jannet Iucu</strong></li>
+                    <li class="list-group-item">Số tài khoản: <strong>1421205079360</strong></li>
                     <li class="list-group-item"><input class="btn btn-danger" type="submit" value="Confirm to Deposit Money" /></li>
                   </ul>
                 </div>
@@ -72,10 +78,14 @@ $balanceAmount = $deposits[2];
 
           <!-- Successfully credited deposits -->
           <div class="panel panel-default">
-            <div class="panel-heading">CREDITED DEPOSITS</div>
+            <div class="panel-heading">
+              <!-- CREDITED DEPOSITS -->
+              SỐ TIỀN NẠP THÀNH CÔNG
+            </div>
             <div class="panel-body">
               @if($success == null && count($success) <= 0)
-                No data found.
+                <!-- No data found. -->
+                Không tìm thấy thông tin
               @else
                 @foreach($success AS $v)
                 <ul class="list-group">
@@ -88,13 +98,30 @@ $balanceAmount = $deposits[2];
 
           <!-- Pending deposits that needs approval/activation from admin -->
           <div class="panel panel-default">
-            <div class="panel-heading">PENDING DEPOSITS
+            <div class="panel-heading">
+              <!-- PENDING DEPOSITS -->
+              SỐ TIỀN NẠP ĐANG CHỜ XỬ LÝ
               @if($pending != null && count($pending) > 0)
               <ul class="list-group">
-                <li class="list-group-item"><span class="text-danger">*Deposit pending request to:</span></li>
-                <li class="list-group-item">Bank: <strong class="text-danger">AGRIBANK</strong></li>
-                <li class="list-group-item">Account Name: <strong class="text-danger">Jannet Iucu</strong></li>
-                <li class="list-group-item">Account Number: <strong class="text-danger">1421205079360</strong></li>
+                <li class="list-group-item"><span class="text-danger">
+                  <!-- *Deposit pending request to: -->
+                  Tiền nạp đang xử lý yêu cầu gửi đến:
+                </span></li>
+                <li class="list-group-item">
+                  <!-- Bank:  -->
+                  Ngân hàng:
+                  <strong class="text-danger">AGRIBANK</strong>
+                </li>
+                <li class="list-group-item">
+                  <!-- Account Name:  -->
+                  Tên tài khoản:
+                  <strong class="text-danger">Jannet Iucu</strong>
+                </li>
+                <li class="list-group-item">
+                  <!-- Account Number:  -->
+                  Số tài khoản:
+                  <strong class="text-danger">1421205079360</strong>
+                </li>
               </ul>
               @endif
             </div>
@@ -104,7 +131,11 @@ $balanceAmount = $deposits[2];
               @else
                 @foreach($pending AS $v)
                 <ul class="list-group">
-                  <li class="list-group-item">Amount: <strong>{{ $v->amount }} </strong> (Date request: {{$v->create_date->toDateTimeString()}}) {{ $v->create_date->diffForHumans()}}</li>
+                  <li class="list-group-item">
+                    <!-- Amount:  -->
+                    Số tiền:
+                    <strong>{{ $v->amount }} </strong> (Thời gian: {{$v->create_date->toDateTimeString()}}) {{ $v->create_date->diffForHumans()}}
+                  </li>
                 </ul>
                 @endforeach
               @endif

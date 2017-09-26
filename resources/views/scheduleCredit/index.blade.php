@@ -16,8 +16,9 @@
 
                 <div class="panel-body">
                   <!-- <p>You have <strong class="text-danger">{{ $creditLesson }}</strong> lesson credit(s) left.</p> -->
-                  <p>Bạn còn lại <strong class="text-danger">{{ $creditLesson }}</strong> bài học trong tài khoản.</p>
-                  <p>You have <strong class="text-success">{{ $balanceAmount }} đồng</strong> balance in your account. [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p>
+                  <p>Bạn còn lại <strong class="text-danger">{{ $creditLesson }}</strong> bài học</p>
+                  <!-- <p>You have <strong class="text-success">{{ $balanceAmount }} đồng</strong> balance in your account. [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
+                  <p>Bạn có <strong class="text-success">{{ $balanceAmount }} đồng</strong> trong tài khoản [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
                   @if (session('success') > 0)
                   <span class="help-block">
                       <strong class="text-success">Cảm ơn bạn đã mua gói học<!--Thank you for your purchase.-->
@@ -68,11 +69,11 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 10 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charge with <strong>860.000 đồng</strong>.
-                              <!--*Afer pressing confirm, please pay <strong>$37.50 USD</strong> to activate your requested credits.-->
+                              Your current balance will be charged with <strong>860.000 đồng</strong>.
                             </span>
                           @else
-                            <p class="text-danger">Please deposit at least <strong>860.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p>
+                            <!-- <p class="text-danger">Please deposit at least <strong>860.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
+                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>860.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
                           @endif
                         </div>
                       </div>
@@ -100,10 +101,11 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 20 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charge with <strong>1.660.000 đồng</strong>.
+                              Your current balance will be charged with <strong>1.660.000 đồng</strong>.
                             </span>
                           @else
-                            <p class="text-danger">Please deposit at least <strong>1.660.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p>
+                            <!-- <p class="text-danger">Please deposit at least <strong>1.660.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
+                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>1.660.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
                           @endif
                         </div>
                       </div>
@@ -132,10 +134,11 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 30 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charge with <strong>2.350.000 đồng</strong>.
+                              Your current balance will be charged with <strong>2.350.000 đồng</strong>.
                             </span>
                           @else
-                            <p class="text-danger">Please deposit at least <strong>2.350.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p>
+                            <!-- <p class="text-danger">Please deposit at least <strong>2.350.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
+                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>2.350.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
                           @endif
                         </div>
                       </div>
@@ -164,10 +167,11 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 40 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charge with <strong>2.990.000 đồng</strong>.
+                              Your current balance will be charged with <strong>2.990.000 đồng</strong>.
                             </span>
                           @else
-                            <p class="text-danger">Please deposit at least <strong>2.990.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p>
+                            <!-- <p class="text-danger">Please deposit at least <strong>2.990.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
+                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>2.990.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
                           @endif
                         </div>
                       </div>
