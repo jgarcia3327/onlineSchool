@@ -124,7 +124,8 @@ class CreditController extends Controller
         $creditLessons = CreditController::getCreditLessons();
         $balance = Balance::where("user_id", Auth::user()->id)->first();
         $quantity = $request->quantity;
-        if (!empty($balance) && array_key_exists($quantity, $creditLessons) && $balance->amount >= $creditLessons[$quantity]) {
+        $amount = $creditLessons[$quantity];
+        if (!empty($balance) && array_key_exists($quantity, $creditLessons) && $balance->amount >= $amount) {
           // Record buy credit lessons
           $insertData = array(
             "user_id" => Auth::user()->id,
@@ -135,7 +136,7 @@ class CreditController extends Controller
           Buycredit::insert($insertData);
 
           // Charge balance
-          $balance->amount -= $creditLessons[$quantity];
+          $balance->amount -= $amount;
           $balance->save();
 
           // Activate bought credit lessons
