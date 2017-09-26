@@ -58,15 +58,16 @@
             <tr>
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
               <td>
-                {{ $v->fname }} {{ $v->lname }}
+                <a href="{{url('/teacherProfile/'.$v->teacher_user_id)}}">{{ $v->fname }} {{ $v->lname }}</a>
               </td>
               <td>
                   @if($v->called == null)
                     <i class="text-danger">Bài học bị bỏ lỡ<!--Missed Session--></i>
                   @elseif($v->memo != null)
-                    <p><strong>Memo:</strong> {{ $v->memo }}</p>
-                    <p><strong>Memo Book:</strong> {{ $v->memo_book }}</p>
-                    <p><strong>Memo Next Page:</strong> {{ $v->memo_book }}</p>
+                    <strong>Tên khóa học:</strong><p style="margin:0">{{ $v->memo }}</p>
+                    <strong>Tên sách:</strong><p style="margin:0">{{ $v->memo_book }}</p>
+                    <strong>Trang tiếp theo:</strong><p style="margin:0">{{ $v->memo_next_page }}</p>
+                    <strong>Nhận xét của giáo viên:</strong><p style="margin:0">{{ $v->memo_comment }}</p>
                   @endif
               </td>
             </tr>

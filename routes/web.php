@@ -40,7 +40,7 @@ Route::get('auth/{driver}/callback', ['as' => 'socialAuthCallback', 'uses' => 'A
 // Public access
 Route::get('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@show');
 Route::get('/reserveTeacher/ajax/{date}', 'ReserveTeacherController@ajax');
-Route::get('teacherProfile/{teacher_id}', 'TeacherProfileController@show');
+Route::get('teacherProfile/{teacher_user_id}', 'TeacherProfileController@show');
 
 // Login access
 Route::group(['middleware' => 'auth'], function() {

@@ -106,7 +106,7 @@ class ScheduleController extends Controller
     public function update(Request $request, $id)
     {
 
-        $schedule = Schedule::findOrFail($id);
+        $schedule = Schedule::where('id',$id)->first();
 
         // TEACHER CANCEL SCHEDULE
         if ($request->has('cancel') && $this->isTeacher()) {
@@ -145,6 +145,8 @@ class ScheduleController extends Controller
             }
             return redirect('/schedule');
         }
+
+        // TEACHER UPDATE MEMO
         $schedule->update($request->all());
         return redirect('/schedule');
     }

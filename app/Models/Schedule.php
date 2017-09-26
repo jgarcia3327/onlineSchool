@@ -51,6 +51,7 @@ class Schedule extends Eloquent
 		'memo',
 		'memo_book',
 		'memo_next_page',
+		'memo_comment',
 		'called',
 		'active',
 		'create_date',

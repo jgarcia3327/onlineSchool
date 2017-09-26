@@ -86,23 +86,28 @@
               <td>
                 @if($v->student_user_id != null && $schedules[4][$v->student_user_id] != null)
                   @if($v->memo != null)
-                  <p>Memo: {{ $v->memo }}</p>
-                  <p>Memo Book: {{ $v->memo_book }}</p>
-                  <p>Memo Next Page: {{ $v->memo_book }}</p>
+                  <strong>Course:</strong><p style="margin:0">{{ $v->memo }}</p>
+                  <strong>Book Title:</strong><p style="margin:0">{{ $v->memo_book }}</p>
+                  <strong>Next Page:</strong><p style="margin:0">{{ $v->memo_next_page }}</p>
+                  <strong>Teacher's Comment:</strong><p style="margin:0">{{ $v->memo_comment }}</p>
                   @elseif($v->called == 1)
                   <form action="{{ url('schedule/'.$v->id) }}" method="POST">
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
                     <div class="form-group">
-                      <select class="form-control" id="memo" name="memo" required placeholder="Memo">
+                      <select class="form-control" id="memo" name="memo" required placeholder="Course">
                         <option value=""></option>
-                        <option>Reading</option>
-                        <option>Writing</option>
-                        <option>Speaking</option>
-                        <option>Listening</option>
+                        <option value="IELTS/TOEIC/TOEFL">IELTS/TOEIC/TOEFL</option>
+                        <option value="BUSINESS/OFFICE ENGLISH">BUSINESS/OFFICE ENGLISH</option>
+                        <option value="ENGLISH FOR KIDS">ENGLISH FOR KIDS</option>
+                        <option value="PUBLIC SPEAKING">PUBLIC SPEAKING</option>
+                        <option value="WRITING AND COMPOSITION">WRITING AND COMPOSITION</option>
+                        <option value="READING AND COMPREHENSION">READING AND COMPREHENSION</option>
+                        <option value="LISTENING">LISTENING</option>
                       </select>
-                      <input class="form-control" type="text" id="memo_book" name="memo_book" required placeholder="Memo Book">
-                      <input class="form-control" type="text" id="memo_next_page" name="memo_next_page" required placeholder="Memo Next Page">
+                      <input class="form-control" type="text" id="memo_book" name="memo_book" required placeholder="Book Title">
+                      <input class="form-control" type="text" id="memo_next_page" name="memo_next_page" required placeholder="Next Page">
+                      <textarea id="memo_comment" name="memo_comment" required placeholder="Comment" style="width:100%"></textarea>
                       <input class="form-control btn btn-primary" type="submit" value="Submit" />
                     </div>
                   </form>
