@@ -18,8 +18,12 @@ $balanceAmount = $deposits[2];
               <!-- <strong>Total Balance: {{$balanceAmount}} </strong> [ <a href="{{url('scheduleCredit')}}">Buy Lesson Credit</a> ] -->
               <strong>Tổng số dư tài khoản: {{$balanceAmount}} </strong> [ <a href="{{url('scheduleCredit')}}">Mua gói học</a> ]
               @if(!empty(session('success')))
-              <p class="text-success">We will credit your balance as soon as we received your <strong class="text-danger">{{ session('success') }}</strong> deposit.</p>
-              <p class="text-success">Thank you. -From EnglishHours.net</p>
+                <!-- <p class="text-success">We will credit your balance as soon as we received your <strong class="text-danger">{{ session('success') }}</strong> deposit.</p>
+                <p class="text-success">Thank you. -From EnglishHours.net</p> -->
+                <br/>
+                <p class="text-success">Chúng tôi sẽ xác nhận số dư tài khoản của bạn ngay khi nhận được số tiền nạp <strong class="text-danger">{{ session('success') }}</strong> từ ngân hàng.</p>
+                <p class="text-success">Chân thành cảm ơn bạn.</p>
+                <p class="text-success">EnglishHours.net</p>
               @endif
             </div>
           </div>
@@ -65,11 +69,15 @@ $balanceAmount = $deposits[2];
                   {{ csrf_field() }}
                   <input type="hidden" name="quantity" value="10" />
                   <ul class="list-group">
-                    <li class="list-group-item">*Please deposit amount to:</li>
+                    <li class="list-group-item">
+                      <!-- *Please deposit amount to: -->
+                      Xin gửi số tiền nạp trên đến:
+                    </li>
                     <li class="list-group-item">Ngân hàng: <strong>AGRIBANK</strong></li>
                     <li class="list-group-item">Tên tài khoản: <strong>Jannet Iucu</strong></li>
                     <li class="list-group-item">Số tài khoản: <strong>1421205079360</strong></li>
-                    <li class="list-group-item"><input class="btn btn-danger" type="submit" value="Confirm to Deposit Money" /></li>
+                    <!-- <li class="list-group-item"><input class="btn btn-danger" type="submit" value="Confirm to Deposit Money" /></li> -->
+                    <li class="list-group-item"><input class="btn btn-danger" type="submit" value="Xác nhận nạp tiền" /></li>
                   </ul>
                 </div>
               </form>

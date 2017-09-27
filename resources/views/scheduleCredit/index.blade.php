@@ -69,7 +69,8 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 10 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charged with <strong>860.000 đồng</strong>.
+                              <!-- Your current balance will be charged with <strong>860.000 đồng</strong>. -->
+                              Số dư tài khoản hiện tại của bạn sẽ được cộng thêm <strong>860.000</strong>
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>860.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
@@ -101,7 +102,8 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 20 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charged with <strong>1.660.000 đồng</strong>.
+                              <!-- Your current balance will be charged with <strong>1.660.000 đồng</strong>. -->
+                              Số dư tài khoản hiện tại của bạn sẽ được cộng thêm <strong>1.660.000</strong>
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>1.660.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
@@ -134,7 +136,8 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 30 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charged with <strong>2.350.000 đồng</strong>.
+                              <!-- Your current balance will be charged with <strong>2.350.000 đồng</strong>. -->
+                              Số dư tài khoản hiện tại của bạn sẽ được cộng thêm <strong>2.350.000</strong>
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>2.350.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
@@ -167,7 +170,8 @@
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 40 bài học này" />
                             </form>
                             <span class="text-danger">
-                              Your current balance will be charged with <strong>2.990.000 đồng</strong>.
+                              <!-- Your current balance will be charged with <strong>2.990.000 đồng</strong>. -->
+                              Số dư tài khoản hiện tại của bạn sẽ được cộng thêm <strong>2.990.000</strong>
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>2.990.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
