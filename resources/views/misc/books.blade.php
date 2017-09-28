@@ -5,7 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Books
+                <div class="panel-heading">
+                  <!-- Books -->
+                  Sách
                   @if ($auth->is_admin == 1)
                   <h4>Add Book</h4>
                   <form action="{{ url('/books') }}" method="POST" enctype="multipart/form-data">
