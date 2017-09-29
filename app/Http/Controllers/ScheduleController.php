@@ -62,7 +62,9 @@ class ScheduleController extends Controller
         $sched = new Schedule;
         $dataSet = [];
         foreach($request->date_time AS $timeSched) {
-          if ( strtotime($timeSched) <= strtotime(date("Y-m-d H:i:s")) ) {
+          // Teacher can register not less than 24 hours of the current time
+          // 24 hours = 86400 seconds
+          if ( strtotime($timeSched) <= (strtotime(date("Y-m-d H:i:s")) + 86400)) {
             continue;
           }
           $dataSet[] = [
@@ -120,7 +122,8 @@ class ScheduleController extends Controller
 
         // STUDENT CANCEL RESERVATION
         if ($request->has('cancel') && !$this->isTeacher()) {
-          if ( (strtotime($schedule->date_time)-360) >= strtotime(date("Y-m-d H:i:s")) ) {
+          // Cannot cancel less than 1 hour = 3600 in seconds
+          if ( (strtotime($schedule->date_time)-3600) >= strtotime(date("Y-m-d H:i:s")) ) {
             if ($schedule->student_user_id === Auth::user()->id) {
               $schedule->student_user_id = null;
               $schedule->save();

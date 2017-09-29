@@ -154,7 +154,11 @@ class CreditController extends Controller
 
           $student = Student::where("user_id",Auth::user()->id)->first();
           //Send email to student
-          MailController::sendMail(Auth::user()->email, "EnglishHours.net Lessons Purshase", "Dear ".$student->fname.",\n\nYou have successfully purchased ".$quantity." lesson credits.\n\nThank you. \n\nEnglishHours.net");
+          //$subject = "EnglishHours.net Lessons Purshase";
+          //$body = "Dear ".$student->fname.",\n\nYou have successfully purchased ".$quantity." lesson credits.\n\nThank you. \n\nEnglishHours.net";
+          $subject = "Bạn vừa mua thành công gói";
+          $body = "Chào ".$student->fname.",\n\nBạn vừa mua thành công gói ".$quantity." bài học. \n\nChân thành cảm ơn bạn. \n\nEnglishHours.net";
+          MailController::sendMail(Auth::user()->email, $subject, $body);
           //Send email to admin
           MailController::sendMail("info@englishhours.net", $quantity." Lessons purchased from ".$student->fname, "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully purchased ".$quantity." lesson credits, amounting to ".$amount);
 

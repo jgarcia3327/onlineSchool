@@ -24,7 +24,8 @@
               <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
               <td>
                 {{ $v->fname }} {{ $v->lname }}
-                @if ( (strtotime($v->date_time)-360) >= strtotime(date("Y-m-d H:i:s")) )
+                <!-- 1h = 3600 in sec -->
+                @if ( (strtotime($v->date_time)-3600) >= strtotime(date("Y-m-d H:i:s")) )
                 <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
                   {{ method_field('PUT') }}
                   {{ csrf_field() }}

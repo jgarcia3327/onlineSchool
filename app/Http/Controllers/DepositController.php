@@ -45,7 +45,11 @@ class DepositController extends Controller
 
         $student = Student::where("user_id",Auth::user()->id)->first();
         //Send email to student
-        MailController::sendMail(Auth::user()->email, "Deposit to EnglishHours.net", "Dear ".$student->fname.",\n\nPlease deposit ".$amount." to our bank account:\nBank:AGRIBANK\nAccount Name:Jannet Iucu\nAccount Number:1421205079360\n\nWe will activate your deposit balance right after we received your payment.\n\nThank you. \n\nEnglishHours.net");
+        //$subject = "Deposit to EnglishHours.net";
+        //$body = "Dear ".$student->fname.",\n\nPlease deposit ".$amount." to our bank account:\nBank:AGRIBANK\nAccount Name:Jannet Iucu\nAccount Number:1421205079360\n\nWe will activate your deposit balance right after we received your payment.\n\nThank you. \n\nEnglishHours.net";
+        $subject = "Bạn vui lòng nạp ".$amount;
+        $body = "Chào ".$student->fname.", \n\nBạn vui lòng nạp ".$amount." vào tài khoản ngân hàng của chúng tôi: \nNgân hàng: AGRIBANK \nTên tài khoản: Jannet Iucu \nSố tài khoản: 1421205079360 \n\nChúng tôi sẽ kích hoạt số dư tài khoản của bạn tại website ngay khi nhận được thông báo từ ngân hàng. \n\nChân thành cảm ơn bạn. \n\nEnglishHours.net";
+        MailController::sendMail(Auth::user()->email, $subject, $body);
         //Send email to admin
         MailController::sendMail("info@englishhours.net", "Student Deposit Submission", "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has submitted to deposit ".$amount."\n\nPlease activate deposit once received.");
 
@@ -96,7 +100,11 @@ class DepositController extends Controller
 
         $student = Student::select("students.*","users.email")->leftJoin("users","users.id","students.user_id")->where("user_id", $user_id)->first();
         //Send email to student
-        MailController::sendMail($student->email, "EnglishHours Deposit Activated", "Dear ".$student->fname.",\n\nWe have activated ".$amount." to your account balance in EnglishHours.net. You can now use your balance to purchase EnglishHours.net lessons.\n\nThank you.\n\nEnglishHours.net");
+        //$subject = "EnglishHours Deposit Activated";
+        //$body = "Dear ".$student->fname.", \n\nWe have activated ".$amount." to your account balance in EnglishHours.net. You can now use your balance to purchase EnglishHours.net lessons.\n\nThank you.\n\nEnglishHours.net";
+        $subject = "Chúng tôi đã kích hoạt ".$amount";
+        $body = "Chào ".$student->fname.", \n\nChúng tôi đã kích hoạt ".$amount." vào số dư tài khoản của bạn tại EnglishHours.net. \nNgay bây giờ bạn có thể sử dụng số dư tài khoản để mua các gói học EnglishHours. \n\nXin chân thành cảm ơn. \n\nEnglishHours.net";
+        MailController::sendMail($student->email, $subject, $body);
         //Send email to admin
         MailController::sendMail("info@englishhours.net", "Deposit Activated", "Dear EnglishHours Admin,\n\nYou have just activated ".$student->fname." ".$student->lname." (".$student->email.") deposit amounting to: ".$amount);
         return back()->with("success", 1);

@@ -21,6 +21,9 @@
                 <i class="text-primary">Selected</i>
               @elseif(date("Y-m-d H:i:s") >= $time[3]." ".$k)
                 <i class="text-danger">Past due date and time</i>
+              <!-- Earlier than 24 hours = 86400 seconds -->
+              @elseif( (strtotime(date("Y-m-d H:i:s")) + 86400) >= strtotime($time[3]." ".$k))
+                <i class="text-warning">Less than 24 hours policy</i>
               @else
                 <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input"> Open</label>
               @endif
@@ -46,6 +49,9 @@
                 <i class="text-primary">Selected</i>
               @elseif(date("Y-m-d H:i:s") >= $time[3]." ".$k)
                 <i class="text-danger">Past due date and time</i>
+              <!-- Earlier than 24 hours = 86400 seconds -->
+              @elseif( (strtotime(date("Y-m-d H:i:s")) + 86400) >= strtotime($time[3]." ".$k))
+                <i class="text-warning">Less than 24 hours policy</i>
               @else
                 <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input">Open</label>
               @endif

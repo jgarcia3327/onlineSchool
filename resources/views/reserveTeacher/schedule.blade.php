@@ -48,8 +48,10 @@
                 <strong>Số tiền trong tài khoản: {{ $reservations[1] }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">Tài khoản của tôi</a> ]
                 @if (session('success') == -1)
                 <span class="help-block">
-                    <strong class="text-danger">You don't have enough credits on your selected schedules.</strong><br/>
-                    <strong class="text-danger">Please select number of schedules within your credits.</strong>
+                    <!-- <strong class="text-danger">You don't have enough credits on your selected schedules.</strong><br/> -->
+                    <!-- <strong class="text-danger">Please select number of schedules within your credits.</strong> -->
+                    <strong class="text-danger">Bạn không đủ số bài học trong tài khoản để thực hiện lịch học này.</strong><br/>
+                    <strong class="text-danger">Vui lòng chọn số bài học vừa đủ với tài khoản hiện có của bạn.</strong>
                 </span>
                 @endif
               </div>
