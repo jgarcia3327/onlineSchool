@@ -87,6 +87,8 @@ class CommonController
   }
 
   public function getFormattedDateVietNam($date) {
+    return $this->getFormattedDate($date);
+    //FIXME
     setlocale(LC_ALL, 'vi_VN.utf8');
     //return date('l, F j, Y', strtotime($date));
     return strftime('%A, %B %e, %Y', strtotime($date));

@@ -1,7 +1,7 @@
 <?php $dateFormat = date('l, F j, Y', strtotime($time[2])); ?>
 <div class="panel panel-default schedule-load {{ $time[2] }}">
   <div class="panel-heading">
-    <h3>{{ $dateFormat }}</h3>
+    <h3>{{ $common->getFormattedDateVietNam($dateFormat)}}</h3>
   </div>
   <div class="panel-body">
       <table class="table table-striped">
@@ -40,6 +40,9 @@
                   <i class="text-primary">Đã được chọn<!--Enrolled--></i>
               @elseif( $time[1][$k] != null )
                 <i class="text-danger">Closed</i>
+              @elseif( strtotime(date("Y-m-d H:i:s")) >= strtotime($time[2]." ".$v) - 3600 ) <!-- Lock if start sched is less than an hour = 3600 sec. -->
+                <!-- <i class="text-warning">Locked</i> -->
+                <i class="text-warning">Đã khóa</i>
               @else
                 <label class="form-check-label"><input type="checkbox" name="schedule_id[{{ $counter++ }}]" data-sched-date="{{ $dateFormat }} | {{ $vformat }}" value="{{ $k }}" class="form-check-input"> Chọn</label>
               @endif
