@@ -86,8 +86,16 @@ class CommonController
     return $return;
   }
 
+  public function getFormattedDateVietNam($date) {
+    setlocale(LC_ALL, 'vi_VN');
+    //return date('l, F j, Y', strtotime($date));
+    return strftime('%A, %B %e, %Y', strtotime($date));
+  }
+
   public function getFormattedDate($date) {
-    return date('l, F j, Y', strtotime($date));
+    setlocale(LC_ALL, 'en_EN');
+    //return date('l, F j, Y', strtotime($date));
+    return strftime('%A, %B %e, %Y', strtotime($date));
   }
 
   public function getFormattedDateTimeRange($date) {

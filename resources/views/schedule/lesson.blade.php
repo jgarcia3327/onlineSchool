@@ -27,7 +27,10 @@
               <div class="panel-heading">Chọn một ngày hoặc một tuần bạn muốn để hiển thị lịch học của bạn
                 @if (!empty(session('success')))
                 <span class="help-block">
-                    <strong class="text-danger">Schedule reservation cancelled successfully. <br/>-{{ $common->getFormattedDateTimeRange(session('success')) }} </strong>
+                    <strong class="text-danger">
+                      <!-- Schedule reservation cancelled successfully.  -->
+                      Buổi học của bạn đã được hủy bỏ thành công.
+                      <br/>-{{ $common->getFormattedDateTimeRange(session('success')) }} </strong>
                 </span>
                 @endif
               </div>

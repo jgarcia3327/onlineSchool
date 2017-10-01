@@ -3,9 +3,9 @@
     <div class="panel-heading">
       <h3 class="text-center">
       @if($schedules[2] != null)
-      <strong>{{ $common->getFormattedDate($schedules[2]) }}</strong>
+      <strong>{{ $common->getFormattedDateVietNam($schedules[2]) }}</strong>
       @else
-      <strong>{{ $common->getFormattedDate($schedules[3][0]) }}</strong> - to - <strong>{{ $common->getFormattedDate($schedules[3][1]) }}</strong>
+      <strong>{{ $common->getFormattedDateVietNam($schedules[3][0]) }}</strong> - to - <strong>{{ $common->getFormattedDateVietNam($schedules[3][1]) }}</strong>
       @endif
       </h3>
       Bài học sẽ thực hiện</div>
