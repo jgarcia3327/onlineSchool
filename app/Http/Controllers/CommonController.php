@@ -87,7 +87,7 @@ class CommonController
   }
 
   public function getFormattedDateVietNam($date) {
-    setlocale(LC_ALL, 'vi_VN.utf8', 'Vietnamese');
+    setlocale(LC_ALL, 'vi_VN.utf8');
     //return date('l, F j, Y', strtotime($date));
     return strftime('%A, %B %e, %Y', strtotime($date));
   }
