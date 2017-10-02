@@ -102,7 +102,7 @@ class DepositController extends Controller
         //Send email to student
         //$subject = "EnglishHours Deposit Activated";
         //$body = "Dear ".$student->fname.", \n\nWe have activated ".$amount." to your account balance in EnglishHours.net. You can now use your balance to purchase EnglishHours.net lessons.\n\nThank you.\n\nEnglishHours.net";
-        $subject = "Chúng tôi đã kích hoạt ".$amount";
+        $subject = "Chúng tôi đã kích hoạt ".$amount;
         $body = "Chào ".$student->fname.", \n\nChúng tôi đã kích hoạt ".$amount." vào số dư tài khoản của bạn tại EnglishHours.net. \nNgay bây giờ bạn có thể sử dụng số dư tài khoản để mua các gói học EnglishHours. \n\nXin chân thành cảm ơn. \n\nEnglishHours.net";
         MailController::sendMail($student->email, $subject, $body);
         //Send email to admin
