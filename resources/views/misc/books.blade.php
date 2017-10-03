@@ -24,38 +24,24 @@
 
                 <div class="panel-body">
                   <div class="row text-center">
-                  <?php $counter = 0; ?>
-                  @foreach($books AS $v)
-                    <div class="col-md-4">
-                      <a href="{{ asset('uploaded_books/'.$v->id.'/'.$v->file_name) }}">
-                      <img src="{{ asset('images/default_book.jpg') }}"/>
-                      </a>
-                      <p>
-                        <a href="{{ asset('uploaded_books/'.$v->id.'/'.$v->file_name) }}">{{ $v->title }}</a>
-                        @if ($auth->is_admin == 1)
-                        <form action="{{ url('/books/'.$v->id) }}" method="POST">
-                          {{ method_field('DELETE') }}
-                          {{ csrf_field() }}
-                          [ <a class="text-danger" href="javascript:void(0)" onclick="$(this).closest('form').submit()">Delete</a> ]
-                        </form>
-                        @endif
-                      </p>
-                      <p class="text-left">{{ $v->description }}</p>
-                    </div>
-                    <?php $counter++; ?>
-                    @if ($counter % 3 == 0)
-                      </div>
-                      <div class="row text-center">
-                    @endif
-                  @endforeach
-                  <?php $remaining = 3 - ($counter % 3); ?>
-                  @if($remaining != 3)
-                    @for($i = 0; $i < $remaining; $i++)
-                      <div class="col-md-4">&nbsp;</div>
-                    @endfor
-                  @endif
+                    <ul class="list-group">
+                      @foreach($books AS $v)
+                        <li class="list-group-item text-left">
+                          <span class="fa fa-book fa-2x"></span> <a href="{{ asset('uploaded_books/'.$v->id.'/'.$v->file_name) }}">{{ $v->title }}</a>
+                          <i>- {{ $v->description }}</i>
+                          @if ($auth->is_admin == 1)
+                          <form action="{{ url('/books/'.$v->id) }}" method="POST">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            [ <a class="text-danger" href="javascript:void(0)" onclick="$(this).closest('form').submit()">Delete</a> ]
+                          </form>
+                          @endif
+                        </li>
+                      @endforeach
+                    </ul>
                   </div>
                 </div>
+
             </div>
         </div>
     </div>

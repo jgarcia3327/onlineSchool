@@ -13,7 +13,7 @@ class BookController extends Controller
 {
 
     public function index(){
-      $books = Book::where("active",1)->get();
+      $books = Book::where("active",1)->orderBy('title','asc')->get();
       return view('misc.books',compact('books'));
     }
 

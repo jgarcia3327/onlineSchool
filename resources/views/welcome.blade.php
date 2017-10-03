@@ -12,6 +12,7 @@
   	<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
   	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
   	<link href="{{ asset('css/homestyle.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

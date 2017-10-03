@@ -112,10 +112,61 @@ class ScheduleController extends Controller
 
         // TEACHER CANCEL SCHEDULE
         if ($request->has('cancel') && $this->isTeacher()) {
-            if ($schedule->teacher_user_id === Auth::user()->id && $schedule->student_user_id == null) {
-              $date = $schedule->date_time;
-              $schedule->delete();
-              return back()->with("success",$date);
+            if ($schedule->teacher_user_id === Auth::user()->id) {
+              // Check if less than 24 hours = 86400 sec
+              if (strtotime(date("Y-m-d H:i:s")) >= strtotime($schedule->date_time) - 86400) {
+                return back()->with("error",1);
+              }
+
+              $teacher = Teacher::where('user_id', Auth::user()->id)->first();
+
+              // Opps, we have student on the sched. We have to restore student credit
+              if ($schedule->student_user_id != null) {
+
+                // Restore student credits
+                $credit = Credit::where([["user_id","=",$schedule->student_user_id],["schedule_id","=",$schedule->id]])->first();
+                $credit->schedule_id = null;
+                $credit->save();
+
+                // Student email
+                $student = Student::select("students.*","users.email")->leftJoin('users','users.id','=','students.user_id')->where('user_id', $schedule->student_user_id)->first();
+                $subject = $schedule->date_time." cancelled by Teacher ".ucfirst($teacher->fname)." ".ucfirst($teacher->lname);
+                $body = "Dear ".ucfirst($student->fname).",\n\nYour lesson on ".$schedule->date_time." with teacher ".ucfirst($teacher->fname)." ".ucfirst($teacher->lname)." has been cancelled. \n\nEnglishHours.net";
+                $email = $student->email;
+                //dd($subject.":".$body.":".$email);
+                MailController::sendMail($email, $subject, $body);
+
+                // Email Teacher
+                $subject = $schedule->date_time." cancelled successfully.";
+                $body = "Dear ".ucfirst($teacher->fname).",\n\nYour lesson on ".$schedule->date_time." with ".ucfirst($student->fname)." ".ucfirst($student->lname)." has been cancelled. \n\nEnglishHours.net";
+                $email = Auth::user()->email;
+                //dd($subject.":".$body.":".$email);
+                MailController::sendMail($email, $subject, $body);
+
+                // Delete Sched
+                $date = $schedule->date_time;
+                $schedule->delete();
+
+                //TODO record teacher cancellations
+                return back()->with("success",$date);
+              }
+              // Ok, we don't have student reserved on the selected sched
+              else {
+
+                // Email Teacher
+                $subject = $schedule->date_time." cancelled successfully.";
+                $body = "Dear ".ucfirst($teacher->fname).",\n\nYour lesson on ".$schedule->date_time." with no reserved student has been cancelled. \n\nEnglishHours.net";
+                $email = Auth::user()->email;
+                //dd($subject.":".$body.":".$email);
+                MailController::sendMail($email, $subject, $body);
+
+                // Delete Sched
+                $date = $schedule->date_time;
+                $schedule->delete();
+
+                return back()->with("success",$date);
+              }
+
             }
           return back()->with("success",-1);
         }

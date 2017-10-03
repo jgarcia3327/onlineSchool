@@ -42,14 +42,36 @@
                     @else
                       [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
                     @endif
+                  @elseif ( $curTime >= $schedTime - 86400) 
+                    <!-- Disable cancellation under 24 hours -->
+                  @else
+                    [ <a class="text-danger" role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Cancel</a> ]
+                    <div id="collapse{{$v->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$v->id}}">
+                      <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                        {{ method_field('PUT') }}
+                        {{ csrf_field() }}
+                        <input type="hidden" name="cancel" value="1">
+                        <input type="submit" value="Confirm"/>
+                      </form>
+                      [ <a role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Close</a> ]
+                    </div>
                   @endif
+
                 @else
-                  Open <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
-                    {{ method_field('PUT') }}
-                    {{ csrf_field() }}
-                    <input type="hidden" name="cancel" value="1">
-                    <input type="submit" value="Cancel Schedule"/>
-                  </form>
+                  <!-- 1hr = 3600 -->
+                  <!-- 24hr = 86400 -->
+                  @if ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 3600) )
+                    <i class="text-warning">No reservation - closed</i>
+                  @elseif ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 86400) )
+                    Open
+                  @else
+                    Open <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                      {{ method_field('PUT') }}
+                      {{ csrf_field() }}
+                      <input type="hidden" name="cancel" value="1">
+                      <input type="submit" value="Cancel"/>
+                    </form>
+                  @endif
                 @endif
               </td>
             </tr>
