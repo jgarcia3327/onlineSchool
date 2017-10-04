@@ -131,7 +131,7 @@ class ScheduleController extends Controller
                 // Student email
                 $student = Student::select("students.*","users.email")->leftJoin('users','users.id','=','students.user_id')->where('user_id', $schedule->student_user_id)->first();
                 $subject = $schedule->date_time." cancelled by Teacher ".ucfirst($teacher->fname)." ".ucfirst($teacher->lname);
-                $body = "Dear ".ucfirst($student->fname).",\n\nYour lesson on ".$schedule->date_time." with teacher ".ucfirst($teacher->fname)." ".ucfirst($teacher->lname)." has been cancelled. \n\nEnglishHours.net";
+                $body = "Chào ".ucfirst($student->fname).",\n\nBài học của bạn vào lúc ".$schedule->date_time." với giáo viên ".ucfirst($teacher->fname)." ".ucfirst($teacher->lname)." đã được hủy. \n\nEnglishHours.net";
                 $email = $student->email;
                 //dd($subject.":".$body.":".$email);
                 MailController::sendMail($email, $subject, $body);
