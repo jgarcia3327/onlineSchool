@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Balance Deposit - English Hours")
+
 @section('content')
 <?php
 $success = $deposits[0];

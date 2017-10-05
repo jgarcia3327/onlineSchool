@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Activate Student Deposit - English Hours")
+
 @section('content')
 <div class="container">
     <div class="row">

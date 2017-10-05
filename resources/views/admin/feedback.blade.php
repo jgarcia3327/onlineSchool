@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "User Feedback - English Hours")
+
 @section('content')
 <div class="container">
     <div class="row">

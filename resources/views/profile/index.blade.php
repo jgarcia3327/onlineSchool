@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-  Profile
-@endsection
+@section('title', "My Profile - English Hours")
 
 @section('content')
 <?php

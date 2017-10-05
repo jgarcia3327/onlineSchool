@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-  Lesson Scheduler
-@endsection
+@section('title', $reservations[0]->fname." ".$reservations[0]->lname." - Schedule - English Hours")
 
 @section('content')
 <div class="container">

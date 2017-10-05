@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Credit Lessons - English Hours")
+
 @section('content')
 <?php
   $creditLesson = $credits[0];

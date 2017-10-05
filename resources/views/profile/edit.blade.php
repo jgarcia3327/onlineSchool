@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Edit Profile - English Hours")
+
 @section('content')
 <div class="col-md-4 col-md-offset-4">
   <h3>Edit profile</h3>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Wage - English Hours")
+
 @section('content')
 <?php $schedules = $wages[0]; ?>
 <?php $startDate = $wages[1]; ?>

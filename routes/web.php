@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminDashboard', 'AdminController@index');
       Route::get('/adminFeedback', 'FeedbackController@admin');
       Route::get('/adminDeposit', 'DepositController@admin');
+      Route::get('/adminStudent', 'AdminController@student');
       Route::put('/activateDeposit/{deposit_id}', 'DepositController@update');
       Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
       Route::get('/wage', 'WageController@index');

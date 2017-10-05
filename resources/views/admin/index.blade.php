@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Admin Dashboard - English Hours")
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -36,7 +38,10 @@
                         </a>
                       </div>
                       <div class="col-md-3">
-                        <!-- Additional admin stuff here... -->
+                        <a class="text-center" title="Activate paid credits" href="{{ url('/adminStudent') }}">
+                         <span class="fa fa-group fa-3x admin-link"></span>
+                         <span class="admin-link">List of Student</span>
+                        </a>
                       </div>
                     </div>
                 </div>
