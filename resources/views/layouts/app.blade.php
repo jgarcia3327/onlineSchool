@@ -132,7 +132,7 @@
             </div>
         </nav>
 
-        @if ($auth->is_admin == 1 || $auth->is_student == 0)
+        @if (!Auth::guest() && ($auth->is_admin == 1 || $auth->is_student == 0))
         <!-- Display server time -->
         <div class='time-frame'>
             <span>VIETNAM DATE/TIME:</span>
@@ -151,7 +151,7 @@
     <script type="text/javascript" src="{{ asset('js/moment-timezone.min.js') }}"></script>
     @yield('javascript')
 
-    @if ($auth->is_admin == 1 || $auth->is_student == 0)
+    @if (!Auth::guest() && ($auth->is_admin == 1 || $auth->is_student == 0))
     <script type="text/javascript">
       $(document).ready(function() {
         var interval = setInterval(function() {
