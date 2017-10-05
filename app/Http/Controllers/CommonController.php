@@ -5,9 +5,14 @@ use Auth;
 use App\User;
 use App\Http\Controllers\TeacherProfileController;
 use App\Http\Controllers\CreditController;
+use Carbon\Carbon;
 
 class CommonController
 {
+
+  public function getCurrentDateTime() {
+    return Carbon::now();
+  }
 
   public function getCreditLessonsValidity() {
     return CreditController::getCreditLessonsValidity();

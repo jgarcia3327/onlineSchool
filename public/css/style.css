@@ -77,3 +77,15 @@ li.message-owner .badge.message{
   max-width: 300px;
   margin-top: 9px;
 }
+.time-frame {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.09);
+  margin-bottom: 18px;
+  color: red;
+}
+.time-frame span{
+  font-size: 15px;
+  color: #333;
+}

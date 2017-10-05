@@ -132,12 +132,39 @@
             </div>
         </nav>
 
+        @if ($auth->is_admin == 1 || $auth->is_student == 0)
+        <!-- Display server time -->
+        <div class='time-frame'>
+            <span>VIETNAM DATE/TIME:</span>
+            <div id='date-part'></div>
+            <div id='time-part'></div>
+        </div>
+        @endif
+
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/moment-timezone.min.js') }}"></script>
     @yield('javascript')
+
+    @if ($auth->is_admin == 1 || $auth->is_student == 0)
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var interval = setInterval(function() {
+            var momentNow = moment().tz('Asia/Ho_Chi_Minh');
+            $('#date-part').html(momentNow.format('dddd') + ', ' + momentNow.format('DD MMMM YYYY'));
+            $('#time-part').html(momentNow.format('hh:mm:ss A'));
+        }, 100);
+
+        $('#stop-interval').on('click', function() {
+            clearInterval(interval);
+        });
+      });
+    </script>
+    @endif
 </body>
 </html>
