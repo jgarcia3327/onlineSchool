@@ -24,7 +24,7 @@
             $hour = ($hour >= 13)? $hour - 12 : $hour;
 
             if (strstr($v,":") == ":30") {
-              $ampmTo = ($hour+1 >= 12)? "PM" : "AM";
+              $ampmTo = (strstr($v,":",true))+1 >= 12? "PM" : "AM";
               $ampmTo = (strstr($v,":",true))+1 == 24? "AM" : $ampmTo;
               $vformat = $hour.$min." ".$ampm." - ".($hour+1).":00 ".$ampmTo;
             }
@@ -44,7 +44,8 @@
                 <!-- <i class="text-warning">Locked</i> -->
                 <i class="text-warning">Đã khóa</i>
               @else
-                <label class="form-check-label"><input type="checkbox" name="schedule_id[{{ $counter++ }}]" data-sched-date="{{ $dateFormat }} | {{ $vformat }}" value="{{ $k }}" class="form-check-input"> Chọn</label>
+                <?php $counter++; ?>
+                <label class="form-check-label"><input type="checkbox" name="schedule_id[{{ $k }}]" data-sched-date="{{ $dateFormat }} | {{ $vformat }}" value="{{ $k }}" class="form-check-input"> Chọn</label>
               @endif
           </td>
           </tr>

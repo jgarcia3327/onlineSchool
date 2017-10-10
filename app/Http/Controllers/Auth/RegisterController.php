@@ -12,6 +12,8 @@ use Illuminate\Auth\Events\Registered;
 
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Http\Controllers\MailController;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -82,6 +84,13 @@ class RegisterController extends Controller
           'address' => $data['address']
         ]);
 
+        //Send email to student
+        $subject = "EnglishHours.net Registration";
+        $body = "Dear ".ucfirst($data['fname']).", \n\nThank you for registering with us. \n\nFrom EnglishHours.net Team";
+        MailController::sendMail($data['email'], $subject, $body);
+        //Send email to admin
+        MailController::sendMail("info@englishhours.net", "Student Registration", "Dear EnglishHours Admin,\n\n".ucfirst($data['fname'])." ".ucfirst($data['lname'])." (".$data['email'].") has successfully registered as Student.\n\nEnglishHours.net");
+
         return $user;
     }
 
@@ -115,6 +124,13 @@ class RegisterController extends Controller
           'address' => $data['address'],
           'esl_experience' => $data['esl_experience']
         ]);
+
+        //Send email to student
+        $subject = "EnglishHours.net Teacher Registration";
+        $body = "Dear ".ucfirst($data['fname']).", \n\nThank you for registering with us. \n\nFrom EnglishHours.net Team";
+        MailController::sendMail($data['email'], $subject, $body);
+        //Send email to admin
+        MailController::sendMail("info@englishhours.net", "Teacher Registration", "Dear EnglishHours Admin,\n\n".ucfirst($data['fname'])." ".ucfirst($data['lname'])." (".$data['email'].") has successfully registered as Teacher.\n\nEnglishHours.net");
 
         return $user;
     }

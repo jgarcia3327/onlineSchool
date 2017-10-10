@@ -1,5 +1,5 @@
 <!-- Future lessons -->
-<div class="panel panel-default">
+<div class="panel panel-default" id="my-schedule">
     <div class="panel-heading">
       <h3 class="text-center">
       @if($schedules[2] != null)
@@ -42,7 +42,7 @@
                     @else
                       [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
                     @endif
-                  @elseif ( $curTime >= $schedTime - 86400) 
+                  @elseif ( $curTime >= $schedTime - 86400)
                     <!-- Disable cancellation under 24 hours -->
                   @else
                     [ <a class="text-danger" role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Cancel</a> ]

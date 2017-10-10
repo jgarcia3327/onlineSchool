@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $reservations[0]->fname." ".$reservations[0]->lname." - Schedule - English Hours")
+@section('title', "Create Schedule - English Hours")
 
 @section('content')
 <div class="container">
@@ -9,29 +9,8 @@
             <!-- Calendar for selecting a day -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class="text-center profile-photo sched-photo">
-                    @if($reservations[0]->photo != null)
-                    <img src="{{ asset('images/profile/') }}/{{ $reservations[0]->photo }}"/>
-                    @else
-                    <img src="{{ asset('images/profile/default_') }}{{ $reservations[0]->gender }}.png"/>
-                    @endif
-                  </div>
-                  <h3 class="text-center">
-                  {{ $reservations[0]->fname }} {{ $reservations[0]->lname }}
-                  <span>[ <a href="{{url('/teacherProfile/'.$reservations[0]->user_id)}}">Xem thông tin của giáo viên</a> ]</span>
-                  </h3>
-                <div class="text-center profile-audio">
-                @if($reservations[0]->audio != null)
-                <audio controls>
-                  <source src="{{ asset('audio/').'/' }}{{ $reservations[0]->user_id }}.ogg" type="audio/ogg">
-                  <source src="{{ asset('audio/').'/' }}{{ $reservations[0]->user_id }}.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-                </audio>
-                @else
-                <span class="text-center">Chưa có Audio</span>
-                @endif
+                  Select Day
                 </div>
-              </div>
                 <div class="panel-body">
                   <p><strong>*Chọn một ngày bạn muốn để hiển thị lịch dạy của giáo viên</strong></p>
                   <div class="col-md-8 col-md-offset-2">
@@ -43,7 +22,7 @@
             @if ( Auth::check() && $auth->is_student == 1)
             <div class="panel panel-default">
               <div class="panel-heading">
-                <strong>Số tiền trong tài khoản: {{ $reservations[1] }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">Tài khoản của tôi</a> ]
+                <strong>Số tiền trong tài khoản: {{ $credits }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">Tài khoản của tôi</a> ]
                 <span class="text-error">
                   *You can select several days to be added-up to your selected schedules.
                   <br/>*Selected schedule will be partially saved when moving/selecting other day for a batch submission of schedules.
@@ -61,7 +40,7 @@
                 <div class="">
                   Selected Schedule: <strong class="selected-sched-count">0</strong> [ <a href="javascript:showSched()" class="view-hide">View</a> ]
                 </div>
-                <div id="selected-sched" style="display:none;">
+                <div id="selected-sched" style="display: none;">
                 <i class="text-danger none-selected">Không có bài học nào được chọn</i>
                 </div>
                 <span class="span-row pull-right"><button onclick="$('form#create-schedule').submit()" type="submit" class="btn btn-primary" id="submit-selected" disabled>Chọn</button></span>
@@ -77,7 +56,7 @@
 
             <p class="loader text-center"><img src="{{ asset('images/ajax-loader.gif') }}"/></p>
 
-            <form id="create-schedule" action="/reserveTeacher/{{ $reservations[0]->user_id }}" method="POST">
+            <form id="create-schedule" action="#" method="POST">
               {{ method_field('PUT') }}
               {{ csrf_field() }}
             <div id="available-time"></div>

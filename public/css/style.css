@@ -89,3 +89,16 @@ li.message-owner .badge.message{
   font-size: 15px;
   color: #333;
 }
+#my-schedule > .panel-heading > h3, #available-time > .panel > .panel-heading > h3 {
+  background-color: #399421;
+  margin-top: 12px;
+  padding-top: 12px;
+  padding-bottom: 9px;
+  color: white;
+  border-radius: 6px;
+  text-align: center;
+}
+.text-error {
+  display: block;
+  color: #ff0000;
+}

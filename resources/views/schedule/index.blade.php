@@ -44,5 +44,6 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('js/display-teacher.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('js/display-teacher.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('js/my_schedule.js') }}"></script>
 @endsection

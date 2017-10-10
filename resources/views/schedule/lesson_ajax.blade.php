@@ -1,5 +1,5 @@
 <!-- Future lessons -->
-<div class="panel panel-default">
+<div class="panel panel-default" id="my-schedule">
     <div class="panel-heading">
       <h3 class="text-center">
       @if($schedules[2] != null)

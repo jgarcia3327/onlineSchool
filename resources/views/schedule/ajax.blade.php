@@ -12,7 +12,6 @@
           </tr>
         </thead>
         <tbody>
-          <?php $counter = 0; ?>
           @foreach($time[0] AS $k => $v)
           <tr>
             <td>{{ $v }}</td>
@@ -25,7 +24,7 @@
               @elseif( (strtotime(date("Y-m-d H:i:s")) + 86400) >= strtotime($time[3]." ".$k))
                 <i class="text-warning">Less than 24 hours policy</i>
               @else
-                <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input"> Open</label>
+                <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ strtotime($time[3]." ".$k) }}]" value="{{ $time[3]." ".$k }}" class="form-check-input"> Open</label>
               @endif
           </td>
           </tr>
@@ -53,7 +52,7 @@
               @elseif( (strtotime(date("Y-m-d H:i:s")) + 86400) >= strtotime($time[3]." ".$k))
                 <i class="text-warning">Less than 24 hours policy</i>
               @else
-                <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ $counter++ }}]" value="{{ $time[3]." ".$k }}" class="form-check-input">Open</label>
+                <label class="form-check-label"><input data-start-time="{{ $k }}" data-sched-date="{{ $dateFormat }} | {{ $v }}" type="checkbox" name="date_time[{{ strtotime($time[3]." ".$k) }}]" value="{{ $time[3]." ".$k }}" class="form-check-input">Open</label>
               @endif
             </td>
           </tr>

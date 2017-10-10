@@ -348,17 +348,17 @@
   <div class="container">
     <div class="row">
       <div class="recent">
-        <h2>MẪU VẬT</h2>
+        <h2>LỚP HỌC MẪU</h2>
         <hr>
       </div>
     </div>
     <div class="row">
       <div class="content">
         <div class="col-md-4">
-          <!-- Video here -->
+          <iframe src="https://www.youtube.com/embed/-srL9IwaJ0A?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="col-md-4">
-          <iframe src="https://www.youtube.com/embed/-srL9IwaJ0A?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/V3jcyR_lIdk?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="col-md-4">
           <!-- Video here -->

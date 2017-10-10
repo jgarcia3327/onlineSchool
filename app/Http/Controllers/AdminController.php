@@ -25,6 +25,7 @@ class AdminController extends Controller
       foreach($student AS $v) {
         $student_info[] = array(
           'name' => ucfirst($v->fname)." ".ucfirst($v->lname),
+          'gender' => ucfirst($v->gender),
           'contact' => $v->contact,
           'skype' => $v->skype,
           'register' => $v->create_date,//$v->create_date->diffForHumans(),

@@ -18,6 +18,7 @@
                       <thead>
                         <tr>
                           <th>Name</th>
+                          <th>Gender</th>
                           <th>Contact #</th>
                           <th>Skype ID</th>
                           <th>Register Date</th>
@@ -29,6 +30,7 @@
                         @foreach($student_info AS $v)
                         <tr>
                           <td>{{$v['name']}}</td>
+                          <td>{{$v['gender']}}</td>
                           <td>{{$v['contact']}}{{$v['name']}}</td>
                           <td>{{$v['skype']}}</td>
                           <td>{{$v['register']}}</td>

@@ -49,7 +49,9 @@ Route::group(['middleware' => 'auth'], function() {
       Route::resource('teacherEducation', 'TeacherEducationController');
       Route::resource('schedule', 'ScheduleController');
       Route::get('/schedule/ajax/{date}', 'ScheduleController@ajax');
-      Route::get('/schedule/index_ajax/{date}', 'ScheduleController@index_ajax');
+      Route::get('/schedule/index_ajax/{date}', 'ScheduleController@index_ajax'); // Deprecated with /schedule/my_schedule/{date}
+      Route::get('/schedule/my_schedule/{date}', 'ScheduleController@my_schedule');
+      Route::get('/studentCreateSchedule', 'ScheduleController@studentCreateSchedule');
       Route::get('/reserveTeacher', 'ReserveTeacherController@index');
       Route::put('/reserveTeacher/{teacher_id}', 'ReserveTeacherController@update');
       Route::get('/lessons', 'ScheduleController@index');

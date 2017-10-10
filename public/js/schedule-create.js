@@ -34,7 +34,7 @@ function getSavedDateTime(dateStr) {
   });
 
   request.done(function( result ) {
-    console.log(result);
+    //console.log(result);
     $( "#available-time" ).append( result );
     $(".loader").css({"display":"none"});
     //Checkbox change value
@@ -55,10 +55,25 @@ function getSavedDateTime(dateStr) {
         $("#submit-selected").attr({disabled : "disabled"});
         $(".none-selected").css({"display":"block"});
       }
+      // Display number of selected items
+      var $checkboxes = $('form input[type="checkbox"]');
+      var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
+      $(".selected-sched-count").text(countCheckedCheckboxes);
     });
   });
 
   request.fail(function( jqXHR, textStatus ) {
     alert( "Request failed: " + textStatus );
   });
+}
+
+function showSched() {
+  if ($(".view-hide").text() == "View") {
+    $(".view-hide").html("Hide");
+    $("#selected-sched").css({"display":"block"});
+  }
+  else {
+    $(".view-hide").html("View");
+    $("#selected-sched").css({"display":"none"});
+  }
 }

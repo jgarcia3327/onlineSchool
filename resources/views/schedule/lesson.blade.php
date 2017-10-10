@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<?php $credits = $common->getStudentCreditCount($auth->id); ?>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -53,5 +54,6 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('js/display-teacher.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('js/display-teacher.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('js/my_schedule.js') }}"></script>
 @endsection

@@ -10,6 +10,10 @@ use Carbon\Carbon;
 class CommonController
 {
 
+  public function getStudentCreditCount($user_id) {
+    return CreditController::getCreditCount($user_id);
+  }
+
   public function getCurrentDateTime() {
     return Carbon::now();
   }
