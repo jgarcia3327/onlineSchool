@@ -901,4 +901,7 @@ header, header .row, header .navbar-default {
 .content {
 	margin-top: 0;
 }
+.container {
+	margin-bottom: 45px;
+}
 /*end custom-edits*/

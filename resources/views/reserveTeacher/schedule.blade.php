@@ -45,8 +45,12 @@
               <div class="panel-heading">
                 <strong>Số tiền trong tài khoản: {{ $reservations[1] }}</strong> | [ <a href="{{ url('/scheduleCredit') }}">Tài khoản của tôi</a> ]
                 <span class="text-error">
+                  <!--
                   *You can select several days to be added-up to your selected schedules.
                   <br/>*Selected schedule will be partially saved when moving/selecting other day for a batch submission of schedules.
+                  -->
+                  *Bạn có thể chọn nhiều ngày để bổ sung vào lịch học  của mình.
+                  <br/>Những bài học đã được chọn sẽ được tự động lưu lại vào lịch học của bạn khi bạn chuyển sang ngày khác để chọn tiếp.
                 </span>
                 @if (session('success') == -1)
                 <span class="help-block">
