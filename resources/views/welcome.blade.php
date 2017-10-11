@@ -355,14 +355,15 @@
     </div>
     <div class="row">
       <div class="content">
-        <div class="col-md-4">
-          <iframe src="https://www.youtube.com/embed/-srL9IwaJ0A?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
+        <div class="col-md-6">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-srL9IwaJ0A?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
+          </div>
         </div>
-        <div class="col-md-4">
-          <iframe src="https://www.youtube.com/embed/V3jcyR_lIdk?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="col-md-4">
-          <!-- Video here -->
+        <div class="col-md-6">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/V3jcyR_lIdk?rel=0&controls=0" frameborder="0" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -414,41 +415,54 @@
   <!--instruction-->
 
     <div class="container">
-      <div class="about">
-          <div class="row">
-            <div class="recent">
-              <button class="btn-primarys"><h3>HƯỚNG DẪN CÁC BƯỚC ĐỂ HỌC</h3></button>
-              <hr>
-            </div>
+        <div class="row">
+          <div class="recent">
+            <h2>HƯỚNG DẪN CÁC BƯỚC ĐỂ HỌC</h2>
+            <hr>
           </div>
+        </div>
         <div class="row">
           <div class="row-slider">
-            <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.2s">
-              <div class="col-lg-6 mar-bot30">
-                <div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
-                  <div class="slides" data-group="slides">
-                    <ul>
-                      <div class="slide-bodys" data-group="slide">
-                        <li><img alt="" class="img-responsive" src="img/4.jpg" width="100%" height="450"/></li>
-                        <li><img alt="" class="img-responsive" src="img/5.jpg" width="100%" height="450"/></li>
-                        <li><img alt="" class="img-responsive" src="img/6.jpg" width="100%" height="450"/></li>
-                        <li><img alt="" class="img-responsive" src="img/7.jpg" width="100%" height="450"/></li>
-                        <li><img alt="" class="img-responsive" src="img/8.jpg" width="100%" height="450"/></li>
-                        <li><img alt="" class="img-responsive" src="img/9.jpg" width="100%" height="450"/></li>
-                        <li><img alt="" class="img-responsive" src="img/10.jpg" width="100%" height="450"/></li>
-                      </div>
-                    </ul>
+            <div>
+              <div class="col-lg-12 mar-bot30">
 
+                <!-- Start slide -->
+                <div id="EnglishHoursInstruction" class="carousel slide" data-ride="carousel" data-interval="false">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    @for ($i = 0; $i < 16; $i++)
+                    <li data-target="#EnglishHoursInstruction" data-slide-to="{{$i}}" {{ ($i == 0)? "class=active" : ''}}></li>
+                    @endfor
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    @for ($i = 1; $i <= 16; $i++)
+                    <div class="item {{ ($i == 1)? 'active' : ''}}">
+                      <img src="{{asset('img/instructions/'.$i.'.jpg')}}" alt="Hướng dẫn 6 bước học - ngang - {{$i}}">
+                    </div>
+                    @endfor
                   </div>
+
+                  <!-- Left and right controls -->
+                  <a class="left carousel-control" href="#EnglishHoursInstruction" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#EnglishHoursInstruction" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
                 </div>
+                <!-- End slide -->
+
               </div>
-            </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.6s">
                 <div class="thumnails">
                   <h4>HƯỚNG DẪN CHO HỌC VIÊN BẮT ĐẦU HỌC
                     <br/>TẠI ENGLISH HOURS</h4>
-                  <ul>
+                  <ul class="instruction-summary">
                     <li>Bước 1: Cài đặt Skype và tạo tài khoản Skype</li>
                     <li>Bước 2: Đăng kí tài khoản học tại EnglishHours.net</li>
                     <li>Bước 3: Học phí và cách nộp học phí</li>
@@ -457,14 +471,14 @@
                     <li>Bước 6: Tiến hành học</li>
                     <li>Chú ý: Hướng dẫn và quy định khi hủy buổi học</li>
                   </ul>
-                  <p>
-                    <span style="display:block; padding-bottom: 9px;">31TCÁC BẠN CẦN HỖ TRỢ XIN LIÊN LẠC:</span>
+                  <p class="instruction-summary">
+                    <span style="display:block; padding-bottom: 9px;">CÁC BẠN CẦN HỖ TRỢ XIN LIÊN LẠC:</span>
                     <span style="display:block;">Inbox Facebook: <a href="https://www.facebook.com/tienganhquaskype" target="_blank">https://www.facebook.com/tienganhquaskype</a></span>
                     <span style="display:block;">Skype: <a href="skype:live:Englishhourscenter@gmail.com?call">Englishhourscenter@gmail.com</a></span>
                     <span style="display:block;">Điện thoại: <a href="tel:0935680606">0935 680 606</a></span>
                   </p>
                   <div class="ficon">
-                    <a href="{{url('/uploaded_books/EnglishHours_manual.pdf')}}" alt="Hướng dẫn 6 bước học.pdf" target="_blank">Tìm hiểu thêm</a> <i class="fa fa-long-arrow-right"></i>
+                    <a href="{{url('/uploaded_books/EnglishHours_manual.pdf')}}" alt="Hướng dẫn 6 bước học" target="_blank">Xem hướng dẫn chi tiết tại đây</a> <i class="fa fa-long-arrow-right"></i>
                   </div>
                 </div>
               </div>
@@ -483,12 +497,25 @@
 					<div class="col-lg-6">
 						<div class="copyright">
 							<p>
-								<span>&copy; EnglishHours.net {{ date('Y') }}. All right reserved.
-							</p>
+                <!--
+                <span>Email: <a href="mailto:info@englishhours.net" target="_blank">info@englishhours.net</a></span>
+                <span>Skype: <a href="skype:live:Englishhourscenter@gmail.com?call">Englishhourscenter@gmail.com</a></span>
+                <span>Điện thoại: <a href="tel:0935680606">0935 680 606</a></span>
+                <span>Facebook: <a href="https://www.facebook.com/tienganhquaskype" target="_blank">https://www.facebook.com/tienganhquaskype</a></span>
+                -->
+                <span>&copy; EnglishHours.net {{ date('Y') }}. All right reserved.</span>
+              </p>
 						</div>
 					</div>
 					<div class="col-lg-6">
-
+            <!--
+              <ul class="social-network">
+                <li><a href="mailto:info@englishhours.net" data-placement="top" title="info@englishhours.net" class="email-icon"><i class="fa fa-envelope fa-3x"></i></a></li>
+                <li><a href="skype:live:aqua.dinh?call" data-placement="top" title="aqua.dinh" class="skype-icon"><i class="fa fa-skype fa-3x"></i></a></li>
+                <li><a href="tel:0935680606" data-placement="top" title="Phone Numbers"><i class="fa fa-phone fa-3x"></i></a></li>
+                <li><a href="https://www.facebook.com/Tienganhquaskype/" data-placement="top" title="Facebook" class="facebook-icon"><i class="fa fa-facebook fa-3x"></i></a></li>
+              </ul>
+            -->
 					</div>
 				</div>
 			</div>

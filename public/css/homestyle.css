@@ -904,4 +904,35 @@ header, header .row, header .navbar-default {
 .container {
 	margin-bottom: 45px;
 }
+.instruction-summary {
+	max-width: 480px;
+	margin: 0 auto;
+}
+.instruction-summary li {
+	font-size: 1.2em;
+  font-weight: bold;
+	padding-bottom: 3px;
+}
+.instruction-summary > span > a{
+	font-size: 0.9em;
+}
+ul.social-network {
+	text-shadow: 0px 1px 9px #fff;
+}
+#sub-footer .copyright > p > span {
+	display: block;
+	color: #fff;
+}
+.copyright > p > span > a {
+	color: #8fe0ac;
+}
+.carousel-indicators li {
+	border: 2px solid #407b55;
+}
+.carousel-indicators .active {
+	background-color: #0ce85a;
+}
+.embed-responsive-item {
+	padding-bottom: 9px;
+}
 /*end custom-edits*/

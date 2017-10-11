@@ -9,9 +9,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Students</div>
+                <div class="panel-heading">List of Students</div>
 
                 <div class="panel-body">
                     <table id="student" class="display" cellspacing="0" width="100%">
@@ -31,7 +31,7 @@
                         <tr>
                           <td>{{$v['name']}}</td>
                           <td>{{$v['gender']}}</td>
-                          <td>{{$v['contact']}}{{$v['name']}}</td>
+                          <td>{{$v['contact']}}</td>
                           <td>{{$v['skype']}}</td>
                           <td>{{$v['register']}}</td>
                           <td>{{$v['credit']}}</td>
@@ -52,7 +52,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#student').DataTable( {
-        "order": [[ 3, "desc" ]]
+        "order": [[ 4, "desc" ]]
     } );
   } );
 </script>

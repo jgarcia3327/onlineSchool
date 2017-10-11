@@ -89,7 +89,8 @@ class RegisterController extends Controller
         $body = "Dear ".ucfirst($data['fname']).", \n\nThank you for registering with us. \n\nFrom EnglishHours.net Team";
         MailController::sendMail($data['email'], $subject, $body);
         //Send email to admin
-        MailController::sendMail("info@englishhours.net", "Student Registration", "Dear EnglishHours Admin,\n\n".ucfirst($data['fname'])." ".ucfirst($data['lname'])." (".$data['email'].") has successfully registered as Student.\n\nEnglishHours.net");
+        $body = "Dear EnglishHours Admin,\n\nName: ".ucfirst($data['fname'])." ".ucfirst($data['lname'])."\nEmail: ".$data['email']."\nGender:".$data['gender']."\nContact #: ".$data['contact']."\nSkype: ".$data['skype']."\n\nhas successfully registered as Student.\n\nEnglishHours.net";
+        MailController::sendMail("info@englishhours.net", "Student Registration", $body);
 
         return $user;
     }
