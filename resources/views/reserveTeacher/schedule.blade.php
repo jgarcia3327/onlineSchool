@@ -25,7 +25,8 @@
                 <audio controls>
                   <source src="{{ asset('audio/').'/' }}{{ $reservations[0]->user_id }}.ogg" type="audio/ogg">
                   <source src="{{ asset('audio/').'/' }}{{ $reservations[0]->user_id }}.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
+                  <source src="{{ asset('audio/').'/' }}{{ $reservations[0]->user_id }}.wav" type="audio/x-wav">
+                  Your browser does not support the audio element.
                 </audio>
                 @else
                 <span class="text-center">Chưa có Audio</span>

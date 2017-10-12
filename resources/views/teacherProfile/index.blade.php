@@ -42,7 +42,8 @@
           <audio controls>
             <source src="{{ asset('audio/').'/' }}{{ $profile->user_id }}.ogg" type="audio/ogg">
             <source src="{{ asset('audio/').'/' }}{{ $profile->user_id }}.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
+            <source src="{{ asset('audio/').'/' }}{{ $profile->user_id }}.wav" type="audio/x-wav">
+            Your browser does not support the audio element.
           </audio>
           @else
           <p class="text-center">No Audio uploaded</p>
