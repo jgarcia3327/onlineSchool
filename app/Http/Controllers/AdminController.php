@@ -19,7 +19,7 @@ class AdminController extends Controller
         return redirect('');
       }
 
-      $student = Student::select('students.*','balances.amount')->leftJoin('balances','balances.user_id','=','students.user_id')->where('active',1)->orderBy('id', 'desc')->get();
+      $student = Student::select('students.*','users.email','balances.amount')->leftJoin('balances','balances.user_id','=','students.user_id')->leftJoin('users','users.id','=','students.user_id')->where('students.active',1)->orderBy('id', 'desc')->get();
 
       $student_info = null;
       foreach($student AS $v) {
@@ -28,6 +28,7 @@ class AdminController extends Controller
           'gender' => ucfirst($v->gender),
           'contact' => $v->contact,
           'skype' => $v->skype,
+          'email' => $v->email,
           'register' => $v->create_date,//$v->create_date->diffForHumans(),
           'credit' => CreditController::getCreditCount($v->user_id),
           'balance' => empty($v->amount)? "-" : $v->amount

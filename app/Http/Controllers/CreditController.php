@@ -11,6 +11,7 @@ use App\Models\Schedule;
 use App\Models\Balance;
 use App\Models\Student;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\CommonController;
 
 class CreditController extends Controller
 {
@@ -30,6 +31,15 @@ class CreditController extends Controller
         20 => 1660000,
         30 => 2350000,
         40 => 2990000
+      );
+    }
+
+    public static function getCreditLessonsStr() {
+      return array(
+        10 => "860.000",
+        20 => "1.660.000",
+        30 => "2.350.000",
+        40 => "2.990.000"
       );
     }
 
@@ -92,7 +102,7 @@ class CreditController extends Controller
       if (Auth::user()->is_student == 1 || Auth::user()->is_admin == 1) {
         $pendingCond = [
           ["user_id","=",Auth::user()->id],
-          ["status","=", 0]
+          ["charged","=", 0]
         ];
         $pending = Buycredit::where($pendingCond)->orderBy("id", "desc")->get();
         $balance = Balance::where('user_id', Auth::user()->id)->first();
@@ -112,7 +122,7 @@ class CreditController extends Controller
     public function admin(){
       // Admin
       if (Auth::user()->is_admin == 1) {
-        $buyCredits = Buycredit::select("buycredits.*","users.email","students.fname","students.lname")->leftJoin("users","users.id","buycredits.user_id")->leftJoin("students","students.user_id","buycredits.user_id")->where("status",0)->orWhere("status",1)->orderBy("id", "desc")->get();
+        $buyCredits = Buycredit::select("buycredits.*","users.email","students.fname","students.lname")->leftJoin("users","users.id","buycredits.user_id")->leftJoin("students","students.user_id","buycredits.user_id")->orderBy("id", "desc")->get();
         return view('admin.credit', compact('buyCredits'));
       }
       return redirect('');
@@ -125,12 +135,15 @@ class CreditController extends Controller
         $balance = Balance::where("user_id", Auth::user()->id)->first();
         $quantity = $request->quantity;
         $amount = $creditLessons[$quantity];
+
+        // Deposit balance => Admin->Activate Student Deposits
         if (!empty($balance) && array_key_exists($quantity, $creditLessons) && $balance->amount >= $amount) {
           // Record buy credit lessons
           $insertData = array(
             "user_id" => Auth::user()->id,
             "quantity" => $quantity,
             "charged" => 1,
+            "active" => 1,
             "create_date" => Carbon::now()
           );
           Buycredit::insert($insertData);
@@ -164,6 +177,37 @@ class CreditController extends Controller
 
           return back()->with("success", $quantity); //TODO change price
         }
+        // Direct buy - credit lessons => Admin->Activate Student Credit Lessons
+        else {
+          // Record buy credit lessons
+          $insertData = array(
+            "user_id" => Auth::user()->id,
+            "quantity" => $quantity,
+            "charged" => 0,
+            "status" => 1,
+            "create_date" => Carbon::now()
+          );
+          Buycredit::insert($insertData);
+
+          $student = Student::where("user_id",Auth::user()->id)->first();
+          //Send email to student
+          $common = new CommonController();
+          $bank = array();
+          $counter = 0;
+          foreach( $common->getEnglishHoursBankAccount() AS $k => $v) {
+            $bank[$counter] = $k.": ".$v;
+            $counter++;
+          }
+          $subject = $quantity." Lessons pending for activation";
+          $body = "Dear ".$student->fname.",\n\nYou have successfull requested a ".$quantity." credit lessons.\n\nTo activate your ".$quantity." requested credit lessons, please deposit ".$this->getCreditLessonsStr()[$quantity]." đồng to:\n".$bank[0]."\n".$bank[1]."\n".$bank[2]."\n\nThank you. \n\nEnglishHours.net";
+          MailController::sendMail(Auth::user()->email, $subject, $body);
+          //Send email to admin
+          $body = "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully requested ".$quantity." lesson credits, amounting to ".$this->getCreditLessonsStr()[$quantity]."\n\nPlease active requested credit lessons once amount deposited to ".$bank[0]."\n".$bank[1]."\n".$bank[2];
+          MailController::sendMail("info@englishhours.net", $quantity." Lessons requested from ".$student->fname, $body);
+
+
+          return back()->with("success", $quantity);
+        }
 
         return back()->with("error", 1);
       }
@@ -174,7 +218,7 @@ class CreditController extends Controller
 
     //Deprecated
     public function update(Request $request, $id) {
-      /*
+
       if (Auth::user()->is_admin == 1) {
         $credit = Buycredit::where('id',$id)->first();
         // Empty credit
@@ -182,36 +226,38 @@ class CreditController extends Controller
           return back()->with("success", -1);
         }
         $credit->activate_by = Auth::user()->id;
-        $credit->status = 1;
+        $credit->charged = 1;
         $credit->modify_date = Carbon::now();
         $credit->save();
 
-        //Assign credits
-        $studentCredit = new Credit;
-        switch($credit->quantity) {
-          case 10 : $consume = 30; // in days
-          break;
-          case 20 : $consume = 60; // in days
-          break;
-          case 30 : $consume = 90; // in days
-          break;
-          default : $consume = 120; // in days
-        }
+        // Activate bought credit lessons
+        $quantity = $credit->quantity;
+        $user_id = $credit->user_id;
+        $consume = CreditController::getCreditLessonsValidity()[$quantity];
         $dataset = [];
-        $limit = $credit->quantity;
+        $limit = $quantity;
         for ($i=0; $i < $limit; $i++) {
           $dataset[] = [
-            'user_id' => $credit->user_id,
+            'user_id' => $user_id,
             'consume_days' => $consume,
             'create_date' => Carbon::now()
           ];
         }
-        $studentCredit->insert($dataset);
+        Credit::insert($dataset);
+
+        $student = Student::select("students.*","users.email")->leftJoin("users","users.id","=","students.user_id")->where("user_id",$user_id)->first();
+        // Send email to student
+        $subject = $quantity." credit lessons ACTIVATED";
+        $body = "Dear ".$student->fname.",\n\nYour ".$quantity." credit lessons has been activated.\nYou can now use your credit lessons to reserved a schedule in EnglishHours.net.\n\nThank you.\n-EnglishHours.net";
+        MailController::sendMail(Auth::user()->email, $subject, $body);
+        //Send email to admin
+        MailController::sendMail("info@englishhours.net", $quantity." Lessons activated to ".$student->fname, "Dear EnglishHours Admin,\n\nYou have successfully activated ". $student->fname." ".$student->lname." (".$student->email.") ".$quantity." lesson credits.\n\nEnglishHours.net");
+
 
         return back()->with("success", 1);
       }
 
       return back()->with("success", -1);
-      */
+
     }
 }

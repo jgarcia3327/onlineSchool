@@ -75,9 +75,9 @@ $balanceAmount = $deposits[2];
                       <!-- *Please deposit amount to: -->
                       Xin gửi số tiền nạp trên đến:
                     </li>
-                    <li class="list-group-item">Ngân hàng: <strong>AGRIBANK</strong></li>
-                    <li class="list-group-item">Tên tài khoản: <strong>Jannet Iucu</strong></li>
-                    <li class="list-group-item">Số tài khoản: <strong>1421205079360</strong></li>
+                    @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
+                    <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
+                    @endforeach
                     <!-- <li class="list-group-item"><input class="btn btn-danger" type="submit" value="Confirm to Deposit Money" /></li> -->
                     <li class="list-group-item"><input class="btn btn-danger" type="submit" value="Xác nhận nạp tiền" /></li>
                   </ul>
@@ -117,21 +117,12 @@ $balanceAmount = $deposits[2];
                   <!-- *Deposit pending request to: -->
                   Tiền nạp đang xử lý yêu cầu gửi đến:
                 </span></li>
+                @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
                 <li class="list-group-item">
-                  <!-- Bank:  -->
-                  Ngân hàng:
-                  <strong class="text-danger">AGRIBANK</strong>
+                  {{$k}}:
+                  <strong class="text-danger">{{$v}}</strong>
                 </li>
-                <li class="list-group-item">
-                  <!-- Account Name:  -->
-                  Tên tài khoản:
-                  <strong class="text-danger">Jannet Iucu</strong>
-                </li>
-                <li class="list-group-item">
-                  <!-- Account Number:  -->
-                  Số tài khoản:
-                  <strong class="text-danger">1421205079360</strong>
-                </li>
+                @endforeach
               </ul>
               @endif
             </div>

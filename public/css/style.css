@@ -102,3 +102,6 @@ li.message-owner .badge.message{
   display: block;
   color: #ff0000;
 }
+.text-underlined {
+  text-decoration: underline;
+}

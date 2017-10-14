@@ -32,9 +32,16 @@
                   <!-- Pending credit lessons -->
                   @if(count($pendingCredits) > 0)
                   @foreach($pendingCredits AS $pending)
-                  <!-- <p class="text-warning">
-                    <strong>Đanh chờ kích hoạt:</strong> Gói học gồm {{$pending->quantity}} bài học - Đã đăng kí {{$pending->create_date->diffForHumans()}}
-                  </p> -->
+                  <div class="text-error">
+                    <ul class="list-group">
+                      <li class="list-group-item">PENDING LESSON REQUEST ( {{$pending->create_date->diffForHumans()}} ):
+                        <br/>- You have {{$pending->quantity}} credit lessons pending for activation.
+                        <br/>- To activate pending request, please deposit {{$common->getCreditLessonsStr()[$pending->quantity]}} đồng to:</li>
+                      @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
+                      <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
+                      @endforeach
+                    </ul>
+                  </div>
                   @endforeach
                   @endif
 
@@ -68,6 +75,7 @@
                             <form action="{{ url('/scheduleCredit') }}" method="POST">
                               {{ csrf_field() }}
                               <input type="hidden" name="quantity" value="10" />
+                              <!-- <input class="btn btn-warning" type="submit" value="Sign up for a 10-lesson package" /> -->
                               <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 10 bài học này" />
                             </form>
                             <span class="text-danger">
@@ -76,7 +84,25 @@
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>860.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
-                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>860.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
+                            <!-- <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>860.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p> -->
+
+                            <!-- Direct buy of # of credit lessons -->
+                            <form action="{{ url('/scheduleCredit') }}" method="POST">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="quantity" value="10" />
+                              <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 10 bài học này" />
+                            </form>
+                            <span class="text-error">
+                              <ul class="list-group">
+                                <li class="list-group-item">
+                                  *To activate your 10 credit lessons, please deposit an amount of <strong>860.000</strong> to:
+                                </li>
+                                @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
+                                <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
+                                @endforeach
+                              </ul>
+                            </span>
+
                           @endif
                         </div>
                       </div>
@@ -109,7 +135,25 @@
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>1.660.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
-                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>1.660.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
+                            <!-- <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>1.660.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p> -->
+
+                            <!-- Direct buy of # of credit lessons -->
+                            <form action="{{ url('/scheduleCredit') }}" method="POST">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="quantity" value="20" />
+                              <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 20 bài học này" />
+                            </form>
+                            <span class="text-error">
+                              <ul class="list-group">
+                                <li class="list-group-item">
+                                  *To activate your 20 credit lessons, please deposit an amount of <strong>1.660.000</strong> to:
+                                </li>
+                                @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
+                                <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
+                                @endforeach
+                              </ul>
+                            </span>
+
                           @endif
                         </div>
                       </div>
@@ -143,7 +187,25 @@
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>2.350.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
-                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>2.350.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
+                            <!-- <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>2.350.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p> -->
+
+                            <!-- Direct buy of # of credit lessons -->
+                            <form action="{{ url('/scheduleCredit') }}" method="POST">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="quantity" value="30" />
+                              <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 30 bài học này" />
+                            </form>
+                            <span class="text-error">
+                              <ul class="list-group">
+                                <li class="list-group-item">
+                                  *To activate your 30 credit lessons, please deposit an amount of <strong>2.350.000</strong> to:
+                                </li>
+                                @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
+                                <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
+                                @endforeach
+                              </ul>
+                            </span>
+
                           @endif
                         </div>
                       </div>
@@ -177,7 +239,25 @@
                             </span>
                           @else
                             <!-- <p class="text-danger">Please deposit at least <strong>2.990.000 đồng</strong> [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
-                            <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>2.990.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p>
+                            <!-- <p class="text-danger">Vui lòng nạp vào tài khoản ít nhất <strong>2.990.000</strong> đồng để mua gói học [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p> -->
+
+                            <!-- Direct buy of # of credit lessons -->
+                            <form action="{{ url('/scheduleCredit') }}" method="POST">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="quantity" value="40" />
+                              <input class="btn btn-warning" type="submit" value="Đăng kí để mua gói 40 bài học này" />
+                            </form>
+                            <span class="text-error">
+                              <ul class="list-group">
+                                <li class="list-group-item">
+                                  *To activate your 40 credit lessons, please deposit an amount of <strong>2.990.000</strong> to:
+                                </li>
+                                @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
+                                <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
+                                @endforeach
+                              </ul>
+                            </span>
+
                           @endif
                         </div>
                       </div>

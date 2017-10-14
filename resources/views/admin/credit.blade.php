@@ -12,10 +12,10 @@
               <div class="panel-body">
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                   @foreach($buyCredits AS $v)
-                  <?php if($v->status != 0) continue; ?>
+                  @if($v->charged == 0 && $v->status == 1)
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading{{$v->id}}">
-                      Lesson Credits: {{$v->quantity}}
+                      REQUEST # OF LESSONS: <span class="text-underlined">{{$v->quantity}}</span>
                     </div>
                     <div class="panel-body">
                       <ul class="list-group">
@@ -36,6 +36,7 @@
                       </div>
                     </div>
                   </div>
+                  @endif
                   @endforeach
                 </div>
               </div>
@@ -47,17 +48,20 @@
             <div class="panel-body">
               <ul class="list-group">
                 @foreach($buyCredits AS $v)
-                  <?php if($v->status != 1) continue; ?>
+                  @if($v->charged == 1 && $v->status == 1)
                   <li class="list-group-item">
-                    @if($v->charged == 0)
-                      <strong class="text-danger">*Activated by Admin</strong>
-                    @endif
-                    <strong>Credits: {{$v->quantity}}</strong>
-                    <br/>Name: {{$v->fname}} {{$v->lname}} ({{$v->email}}) | Activated {{$v->modify_date->diffForHumans()}}</li>
+                    <strong># of Credits: <span class="text-underlined">{{$v->quantity}}</span></strong> ({{$v->modify_date != null? $v->modify_date->diffForHumans() : "Date - untraced"}})
+                    <br/><strong>Name:</strong> {{$v->fname}} {{$v->lname}} ({{$v->email}})
+                    <br/><strong>Activated by:</strong> {{$v->activated_by != null ? "ADMIN ".$common->getAdmin($v->activated_by)->fname." ".$common->getAdmin($v->activated_by)->lname : "Credited to STUDENT DEPOSIT"}}
+                  </li>
+                  @endif
                 @endforeach
               </ul>
             </div>
           </div>
+
+          <!-- Disabled TODO -->
+
           @endif
 
         </div>

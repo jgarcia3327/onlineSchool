@@ -10,6 +10,28 @@ use Carbon\Carbon;
 class CommonController
 {
 
+  public function getAdmin($user_id) {
+    $teacher = Teacher::select("teachers.*","users.email","users.is_admin")->leftJoin("users","users.id","=","teachers.user_id")->where('user_id', $user_id)->first();
+    if ($teacher != null) {
+      if ($teacher.is_admin == 1)
+        return $teacher;
+      else return null;
+    }
+    $student = Teacher::select("students.*","users.email","users.is_admin")->leftJoin("users","users.id","=","students.user_id")->where('user_id', $user_id)->first();
+    if ($student != null && $student.is_admin == 1) {
+      return $student;
+    }
+    return null;
+  }
+
+  public function getEnglishHoursBankAccount() {
+    return array(
+      "Ngân hàng" => "AGRIBANK",
+      "Tên tài khoản" => "Jannet Iucu",
+      "Số tài khoản" => "1421205079360"
+    );
+  }
+
   public function getStudentCreditCount($user_id) {
     return CreditController::getCreditCount($user_id);
   }
@@ -20,6 +42,10 @@ class CommonController
 
   public function getCreditLessonsValidity() {
     return CreditController::getCreditLessonsValidity();
+  }
+
+  public function getCreditLessonsStr() {
+    return CreditController::getCreditLessonsStr();
   }
 
   public function getCreditLessons() {

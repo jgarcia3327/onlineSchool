@@ -21,6 +21,7 @@
                           <th>Gender</th>
                           <th>Contact #</th>
                           <th>Skype ID</th>
+                          <th>Email</th>
                           <th>Register Date</th>
                           <th>Lesson Credit</th>
                           <th>Balance</th>
@@ -33,6 +34,7 @@
                           <td>{{$v['gender']}}</td>
                           <td>{{$v['contact']}}</td>
                           <td>{{$v['skype']}}</td>
+                          <td>{{$v['email']}}</td>
                           <td>{{$v['register']}}</td>
                           <td>{{$v['credit']}}</td>
                           <td>{{$v['balance']}}</td>
@@ -52,7 +54,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#student').DataTable( {
-        "order": [[ 4, "desc" ]]
+        "order": [[ 5, "desc" ]]
     } );
   } );
 </script>
