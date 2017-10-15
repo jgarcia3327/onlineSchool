@@ -30,7 +30,7 @@
                     <strong class="text-danger">You don't have enough privileges.</strong>
                   @endif
                   <!-- Pending credit lessons -->
-                  @if(count($pendingCredits) > 0)
+                  @if($pendingCredits != null && count($pendingCredits) > 0)
                   @foreach($pendingCredits AS $pending)
                   <div class="text-error">
                     <ul class="list-group">
