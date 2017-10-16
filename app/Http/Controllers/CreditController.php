@@ -194,7 +194,7 @@ class CreditController extends Controller
           $common = new CommonController();
           $bank = array();
           foreach( $common->getEnglishHoursBankAccount() AS $k => $v) {
-            $bank[$counter] = $k.": ".$v;
+            $bank[] = $k.": ".$v;
           }
           $bank_details = implode("\n", $bank);
           $subject = $quantity." Lessons pending for activation";
