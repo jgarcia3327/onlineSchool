@@ -52,7 +52,7 @@
                   <li class="list-group-item">
                     <strong># of Credits: <span class="text-underlined">{{$v->quantity}}</span></strong> ({{$v->modify_date != null? $v->modify_date->diffForHumans() : "Date - untraced"}})
                     <br/><strong>Name:</strong> {{$v->fname}} {{$v->lname}} ({{$v->email}})
-                    <br/><strong>Activated by:</strong> {{$v->activate_by != null ? "ADMIN ".$common->getAdmin($v->activated_by)->fname." ".$common->getAdmin($v->activated_by)->lname : "Credited to STUDENT DEPOSIT"}}
+                    <br/><strong>Activated by:</strong> {{$v->activate_by != null ? "ADMIN ".$common->getAdmin($v->activate_by)->fname." ".$common->getAdmin($v->activate_by)->lname : "Credited to STUDENT DEPOSIT"}}
                   </li>
                   @endif
                 @endforeach
