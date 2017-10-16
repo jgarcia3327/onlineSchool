@@ -216,7 +216,6 @@ class CreditController extends Controller
 
     }
 
-    //Deprecated
     public function update(Request $request, $id) {
 
       if (Auth::user()->is_admin == 1) {
