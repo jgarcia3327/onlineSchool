@@ -6,19 +6,26 @@ use App\User;
 use App\Http\Controllers\TeacherProfileController;
 use App\Http\Controllers\CreditController;
 use Carbon\Carbon;
+use App\Models\Teacher;
+use App\Models\Student;
+use App\Models\Feedback;
 
-class CommonController
-{
+
+class CommonController {
+
+  public function getFeaturedFeeback() {
+    return Feedback::select("feedback.*","students.fname AS student", "teachers.fname AS teacher")->leftJoin("students","students.user_id","=","feedback.user_id")->leftJoin("teachers","teachers.user_id","=","feedback.user_id")->where([['feedback.active','=',1],['featured','=',1]])->get();
+  }
 
   public function getAdmin($user_id) {
     $teacher = Teacher::select("teachers.*","users.email","users.is_admin")->leftJoin("users","users.id","=","teachers.user_id")->where('user_id', $user_id)->first();
     if ($teacher != null) {
-      if ($teacher.is_admin == 1)
+      if ($teacher->is_admin == 1)
         return $teacher;
       else return null;
     }
-    $student = Teacher::select("students.*","users.email","users.is_admin")->leftJoin("users","users.id","=","students.user_id")->where('user_id', $user_id)->first();
-    if ($student != null && $student.is_admin == 1) {
+    $student = Student::select("students.*","users.email","users.is_admin")->leftJoin("users","users.id","=","students.user_id")->where('user_id', $user_id)->first();
+    if ($student != null && $student->is_admin == 1) {
       return $student;
     }
     return null;
@@ -26,9 +33,20 @@ class CommonController
 
   public function getEnglishHoursBankAccount() {
     return array(
-      "Ngân hàng" => "AGRIBANK",
-      "Tên tài khoản" => "Jannet Iucu",
-      "Số tài khoản" => "1421205079360"
+      "Tên đơn vị thụ hưởng / Tên tài khoản" => "Iucu Jannet",
+      "Tài khoản thụ hưởng / Số tài khoản" => "142 120 507 9360",
+      "Tỉnh/ Thành phố" => "Hà Nội",
+      "Tại ngân hàng" => "NH Nông Nghiệp và Phát Triền Nông Thôn (AGRIBANK)",
+      "Chi nhánh" => "NN&PTNT Đông Hà Nội",
+      "Nội dung chuyển tiền" => "(Họ tên đầy đủ và số điện thoại của bạn)",
+    );
+  }
+
+  public function getEnglishHoursBankAccountEN() {
+    return array(
+      "Bank" => "AGRIBANK",
+      "Account Name" => "Jannet Iucu",
+      "Acount Number" => "1421205079360"
     );
   }
 

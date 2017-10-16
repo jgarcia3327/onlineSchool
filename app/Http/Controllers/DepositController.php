@@ -50,16 +50,15 @@ class DepositController extends Controller
         //$body = "Dear ".$student->fname.",\n\nPlease deposit ".$amount." to our bank account:\nBank:AGRIBANK\nAccount Name:Jannet Iucu\nAccount Number:1421205079360\n\nWe will activate your deposit balance right after we received your payment.\n\nThank you. \n\nEnglishHours.net";
         $common = new CommonController();
         $bank = array();
-        $counter = 0;
         foreach($common->getEnglishHoursBankAccount() AS $k => $v) {
           $bank[$counter] = $k.": ".$v;
-          $counter++;
         }
+        $bank_details = implode("\n", $bank);
         $subject = "Bạn vui lòng nạp ".$amount;
-        $body = "Chào ".$student->fname.", \n\nBạn vui lòng nạp ".$amount." vào tài khoản ngân hàng của chúng tôi: \n".$bank[0]." \nTên tài ".$bank[1]." \nSố tài ".$bank[2]." \n\nChúng tôi sẽ kích hoạt số dư tài khoản của bạn tại website ngay khi nhận được thông báo từ ngân hàng. \n\nChân thành cảm ơn bạn. \n\nEnglishHours.net";
+        $body = "Chào ".$student->fname.", \n\nBạn vui lòng nạp ".$amount." vào tài khoản ngân hàng của chúng tôi: \n".$bank_details." \n\nChúng tôi sẽ kích hoạt số dư tài khoản của bạn tại website ngay khi nhận được thông báo từ ngân hàng. \n\nChân thành cảm ơn bạn. \n\nEnglishHours.net";
         MailController::sendMail(Auth::user()->email, $subject, $body);
         //Send email to admin
-        MailController::sendMail("info@englishhours.net", "Student Deposit Submission", "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has submitted to deposit ".$amount."\n\nPlease activate deposit once received.");
+        MailController::sendMail("info@englishhours.net", "Student Deposit Submission", "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has submitted to deposit ".$amount." to:\n".$bank_details."\n\nPlease activate deposit once received.");
 
         return back()->with("success", $amount);
       }

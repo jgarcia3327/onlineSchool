@@ -41,6 +41,14 @@ class FeedbackController extends Controller
     return back()->with('error', "You don't have the permission to post feedback reply.");
   }
 
+  public static function ajaxFeaturedUpdate($id) {
+    if(Auth::user()->is_admin === 1) {
+      $feedback =  Feedback::where('id', $id)->first();
+      $feedback->featured = $feedback->featured == 0? 1 : 0;
+      $feedback->save();
+    }
+  }
+
   public function store(Request $request){
 
     if (Auth::check()) {

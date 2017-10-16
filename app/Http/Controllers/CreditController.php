@@ -193,16 +193,16 @@ class CreditController extends Controller
           //Send email to student
           $common = new CommonController();
           $bank = array();
-          $counter = 0;
           foreach( $common->getEnglishHoursBankAccount() AS $k => $v) {
             $bank[$counter] = $k.": ".$v;
-            $counter++;
           }
+          $bank_details = implode("\n", $bank);
           $subject = $quantity." Lessons pending for activation";
-          $body = "Dear ".$student->fname.",\n\nYou have successfull requested a ".$quantity." credit lessons.\n\nTo activate your ".$quantity." requested credit lessons, please deposit ".$this->getCreditLessonsStr()[$quantity]." đồng to:\n".$bank[0]."\n".$bank[1]."\n".$bank[2]."\n\nThank you. \n\nEnglishHours.net";
+          //$body = "Dear ".$student->fname.",\n\nYou have successfull requested a ".$quantity." credit lessons.\n\nTo activate your ".$quantity." requested credit lessons, please deposit ".$this->getCreditLessonsStr()[$quantity]." đồng to:\n".$bank[0]."\n".$bank[1]."\n".$bank[2]."\n".$bank[3]."\n".$bank[4]."\n".$bank[5]."\n\nThank you. \n\nEnglishHours.net";
+          $body = "Chào ".$student->fname.",\n\nBạn vừa đề nghị mua gói ".$quantity." bài học.\n\nTĐể kích hoạt ".$quantity." bài học này, bạn vui lòng gửi ".$this->getCreditLessonsStr()[$quantity]." đến:\n".$bank_details."\n\nCảm ơn bạn, \n\nEnglishHours.net";
           MailController::sendMail(Auth::user()->email, $subject, $body);
           //Send email to admin
-          $body = "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully requested ".$quantity." lesson credits, amounting to ".$this->getCreditLessonsStr()[$quantity]."\n\nPlease active requested credit lessons once amount deposited to ".$bank[0]."\n".$bank[1]."\n".$bank[2];
+          $body = "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully requested ".$quantity." lesson credits, amounting to ".$this->getCreditLessonsStr()[$quantity]."\n\nPlease active requested credit lessons once amount deposited to \n".$bank_details."\n".$bank[2];
           MailController::sendMail("info@englishhours.net", $quantity." Lessons requested from ".$student->fname, $body);
 
 

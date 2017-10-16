@@ -58,7 +58,10 @@
                   </a>
                 </div>
                 <div class="col-md-3">
-                  <!-- Additional feature here -->
+                  <a class="text-center" title="Activate paid credits" href="#">
+                   <span class="fa fa-tasks fa-3x admin-link"></span>
+                   <span class="admin-link">List of Schedules - (under construction)</span>
+                  </a>
                 </div>
               </div>
             </div>

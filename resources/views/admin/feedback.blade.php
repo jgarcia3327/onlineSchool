@@ -21,9 +21,17 @@
               <div class="panel-body">
                 <!-- List of feedbacks -->
                 <ul class="list-group">
+                  <li class="list-group-item"><strong>Featured</strong></li>
                   @foreach($feedback AS $v)
-                  <li class="list-group-item"><a href="javascript:void(0)" data-toggle="collapse" data-target="#feedback{{$v->id}}">
-                    {{ substr($v->remark,0,60) }}{{strlen($v->remark) > 60? '...' : ''}}</a>  <span class="badge">{{$v->reply !== null? 'Replied: '.$v->modify_date->diffForHumans().' | Feedback: ':' '}}{{ $v->create_date->diffForHumans() }}</span>
+                  <li class="list-group-item">
+                    <label class="switch">
+                      <input type="checkbox" name="featured_id_{{$v->id}}" value="{{$v->id}}" {{$v->featured == 1? "checked" : ""}}>
+                      <span class="slider round"></span>
+                    </label>
+                    <i>{{$v->reply !== null? 'Replied: '.$v->modify_date->diffForHumans().' | Feedback: ':' '}}{{ $v->create_date->diffForHumans() }}</i>
+                    <br/>
+                    <a href="javascript:void(0)" data-toggle="collapse" data-target="#feedback{{$v->id}}">
+                    {{ substr($v->remark,0,60) }}{{strlen($v->remark) > 60? '...' : ''}}</a>
                     <div id="feedback{{$v->id}}" class="collapse">
                       <ul class="list-group">
                         <li class="list-group-item">{{ $v->remark }}</li>
@@ -66,4 +74,24 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("input[type='checkbox']").change(function() {
+      var request = $.ajax({
+        url : "feedbackFeatured/"+$(this).val(),
+        method : "GET",
+        dataType : "HTML"
+      });
+      request.done(function(result) {
+        console.log(result);
+      });
+      request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+      });
+    });
+  });
+</script>
 @endsection

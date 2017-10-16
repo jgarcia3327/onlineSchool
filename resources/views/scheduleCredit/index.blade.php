@@ -95,7 +95,8 @@
                             <span class="text-error">
                               <ul class="list-group">
                                 <li class="list-group-item">
-                                  *To activate your 10 credit lessons, please deposit an amount of <strong>860.000</strong> to:
+                                  <!-- *To activate your 10 credit lessons, please deposit an amount of <strong>860.000</strong> to: -->
+                                  Để kích hoạt gói 10 bài học này, bạn vui lòng chuyển <strong>860.000</strong> đến:
                                 </li>
                                 @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
                                 <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
@@ -146,7 +147,8 @@
                             <span class="text-error">
                               <ul class="list-group">
                                 <li class="list-group-item">
-                                  *To activate your 20 credit lessons, please deposit an amount of <strong>1.660.000</strong> to:
+                                  <!-- *To activate your 20 credit lessons, please deposit an amount of <strong>1.660.000</strong> to: -->
+                                  Để kích hoạt gói 10 bài học này, bạn vui lòng chuyển <strong>1.660.000</strong> đến:
                                 </li>
                                 @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
                                 <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
@@ -198,7 +200,8 @@
                             <span class="text-error">
                               <ul class="list-group">
                                 <li class="list-group-item">
-                                  *To activate your 30 credit lessons, please deposit an amount of <strong>2.350.000</strong> to:
+                                  <!-- *To activate your 30 credit lessons, please deposit an amount of <strong>2.350.000</strong> to: -->
+                                  Để kích hoạt gói 10 bài học này, bạn vui lòng chuyển <strong>2.350.000</strong> đến:
                                 </li>
                                 @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
                                 <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
@@ -250,7 +253,8 @@
                             <span class="text-error">
                               <ul class="list-group">
                                 <li class="list-group-item">
-                                  *To activate your 40 credit lessons, please deposit an amount of <strong>2.990.000</strong> to:
+                                  <!-- *To activate your 40 credit lessons, please deposit an amount of <strong>2.990.000</strong> to: -->
+                                  Để kích hoạt gói 10 bài học này, bạn vui lòng chuyển <strong>2.990.000</strong> đến:
                                 </li>
                                 @foreach($common->getEnglishHoursBankAccount() AS $k => $v)
                                 <li class="list-group-item">{{$k}}: <strong>{{$v}}</strong></li>
