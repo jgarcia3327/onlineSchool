@@ -58,9 +58,9 @@
                   </a>
                 </div>
                 <div class="col-md-3">
-                  <a class="text-center" title="Activate paid credits" href="#">
+                  <a class="text-center" title="Activate paid credits" href="{{ url('/adminScheduleList') }}">
                    <span class="fa fa-tasks fa-3x admin-link"></span>
-                   <span class="admin-link">List of Schedules - (under construction)</span>
+                   <span class="admin-link">List of Schedules</span>
                   </a>
                 </div>
               </div>

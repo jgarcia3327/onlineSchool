@@ -7,6 +7,7 @@ use Auth;
 use App\Models\Student;
 use App\Http\Controllers\CreditController;
 use Carbon\Carbon;
+use App\Http\Controllers\ScheduleController;
 
 class AdminController extends Controller
 {
@@ -37,5 +38,15 @@ class AdminController extends Controller
 
       return view('admin.student', compact('student_info'));
 
+    }
+
+    public function schedule() {
+      if (Auth::user()->is_admin != 1) {
+        return redirect('');
+      }
+
+      $schedules = ScheduleController::getAllFutureSchedules();
+
+      return view('admin.schedules', compact('schedules'));
     }
 }

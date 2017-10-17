@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminFeedback', 'FeedbackController@admin');
       Route::get('/adminDeposit', 'DepositController@admin');
       Route::get('/adminStudent', 'AdminController@student');
+      Route::get('/adminScheduleList', 'AdminController@schedule');
       Route::put('/activateDeposit/{deposit_id}', 'DepositController@update');
       Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
       Route::get('/wage', 'WageController@index');
