@@ -20,6 +20,10 @@ class ScheduleController extends Controller
     return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["date_time",">=",Carbon::now()]])->orderBy("date_time","asc")->get();
   }
 
+  public static function getAllPastSchedules() {
+    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
+  }
+
   private function isTeacher() {
       return (Auth::user()->is_student == 0);
   }

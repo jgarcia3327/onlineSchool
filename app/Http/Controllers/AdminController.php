@@ -45,8 +45,10 @@ class AdminController extends Controller
         return redirect('');
       }
 
-      $schedules = ScheduleController::getAllFutureSchedules();
+      $future_schedules = ScheduleController::getAllFutureSchedules();
+      $past_schedules = ScheduleController::getAllPastSchedules();
 
+      $schedules = array($future_schedules, $past_schedules);
       return view('admin.schedules', compact('schedules'));
     }
 }
