@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Feedback;
-
+use DateTime;
 
 class CommonController {
 
@@ -173,6 +173,51 @@ class CommonController {
     $hourMinuteFrom = $hour >= 13? ($hour-12).strstr($time,":") : $time;
     $dateFormat = date('l, F j, Y', strtotime($date));
     return $dateFormat." | ".$hourMinuteFrom." ".$ampmFrom." - ".$hourMinuteTo." ".$ampmTo;
+  }
+
+  public function getFormattedDateTimeRangeMilitary($date) {
+    $dateFormat = date('Y-m-d', strtotime($date));
+    $time = substr(strstr($date," "),1,5);
+    $timeTo = null;
+    $hour = strstr($time,":",true);
+    if (strstr($time,":") == ":30"){
+      $timeTo = ($hour + 1).":00";
+    }
+    else {
+      $timeTo = $hour.":30";
+    }
+    $hourMinuteRange = $time." - ".$timeTo;
+
+    // Specify Today, Yesterday, Tomorrow
+    $today = new DateTime(); // This object represents current date/time
+    $today->setTime( 0, 0, 0 ); // reset time part, to prevent partial comparison
+
+    $match_date = DateTime::createFromFormat( "Y-m-d H:i:s", $date );
+    $match_date->setTime( 0, 0, 0 ); // reset time part, to prevent partial comparison
+
+    $diff = $today->diff( $match_date );
+    $diffDays = (integer)$diff->format( "%R%a" ); // Extract days count in interval
+
+    $forSorting = $match_date->getTimestamp();
+    switch( $diffDays ) {
+        case 0:
+            $dateFormat = "<strong>Today</strong>";
+            $forSorting = $forSorting."-0";
+            break;
+        case -1:
+            $dateFormat = "Yesterday";
+            $forSorting = $forSorting."-1";
+            break;
+        case +1:
+            $dateFormat = "Tomorrow";
+            $forSorting = $forSorting."-2";
+            break;
+        default:
+            //Other datetime
+            $forSorting = $forSorting."-3";
+    }
+
+    return "<i style='display:none;'>".$forSorting."</i>".$dateFormat." | ".$hourMinuteRange;
   }
 
   public function getDeleteModal($id, $link) {

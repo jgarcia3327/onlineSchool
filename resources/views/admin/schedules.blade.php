@@ -35,7 +35,7 @@
                         @foreach($futureSchedules AS $v)
                         <tr>
                           <?php $hasStudent = ($v->sfname == null || empty($v->sfname))? false : true; ?>
-                          <td>{{$common->getFormattedDateTimeRange($v->date_time)}}</td>
+                          <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
                           <td>{{ucfirst($v->tfname." ".$v->tlname)}} (<a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a>)</td>
                           @if ($hasStudent)
                             <td>{{ucfirst($v->sfname." ".$v->slname)}} (<a href="skype:live:{{$v->sskype}}?call">{{$v->sskype}}</a>)</td>
@@ -65,14 +65,20 @@
                         @foreach($pastSchedules AS $v)
                         <tr>
                           <?php $hasStudent = ($v->sfname == null || empty($v->sfname))? false : true; ?>
-                          <td>{{$common->getFormattedDateTimeRange($v->date_time)}}</td>
+                          <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
                           <td>{{ucfirst($v->tfname." ".$v->tlname)}} (<a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a>)</td>
                           @if ($hasStudent)
                             <td>{{ucfirst($v->sfname." ".$v->slname)}} (<a href="skype:live:{{$v->sskype}}?call">{{$v->sskype}}</a>)</td>
+                            <td>
+                              <strong>Course:</strong> {{ $v->memo }}<br/>
+                              <strong>Book Title:</strong> {{ $v->memo_book }}<br/>
+                              <strong>Next Page:</strong> {{ $v->memo_next_page }}<br/>
+                              <strong>Teacher's Comment:</strong> {{ $v->memo_comment }}
+                            </td>
                           @else
                             <td><i>Open</i></td>
+                            <td><i>N/A</i></td>
                           @endif
-                            <td>Report here...</td>
                         </tr>
                         @endforeach
                       </tbody>
@@ -92,25 +98,41 @@
 
     // Data tables
     $('#future').DataTable( {
+        "pageLength": 20,
+        "lengthMenu": [ [10, 20, 50, -1], [10, 20, 50, "All"] ],
         "order": [[ 0, "asc" ]]
     } );
     $('#past').DataTable( {
-        "order": [[ 0, "asc" ]]
+        "pageLength": 20,
+        "lengthMenu": [ [10, 20, 50, -1], [10, 20, 50, "All"] ],
+        "order": [[ 0, "desc" ]]
     } );
 
-  });
+    var searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("past") == "1") {
+      viewPastSched();
+    }
+
+});
+
+  var refreshPage = '/adminScheduleList';
+  var refreshInterval = setInterval(function() {
+    window.location.href = refreshPage;
+  }, 300000); // 5 mins
 
   function viewFutureSched() {
     $("#past-schedule").css({"display":"none"});
     $("#future-schedule").css({"display":"block"});
     $(".future").addClass("active");
     $(".past").removeClass("active");
+    refreshPage = '/adminScheduleList';
   }
   function viewPastSched() {
     $("#future-schedule").css({"display":"none"});
     $("#past-schedule").css({"display":"block"});
     $(".future").removeClass("active");
     $(".past").addClass("active");
+    refreshPage = '/adminScheduleList/?past=1';
   }
 </script>
 @endsection
