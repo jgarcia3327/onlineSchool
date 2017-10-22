@@ -58,9 +58,9 @@
                   @endif
 
                 @else
-                  <!-- 1hr = 3600 -->
-                  <!-- 24hr = 86400 -->
-                  @if ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 3600) )
+                  <!-- 2hrs = 7200 sec -->
+                  <!-- 24hrs = 86400 sec -->
+                  @if ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 7200) )
                     <i class="text-warning">No reservation - closed</i>
                   @elseif ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 86400) )
                     Open

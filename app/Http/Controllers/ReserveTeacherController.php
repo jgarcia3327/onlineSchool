@@ -64,7 +64,7 @@ class ReserveTeacherController extends Controller
           ['active','=',1],
           ['id','=',$sched_id],
           ['student_user_id','=',null],
-          ['date_time','>',Carbon::now()]
+          ['date_time','>',Carbon::now()->addHours(2)] // Should be earlier than 2 hours form current time
         ];
         $schedule = Schedule::where("id",$sched_id)->first();
         if ( $schedule != null ) {

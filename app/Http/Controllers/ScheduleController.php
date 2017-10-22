@@ -182,8 +182,8 @@ class ScheduleController extends Controller
 
       // STUDENT CANCEL RESERVATION
       if ($request->has('cancel') && !$this->isTeacher()) {
-        // Cannot cancel less than 1 hour = 3600 in seconds
-        if ( (strtotime($schedule->date_time)-3600) >= strtotime(date("Y-m-d H:i:s")) ) {
+        // Cannot cancel less than 2 hours = 7200 in seconds
+        if ( (strtotime($schedule->date_time)-7200) >= strtotime(Carbon::now()) ) {
           if ($schedule->student_user_id === Auth::user()->id) {
             $schedule->student_user_id = null;
             $schedule->save();
@@ -206,7 +206,7 @@ class ScheduleController extends Controller
           if ( strtotime(date("Y-m-d H:i:s")) <= (strtotime($schedule->date_time)+600) ) {
             $schedule->update($request->all());
           }
-          return redirect('/schedule');
+          return json_encode(array("id"=>$schedule->id));
       }
 
       // TEACHER UPDATE MEMO

@@ -70,12 +70,11 @@
                               ?>
                               @if( $curTime >= $startDateTime && $curTime <= $expireDateTime )
                                 @if($v->called == null)
-                                  <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
-                                    {{ method_field('PUT') }}
+                                  <form style="display:none;" id="token-{{$v->id}}">
                                     {{ csrf_field() }}
-                                    <input type="hidden" name="called" value="1">
-                                    <input type="submit" value="Call"/>
                                   </form>
+                                  <button class="btn btn-primary call-sched btn-sched-id-{{$v->id}}" data-sched_id="{{$v->id}}">Call</button>
+                                  <span class="btn-skype-{{$v->id}}" style="display:none;">[ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]</span>
                                 @else
                                   [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
                                 @endif
@@ -95,9 +94,9 @@
                               @endif
 
                             @else
-                              <!-- 1hr = 3600 -->
-                              <!-- 24hr = 86400 -->
-                              @if ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 3600) )
+                              <!-- 2hrs = 7200 hrs -->
+                              <!-- 24hrs = 86400 hrs -->
+                              @if ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 7200) )
                                 <i class="text-warning">No reservation - closed</i>
                               @elseif ( strtotime(date("Y-m-d H:i:s")) >= (strtotime($v->date_time) - 86400) )
                                 Open
@@ -183,20 +182,6 @@
                 </div>
             </div>
 
-            <script>
-            // Load week button trigger in #week-datepicer
-            $("#week-datepicker .ui-datepicker-week-col").click(function(){
-                $(".loader").css({"display":"block"});
-                $("#lessons-list").css({"display":"none"});
-                var year = $("#week-datepicker .ui-datepicker-year").text();
-                var week = $(this).text();
-                dateStr = week+"_"+year;
-                console.log(dateStr);
-                getSavedDateTime(dateStr);
-            });
-
-            </script>
-
             <!-- END LIST OF SCHEDULES -->
           </div>
 
@@ -207,4 +192,44 @@
 
 @section('javascript')
 <script type="text/javascript" src="{{ asset('js/my_schedule.js') }}"></script>
+
+<script>
+// Load week button trigger in #week-datepicer
+$("#week-datepicker .ui-datepicker-week-col").click(function(){
+    $(".loader").css({"display":"block"});
+    $("#lessons-list").css({"display":"none"});
+    var year = $("#week-datepicker .ui-datepicker-year").text();
+    var week = $(this).text();
+    dateStr = week+"_"+year;
+    console.log(dateStr);
+    getSavedDateTime(dateStr);
+});
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".call-sched").mouseup(function(){
+      var id = $(this).data("sched_id");
+      var token = $("form#token-"+id+" input[name='_token']").val();
+      console.log(token);
+      console.log(id);
+      $.ajax({
+        url : "/schedule/"+id,
+        dataType : "json",
+        method : "POST",
+        data : {"_method":"PUT", "_token":token,"called":"1"}
+      })
+      .done(
+        function(result) {
+          console.log(result);
+          console.log(result.id);
+          $(".sched-kype-"+result.id).click();
+      });
+      // Call skype
+      $(".btn-sched-id-"+id).css({"display":"none"});
+      $(".btn-skype-"+id).css({"display":"block"});
+      $(".btn-skype-"+id+" > a")[0].click();
+    });
+  });
+</script>
 @endsection

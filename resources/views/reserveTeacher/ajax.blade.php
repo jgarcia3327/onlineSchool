@@ -40,7 +40,7 @@
                   <i class="text-primary">Đã được chọn<!--Enrolled--></i>
               @elseif( $time[1][$k] != null )
                 <i class="text-danger">Đã được chọn<!--Closed--></i>
-              @elseif( strtotime(date("Y-m-d H:i:s")) >= strtotime($time[2]." ".$v) - 3600 ) <!-- Lock if start sched is less than an hour = 3600 sec. -->
+              @elseif( strtotime(date("Y-m-d H:i:s")) >= strtotime($time[2]." ".$v) - 7200 ) <!-- Lock if start sched is less than 2 hours = 7200 sec. -->
                 <!-- <i class="text-warning">Locked</i> -->
                 <i class="text-warning">Đã khóa</i>
               @else

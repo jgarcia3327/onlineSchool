@@ -12,7 +12,8 @@ $(document).ready(function(){
     // Display current date
     var dateStr = $( "#week-datepicker" ).val();
     if(window.location.href.indexOf("my_") < 0 ) {
-       getSavedDateTimeAjax(dateStr);
+       //getSavedDateTimeAjax(dateStr);
+       getSavedDateTime(dateStr);
     }
     // Display current date on-change
     $("#week-datepicker").change(function(){
@@ -46,7 +47,12 @@ function getWeekTrigger() {
 }
 
 function getSavedDateTime(dateStr) {
-  window.location.href = "/schedule/my_schedule/"+dateStr+"/#my-schedule";
+  if(window.location.href.indexOf("/schedule/my_schedule/"+dateStr+"/#my-schedule") < 0 ) {
+    window.location.href = "/schedule/my_schedule/"+dateStr+"/#my-schedule";
+  }
+  else {
+    window.location.reload();
+  }
 }
 
 function getSavedDateTimeAjax(dateStr) {
