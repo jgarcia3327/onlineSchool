@@ -13,6 +13,18 @@ use DateTime;
 
 class CommonController {
 
+  public function getCourses() {
+    return array(
+      "IELTS/TOEIC/TOEFL" => "IELTS/TOEIC/TOEFL",
+      "BUSINESS/OFFICE ENGLISH" => "BUSINESS/OFFICE ENGLISH",
+      "ENGLISH FOR KIDS" => "ENGLISH FOR KIDS",
+      "PUBLIC SPEAKING" => "PUBLIC SPEAKING",
+      "WRITING AND COMPOSITION" => "WRITING AND COMPOSITION",
+      "READING AND COMPREHENSION" => "READING AND COMPREHENSION",
+      "LISTENING" => "LISTENING"
+    );
+  }
+
   public function getFeaturedFeeback() {
     return Feedback::select("feedback.*","students.fname AS student", "teachers.fname AS teacher")->leftJoin("students","students.user_id","=","feedback.user_id")->leftJoin("teachers","teachers.user_id","=","feedback.user_id")->where([['feedback.active','=',1],['featured','=',1]])->get();
   }
