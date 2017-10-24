@@ -143,7 +143,7 @@ class CreditController extends Controller
             "user_id" => Auth::user()->id,
             "quantity" => $quantity,
             "charged" => 1,
-            "active" => 1,
+            "status" => 1,
             "create_date" => Carbon::now()
           );
           Buycredit::insert($insertData);
