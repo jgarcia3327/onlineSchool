@@ -126,20 +126,6 @@
               </div>
           </div>
 
-          <script>
-          // Load week button trigger in #week-datepicer
-          $("#week-datepicker .ui-datepicker-week-col").click(function(){
-              $(".loader").css({"display":"block"});
-              $("#lessons-list").css({"display":"none"});
-              var year = $("#week-datepicker .ui-datepicker-year").text();
-              var week = $(this).text();
-              dateStr = week+"_"+year;
-              console.log(dateStr);
-              getSavedDateTime(dateStr);
-          });
-
-          </script>
-
           <!-- END LESSONS -->
 
           </div>
@@ -149,7 +135,34 @@
 </div>
 @endsection
 
+<?php
+  $dateActiveArr = $schedules[2] != null? explode("-", $schedules[2]) : explode("-", $schedules[3][0]);
+  $dateActiveStr = $dateActiveArr[0].",".($dateActiveArr[1]-1).",".$dateActiveArr[2];
+?>
+
 @section('javascript')
+
 <!-- <script type="text/javascript" src="{{ asset('js/display-teacher.js') }}"></script> -->
 <script type="text/javascript" src="{{ asset('js/my_schedule.js') }}"></script>
+
+<script>
+  // Set date selected
+  // console.log("{{$dateActiveStr}}");
+  //$('#week-datepicker').datepicker("setDate", new Date(2017,9,24) ); //Oct. 24, 2017
+  $(document).ready(function(){
+    $('#week-datepicker').datepicker("setDate", new Date({{$dateActiveStr}}) );
+
+    // Load week button trigger in #week-datepicer
+    $("#week-datepicker .ui-datepicker-week-col").click(function(){
+        $(".loader").css({"display":"block"});
+        $("#lessons-list").css({"display":"none"});
+        var year = $("#week-datepicker .ui-datepicker-year").text();
+        var week = $(this).text();
+        dateStr = week+"_"+year;
+        console.log(dateStr);
+        getSavedDateTime(dateStr);
+    });
+  });
+</script>
+
 @endsection

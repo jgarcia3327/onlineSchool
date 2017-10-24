@@ -47,12 +47,14 @@ function getWeekTrigger() {
 }
 
 function getSavedDateTime(dateStr) {
+  /*
   if(window.location.href.indexOf("/schedule/my_schedule/"+dateStr+"/#my-schedule") < 0 ) {
     window.location.href = "/schedule/my_schedule/"+dateStr+"/#my-schedule";
   }
   else {
     window.location.reload();
-  }
+  }*/
+  window.location.href = "/schedule/my_schedule/"+dateStr;
 }
 
 function getSavedDateTimeAjax(dateStr) {
