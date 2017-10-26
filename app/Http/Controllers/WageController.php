@@ -22,7 +22,7 @@ class WageController extends Controller
         $dateEnd = date("Y-m-d", strtotime($year.'-'.$month.'-'.date('t', strtotime($dateStart))));
       }
       $condition = [
-        //['student_user_id','<>',null],
+        ['student_user_id','<>',null], // Exclude open/no-student schedule
         ['active','=',1],
         ['teacher_user_id','=',$user->id],
         ['date_time', '>=', $dateStart." 00:00:00"],

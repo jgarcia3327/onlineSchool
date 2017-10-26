@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Http\Controllers\CreditController;
 use Carbon\Carbon;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\WageController;
 
 class AdminController extends Controller
 {
@@ -50,5 +51,19 @@ class AdminController extends Controller
 
       $schedules = array($future_schedules, $past_schedules);
       return view('admin.schedules', compact('schedules'));
+    }
+
+    public function teacherSalary() {
+      if (Auth::user()->is_admin != 1) {
+        return redirect('');
+      }
+
+      $dt = Carbon::now();
+      $pitch = $dt->day > 15? 2 : 1;
+      $wages = WageController::getTeacherWage($dt->year, $dt->month, $pitch, Auth::user());
+
+      //$wages = WageController::getTeacherWage($datePieces[0], $datePieces[1], $datePieces[2], Auth::user());
+
+      return view('admin.teacherSalary', compact('wages'));
     }
 }

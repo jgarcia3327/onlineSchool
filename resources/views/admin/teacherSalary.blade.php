@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Wage - English Hours")
+@section('title', "Teacher Salary - English Hours")
 
 @section('content')
 <?php $schedules = $wages[0]; ?>
@@ -12,7 +12,7 @@
 
           <!-- Year/month/pich form -->
             <div class="panel panel-default">
-                <div class="panel-heading">Wage</div>
+                <div class="panel-heading">Teacher's Wage</div>
 
                 <div class="panel-body">
                   <form id="teacher-wage" action="" method="POST">

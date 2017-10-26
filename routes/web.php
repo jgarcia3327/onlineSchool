@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminCredit', 'CreditController@admin');
       Route::get('/adminDashboard', 'AdminController@index');
       Route::get('/adminFeedback', 'FeedbackController@admin');
+      Route::get('/adminTeacherSalary', 'AdminController@teacherSalary');
       // Deposit - Deprecated
       //Route::get('/adminDeposit', 'DepositController@admin');
       Route::get('/adminStudent', 'AdminController@student');
