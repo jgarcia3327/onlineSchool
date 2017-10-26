@@ -13,16 +13,17 @@
               <div class="panel-body">
                   <div class="row">
                     <div class="col-md-3">
-                      <a class="text-center" title="Activate paid credits" href="{{ url('/adminDeposit') }}">
-                       <span class="fa fa-money fa-3x admin-link"></span>
-                       <span class="admin-link">Activate Student Deposits</span>
-                      </a>
-                    </div>
-                    <div class="col-md-3">
                       <a class="text-center" title="Activate paid credits" href="{{ url('/adminCredit') }}">
                        <span class="fa fa-ticket fa-3x admin-link"></span>
                        <span class="admin-link">Activate Student Credit Lessons</span>
                       </a>
+                    </div>
+                    <div class="col-md-3">
+                      <!-- Deposit - deprecated -->
+                      <!-- <a class="text-center" title="Activate paid credits" href="{{ url('/adminDeposit') }}">
+                       <span class="fa fa-money fa-3x admin-link"></span>
+                       <span class="admin-link">Activate Student Deposits</span>
+                      </a> -->
                     </div>
                     <div class="col-md-3">
                       <!-- Additiona admin feature -->

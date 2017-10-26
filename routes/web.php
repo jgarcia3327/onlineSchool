@@ -69,13 +69,15 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminCredit', 'CreditController@admin');
       Route::get('/adminDashboard', 'AdminController@index');
       Route::get('/adminFeedback', 'FeedbackController@admin');
-      Route::get('/adminDeposit', 'DepositController@admin');
+      // Deposit - Deprecated
+      //Route::get('/adminDeposit', 'DepositController@admin');
       Route::get('/adminStudent', 'AdminController@student');
       Route::get('/adminScheduleList', 'AdminController@schedule');
       Route::put('/activateDeposit/{deposit_id}', 'DepositController@update');
       Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
       Route::get('/wage', 'WageController@index');
       Route::get('/wage/{date}', 'WageController@show');
-      Route::get('/deposit', 'DepositController@index');
-      Route::post('/deposit', 'DepositController@store');
+      // Deposit - Deprecated
+      //Route::get('/deposit', 'DepositController@index');
+      //Route::post('/deposit', 'DepositController@store');
 });
