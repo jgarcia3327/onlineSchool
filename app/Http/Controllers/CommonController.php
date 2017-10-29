@@ -93,10 +93,10 @@ class CommonController {
   public function getActiveTeachers() {
     $condition = [
       ['users.active','=',1],
-      ['users.id','<>',Auth::user()->id],
+      //['users.id','<>',Auth::user()->id],
       ['users.is_student', '=', 0]
     ];
-    $users = User::select("users.*","teachers.fname","teachers.lname")->leftJoin("teachers","teachers.user_id","users.id")->where($condition)->get();
+    $users = User::select("users.*","teachers.fname","teachers.lname")->leftJoin("teachers","teachers.user_id","users.id")->where($condition)->orderBy("teachers.fname","asc")->get();
     return $users;
   }
 

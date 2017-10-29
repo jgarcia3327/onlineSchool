@@ -61,7 +61,7 @@ class AdminController extends Controller
       $dt = Carbon::now();
       $pitch = $dt->day > 15? 2 : 1;
       $wages = WageController::getTeacherWage($dt->year, $dt->month, $pitch, Auth::user());
-
+      $wages[] = null;
       //$wages = WageController::getTeacherWage($datePieces[0], $datePieces[1], $datePieces[2], Auth::user());
 
       return view('admin.teacherSalary', compact('wages'));

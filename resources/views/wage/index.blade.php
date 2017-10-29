@@ -11,11 +11,12 @@
         <div class="col-md-8 col-md-offset-2">
 
           <!-- Year/month/pich form -->
+          <form id="teacher-wage" action="" method="POST">
             <div class="panel panel-default">
                 <div class="panel-heading">Wage</div>
 
                 <div class="panel-body">
-                  <form id="teacher-wage" action="" method="POST">
+
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="year">Select Year:</label>
@@ -48,12 +49,13 @@
                         </select>
                       </div>
                     </div>
-                  </form>
+
                   <div class="col-md-12 text-right">
                     <button id="teacher-wage-submit" class="btn btn-primary" type="submit" >Submit</button>
                   </div>
                 </div>
             </div>
+            </form>
             <!-- form -->
 
             <!-- Wage display -->

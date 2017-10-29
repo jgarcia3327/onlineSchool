@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Schedule;
+use App\User;
 use Carbon\Carbon;
 
 class WageController extends Controller
@@ -29,7 +30,9 @@ class WageController extends Controller
         ['date_time', '<=', $dateEnd." 23:59:59"]
       ];
 
-      return array(Schedule::where($condition)->get(), $dateStart, $dateEnd);
+      $teacherScheds = Schedule::where($condition)->get();
+
+      return array($teacherScheds, $dateStart, $dateEnd);
     }
     return null;
   }
@@ -48,11 +51,32 @@ class WageController extends Controller
   public function show($date) {
     if( Auth::user()->is_student === 0 ) {
       $datePieces = explode('-', $date);
+      if (empty($datePieces[0]) || empty($datePieces[1]) || empty($datePieces[2])) {
+        return redirect('/wage');
+      }
       $wages = WageController::getTeacherWage($datePieces[0], $datePieces[1], $datePieces[2], Auth::user());
 
       return view('wage.index', compact('wages'));
     }
     return back()->with('error', "You don't have permission to visit the page.");
+  }
+
+  public function admin($date_teacher) {
+    if (Auth::user()->is_admin != 1) {
+      return redirect('');
+    }
+    $datePieces = explode('-', $date_teacher);
+    if (empty($datePieces[0]) || empty($datePieces[1]) || empty($datePieces[2]) || empty($datePieces[3])) {
+      return redirect('/adminTeacherSalary');
+    }
+    $teacher = User::where("id",$datePieces[3])->first();
+    if ($teacher == null) {
+      return redirect('/adminTeacherSalary');
+    }
+    $wages = WageController::getTeacherWage($datePieces[0], $datePieces[1], $datePieces[2], $teacher);
+    $wages[] = $datePieces[3];
+
+    return view('admin.teacherSalary', compact('wages'));
   }
 
 }

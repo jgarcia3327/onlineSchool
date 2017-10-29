@@ -3,19 +3,41 @@
 @section('title', "Teacher Salary - English Hours")
 
 @section('content')
-<?php $schedules = $wages[0]; ?>
-<?php $startDate = $wages[1]; ?>
-<?php $endDate = $wages[2]; ?>
+<?php
+  $schedules = $wages[0];
+  $startDate = $wages[1];
+  $endDate = $wages[2];
+  $teacherID = $wages[3];
+  $selectedTeacherName = null;
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
           <!-- Year/month/pich form -->
+          <form id="teacher-wage" action="" method="POST">
             <div class="panel panel-default">
-                <div class="panel-heading">Teacher's Wage</div>
+                <div class="panel-heading">
+                  <h3>Teacher's Wage</h3>
+                  <div class="form-group">
+                    <label for="year">Select Teacher:</label>
+                    <select class="form-control" id="teacher-id" name="teacher-id">
+                      <option></option>
+                      @foreach($common->getActiveTeachers() AS $v)
+                      <?php
+                        $teacherName = $v->fname." ".$v->lname." - ".$v->email;
+                        if($v->id == $teacherID) {
+                          $selectedTeacherName = $teacherName;
+                        }
+                      ?>
+                      <option value="{{$v->id}}" {{$v->id == $teacherID? "selected":""}}>{{$teacherName}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+
+                </div>
 
                 <div class="panel-body">
-                  <form id="teacher-wage" action="" method="POST">
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="year">Select Year:</label>
@@ -48,17 +70,23 @@
                         </select>
                       </div>
                     </div>
-                  </form>
                   <div class="col-md-12 text-right">
                     <button id="teacher-wage-submit" class="btn btn-primary" type="submit" >Submit</button>
                   </div>
                 </div>
             </div>
+            </form>
             <!-- form -->
 
             <!-- Wage display -->
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>{{ date('Y-m-d', strtotime($startDate)) }}</strong> to <strong>{{ date('Y-m-d', strtotime($endDate)) }}</strong> Classes</div>
+                <div class="panel-heading">
+                  @if (!empty($selectedTeacherName))
+                  <h3 class="text-success">{{$selectedTeacherName}}</h3>
+                  @endif
+                  <i>(YYYY-MM-DD)</i><br/>
+                  <strong class="text-error-inline">{{ date('Y-m-d', strtotime($startDate)) }}</strong> to <strong class="text-error-inline">{{ date('Y-m-d', strtotime($endDate)) }}</strong> Classes
+                </div>
 
                 <div class="panel-body">
                   <table class="table striped">
@@ -108,5 +136,21 @@
 @endsection
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('js/teacher-wage.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("#teacher-wage-submit").click(function(event) {
+
+      var form = $("form#teacher-wage");
+      var year = form.find("select[name='year']").val();
+      var month = form.find("select[name='month']").val();
+      var pitch = form.find("select[name='pitch']").val();
+      var teacherID = form.find("select[name='teacher-id']").val();
+      window.location.href = "/adminTeacherSalary/"+year+"-"+month+"-"+pitch+"-"+teacherID;
+
+      event.preventDefault();
+    });
+
+  });
+</script>
 @endsection

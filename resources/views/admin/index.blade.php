@@ -19,10 +19,10 @@
                       </a>
                     </div>
                     <div class="col-md-3">
-                      <!-- TODO <a class="text-center" title="Activate paid credits" href="{{ url('/adminTeacherSalary') }}">
-                       <span class="fa fa-clock-o fa-3x admin-link"></span>
+                      <a class="text-center" title="Teacher Salary" href="{{ url('/adminTeacherSalary') }}">
+                       <span class="fa fa-money fa-3x admin-link"></span>
                        <span class="admin-link">Teacher Salary</span>
-                     </a> -->
+                      </a>
                       <!-- Deposit - deprecated -->
                       <!-- <a class="text-center" title="Activate paid credits" href="{{ url('/adminDeposit') }}">
                        <span class="fa fa-money fa-3x admin-link"></span>

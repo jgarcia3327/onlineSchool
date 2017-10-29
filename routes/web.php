@@ -78,6 +78,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::put('/feedback/{feedback_id}', 'FeedbackController@update');
       Route::get('/wage', 'WageController@index');
       Route::get('/wage/{date}', 'WageController@show');
+      Route::get('/adminTeacherSalary/{date_teacher}', 'WageController@admin');
       // Deposit - Deprecated
       //Route::get('/deposit', 'DepositController@index');
       //Route::post('/deposit', 'DepositController@store');
