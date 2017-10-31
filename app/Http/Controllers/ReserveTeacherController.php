@@ -69,17 +69,17 @@ class ReserveTeacherController extends Controller
         $schedule = Schedule::where("id",$sched_id)->first();
         if ( $schedule != null ) {
           //Update credit
-          CreditController::updateCreditSchedule(Auth::user()->id, $schedule->id);
+          $credit_id = CreditController::updateCreditSchedule(Auth::user()->id, $schedule->id);
           //Update schedule
-          //$schedule->update(['student_user_id' => Auth::user()->id]);
-          $schedArr[] = $sched_id;
+          $schedule->update(['student_user_id' => Auth::user()->id, 'credit_id' => $credit_id]);
+          //$schedArr[] = $sched_id;
         }
       }
       //Update schedule at once
-      if (count($schedArr) > 0) {
+      //if (count($schedArr) > 0) {
         //Update schedule
-        Schedule::whereIn("id", $schedArr)->update(['student_user_id' => Auth::user()->id]);
-      }
+        //Schedule::whereIn("id", $schedArr)->update(['student_user_id' => Auth::user()->id]);
+      //}
 
       return redirect('/lessons');
     }

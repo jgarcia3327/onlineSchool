@@ -92,8 +92,10 @@ class CreditController extends Controller
 
       if ($credit != null && !empty($credit) && !empty($schedule_id)) {
         $credit->update(['schedule_id' => $schedule_id]);
+        return $credit->id;
       }
 
+      return 0;
     }
 
     public function index() {

@@ -30,6 +30,7 @@ class Schedule extends Eloquent
 	protected $casts = [
 		'teacher_user_id' => 'int',
 		'student_user_id' => 'int',
+		'credit_id' => 'int',
 		'active' => 'bool'
 	];
 
@@ -47,6 +48,7 @@ class Schedule extends Eloquent
 	protected $fillable = [
 		'teacher_user_id',
 		'student_user_id',
+		'credit_id',
 		'date_time',
 		'memo',
 		'memo_book',

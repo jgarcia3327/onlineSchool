@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Schedule;
+use App\Models\Credit;
 use App\User;
 use Carbon\Carbon;
+use App\Http\Controllers\CreditController;
 
 class WageController extends Controller
 {
@@ -24,7 +26,7 @@ class WageController extends Controller
       }
       $condition = [
         ['student_user_id','<>',null], // Exclude open/no-student schedule
-        ['active','=',1],
+        //['active','=',1], // Missed call
         ['teacher_user_id','=',$user->id],
         ['date_time', '>=', $dateStart." 00:00:00"],
         ['date_time', '<=', $dateEnd." 23:59:59"]
@@ -77,6 +79,76 @@ class WageController extends Controller
     $wages[] = $datePieces[3];
 
     return view('admin.teacherSalary', compact('wages'));
+  }
+
+  public function creditMissedCall(Request $request) {
+    if (Auth::user()->is_admin != 1) {
+      return redirect('');
+    }
+    $isSuccess = true;
+    if ($request->has('schedID')){
+      //dd($request->all());
+      // Get selected missed call
+      foreach($request->schedID AS $v) {
+        // Get student credit
+        $schedule = Schedule::where([['id','=',$v], ['active','=',0]])->first();
+        if ($schedule == null) continue;
+        $credit = Credit::where('id',$schedule->credit_id)->first();
+
+        // Check if credit returned from missed call status has been used
+        if ($credit == null) { // We don't have records with the $credit_id, this happens if schedules has been created before Nov. 1, 2017
+          $isSuccess = $this->updateCreditSchedule($schedule);
+        }
+        else if ($credit->schedule_id != null) { // Student credit has been assigned to new schedule
+          // Check if student has extra credit to replace with the original credit
+          if (!$this->updateCreditSchedule($schedule)) { // Student don't have extra credit
+            // Check if assigned session is in future sched
+            $newSchedule = Schedule::where([['credit_id','=',$credit->id],['student_user_id','=',$schedule->student_user_id], ['active','=',1]])->first();
+            if ($newSchedule->called != 1) { // We have future sched, session not yet started
+              // Free schedule
+              $newSchedule->student_user_id = null;
+              $newSchedule->credit_id = null;
+              $newSchedule->save();
+            }
+            else { // We have past sched, therefore we need to credit another credit ID from student
+              $isSuccess = false;
+            }
+          }
+        }
+        else { // no problem, credit still available
+          // Update credit
+          $credit->schedule_id = $v;
+          $credit->save();
+          // Update schedule
+          $schedule->called = 1;
+          $schedule->active = 1;
+          $schedule->save();
+        }
+      }
+    }
+
+    if ($isSuccess) {
+      return back()->with('success', 'Missed session successfully credited as successful session.');
+    }
+
+    return back()->with('error', 'Student do not have available lesson credit to be credited to missed session! Please try again once the student has an extra credit.');
+
+  }
+
+  private function updateCreditSchedule($schedule) {
+    // Update credit
+    $credit_id = CreditController::updateCreditSchedule($schedule->student_user_id, $schedule->id);
+    if ($credit_id > 0) {
+      // Update schedule
+      $schedule->credit_id = $credit_id;
+      $schedule->called = 1;
+      $schedule->active = 1;
+      $schedule->save();
+      return true;
+    }
+    else { // Student don't have available credit
+      return false;
+    }
   }
 
 }

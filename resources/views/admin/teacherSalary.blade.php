@@ -89,43 +89,53 @@
                 </div>
 
                 <div class="panel-body">
-                  <table class="table striped">
-                    <tr>
-                      <th>Schedule</th>
-                      <th>Status</th>
-                      <th>Salary</th>
-                    </tr>
-                    <?php $gross = $deduction = 0; ?>
-                    @if(empty($schedules) || count($schedules) <= 0)
+                  <form class="teacher-wage" action="{{ url('/adminCreditMissedCall') }}" method="POST">
+                    {{ csrf_field() }}
+                    <table class="table striped">
                       <tr>
-                        <td colspan="3"><i>No Schedule Found.</i></td>
+                        <th>Schedule</th>
+                        <th>Status</th>
+                        <th>Salary</th>
                       </tr>
-                    @else
-                      @foreach($schedules AS $v)
-                      <tr>
-                        <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
-                        @if($v->student_user_id === null)
-                        <td>Open</td>
-                        @elseif( $v->called === null )
-                        <td><span class="text-danger">Missed Session</span></td>
-                        @else
-                        <td><span class="text-success">Successful Session</span></td>
-                        @endif
+                      <?php $gross = $deduction = 0; ?>
+                      @if($teacherID == null || empty($schedules) || count($schedules) <= 0)
+                        <tr>
+                          <td colspan="3"><i>No Schedule Found.</i></td>
+                        </tr>
+                      @else
+                        <?php $missedCounter = 0; ?>
+                        @foreach($schedules AS $v)
+                        <tr>
+                          <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
+                          @if($v->student_user_id === null)
+                          <td>Open</td>
+                          @elseif( $v->called === null )
+                          <?php $missedCounter++ ?>
+                          <td><span class="text-danger">Missed Session [ <input type="checkbox" name="schedID[]" value="{{$v->id}}" /> Credit ]</span></td>
+                          @else
+                          <td><span class="text-success">Successful Session</span></td>
+                          @endif
 
-                        @if($v->student_user_id === null)
-                        <td>&nbsp;</td>
-                        @elseif( $v->called === null )
-                        <?php $deduction += 25; ?>
-                        <td><span class="text-danger">-25 PHP</span></td>
-                        @else
-                        <?php $gross += 100; ?>
-                        <td><span class="text-success">100 PHP</span></td>
+                          @if($v->student_user_id === null)
+                          <td>&nbsp;</td>
+                          @elseif( $v->called === null )
+                          <?php $deduction += 25; ?>
+                          <td><span class="text-danger">-25 PHP</span></td>
+                          @else
+                          <?php $gross += 100; ?>
+                          <td><span class="text-success">100 PHP</span></td>
+                          @endif
+                        </tr>
+                        @endforeach
+                        @if ($missedCounter > 0)
+                        <tr>
+                          <td colspan="3" align="right"><button type="submit" class="btn btn-danger" id="credit-missed-call" disabled>Credit missed call</button></td>
+                        </tr>
                         @endif
-                      </tr>
-                      @endforeach
-                    @endif
-                  </table>
-                  <h4>Total Earning: {{$gross-$deduction}} PHP</h4>
+                      @endif
+                    </table>
+                  </form>
+                  <h4 class="pull-right"><strong>Total Earning: {{$gross-$deduction}} PHP</strong></h4>
                 </div>
             </div>
             <!-- end wage display -->
@@ -139,16 +149,26 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
+    // Teacher and date range submit
     $("#teacher-wage-submit").click(function(event) {
-
       var form = $("form#teacher-wage");
       var year = form.find("select[name='year']").val();
       var month = form.find("select[name='month']").val();
       var pitch = form.find("select[name='pitch']").val();
       var teacherID = form.find("select[name='teacher-id']").val();
       window.location.href = "/adminTeacherSalary/"+year+"-"+month+"-"+pitch+"-"+teacherID;
-
       event.preventDefault();
+    });
+
+    // Missed session
+    $("form.teacher-wage input[type='checkbox']").change(function(){
+      var numberOfChecked = $('form.teacher-wage input:checkbox:checked').length;
+      if (numberOfChecked > 0) {
+        $("#credit-missed-call").removeAttr("disabled");
+      }
+      else{
+        $("#credit-missed-call").attr("disabled","disabled");
+      }
     });
 
   });

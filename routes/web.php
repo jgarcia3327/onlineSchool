@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/wage', 'WageController@index');
       Route::get('/wage/{date}', 'WageController@show');
       Route::get('/adminTeacherSalary/{date_teacher}', 'WageController@admin');
+      Route::post('/adminCreditMissedCall', 'WageController@creditMissedCall');
       // Deposit - Deprecated
       //Route::get('/deposit', 'DepositController@index');
       //Route::post('/deposit', 'DepositController@store');
