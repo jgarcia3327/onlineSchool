@@ -24,6 +24,14 @@ class ScheduleController extends Controller
     return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","<>",null],["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
   }
 
+  public static function getTeacherFutureSchedules($teacher_user_id) {
+    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "students.user_id AS suser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","=",$teacher_user_id],["date_time",">=",Carbon::now()]])->orderBy("date_time","asc")->get();
+  }
+
+  public static function getTeacherPastSchedules($teacher_user_id) {
+    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "students.user_id AS suser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","=",$teacher_user_id],["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
+  }
+
   private function isTeacher() {
       return (Auth::user()->is_student == 0);
   }
@@ -511,6 +519,19 @@ class ScheduleController extends Controller
     );
     $time = array($morning, $afternoon, $scheds, $date);
     return view('schedule.ajax', compact('time'));
+  }
+
+
+  public function teacherSchedule() {
+    if (Auth::user()->is_student == 1) {
+      return redirect('');
+    }
+
+    $future_schedules = ScheduleController::getTeacherFutureSchedules(Auth::user()->id);
+    $past_schedules = ScheduleController::getTeacherPastSchedules(Auth::user()->id);
+
+    $schedules = array($future_schedules, $past_schedules);
+    return view('schedule.teacherSchedules', compact('schedules'));
   }
 
 }

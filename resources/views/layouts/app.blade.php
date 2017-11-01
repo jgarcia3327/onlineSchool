@@ -123,6 +123,7 @@
                                   <ul class="dropdown-menu" role="menu">
                                       <li><a href="{{ url('/schedule') }}">My Schedule</a></li>
                                       <li><a href="{{ url('/schedule/create') }}">Create Schedule</a></li>
+                                      <li><a href="{{ url('/teacherScheduleList') }}">My List of Schedules</a></li>
                                   </ul>
                               </li>
                               <li><a href="{{ url('/messages') }}">Messages</a></li>

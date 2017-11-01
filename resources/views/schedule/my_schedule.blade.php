@@ -13,7 +13,7 @@
           <div class="panel panel-default">
               <div class="panel-heading">Choose a day or week to display your lessons
                 @if($auth->is_student === 0)
-                [ <a href="{{url('/schedule/create')}}">Create Schedule</a> ]
+                [ <a href="{{url('/schedule/create')}}">Create Schedule</a> ] [ <a href="{{url('/teacherScheduleList')}}">My List of Schedules</a> ]
                 @endif
                 @if (session('success') === -1)
                 <span class="help-block">
@@ -150,7 +150,7 @@
                               <!-- <strong>Teacher's Comment:</strong><p style="margin:0">{{ $v->memo_comment }}</p> -->
                               @endif
                               @if($v->called == 1)
-                              <form action="{{ url('schedule/'.$v->id) }}" method="POST">
+                              <form class="memo" action="{{ url('schedule/'.$v->id) }}" method="POST">
                                 {{ method_field('PUT') }}
                                 {{ csrf_field() }}
                                 <div class="form-group">
@@ -162,7 +162,7 @@
                                   </select>
                                   <input class="form-control" type="text" id="memo_book" name="memo_book" value="{{ $v->memo_book }}" required placeholder="Book Title">
                                   <input class="form-control" type="text" id="memo_next_page" name="memo_next_page" value="{{ $v->memo_next_page }}" required placeholder="Next Page">
-                                  <textarea id="memo_comment" name="memo_comment" required placeholder="Comment" style="width:100%">{{ $v->memo_comment }}</textarea>
+                                  <textarea class="memo_comment" name="memo_comment" required placeholder="Comment" style="width:100%">{{ $v->memo_comment }}</textarea>
                                   @if($v->memo != null)
                                     <input class="form-control btn btn-primary" type="submit" value="UPDATE" />
                                   @else
