@@ -19,7 +19,9 @@ $(document).ready(function() {
 
 });
 
-var refreshPage = '/adminScheduleList';
+var pathname = $(location).attr('pathname');
+
+var refreshPage = pathname;//'/adminScheduleList';
 var refreshInterval = setInterval(function() {
   window.location.href = refreshPage;
 }, 300000); // 5 mins
@@ -29,12 +31,13 @@ function viewFutureSched() {
   $("#future-schedule").css({"display":"block"});
   $(".future").addClass("active");
   $(".past").removeClass("active");
-  refreshPage = '/adminScheduleList';
+  refreshPage = pathname;//'/adminScheduleList';
 }
 function viewPastSched() {
   $("#future-schedule").css({"display":"none"});
   $("#past-schedule").css({"display":"block"});
   $(".future").removeClass("active");
   $(".past").addClass("active");
-  refreshPage = '/adminScheduleList/?past=1';
+  var param = pathname.endsWith("\/")? "?past=1" : "/?past=1";
+  refreshPage = pathname+param;//'/adminScheduleList/?past=1';
 }
