@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Hash;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ScheduleController;
 
 class ProfileController extends Controller
 {
@@ -98,7 +99,10 @@ class ProfileController extends Controller
       $condition = [['student_user_id','=',$profile->user_id],
         ['date_time', '<=', date("Y-m-d H:i:s")]
       ];
-      $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
+      //$scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftjoin('teachers', 'schedules.teacher_user_id', '=', 'teachers.user_id')->where($condition)->orderBy('date_time', 'desc')->limit(20)->get();
+      $scheds = array();
+      $scheds[0] = ScheduleController::getStudentFutureSchedules($user_id);
+      $scheds[1] = ScheduleController::getStudentPastSchedules($user_id);
 
       $credits = CreditController::getCreditCount($profile->user_id);
 

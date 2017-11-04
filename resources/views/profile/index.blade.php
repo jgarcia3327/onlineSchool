@@ -2,6 +2,10 @@
 
 @section('title', "My Profile - English Hours")
 
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <?php
 $isStudent = (Auth::user()->is_student == 1)? true : false;
@@ -195,63 +199,132 @@ $isStudent = (Auth::user()->is_student == 1)? true : false;
             <!-- History -->
             <div class="panel panel-default">
                 <div class="panel-heading">
+                  <!-- Teacher view -->
                   @if (!$isStudent)
-                    History
+                    <strong>{{ $profiles[0]->fname }} {{ $profiles[0]->lname }} - Schedules</strong>
+                  <!-- Owner/Student view -->
                   @else
-                    Lịch sử
+                    My Schedules [ <a href="{{ url('/studentScheduleList/?past=1') }}">Lịch sử</a> ]
                   @endif
                 </div>
-
+                <!-- Show student scheds on Teacher view -->
+                @if (!$isStudent)
+                <?php
+                  $futureSchedules = $profiles[1][0];
+                  $pastSchedules = $profiles[1][1];
+                ?>
                 <div class="panel-body">
-                  <table class="table striped">
-                    <thead>
-                      <tr>
-                        @if (!$isStudent)
-                          <th>Date/Time</th>
-                          <th>Teacher</th>
-                          <th>Memo</th>
-                        @else
-                          <th>Ngày/Giờ</th>
-                          <th>Giáo viên</th>
-                          <th>Ghi chú</th>
-                        @endif
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php $counter=0; ?>
-                      @foreach($profiles[1] AS $v)
-                      <tr>
-                        <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
-                        <td>{{ $v->fname }} {{ $v->lname }}</td>
-                        <td>
-                          @if ($v->called == null)
-                          <i class="text-danger">Missed Session</i>
-                          @elseif ($v->memo == null)
-                          <i class="text-warning">No Memo provided</i>
-                          @else
-                            @if (!$isStudent)
-                              <strong>Course:</strong><p style="margin:0">{{ $v->memo }}</p>
-                              <strong>Book Title:</strong><p style="margin:0">{{ $v->memo_book }}</p>
-                              <strong>Next Page:</strong><p style="margin:0">{{ $v->memo_next_page }}</p>
-                              <strong>Teacher's Comment:</strong><p style="margin:0">{{ $v->memo_comment }}</p>
-                            @else
-                              <strong>Tên khóa học:</strong><p style="margin:0">{{ $v->memo }}</p>
-                              <strong>Tên sách:</strong><p style="margin:0">{{ $v->memo_book }}</p>
-                              <strong>Trang tiếp theo:</strong><p style="margin:0">{{ $v->memo_next_page }}</p>
-                              <strong>Nhận xét của giáo viên:</strong><p style="margin:0">{{ $v->memo_comment }}</p>
-                            @endif
-                          @endif
-                        </td>
-                      </tr>
-                      <?php $counter++; ?>
-                      @endforeach
-                    </tbody>
-                  </table>
-                  <?php //LOAD MORE TODO ?>
+                  <div class="col-md-12">
+
+                    <ul class="nav nav-tabs">
+                      <li role="presentation" class="future"><a href="javascript:viewFutureSched();">Future Lessons</a></li>
+                      <li role="presentation" class="active past"><a href="javascript:viewPastSched();">Past Lessons</a></li>
+                    </ul>
+
+                      <div class="panel panel-default" id="future-schedule">
+                          <!-- <div class="panel-heading">My List of Future Schedules</div> -->
+                          <div class="panel-body">
+                              <table id="future" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                  <tr>
+                                    <th>Lesson Schedule</th>
+                                    <th>Teacher</th>
+                                    <!-- <th>Skype ID</th> -->
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($futureSchedules AS $v)
+                                  <tr>
+                                    <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
+                                    <td>{{ucfirst($v->tfname." ".$v->tlname)}} [<a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Profile</a>]</td>
+                                    <!-- <td><a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a></td> -->
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
+                          </div>
+                      </div>
+
+                      <div class="panel panel-default" id="past-schedule" style="display: none;">
+                          <!-- <div class="panel-heading">My List of Past Schedules</div> -->
+                          <div class="panel-body">
+                              <table id="past" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                  <tr>
+                                    <th>Lesson Schedule</th>
+                                    <th>Teacher</th>
+                                    <!-- <th>Skype ID</th> -->
+                                    <th>Report</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($pastSchedules AS $v)
+                                  <tr>
+                                    <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
+                                    <td>{{ucfirst($v->tfname." ".$v->tlname)}} [<a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Profile</a>]</td>
+                                    <!-- <td><a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a></td> -->
+                                    <td>
+                                      @if ($v->called == 1)
+                                      <p style="margin:0"><strong>Course:</strong> {{ $v->memo }}</p>
+                                      <p style="margin:0"><strong>Book Title:</strong> {{ $v->memo_book }}</p>
+                                      <p style="margin:0"><strong>Next Page:</strong> {{ $v->memo_next_page }}</p>
+                                      <p style="margin:0"><strong>Comment:</strong> {{ $v->memo_comment }}</p>
+                                      @else
+                                      <i class="text-danger">Missed Session</i>
+                                      @endif
+                                    </td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                @endif
             </div>
 
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
+@if(!$isStudent)
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      // Default past schedules
+      viewPastSched();
+
+      // Data tables
+      $('#future').DataTable( {
+          "pageLength": 20,
+          "lengthMenu": [ [10, 20, 50, -1], [10, 20, 50, "All"] ],
+          "order": [[ 0, "asc" ]]
+      } );
+      $('#past').DataTable( {
+          "pageLength": 20,
+          "lengthMenu": [ [10, 20, 50, -1], [10, 20, 50, "All"] ],
+          "order": [[ 0, "desc" ]]
+      } );
+
+    });
+
+    function viewFutureSched() {
+      $("#past-schedule").css({"display":"none"});
+      $("#future-schedule").css({"display":"block"});
+      $(".future").addClass("active");
+      $(".past").removeClass("active");
+    }
+    function viewPastSched() {
+      $("#future-schedule").css({"display":"none"});
+      $("#past-schedule").css({"display":"block"});
+      $(".future").removeClass("active");
+      $(".past").addClass("active");
+    }
+  </script>
+@endif
 @endsection

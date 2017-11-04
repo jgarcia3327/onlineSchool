@@ -26,9 +26,11 @@
                     <table id="future" class="display" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th>Lesson Schedule</th>
+                          <!-- <th>Lesson Schedule</th> -->
+                          <th>Ngày/Giờ</th>
                           <th>Action</th>
-                          <th>Teacher</th>
+                          <!-- <th>Teacher</th> -->
+                          <th>Giáo viên</th>
                           <th>Skype ID</th>
                         </tr>
                       </thead>
@@ -67,10 +69,13 @@
                     <table id="past" class="display" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th>Lesson Schedule</th>
-                          <th>Teacher</th>
+                          <!-- <th>Lesson Schedule</th> -->
+                          <th>Ngày/Giờ</th>
+                          <!-- <th>Teacher</th> -->
+                          <th>Giáo viên</th>
                           <th>Skype ID</th>
-                          <th>Report</th>
+                          <!-- <th>Report</th> -->
+                          <th>Ngày/Giờ</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -96,7 +101,7 @@
                     </table>
                 </div>
             </div>
-
+          </div>
         </div>
     </div>
 </div>
