@@ -78,7 +78,7 @@
                         <tr>
                           <?php $dateRangePieces = explode("|", $common->getFormattedDateTimeRangeMilitary($v->date_time)); ?>
                           <td>{!! $dateRangePieces[0] !!}<a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)))}}">{!! $dateRangePieces[1] !!}</a> | {!! $dateRangePieces[2] !!}</td>
-                          <td>{{ucfirst($v->tfname." ".$v->tlname)}} [ <a href="{{ url('profile/'.$v->tuser_id) }}">Profile</a> ]</td>
+                          <td>{{ucfirst($v->tfname." ".$v->tlname)}} [ <a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Profile</a> ]</td>
                           <td><a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a></td>
                           <td>
                             @if ($v->called == 1)
