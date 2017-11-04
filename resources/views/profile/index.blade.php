@@ -18,18 +18,26 @@ $isStudent = (Auth::user()->is_student == 1)? true : false;
           <div class="panel panel-default">
               <div class="panel-heading">
                 <!-- Schedule Credits -->
+                @if (!$isStudent)
+                {{$profiles[0]->fname}} {{$profiles[0]->lname}} - Credits
+                @else
                 Thông tin tài khoản
-                @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
-                [ <a href="{{url('/scheduleCredit')}}">
-                  <!-- Buy credits -->
-                  Mua thêm bài học
-                </a> ]
+                  @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
+                  [ <a href="{{url('/scheduleCredit')}}">
+                    <!-- Buy credits -->
+                    Mua thêm bài học
+                  </a> ]
+                  @endif
                 @endif
               </div>
 
               <div class="panel-body">
                   <!-- Credits:  -->
+                  @if (!$isStudent)
+                  Lesson credits left:
+                  @else
                   Số bài học:
+                  @endif
                   <strong>{{ $profiles[2] }}</strong>
               </div>
           </div>
@@ -201,7 +209,7 @@ $isStudent = (Auth::user()->is_student == 1)? true : false;
                 <div class="panel-heading">
                   <!-- Teacher view -->
                   @if (!$isStudent)
-                    <strong>{{ $profiles[0]->fname }} {{ $profiles[0]->lname }} - Schedules</strong>
+                    {{ $profiles[0]->fname }} {{ $profiles[0]->lname }} - Schedules
                   <!-- Owner/Student view -->
                   @else
                     My Schedules [ <a href="{{ url('/studentScheduleList/?past=1') }}">Lịch sử</a> ]
