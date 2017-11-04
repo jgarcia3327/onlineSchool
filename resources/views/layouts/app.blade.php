@@ -71,11 +71,15 @@
                                 </a>
                               </li>
                               -->
-                              <li>
-                                <a href="{{ url('/lessons') }}">
-                                  <!-- My Lessons -->
-                                  Lịch học của tôi
-                                </a>
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                      Lịch học <!-- Lessons/Schedules --> <span class="caret"></span>
+                                  </a>
+
+                                  <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/lessons') }}">Lịch học của tôi<!-- My Lessons --></a></li>
+                                    <li><a href="{{ url('/studentScheduleList') }}">My List of Lessons</a></li>
+                                  </ul>
                               </li>
                               <li>
                                 <a href="{{ url('/books') }}">

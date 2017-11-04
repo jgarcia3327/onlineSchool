@@ -25,7 +25,7 @@
 
           <!-- Calendar display -->
           <div class="panel panel-default">
-              <div class="panel-heading">Chọn một ngày hoặc một tuần bạn muốn để hiển thị lịch học của bạn
+              <div class="panel-heading">Chọn một ngày hoặc một tuần bạn muốn để hiển thị lịch học của bạn [ <a href="{{ url('/studentScheduleList') }}">My List of Lessons</a> ]
                 @if (!empty(session('success')))
                 <span class="help-block">
                     <strong class="text-danger">
@@ -73,12 +73,16 @@
                           {{ $v->fname }} {{ $v->lname }}
                           <!-- 2hrs = 7200 in sec -->
                           @if ( (strtotime($v->date_time)-7200) >= strtotime(date("Y-m-d H:i:s")) )
-                          <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
-                            {{ method_field('PUT') }}
-                            {{ csrf_field() }}
-                            <input type="hidden" name="cancel" value="1">
-                            <input type="submit" value="Hủy bài học"/>
-                          </form>
+                          [ <a class="text-danger" role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Hủy bài học<!--Cancel--></a> ]
+                          <div id="collapse{{$v->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$v->id}}">
+                            <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                              {{ method_field('PUT') }}
+                              {{ csrf_field() }}
+                              <input type="hidden" name="cancel" value="1">
+                              <!-- <input type="submit" value="Confirm"/> -->
+                              <input type="submit" value="Hủy bài học - Confirm"/>
+                            </form>
+                            [ <a role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Close</a> ]
                           @endif
                         </td>
                       </tr>

@@ -25,11 +25,19 @@ class ScheduleController extends Controller
   }
 
   public static function getTeacherFutureSchedules($teacher_user_id) {
-    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "students.user_id AS suser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","=",$teacher_user_id],["date_time",">=",Carbon::now()]])->orderBy("date_time","asc")->get();
+    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "students.user_id AS suser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["schedules.teacher_user_id","=",$teacher_user_id],["date_time",">=",Carbon::now()]])->orderBy("date_time","asc")->get();
   }
 
   public static function getTeacherPastSchedules($teacher_user_id) {
-    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "students.user_id AS suser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","=",$teacher_user_id],["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
+    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "students.user_id AS suser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["schedules.teacher_user_id","=",$teacher_user_id],["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
+  }
+
+  public static function getStudentFutureSchedules($student_user_id) {
+    return Schedule::select("schedules.*", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype", "teachers.user_id AS tuser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["schedules.student_user_id","=",$student_user_id],["date_time",">=",Carbon::now()]])->orderBy("date_time","asc")->get();
+  }
+
+  public static function getStudentPastSchedules($student_user_id) {
+    return Schedule::select("schedules.*", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype", "teachers.user_id AS tuser_id")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["schedules.student_user_id","=",$student_user_id],["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
   }
 
   private function isTeacher() {
@@ -532,6 +540,18 @@ class ScheduleController extends Controller
 
     $schedules = array($future_schedules, $past_schedules);
     return view('schedule.teacherSchedules', compact('schedules'));
+  }
+
+  public function studentSchedule() {
+    if (Auth::user()->is_student != 1) {
+      return redirect('');
+    }
+
+    $future_schedules = ScheduleController::getStudentFutureSchedules(Auth::user()->id);
+    $past_schedules = ScheduleController::getStudentPastSchedules(Auth::user()->id);
+
+    $schedules = array($future_schedules, $past_schedules);
+    return view('schedule.studentSchedules', compact('schedules'));
   }
 
 }

@@ -27,6 +27,7 @@
                       <thead>
                         <tr>
                           <th>Lesson Schedule</th>
+                          <th>Action</th>
                           <th>Student</th>
                           <th>Skype ID</th>
                         </tr>
@@ -35,7 +36,41 @@
                         @foreach($futureSchedules AS $v)
                         <tr>
                           <?php $hasStudent = ($v->sfname == null || empty($v->sfname))? false : true; ?>
-                          <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
+                          <?php $dateRangePieces = explode("|", $common->getFormattedDateTimeRangeMilitary($v->date_time)); ?>
+                          <td>{!! $dateRangePieces[0] !!}<a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)))}}">{!! $dateRangePieces[1] !!}</a> | {!! $dateRangePieces[2] !!}</td>
+                          <td>
+                            <?php
+                              $schedTime =  strtotime($v->date_time);
+                              $curTime = strtotime(date("Y-m-d H:i:s"));
+                              $expireDateTime = $schedTime + 600; //10 minutes before called button elapse
+                              $startDateTime = $schedTime - 300; //5 minutes earlier to show call button
+                            ?>
+                            @if( $curTime >= $startDateTime && $curTime <= $expireDateTime )
+                              @if($v->called == null)
+                                <!-- Confirmation TODO -->
+                                <form style="display:none;" id="token-{{$v->id}}">
+                                  {{ csrf_field() }}
+                                </form>
+                                <button class="btn btn-primary call-sched btn-sched-id-{{$v->id}}" data-sched_id="{{$v->id}}">Call</button>
+                                <span class="btn-skype-{{$v->id}}" style="display:none;">[ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]</span>
+                              @else
+                                [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
+                              @endif
+                            @elseif ( $curTime >= $schedTime - 86400)
+                              <!-- Disable cancellation under 24 hours -->
+                            @else
+                              [ <a class="text-danger" role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Cancel</a> ]
+                              <div id="collapse{{$v->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$v->id}}">
+                                <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
+                                  {{ method_field('PUT') }}
+                                  {{ csrf_field() }}
+                                  <input type="hidden" name="cancel" value="1">
+                                  <input type="submit" value="Confirm"/>
+                                </form>
+                                [ <a role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Close</a> ]
+                              </div>
+                            @endif
+                          </td>
                           @if ($hasStudent)
                             <td>{{ucfirst($v->sfname." ".$v->slname)}} [ <a href="{{ url('profile/'.$v->suser_id) }}">Profile</a> ]</td>
                             <td><a href="skype:live:{{$v->sskype}}?call">{{$v->sskype}}</a></td>
@@ -66,7 +101,8 @@
                         @foreach($pastSchedules AS $v)
                         <tr>
                           <?php $hasStudent = ($v->sfname == null || empty($v->sfname))? false : true; ?>
-                          <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
+                          <?php $dateRangePieces = explode("|", $common->getFormattedDateTimeRangeMilitary($v->date_time)); ?>
+                          <td>{!! $dateRangePieces[0] !!}<a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)))}}">{!! $dateRangePieces[1] !!}</a> | {!! $dateRangePieces[2] !!}</td>
                           @if ($hasStudent)
                             <td>{{ucfirst($v->sfname." ".$v->slname)}} [ <a href="{{ url('profile/'.$v->suser_id) }}">Profile</a> ]</td>
                             <td><a href="skype:live:{{$v->sskype}}?call">{{$v->sskype}}</a></td>

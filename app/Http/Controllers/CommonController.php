@@ -229,7 +229,7 @@ class CommonController {
             $forSorting = $forSorting."-3";
     }
 
-    return "<i style='display:none;'>".$forSorting."</i>".$dateFormat." | ".$hourMinuteRange;
+    return "<i style='display:none;'>".$forSorting."</i>| ".$dateFormat." | ".$hourMinuteRange;
   }
 
   public function getDeleteModal($id, $link) {
