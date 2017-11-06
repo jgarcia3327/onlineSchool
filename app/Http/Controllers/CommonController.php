@@ -13,6 +13,10 @@ use DateTime;
 
 class CommonController {
 
+  public function getCarbonNow() {
+    return Carbon::now();
+  }
+
   public function getCourses() {
     return array(
       "IELTS/TOEIC/TOEFL" => "IELTS/TOEIC/TOEFL",

@@ -81,19 +81,29 @@
                         @if($v->student_user_id === null)
                         <td>Open</td>
                         @elseif( $v->called === null )
-                        <td><span class="text-danger">Missed Session</span></td>
+                          @if(strtotime($v->date_time) > strtotime($common->getCarbonNow()))
+                          <td><span class="text-primary"><i>Incoming Session<i></span></td>
+                          @else
+                          <td><span class="text-danger">Missed Session</span></td>
+                          @endif
                         @else
                         <td><span class="text-success">Successful Session</span></td>
                         @endif
 
+                        <!-- No Student -->
                         @if($v->student_user_id === null)
                         <td>&nbsp;</td>
-                        @elseif( $v->called === null )
+                        <!-- Missed session -->
+                        @elseif( $v->called === null && strtotime($v->date_time) < strtotime($common->getCarbonNow()) )
                         <?php $deduction += 25; ?>
                         <td><span class="text-danger">-25 PHP</span></td>
-                        @else
+                        <!-- Successful session -->
+                        @elseif($v->called !== null && strtotime($v->date_time) < strtotime($common->getCarbonNow()))
                         <?php $gross += 100; ?>
                         <td><span class="text-success">100 PHP</span></td>
+                        <!-- Incoming session -->
+                        @else
+                        <td><span class="text-primary">0 PHP</span></td>
                         @endif
                       </tr>
                       @endforeach
