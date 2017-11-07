@@ -91,7 +91,8 @@ class WageController extends Controller
       // Get selected missed call
       foreach($request->schedID AS $v) {
         // Get student credit
-        $schedule = Schedule::where([['id','=',$v], ['active','=',0]])->first();
+        //$schedule = Schedule::where([['id','=',$v], ['active','=',0]])->first();
+        $schedule = Schedule::where('id',$v)->first();
         if ($schedule == null) continue;
         $credit = Credit::where('id',$schedule->credit_id)->first();
 
