@@ -85,4 +85,5 @@ Route::group(['middleware' => 'auth'], function() {
       // Deposit - Deprecated
       //Route::get('/deposit', 'DepositController@index');
       //Route::post('/deposit', 'DepositController@store');
+      Route::get('/myCredits', ['as' => "Student Credit Details", 'uses' => "CreditController@creditDetails"]);
 });

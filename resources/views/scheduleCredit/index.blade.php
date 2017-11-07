@@ -18,7 +18,7 @@
 
                 <div class="panel-body">
                   <!-- <p>You have <strong class="text-danger">{{ $creditLesson }}</strong> lesson credit(s) left.</p> -->
-                  <p>Bạn còn lại <strong class="text-danger">{{ $creditLesson }}</strong> bài học</p>
+                  <p>Bạn còn lại <strong class="text-danger">{{ $creditLesson }}</strong> bài học [ <a href="{{ url('/myCredits') }}">My Credit Details</a> ]</p>
                   <!-- Deposit - Deprecated -->
                   <!-- <p>You have <strong class="text-success">{{ $balanceAmount }} đồng</strong> balance in your account. [ <a href="{{ url('/deposit') }}">Deposit</a> ]</p> -->
                   <!-- <p>Bạn có <strong class="text-success">{{ $balanceAmount }} đồng</strong> trong tài khoản [ <a href="{{ url('/deposit') }}">Nạp tiền vào tài khoản</a> ]</p> -->

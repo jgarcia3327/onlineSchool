@@ -39,6 +39,9 @@ $isStudent = (Auth::user()->is_student == 1)? true : false;
                   Số bài học:
                   @endif
                   <strong>{{ $profiles[2] }}</strong>
+                  @if (Auth::check() && $profiles[0]->user_id === Auth::user()->id)
+                    [ <a href="{{ url('/myCredits') }}">My Credit Details</a> ]
+                  @endif
               </div>
           </div>
 

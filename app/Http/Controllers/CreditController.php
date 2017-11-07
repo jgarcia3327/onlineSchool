@@ -10,11 +10,16 @@ use Carbon\Carbon;
 use App\Models\Schedule;
 use App\Models\Balance;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\CommonController;
 
 class CreditController extends Controller
 {
+
+    public static function getCreditDetails($student_user_id) {
+      return Credit::select("credits.*", "schedules.teacher_user_id", "schedules.date_time", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.user_id AS tuser_id")->leftJoin("schedules","schedules.id","=","credits.schedule_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where('credits.user_id', $student_user_id)->orderBy("credits.id","asc")->get();
+    }
 
     public static function getCreditLessonsValidity() {
       return array(
@@ -88,7 +93,7 @@ class CreditController extends Controller
         ["active","=",1],
         ["schedule_id","=",null]
       ];
-      $credit = Credit::where($creditCond)->first();
+      $credit = Credit::where($creditCond)->orderBy("id","asc")->first();
 
       if ($credit != null && !empty($credit) && !empty($schedule_id)) {
         $credit->update(['schedule_id' => $schedule_id]);
@@ -260,5 +265,15 @@ class CreditController extends Controller
 
       return back()->with("success", -1);
 
+    }
+
+    public function creditDetails() {
+      if (Auth::user()->is_student != 1) {
+        return redirect('');
+      }
+
+      $credits = CreditController::getCreditDetails(Auth::user()->id);
+
+      return view("scheduleCredit.details",compact("credits"));
     }
 }
