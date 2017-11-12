@@ -276,4 +276,58 @@ class CreditController extends Controller
 
       return view("scheduleCredit.details",compact("credits"));
     }
+
+    public function adminAddCredit() {
+      if (Auth::user()->is_admin != 1)
+        return redirect('');
+
+      return view('admin.addCredit');
+    }
+
+    public function storeAddCredit(Request $request) {
+      if (Auth::user()->is_admin != 1)
+        return redirect('');
+
+      // Add credits
+      if ($request->has("student_id") && $request->has("num_credit") && $request->has("num_days")) {
+        $credit_count = $request->num_credit;
+        $consume = $request->num_days;
+        $sid = $request->student_id;
+        $student = Student::select("students.*", "users.email")->leftJoin("users", "users.id","=","students.user_id")->where("students.user_id", $sid)->first();
+        if ($credit_count > 0 && $consume > 0 && $student) {
+          $dataset = [];
+          for ($i=0; $i < $credit_count; $i++) {
+            $dataset[] = [
+              'user_id' => $sid,
+              'consume_days' => $consume,
+              'added_by' => Auth::user()->id,
+              'create_date' => Carbon::now()
+            ];
+          }
+          Credit::insert($dataset);
+          return back()->with('success', 'You have successfully added and activated '.$credit_count.' lessons to: '.ucFirst($student->fname).' '.ucFirst($student->lname).' ('.$student->email.') consumable within '.$consume.' days.');
+        }
+      }
+      else {
+        return back()->with('error', 'Adding credit is un-successful. Please contact system admin.');
+      }
+    }
+
+    public function adminCreditDetails() {
+      if (Auth::user()->is_admin != 1)
+        return redirect('');
+
+      $credit_details = array(0 => null);
+      return view('admin.creditDetails', compact('credit_details'));
+    }
+
+    public function showCreditDetails($student_id) {
+      if (Auth::user()->is_admin != 1)
+        return redirect('');
+
+      $credits = CreditController::getCreditDetails($student_id);
+
+      $credit_details = array(0 => $student_id, 1 => $credits);
+      return view('admin.creditDetails', compact('credit_details'));
+    }
 }

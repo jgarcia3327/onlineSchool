@@ -86,4 +86,8 @@ Route::group(['middleware' => 'auth'], function() {
       //Route::get('/deposit', 'DepositController@index');
       //Route::post('/deposit', 'DepositController@store');
       Route::get('/myCredits', ['as' => "Student Credit Details", 'uses' => "CreditController@creditDetails"]);
+      Route::get('/adminAddCredit', ['as' => "Add Student Credit Lessons", 'uses' => "CreditController@adminAddCredit"]);
+      Route::post('/storeAdminAddCredit', ['as' => "Submit Add Student Credit Lessons", 'uses' => "CreditController@storeAddCredit"]);
+      Route::get('/adminCreditDetails', ['as' => "Student Credit Viewer", 'uses' => "CreditController@adminCreditDetails"]);
+      Route::get('/adminCreditDetails/{student_id}', ['as' => "Student Credit Viewer", 'uses' => "CreditController@showCreditDetails"]);
 });

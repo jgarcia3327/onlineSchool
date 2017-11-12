@@ -30,7 +30,10 @@
                       </a> -->
                     </div>
                     <div class="col-md-3">
-                      <!-- Additiona admin feature -->
+                      <a class="text-center" title="Add Student credits" href="{{ url('/adminAddCredit') }}">
+                       <span class="fa fa-arrow-circle-down fa-3x admin-link"></span>
+                       <span class="admin-link">Add Student Credit Lessons</span>
+                      </a>
                     </div>
                     <div class="col-md-3">
                       <!-- Additional admin feature -->
@@ -69,7 +72,27 @@
                   </a>
                 </div>
               </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-3">
+                  <a class="text-center" title="Student Credit Details" href="{{ url('/adminCreditDetails') }}">
+                   <span class="fa fa-clipboard fa-3x admin-link"></span>
+                   <span class="admin-link">Student Credit Details</span>
+                  </a>
+                </div>
+                <div class="col-md-3">
+                  <!-- feature here -->
+                </div>
+                <div class="col-md-3">
+                  <!-- feature here -->
+                </div>
+                <div class="col-md-3">
+                  <!-- feature here -->
+                </div>
+              </div>
+
             </div>
+
           </div>
 
         </div>

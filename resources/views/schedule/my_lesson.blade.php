@@ -19,7 +19,11 @@
               </div>
 
               <div class="panel-body">
-                  Số bài học: <strong>{{ $credits }}</strong>
+                  Số bài học: <strong>{{ $credits }}
+                  @if (Auth::check() && $auth->is_student == 1)
+                  [ <a href="{{ url('/myCredits') }}">My Credit Details</a> ]
+                  @endif
+                  </strong>
               </div>
           </div>
 
