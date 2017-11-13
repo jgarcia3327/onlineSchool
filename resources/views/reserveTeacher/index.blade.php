@@ -13,7 +13,7 @@
                   <div class="row text-center">
                   <?php $counter = 0; ?>
                   @foreach($teachers AS $v)
-                    <div class="col-md-3 profile-photo">
+                    <div class="col-sm-3 profile-photo">
                       <a href="{{ url('reserveTeacher/'.$v->user_id) }}">
                       @if(Auth::check() && $v->photo != null)
                       <img src="{{ asset('images/profile/') }}/{{ $v->photo }}"/>
@@ -33,7 +33,7 @@
                   <?php $remaining = 4 - ($counter % 4); ?>
                   @if($remaining != 4)
                     @for($i = 0; $i < $remaining; $i++)
-                      <div class="col-md-3">&nbsp;</div>
+                      <div class="col-sm-3">&nbsp;</div>
                     @endfor
                   @endif
                   </div>

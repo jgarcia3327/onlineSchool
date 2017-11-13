@@ -319,7 +319,7 @@ class CreditController extends Controller
           // Email to admin
           $subject = $credit_count." Credit Lessons successfully added to ".ucFirst($student->fname)." ".ucFirst($student->lname);
           $body = "Dear EnglishHours Admin,\n\nYou have successfully added ".$credit_count." lessons to ".ucFirst($student->fname)." ".ucFirst($student->lname)."(".$student->email.") with ".$consume." days expiry. \n\n-EnglishHours.net";
-          MailController::sendMail(Auth::user()->email, $subject, $body);
+          MailController::sendMail("info@englishhours.net", $subject, $body);
 
           return back()->with('success', 'You have successfully added and activated '.$credit_count.' lessons to: '.ucFirst($student->fname).' '.ucFirst($student->lname).' ('.$student->email.') consumable within '.$consume.' days.');
         }

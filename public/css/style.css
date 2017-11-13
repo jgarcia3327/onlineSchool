@@ -25,8 +25,12 @@ span.span-row {
 #selected-sched span.sel {
   display: block;
 }
+.profile-photo {
+  padding: 12px;
+  padding-bottom: 24px;
+}
 .profile-photo img{
-  margin-bottom: 21px;
+  margin-bottom: 9px;
   border-radius: 50%;
   width: 90px;
 }
