@@ -180,7 +180,7 @@ class CreditController extends Controller
           $body = "Chào ".$student->fname.",\n\nBạn vừa mua thành công gói ".$quantity." bài học. \n\nChân thành cảm ơn bạn. \n\nEnglishHours.net";
           MailController::sendMail(Auth::user()->email, $subject, $body);
           //Send email to admin
-          MailController::sendMail("info@englishhours.net", $quantity." Lessons purchased from ".$student->fname, "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully purchased ".$quantity." lesson credits, amounting to ".$amount);
+          MailController::sendMail("info@englishhours.net", $quantity." Lessons purchased from ".$student->fname, "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully purchased ".$quantity." lesson credits, amounting to ".$amount." \n\n-EnglishHours.net");
 
           return back()->with("success", $quantity); //TODO change price
         }
@@ -209,7 +209,11 @@ class CreditController extends Controller
           $body = "Chào ".$student->fname.",\n\nBạn vừa đề nghị mua gói ".$quantity." bài học.\n\nTĐể kích hoạt ".$quantity." bài học này, bạn vui lòng gửi ".$this->getCreditLessonsStr()[$quantity]." đến:\n".$bank_details."\n\nCảm ơn bạn, \n\nEnglishHours.net";
           MailController::sendMail(Auth::user()->email, $subject, $body);
           //Send email to admin
-          $body = "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully requested ".$quantity." lesson credits, amounting to ".$this->getCreditLessonsStr()[$quantity]."\n\nPlease active requested credit lessons once amount deposited to \n".$bank_details."\n".$bank[2];
+          foreach( $common->getEnglishHoursBankAccountEN() AS $k => $v) {
+            $bank[] = $k.": ".$v;
+          }
+          $bank_details = implode("\n", $bank);
+          $body = "Dear EnglishHours Admin,\n\n". $student->fname." ".$student->lname." (".Auth::user()->email.") has successfully requested ".$quantity." lesson credits, amounting to ".$this->getCreditLessonsStr()[$quantity]."\n\nPlease activate requested credit lessons once amount deposited to \n".$bank_details."\n\n-EnglishHours.net";
           MailController::sendMail("info@englishhours.net", $quantity." Lessons requested from ".$student->fname, $body);
 
 
@@ -257,7 +261,7 @@ class CreditController extends Controller
         $body = "Dear ".$student->fname.",\n\nYour ".$quantity." credit lessons has been activated.\nYou can now use your credit lessons to reserved a schedule in EnglishHours.net.\n\nThank you.\n-EnglishHours.net";
         MailController::sendMail(Auth::user()->email, $subject, $body);
         //Send email to admin
-        MailController::sendMail("info@englishhours.net", $quantity." Lessons activated to ".$student->fname, "Dear EnglishHours Admin,\n\nYou have successfully activated ". $student->fname." ".$student->lname." (".$student->email.") ".$quantity." lesson credits.\n\nEnglishHours.net");
+        MailController::sendMail("info@englishhours.net", $quantity." Lessons activated to ".$student->fname, "Dear EnglishHours Admin,\n\nYou have successfully activated ". $student->fname." ".$student->lname." (".$student->email.") ".$quantity." lesson credits.\n\n-EnglishHours.net");
 
 
         return back()->with("success", 1);
@@ -304,7 +308,19 @@ class CreditController extends Controller
               'create_date' => Carbon::now()
             ];
           }
+
           Credit::insert($dataset);
+
+          // Email to student
+          $subject = $credit_count." Credit Lessons added to your EnglishHours.net account";
+          $body = "Dear ".$student->fname.",\n\n".$credit_count." Credit Lessons succesfully added to your account. \n\nPlease visit http://englishhours.net/reserveTeacher to reserve a lessons. \n\nEnglishHours.net";
+          MailController::sendMail($student->email, $subject, $body);
+
+          // Email to admin
+          $subject = $credit_count." Credit Lessons successfully added to ".ucFirst($student->fname)." ".ucFirst($student->lname);
+          $body = "Dear EnglishHours Admin,\n\nYou have successfully added ".$credit_count." lessons to ".ucFirst($student->fname)." ".ucFirst($student->lname)."(".$student->email.") with ".$consume." days expiry. \n\n-EnglishHours.net";
+          MailController::sendMail(Auth::user()->email, $subject, $body);
+
           return back()->with('success', 'You have successfully added and activated '.$credit_count.' lessons to: '.ucFirst($student->fname).' '.ucFirst($student->lname).' ('.$student->email.') consumable within '.$consume.' days.');
         }
       }
