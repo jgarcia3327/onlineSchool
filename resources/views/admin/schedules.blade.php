@@ -58,7 +58,7 @@
                           <th>Lesson Schedule</th>
                           <th>Teacher</th>
                           <th>Student</th>
-                          <th>Report</th>
+                          <th>Report/Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -69,15 +69,19 @@
                           <td>{{ucfirst($v->tfname." ".$v->tlname)}} (<a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a>)</td>
                           @if ($hasStudent)
                             <td>{{ucfirst($v->sfname." ".$v->slname)}} (<a href="skype:live:{{$v->sskype}}?call">{{$v->sskype}}</a>)</td>
-                            <td>
-                              <strong>Course:</strong> {{ $v->memo }}<br/>
-                              <strong>Book Title:</strong> {{ $v->memo_book }}<br/>
-                              <strong>Next Page:</strong> {{ $v->memo_next_page }}<br/>
-                              <strong>Teacher's Comment:</strong> {{ $v->memo_comment }}
-                            </td>
+                            @if ($v->called == null)
+                              <td><i class="text-error-inline">Missed Session</i></td>
+                            @else
+                              <td>
+                                <strong>Course:</strong> {{ $v->memo }}<br/>
+                                <strong>Book Title:</strong> {{ $v->memo_book }}<br/>
+                                <strong>Next Page:</strong> {{ $v->memo_next_page }}<br/>
+                                <strong>Teacher's Comment:</strong> {{ $v->memo_comment }}
+                              </td>
+                            @endif
                           @else
-                            <td><i>Open</i></td>
-                            <td><i>N/A</i></td>
+                            <td><i class="text-danger">Open</i></td>
+                            <td><i class="text-danger">N/A</i></td>
                           @endif
                         </tr>
                         @endforeach
