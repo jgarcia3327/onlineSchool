@@ -417,20 +417,25 @@
             <div>
               <div class="col-lg-12 mar-bot30">
 
+                <?php
+                $slideDir = "img/instructionsPromo/";
+                $fi = new FilesystemIterator($slideDir, FilesystemIterator::SKIP_DOTS);
+                $slideMax = iterator_count($fi);
+                ?>
                 <!-- Start slide -->
                 <div id="EnglishHoursInstruction" class="carousel slide" data-ride="carousel" data-interval="false">
                   <!-- Indicators -->
                   <ol class="carousel-indicators">
-                    @for ($i = 0; $i < 16; $i++)
+                    @for ($i = 0; $i < $slideMax; $i++)
                     <li data-target="#EnglishHoursInstruction" data-slide-to="{{$i}}" {{ ($i == 0)? "class=active" : ''}}></li>
                     @endfor
                   </ol>
 
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner">
-                    @for ($i = 1; $i <= 16; $i++)
+                    @for ($i = 1; $i <= $slideMax; $i++)
                     <div class="item {{ ($i == 1)? 'active' : ''}}">
-                      <img src="{{asset('img/instructions/'.$i.'.jpg')}}" alt="Hướng dẫn 6 bước học - ngang - {{$i}}">
+                      <img src="{{asset($slideDir.$i.'.jpg')}}" alt="Hướng dẫn 6 bước học - ngang - {{$i}}">
                     </div>
                     @endfor
                   </div>
