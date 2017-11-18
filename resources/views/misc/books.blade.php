@@ -12,13 +12,17 @@
                   Sách
                   @if ($auth->is_admin == 1)
                   <h4>Add Book</h4>
-                  <form action="{{ url('/books') }}" method="POST" enctype="multipart/form-data">
+                  <form id="book-upload-form" action="{{ url('/books') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="form-group">
-                      <input class="form-control" type="file" name="book" required placeholder="Upload Book" accept="application/pdf">
+                    <div class="form-group book-fields">
+                      <input class="form-control" type="file" name="book" required placeholder="Upload Book" accept="application/pdf" multiple >
                       <input class="form-control" type="text" name="title" required placeholder="Book Title">
                       <textarea class="form-control" name="description" placeholder="Book Description"></textarea>
                       <input class="form-control btn btn-primary" type="submit" value="Submit" />
+                    </div>
+                    <div class="upload-progress text-center" style="display: none;">
+                      <p class="text-center">Uploading <span class="upload-title"></span>, please wait...</p>
+                      <img src="{{asset('images/ajax-loader.gif')}}" />
                     </div>
                   </form>
                   @endif
@@ -48,4 +52,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+  $("book-upload-form").submit(){
+    $(".book-fields").css({"display":"none"});
+    var title = $("input[name='title']").val();
+    $().html(title);
+    $(".upload-progress").css({"display":"block"});
+  }
+</script>
 @endsection
