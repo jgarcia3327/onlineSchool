@@ -21,7 +21,7 @@
                       <input class="form-control btn btn-primary" type="submit" value="Submit" />
                     </div>
                     <div class="upload-progress text-center" style="display: none;">
-                      <p class="text-center">Uploading <span class="upload-title"></span>, please wait...</p>
+                      <p class="text-center">Uploading <i class="upload-title text-error-inline"></i>, please wait...</p>
                       <img src="{{asset('images/ajax-loader.gif')}}" />
                     </div>
                   </form>
@@ -56,11 +56,13 @@
 
 @section('javascript')
 <script type="text/javascript">
-  $("book-upload-form").submit(){
+  $("form#book-upload-form").submit(function(event){
+    //console.log("Uploading...");
     $(".book-fields").css({"display":"none"});
     var title = $("input[name='title']").val();
-    $().html(title);
+    $(".upload-title").html(title);
     $(".upload-progress").css({"display":"block"});
-  }
+    //event.preventDefault();
+  });
 </script>
 @endsection
