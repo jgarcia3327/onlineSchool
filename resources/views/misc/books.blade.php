@@ -12,12 +12,13 @@
                   Sách
                   @if ($auth->is_admin == 1)
                   <h4>Add Book</h4>
+                  <p class="no-title-desc"></p>
                   <form id="book-upload-form" action="{{ url('/books') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group book-fields">
                       <input class="form-control" type="file" name="book" required placeholder="Upload Book" accept="application/pdf" multiple >
                       <input class="form-control" type="text" name="title" required placeholder="Book Title">
-                      <textarea class="form-control" name="description" placeholder="Book Description"></textarea>
+                      <textarea class="form-control" name="description" required placeholder="Book Description"></textarea>
                       <input class="form-control btn btn-primary" type="submit" value="Submit" />
                     </div>
                     <div class="upload-progress text-center" style="display: none;">
@@ -54,15 +55,24 @@
 </div>
 @endsection
 
+@if ($auth->is_admin == 1)
 @section('javascript')
 <script type="text/javascript">
   $("form#book-upload-form").submit(function(event){
-    //console.log("Uploading...");
-    $(".book-fields").css({"display":"none"});
+    var book = $("input[name='book']").val();
     var title = $("input[name='title']").val();
+    var desc = $("textarea[name='description']").val();
+    if (typeof book === "undefined" || typeof title === "undefined" || typeof desc === "undefined" || book =="" || title == "" || desc == "") {
+      $(".no-title-desc").html("<i class='text-error-inline'>Empty either Book, Title or Description.</i>");
+      event.preventDefault();
+      return;
+    }
+    $(".no-title-desc").html("");
+    $(".book-fields").css({"display":"none"});
     $(".upload-title").html(title);
     $(".upload-progress").css({"display":"block"});
-    //event.preventDefault();
+
   });
 </script>
 @endsection
+@endif
