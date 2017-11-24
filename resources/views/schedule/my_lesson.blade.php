@@ -173,4 +173,13 @@
   });
 </script>
 
+<script type="text/javascript">
+  // Refresh every 5 minutes
+  var pathname = $(location).attr('pathname');
+  var refreshPage = pathname;
+  var refreshInterval = setInterval(function() {
+    window.location.href = refreshPage;
+  }, 300000); // 5 mins
+
+</script>
 @endsection

@@ -164,7 +164,7 @@
                                   <input class="form-control" type="text" id="memo_next_page" name="memo_next_page" value="{{ $v->memo_next_page }}" required placeholder="Next Page">
                                   <textarea class="memo_comment" name="memo_comment" required placeholder="Comment" style="width:100%">{{ $v->memo_comment }}</textarea>
                                   @if($v->memo != null)
-                                    <input class="form-control btn btn-primary" type="submit" value="UPDATE" />
+                                    <input class="form-control btn btn-success" type="submit" value="UPDATE" />
                                   @else
                                     <input class="form-control btn btn-primary" type="submit" value="Submit" />
                                   @endif
@@ -245,5 +245,15 @@
     });
 
   });
+</script>
+
+<script type="text/javascript">
+  // Refresh every 5 minutes
+  var pathname = $(location).attr('pathname');
+  var refreshPage = pathname;
+  var refreshInterval = setInterval(function() {
+    window.location.href = refreshPage;
+  }, 300000); // 5 mins
+
 </script>
 @endsection
