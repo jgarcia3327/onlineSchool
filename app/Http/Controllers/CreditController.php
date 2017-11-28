@@ -297,6 +297,7 @@ class CreditController extends Controller
         $credit_count = $request->num_credit;
         $consume = $request->num_days;
         $sid = $request->student_id;
+        $can_cancel = $request->can_cancel;
         $student = Student::select("students.*", "users.email")->leftJoin("users", "users.id","=","students.user_id")->where("students.user_id", $sid)->first();
         if ($credit_count > 0 && $consume > 0 && $student) {
           $dataset = [];
@@ -304,6 +305,7 @@ class CreditController extends Controller
             $dataset[] = [
               'user_id' => $sid,
               'consume_days' => $consume,
+              'can_cancel' => $can_cancel,
               'added_by' => Auth::user()->id,
               'create_date' => Carbon::now()
             ];

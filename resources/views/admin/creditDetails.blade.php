@@ -79,18 +79,19 @@ $student_name = null;
                         $date_time_active = ($v->consume_days * (24*60*60)); //Convert days to seconds
                         $expired_time = $date_created + $date_time_active;
                         $counter++;
+                        $can_cancel = $v->can_cancel != 1? "[Cannot Cancel Schedule]" : "";
                       ?>
                       @if ( $v->active == 0 )
                         <?php $expired_credit++; ?>
-                        <li class="list-group-item">{{$counter}} ). <i class="text-error-inline">Expired last {{date("F d, Y",$expired_time)}}</i></li>
+                        <li class="list-group-item">{{$counter}} ). {{$can_cancel}} <i class="text-error-inline">Expired last {{date("F d, Y",$expired_time)}}</i></li>
                       @elseif ($v->schedule_id == null || empty($v->schedule_id))
                         <?php $active_credit++; ?>
-                        <li class="list-group-item">{{$counter}} ). <i class="text-success">Open - will expire {{date("F d, Y",$expired_time)}}</i></li>
+                        <li class="list-group-item">{{$counter}} ). {{$can_cancel}} <i class="text-success">Open - will expire {{date("F d, Y",$expired_time)}}</i></li>
                       @else
                         <?php $used_credit++; ?>
                         <li class="list-group-item">
                           <?php $status = $date_time < strtotime($common->getCarbonNow())? "<i class='text-success'>(Done)</i>" : "<i class='text-danger'>(Incoming)</i>"; ?>
-                          {{$counter}} ). <strong>{!! $status !!} Lesson Schedule:</strong> <a href="{{ url('/schedule/my_schedule/'.date('Y-m-d', $date_time)) }}">{{$common->getFormattedDateTimeRange($v->date_time)}}</a>
+                          {{$counter}} ).{{$can_cancel}} <strong>{!! $status !!} Lesson Schedule:</strong> <a href="{{ url('/schedule/my_schedule/'.date('Y-m-d', $date_time)) }}">{{$common->getFormattedDateTimeRange($v->date_time)}}</a>
                           <br/><strong>Teacher:</strong> {{$v->tfname}} {{$v->tlname}} [ <a href="{{url('/teacherProfile/'.$v->tuser_id)}}">Teacher Profile</a> ]
                           <!-- id:{{$v->id}} | user-id:{{$v->user_id}} | schedule-id:{{$v->schedule_id}} | consume-days:{{$v->consume_days}} -->
                         </li>

@@ -76,7 +76,7 @@
                         <td>
                           {{ $v->fname }} {{ $v->lname }}
                           <!-- 2hrs = 7200 in sec -->
-                          @if ( (strtotime($v->date_time)-7200) >= strtotime(date("Y-m-d H:i:s")) )
+                          @if ( (strtotime($v->date_time)-7200) >= strtotime(date("Y-m-d H:i:s")) && $v->can_cancel == 1 )
                           [ <a class="text-danger" role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Hủy bài học<!--Cancel--></a> ]
                           <div id="collapse{{$v->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$v->id}}">
                             <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">

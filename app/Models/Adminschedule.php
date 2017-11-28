@@ -10,25 +10,23 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Credit
+ * Class Book
  *
  * @property int $id
- * @property int $user_id
  * @property int $schedule_id
- * @property int $consume_days
- * @property tinyint $active
+ * @property int $action
  * @property \Carbon\Carbon $create_date
  * @property \Carbon\Carbon $modify_date
  *
  * @package App\Models
  */
-class Credit extends Eloquent
+class Adminschedule extends Eloquent
 {
 	public $timestamps = false;
 
 	protected $casts = [
-		'user_id' => 'int',
-		'schedule_id' => 'int'
+		'schedule_id' => 'int',
+		'action' => 'int'
 	];
 
 	protected $dates = [
@@ -37,9 +35,8 @@ class Credit extends Eloquent
 	];
 
 	protected $fillable = [
-		'user_id',
 		'schedule_id',
-		'can_cancel',
+		'action',
 		'create_date',
 		'modify_date'
 	];

@@ -201,13 +201,16 @@ class ScheduleController extends Controller
         // Cannot cancel less than 2 hours = 7200 in seconds
         if ( (strtotime($schedule->date_time)-7200) >= strtotime(Carbon::now()) ) {
           if ($schedule->student_user_id === Auth::user()->id) {
-            $schedule->student_user_id = null;
-            $schedule->save();
-            // Restore credits //TODO record student cancellations
             $credit = Credit::where([["user_id","=",Auth::user()->id],["schedule_id","=",$schedule->id]])->first();
-            $credit->schedule_id = null;
-            $credit->save();
-            return back()->with("success",$schedule->date_time);
+            // Check if credit can cancel schedule
+            if ($credit->can_cancel == 1) {
+              $schedule->student_user_id = null;
+              $schedule->save();
+              // Restore credits //TODO record student cancellations
+              $credit->schedule_id = null;
+              $credit->save();
+              return back()->with("success",$schedule->date_time);
+            }
           }
         }
         return back()->with("success",0);
@@ -379,7 +382,7 @@ class ScheduleController extends Controller
         ];
         //dd($condition);
       }
-      $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname")->leftJoin("teachers","schedules.teacher_user_id","=","teachers.user_id")->where($condition)->orderBy('date_time', 'asc')->get();
+      $scheds = Schedule::select("schedules.*","teachers.fname","teachers.lname","credits.can_cancel")->leftJoin("credits","credits.schedule_id","=","schedules.id")->leftJoin("teachers","schedules.teacher_user_id","=","teachers.user_id")->where($condition)->orderBy('date_time', 'asc')->get();
       //dd($scheds);
       $futureScheds = $pastScheds = null;
       $teachersArray = array();

@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                       <label for="student_name">
-                        Student Name
+                        Student Name:
                       </label>
                       <select class="form-control" id="student_name" name="student_id" required>
                         <option value=""></option>
@@ -31,7 +31,7 @@
                       </select>
 
                       <label for="num_credit">
-                        Number of Credits
+                        Number of Credits:
                       </label>
                       <select class="form-control" id="num_credit" name="num_credit" required>
                         <option value=""></option>
@@ -41,13 +41,21 @@
                       </select>
 
                       <label for="num_days">
-                        Number of validity days
+                        Number of validity days:
                       </label>
                       <select class="form-control" id="num_days" name="num_days" required>
                         <option value=""></option>
                         @for($i = 1; $i <= 60; $i++)
                         <option value="{{$i}}">{{$i}}</option>
                         @endfor
+                      </select>
+
+                      <label for="can_cancel">
+                        Can cancel schedule:
+                      </label>
+                      <select class="form-control" id="can_cancel" name="can_cancel" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
                       </select>
 
                     </div>

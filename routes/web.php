@@ -90,4 +90,5 @@ Route::group(['middleware' => 'auth'], function() {
       Route::post('/storeAdminAddCredit', ['as' => "Submit Add Student Credit Lessons", 'uses' => "CreditController@storeAddCredit"]);
       Route::get('/adminCreditDetails', ['as' => "Student Credit Viewer", 'uses' => "CreditController@adminCreditDetails"]);
       Route::get('/adminCreditDetails/{student_id}', ['as' => "Student Credit Viewer", 'uses' => "CreditController@showCreditDetails"]);
+      Route::get('/adminScheduleEditor', ['as' => "Admin Schedule Editor", 'uses' => "AdminController@scheduleEditor"]);
 });

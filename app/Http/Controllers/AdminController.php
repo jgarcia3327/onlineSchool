@@ -66,4 +66,8 @@ class AdminController extends Controller
 
       return view('admin.teacherSalary', compact('wages'));
     }
+
+    public function scheduleEditor() {
+      return view('admin.scheduleEditor');
+    }
 }
