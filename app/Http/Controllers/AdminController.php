@@ -68,6 +68,15 @@ class AdminController extends Controller
     }
 
     public function scheduleEditor() {
-      return view('admin.scheduleEditor');
+      if (Auth::user()->is_admin != 1) {
+        return redirect('');
+      }
+
+      $future_schedules = ScheduleController::getAllFutureSchedules();
+      $past_schedules = ScheduleController::getAllPastSchedules();
+
+      $schedules = array($future_schedules, $past_schedules);
+
+      return view('admin.scheduleEditor', compact('schedules'));
     }
 }

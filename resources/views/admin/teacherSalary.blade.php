@@ -12,7 +12,7 @@
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
 
           <!-- Year/month/pich form -->
           <form id="teacher-wage" action="" method="POST">
@@ -94,19 +94,25 @@
                     <table class="table striped">
                       <tr>
                         <th>Schedule</th>
+                        <th>Student</th>
                         <th>Status</th>
                         <th>Salary</th>
                       </tr>
                       <?php $gross = $deduction = 0; ?>
                       @if($teacherID == null || empty($schedules) || count($schedules) <= 0)
                         <tr>
-                          <td colspan="3"><i>No Schedule Found.</i></td>
+                          <td colspan="4"><i>No Schedule Found.</i></td>
                         </tr>
                       @else
                         <?php $missedCounter = 0; ?>
                         @foreach($schedules AS $v)
                         <tr>
                           <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
+                          <td>
+                            @if($v->student_user_id != null)
+                              {{$v->sfname}} {{$v->slname}} ({{$v->semail}})
+                            @endif
+                          </td>
                           @if($v->student_user_id === null)
                           <td>Open</td>
                           @elseif( $v->called === null )

@@ -110,7 +110,7 @@ class CommonController {
       ['users.id','<>',Auth::user()->id],
       ['users.is_student', '=', 1]
     ];
-    $users = User::select("users.*","students.fname","students.lname")->leftJoin("students","students.user_id","users.id")->where($condition)->orderBy("students.fname","asc")->orderBy("students.lname","asc")->get();
+    $users = User::select("users.*", "students.user_id", "students.fname","students.lname")->leftJoin("students","students.user_id","users.id")->where($condition)->orderBy("students.fname","asc")->orderBy("students.lname","asc")->get();
     return $users;
   }
 

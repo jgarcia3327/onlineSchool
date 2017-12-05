@@ -36,11 +36,10 @@
                       </a>
                     </div>
                     <div class="col-md-3">
-                      <!--
                       <a class="text-center" title="Schedule Editor" href="{{ url('/adminScheduleEditor') }}">
                        <span class="fa fa-calendar fa-3x admin-link"></span>
-                       <span class="admin-link">Schedule Editor</span>
-                     </a> -->
+                       <span class="admin-link">Schedule Editor (In-development)</span>
+                     </a>
                     </div>
                   </div>
               </div>
