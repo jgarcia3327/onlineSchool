@@ -32,7 +32,7 @@ class WageController extends Controller
         ['date_time', '<=', $dateEnd." 23:59:59"]
       ];
 
-      $teacherScheds = Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "users.email AS semail")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("users","users.id","=","schedules.student_user_id")->where($condition)->get();
+      $teacherScheds = Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "users.email AS semail")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("users","users.id","=","schedules.student_user_id")->where($condition)->orderBy("schedules.date_time","asc")->get();
 
       return array($teacherScheds, $dateStart, $dateEnd);
     }
