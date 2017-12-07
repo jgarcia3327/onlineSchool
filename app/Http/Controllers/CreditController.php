@@ -344,8 +344,8 @@ class CreditController extends Controller
         return redirect('');
 
       // Update student Credits
-      CreditController::getCreditLessons($student_id);
-      
+      CreditController::getCreditCount($student_id);
+
       $credits = CreditController::getCreditDetails($student_id);
 
       $credit_details = array(0 => $student_id, 1 => $credits);
