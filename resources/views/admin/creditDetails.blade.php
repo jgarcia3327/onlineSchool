@@ -106,7 +106,7 @@ $student_name = null;
                         <?php $used_credit++; ?>
                         <?php $status = $date_time < strtotime($common->getCarbonNow())? "<i class='text-success'>(Done)</i>" : "<i class='text-danger'>(Incoming)</i>"; ?>
                         <td><span style="display:none;">{{$v->date_time}}</span>{{$common->getFormattedDateTimeRange($v->date_time)}}</td>
-                        <td>{{$v->tfname}} {{$v->tlname}} [ <a href="{{url('/teacherProfile/'.$v->tuser_id)}}">Teacher Profile</a> ]</td>
+                        <td>{{$v->tfname}} {{$v->tlname}} [<a href="{{url('/teacherProfile/'.$v->tuser_id)}}">Teacher Profile</a>]</td>
                         <td>{{$can_cancel}} {!! $status !!}</td>
                       @endif
                       </tr>
@@ -148,7 +148,8 @@ $student_name = null;
 <script type="text/javascript">
   $(document).ready(function() {
     $('#student-credit').DataTable( {
-        "order": [[ 0, "asc" ]]
+        "order": [[ 0, "asc" ]],
+        "pageLength": 60
     } );
   } );
 </script>
