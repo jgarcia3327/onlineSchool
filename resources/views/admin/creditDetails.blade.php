@@ -76,9 +76,9 @@ $student_name = null;
                   @else
                     <table id="student-credit">
                       <thead>
+                        <th>Status</th>
                         <th>Schedule</th>
                         <th>Teacher</th>
-                        <th>Status</th>
                       </thead>
                       <tbody>
                     <?php $counter = 0; ?>
@@ -94,20 +94,20 @@ $student_name = null;
                       ?>
                       @if ( $v->active == 0 )
                         <?php $expired_credit++; ?>
+                        <td>{{$can_cancel}} <i class="text-error-inline">Expired last {{date("F d, Y",$expired_time)}}</i></td>
                         <td><span style="display:none;">0</span></td>
                         <td></td>
-                        <td>{{$can_cancel}} <i class="text-error-inline">Expired last {{date("F d, Y",$expired_time)}}</i></td>
                       @elseif ($v->schedule_id == null || empty($v->schedule_id))
                         <?php $active_credit++; ?>
+                        <td>{{$can_cancel}} <i class="text-success">Open - will expire {{date("F d, Y",$expired_time)}}</i></td>
                         <td><span style="display:none;">0</span></td>
                         <td></td>
-                        <td>{{$counter}} ). {{$can_cancel}} <i class="text-success">Open - will expire {{date("F d, Y",$expired_time)}}</i></td>
                       @else
                         <?php $used_credit++; ?>
                         <?php $status = $date_time < strtotime($common->getCarbonNow())? "<i class='text-success'>(Done)</i>" : "<i class='text-danger'>(Incoming)</i>"; ?>
+                        <td>{{$can_cancel}} {!! $status !!}</td>
                         <td><span style="display:none;">{{$v->date_time}}</span>{{$common->getFormattedDateTimeRange($v->date_time)}}</td>
                         <td>{{$v->tfname}} {{$v->tlname}} [<a href="{{url('/teacherProfile/'.$v->tuser_id)}}">Teacher Profile</a>]</td>
-                        <td>{{$can_cancel}} {!! $status !!}</td>
                       @endif
                       </tr>
                     @endforeach
@@ -148,7 +148,7 @@ $student_name = null;
 <script type="text/javascript">
   $(document).ready(function() {
     $('#student-credit').DataTable( {
-        "order": [[ 0, "asc" ]],
+        "order": [[ 1, "desc" ]],
         "pageLength": 60
     } );
   } );
