@@ -343,6 +343,9 @@ class CreditController extends Controller
       if (Auth::user()->is_admin != 1)
         return redirect('');
 
+      // Update student Credits
+      CreditController::getCreditLessons($student_id);
+      
       $credits = CreditController::getCreditDetails($student_id);
 
       $credit_details = array(0 => $student_id, 1 => $credits);

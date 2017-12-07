@@ -2,6 +2,10 @@
 
 @section('title', "Student Lesson Credit Details")
 
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+@endsection
+
 @section('content')
 <?php
 $student_id = $credit_details[0];
@@ -70,9 +74,16 @@ $student_name = null;
                   @if ($credits == null)
                   <i class="text-danger">No Credits Found</i>
                   @else
-                    <ul class="list-group">
+                    <table id="student-credit">
+                      <thead>
+                        <th>Schedule</th>
+                        <th>Teacher</th>
+                        <th>Status</th>
+                      </thead>
+                      <tbody>
                     <?php $counter = 0; ?>
                     @foreach ($credits AS $v)
+                      <tr>
                       <?php
                         $date_time = strtotime($v->date_time);
                         $date_created = strtotime($v->create_date);
@@ -83,21 +94,25 @@ $student_name = null;
                       ?>
                       @if ( $v->active == 0 )
                         <?php $expired_credit++; ?>
-                        <li class="list-group-item">{{$counter}} ). {{$can_cancel}} <i class="text-error-inline">Expired last {{date("F d, Y",$expired_time)}}</i></li>
+                        <td><span style="display:none;">0</span></td>
+                        <td></td>
+                        <td>{{$can_cancel}} <i class="text-error-inline">Expired last {{date("F d, Y",$expired_time)}}</i></td>
                       @elseif ($v->schedule_id == null || empty($v->schedule_id))
                         <?php $active_credit++; ?>
-                        <li class="list-group-item">{{$counter}} ). {{$can_cancel}} <i class="text-success">Open - will expire {{date("F d, Y",$expired_time)}}</i></li>
+                        <td><span style="display:none;">0</span></td>
+                        <td></td>
+                        <td>{{$counter}} ). {{$can_cancel}} <i class="text-success">Open - will expire {{date("F d, Y",$expired_time)}}</i></td>
                       @else
                         <?php $used_credit++; ?>
-                        <li class="list-group-item">
-                          <?php $status = $date_time < strtotime($common->getCarbonNow())? "<i class='text-success'>(Done)</i>" : "<i class='text-danger'>(Incoming)</i>"; ?>
-                          {{$counter}} ).{{$can_cancel}} <strong>{!! $status !!} Lesson Schedule:</strong> <a href="{{ url('/schedule/my_schedule/'.date('Y-m-d', $date_time)) }}">{{$common->getFormattedDateTimeRange($v->date_time)}}</a>
-                          <br/><strong>Teacher:</strong> {{$v->tfname}} {{$v->tlname}} [ <a href="{{url('/teacherProfile/'.$v->tuser_id)}}">Teacher Profile</a> ]
-                          <!-- id:{{$v->id}} | user-id:{{$v->user_id}} | schedule-id:{{$v->schedule_id}} | consume-days:{{$v->consume_days}} -->
-                        </li>
+                        <?php $status = $date_time < strtotime($common->getCarbonNow())? "<i class='text-success'>(Done)</i>" : "<i class='text-danger'>(Incoming)</i>"; ?>
+                        <td><span style="display:none;">{{$v->date_time}}</span>{{$common->getFormattedDateTimeRange($v->date_time)}}</td>
+                        <td>{{$v->tfname}} {{$v->tlname}} [ <a href="{{url('/teacherProfile/'.$v->tuser_id)}}">Teacher Profile</a> ]</td>
+                        <td>{{$can_cancel}} {!! $status !!}</td>
                       @endif
+                      </tr>
                     @endforeach
-                    </ul>
+                    </tbody>
+                  </table>
                   @endif
                 </div>
             </div>
@@ -128,4 +143,13 @@ $student_name = null;
   });
 </script>
 @endif
+
+<script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#student-credit').DataTable( {
+        "order": [[ 0, "asc" ]]
+    } );
+  } );
+</script>
 @endsection
