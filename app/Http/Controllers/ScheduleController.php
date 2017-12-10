@@ -557,4 +557,75 @@ class ScheduleController extends Controller
     return view('schedule.studentSchedules', compact('schedules'));
   }
 
+  public function adminUpdateAjax(Request $request, $id) {
+    if (Auth::user()->is_admin != 1) {
+      return redirect('');
+    }
+
+    if($request->has('action')){
+      $schedule = Schedule::where("id",$id)->first();
+      $student_id = $schedule->student_user_id;
+      $sched_id = $schedule->id;
+      $credit_id = $schedule->credit_id;
+      // Cancel
+      if($request->action == 'cancel'){
+        // Nullify called
+        $schedule->called = null;
+        $schedule->save(); // save called=null
+        //Update credit
+        $credit = Credit::where([["user_id","=",$student_id],["schedule_id","=",$sched_id]])->first();
+        if ($credit != null) {
+          $credit->schedule_id = null;
+          $credit->save();
+        }
+        return json_encode(array("response"=>"success"));
+      }
+      // Delete
+      else if($request->action == 'delete') {
+        // Check if there's student linked to it
+        if ($student_id != null) {
+          // Nullify credit
+          $credit = Credit::where([["user_id","=",$student_id],["schedule_id","=",$sched_id]])->first();
+          if ($credit != null) {
+            $credit->schedule_id = null;
+            $credit->save();
+          }
+        }
+        // Delete schedule
+        $schedule->delete();
+        return json_encode(array("response"=>"success"));
+      }
+      // Assign
+      else if($request->action == 'assign') {
+        // Check if there's student linked to it
+        if ($student_id == null) {
+          $student_id = $request->student_id;
+          // Credit sched
+          if (CreditController::getCreditCount($student_id) > 0) {
+            $assign_credit_id = CreditController::updateCreditSchedule($student_id, $sched_id);
+            if ($assign_credit_id > 0) {
+              // Assign student
+              $schedule->student_user_id = $student_id;
+              $schedule->credit_id = $assign_credit_id;
+              $schedule->save();
+              return json_encode(array("response"=>"success"));
+            }
+            else {
+              return json_encode(array("response"=>"fail - error assigning credit to schedule."));
+            }
+
+          }
+          else {
+            return json_encode(array("response"=>"fail - student has no active credit left. === ".$student_id));
+          }
+        }
+        else {
+          return json_encode(array("response"=>"fail - schedule has student."));
+        }
+      }
+
+    }
+
+  }
+
 }

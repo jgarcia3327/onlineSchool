@@ -67,3 +67,13 @@
     </div>
 </div>
 @endsection
+
+@section('javascript')
+<script type="text/javascript">
+var pathname = $(location).attr('pathname');
+var refreshPage = pathname;
+var refreshInterval = setInterval(function() {
+  window.location.href = refreshPage;
+}, 300000); // 5 mins
+</script>
+@endsection

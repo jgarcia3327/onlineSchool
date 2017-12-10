@@ -91,4 +91,5 @@ Route::group(['middleware' => 'auth'], function() {
       Route::get('/adminCreditDetails', ['as' => "Student Credit Viewer", 'uses' => "CreditController@adminCreditDetails"]);
       Route::get('/adminCreditDetails/{student_id}', ['as' => "Student Credit Viewer", 'uses' => "CreditController@showCreditDetails"]);
       Route::get('/adminScheduleEditor', ['as' => "Admin Schedule Editor", 'uses' => "AdminController@scheduleEditor"]);
+      Route::put('/adminScheduleEditorUpdateAjax/{schedule_id}', ['as' => "Admin Schedule Editor - update", "uses" => "ScheduleController@adminUpdateAjax"]);
 });
