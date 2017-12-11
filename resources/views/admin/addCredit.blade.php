@@ -35,18 +35,18 @@
                       </label>
                       <select class="form-control" id="num_credit" name="num_credit" required>
                         <option value=""></option>
-                        @for($i = 1; $i <= 30; $i++)
+                        @for($i = 1; $i <= 60; $i++)
                         <option value="{{$i}}">{{$i}}</option>
                         @endfor
                       </select>
 
                       <label for="num_days">
-                        Number of validity days:
+                        Number of validity in days:
                       </label>
                       <select class="form-control" id="num_days" name="num_days" required>
                         <option value=""></option>
-                        @for($i = 1; $i <= 60; $i++)
-                        <option value="{{$i}}">{{$i}}</option>
+                        @for($i = 1; $i <= 120; $i++)
+                        <option value="{{$i}}">{{$i}} day{{$i>1?"s":""}}</option>
                         @endfor
                       </select>
 
