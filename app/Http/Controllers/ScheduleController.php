@@ -16,12 +16,55 @@ use Carbon\Carbon;
 class ScheduleController extends Controller
 {
 
-  public static function getAllFutureSchedules() {
-    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","<>",null],["date_time",">=",Carbon::now()]])->orderBy("date_time","asc")->get();
-  }
+  public static function getAllSchedules($date) {
+    if ($date === null && empty($date)) {
+      return null;
+    }
+    $dateRange = null;
+    if (strpos($date, "_") !== false) {
+      $week = strstr($date,"_",true);
+      $year = substr(strstr($date,"_"),1);
+      //JS release week number per year in advance of 1 week and we need to -1 to inline with JS
+      $week = $week != 0 ? ($week-1) : 1;
+      $dates = new CommonController();
+      $dateStart = $dates->getStartAndEndDate($week, $year)[0];
+      $dateEnd = $dates->getStartAndEndDate($week, $year)[1];
+      $condition = [
+        ["teachers.user_id","<>",null],
+        ['date_time', '>=', $dateStart." 00:00:00"],
+        ['date_time', '<=', $dateEnd." 23:59:59"]
+      ];
+      $date = null;
+      $dateRange = array($dateStart, $dateEnd);
+    }
+    else {
+      $condition = [
+        ["teachers.user_id","<>",null],
+        ['date_time', '>=', $date." 00:00:00"],
+        ['date_time', '<=', $date." 23:59:59"]
+      ];
+      //dd($condition);
+    }
+    $scheds = Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where($condition)->orderBy("date_time","asc")->get();
 
-  public static function getAllPastSchedules() {
-    return Schedule::select("schedules.*", "students.fname AS sfname", "students.lname AS slname", "students.skype AS sskype", "teachers.fname AS tfname", "teachers.lname AS tlname", "teachers.skype AS tskype")->leftJoin("students","students.user_id","=","schedules.student_user_id")->leftJoin("teachers","teachers.user_id","=","schedules.teacher_user_id")->where([["teachers.user_id","<>",null],["date_time","<",Carbon::now()]])->orderBy("date_time","desc")->get();
+    $futureScheds = $pastScheds = array();
+    if ($scheds != null && count($scheds) > 0) {
+      foreach($scheds AS $sched){
+        if ($sched->date_time >= Carbon::now()) {
+          $futureScheds[] = $sched;
+        }
+        else{
+          $pastScheds[] = $sched;
+        }
+      }
+    }
+
+    if($pastScheds != null) {
+      $pastScheds = array_reverse($pastScheds);
+    }
+
+    return array("future" => $futureScheds, "past" => $pastScheds);
+
   }
 
   public static function getTeacherFutureSchedules($teacher_user_id) {
@@ -438,8 +481,8 @@ class ScheduleController extends Controller
     $studentsArray = array();
     foreach($scheds AS $sched){
       if ($sched->student_user_id != null ) $studentsArray[] = $sched->student_user_id;
-      //add 15 minutes to be moved to past lessons 15 x 60sec = 900
-      if( strtotime($sched->date_time) + 900 >= strtotime(date("Y-m-d H:i:s")) ) {
+      //add 10 minutes to be moved to past lessons. 10 x 60sec = 600
+      if( strtotime($sched->date_time) + 600 >= strtotime(date("Y-m-d H:i:s")) ) {
         $futureScheds[] = $sched;
       }
       else{
@@ -569,16 +612,30 @@ class ScheduleController extends Controller
       $credit_id = $schedule->credit_id;
       // Cancel
       if($request->action == 'cancel'){
-        // Nullify called
-        $schedule->called = null;
-        $schedule->save(); // save called=null
-        //Update credit
-        $credit = Credit::where([["user_id","=",$student_id],["schedule_id","=",$sched_id]])->first();
-        if ($credit != null) {
-          $credit->schedule_id = null;
-          $credit->save();
+        $isUpdate = false;
+        // Past and called sched
+        if($schedule->called != null) {
+          $schedule->called = null;
+          $isUpdate = true;
         }
-        return json_encode(array("response"=>"success"));
+        // Future sched
+        else if($schedule->date_time > Carbon::now()){
+          $schedule->student_user_id = null;
+          $isUpdate = true;
+        }
+        if ($isUpdate) {
+          $schedule->save(); // save called=null
+          //Update credit
+          $credit = Credit::where([["user_id","=",$student_id],["schedule_id","=",$sched_id]])->first();
+          if ($credit != null) {
+            $credit->schedule_id = null;
+            $credit->save();
+          }
+          return json_encode(array("response"=>"success"));
+        }
+        else {
+          return json_encode(array("response"=>"no update made"));
+        }
       }
       // Delete
       else if($request->action == 'delete') {

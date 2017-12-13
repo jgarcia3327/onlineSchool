@@ -118,7 +118,11 @@
                         </td>
                         <td>
                             @if($v->called == null)
-                              <i class="text-danger">Bài học bị bỏ lỡ<!--Missed Session--></i>
+                              @if( strtotime($v->date_time)+600 > strtotime($common->getCarbonNow()) ) <!-- 10mins -->
+                                <i class="text-success">Session in-progress</i>
+                              @else
+                                <i class="text-danger">Bài học bị bỏ lỡ<!--Missed Session--></i>
+                              @endif
                             @elseif($v->memo != null)
                               <strong>Tên khóa học:</strong><p style="margin:0">{{ $v->memo }}</p>
                               <strong>Tên sách:</strong><p style="margin:0">{{ $v->memo_book }}</p>

@@ -197,7 +197,7 @@
 ?>
 
 @section('javascript')
-<script type="text/javascript" src="{{ asset('js/my_schedule.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/my_schedule_teacher.js') }}"></script>
 
 <script type="text/javascript">
   $(document).ready(function(){

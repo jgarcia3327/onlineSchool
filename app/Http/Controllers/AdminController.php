@@ -67,15 +67,27 @@ class AdminController extends Controller
       return view('admin.teacherSalary', compact('wages'));
     }
 
-    public function scheduleEditor() {
+    public function scheduleEditor($date) {
       if (Auth::user()->is_admin != 1) {
         return redirect('');
       }
 
-      $future_schedules = ScheduleController::getAllFutureSchedules();
-      $past_schedules = ScheduleController::getAllPastSchedules();
+      $scheds = ScheduleController::getAllSchedules($date);
 
-      $schedules = array($future_schedules, $past_schedules);
+      $dateRange = null;
+      if (strpos($date, "_") !== false) {
+        $week = strstr($date,"_",true);
+        $year = substr(strstr($date,"_"),1);
+        //JS release week number per year in advance of 1 week and we need to -1 to inline with JS
+        $week = $week != 0 ? ($week-1) : 1;
+        $dates = new CommonController();
+        $dateStart = $dates->getStartAndEndDate($week, $year)[0];
+        $dateEnd = $dates->getStartAndEndDate($week, $year)[1];
+        $date = null;
+        $dateRange = array($dateStart, $dateEnd);
+      }
+
+      $schedules = array($scheds["future"], $scheds["past"], $date, $dateRange);
 
       return view('admin.scheduleEditor', compact('schedules'));
     }

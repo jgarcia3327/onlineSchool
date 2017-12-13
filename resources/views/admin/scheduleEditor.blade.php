@@ -15,6 +15,29 @@
     <div class="row">
         <div class="col-md-12">
 
+          <!-- Calendar display -->
+          <div class="panel panel-default">
+              <div class="panel-heading">Choose a day or week to display your lessons</div>
+              <div class="panel-body">
+                <div class="col-md-8 col-md-offset-2">
+                  <div id="week-datepicker"></div>
+                </div>
+              </div>
+          </div>
+
+          <!-- Label -->
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="text-center">
+                @if($schedules[2] != null)
+                <strong>{{ $common->getFormattedDate($schedules[2]) }}</strong>
+                @else
+                <strong>{{ $common->getFormattedDate($schedules[3][0]) }}</strong> - to - <strong>{{ $common->getFormattedDate($schedules[3][1]) }}</strong>
+                @endif
+                </h3>
+              </div>
+          </div>
+
           <ul class="nav nav-tabs">
             <li role="presentation" class="active future"><a href="javascript:viewFutureSched();">Future Schedules</a></li>
             <li role="presentation" class="past"><a href="javascript:viewPastSched();">Past Schedules</a></li>
@@ -43,7 +66,9 @@
                             <td class="cancel-sched">
                               [ <a class="cancel" href="javascript:void(0)">Cancel</a> ]
                               <form class="form-cancel" action="{{url('')}}" method="post" style="display:none;">
-                                <input type="hidden" name="shed_id" value="{{$v->id}}">
+                                {{ method_field('PUT') }}
+                                {{ csrf_field() }}
+                                <input type="hidden" name="cancel_sched_id" value="{{$v->id}}">
                                 <button class="btn btn-danger" type="submit" name="button">Confirm</button>
                                 <a class="close-cancel" href="javascript:void(0)">Close</a>
                               </form>
@@ -148,7 +173,13 @@
 </div>
 @endsection
 
+<?php
+  $dateActiveArr = $schedules[2] != null? explode("-", $schedules[2]) : explode("-", $schedules[3][0]);
+  $dateActiveStr = $dateActiveArr[0].",".($dateActiveArr[1]-1).",".$dateActiveArr[2];
+?>
+
 @section('javascript')
+<script type="text/javascript" src="{{ asset('js/my_schedule_editor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/schedule-list.js') }}"></script>
 <script type="text/javascript">
@@ -216,6 +247,30 @@
       }
       event.preventDefault();
     });
+
+    $(document).ready(function(){
+      $('#week-datepicker').datepicker("setDate", new Date({{$dateActiveStr}}) );
+
+      // Load week button trigger in #week-datepicer
+      $("#week-datepicker .ui-datepicker-week-col").click(function(){
+          $(".loader").css({"display":"block"});
+          $("#lessons-list").css({"display":"none"});
+          var year = $("#week-datepicker .ui-datepicker-year").text();
+          var week = $(this).text();
+          dateStr = week+"_"+year;
+          console.log(dateStr);
+          getSavedDateTime(dateStr);
+      });
+    });
   });
+</script>
+
+<script type="text/javascript">
+  // Refresh every 5 minutes
+  var pathname = $(location).attr('pathname');
+  var refreshPage = pathname;
+  var refreshInterval = setInterval(function() {
+    window.location.href = refreshPage;
+  }, 300000); // 5 mins
 </script>
 @endsection
