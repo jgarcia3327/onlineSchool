@@ -131,8 +131,8 @@ class ScheduleController extends Controller
       $dataSet = [];
       foreach($request->date_time AS $timeSched) {
         // Teacher can register not less than 24 hours of the current time
-        // 24 hours = 86400 seconds
-        if ( strtotime($timeSched) <= (strtotime(date("Y-m-d H:i:s")) + 86400)) {
+        // 2 hours = 7200 seconds; //(Deprecated)24 hours = 86400 seconds
+        if ( strtotime($timeSched) <= (strtotime(date("Y-m-d H:i:s")) + 7200)) {
           continue;
         }
         $dataSet[] = [
