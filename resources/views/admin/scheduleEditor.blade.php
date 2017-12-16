@@ -181,7 +181,7 @@
 @section('javascript')
 <script type="text/javascript" src="{{ asset('js/my_schedule_editor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/datatables.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/schedule-list.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/schedule-list-editor.js') }}"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     // Cancel / Delete
