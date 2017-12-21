@@ -159,6 +159,15 @@
                               <button class="btn btn-danger" type="submit" name="button">Confirm</button>
                               <a class="close-cancel" href="javascript:void(0)">Close</a>
                             </form>
+                            @elseif($hasStudent)
+                            [ <a class="cancel" href="javascript:void(0)">Delete</a> ]
+                            <form class="form-cancel" action="" method="post" style="display:none;">
+                              {{ method_field('PUT') }}
+                              {{ csrf_field() }}
+                              <input type="hidden" name="delete_sched_id" value="{{$v->id}}">
+                              <button class="btn btn-danger" type="submit" name="button">Confirm</button>
+                              <a class="close-cancel" href="javascript:void(0)">Close</a>
+                            </form>
                             @endif
                           </td>
                         </tr>
