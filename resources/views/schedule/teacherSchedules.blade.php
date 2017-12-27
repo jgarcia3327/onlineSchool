@@ -39,7 +39,7 @@
                           <?php $dateRangePieces = explode("|", $common->getFormattedDateTimeRangeMilitary($v->date_time)); ?>
                           <td>{!! $dateRangePieces[0] !!}<a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)))}}">{!! $dateRangePieces[1] !!}</a> | {!! $dateRangePieces[2] !!}</td>
                           <td>
-                            <a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)))}}">Visit {{date('Y-m-d', strtotime($v->date_time))}} from My Calendar</a>
+                            <a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)).'/#lessons-list')}}">Visit {{date('Y-m-d', strtotime($v->date_time))}} from My Calendar</a>
                           </td>
                           @if ($hasStudent)
                             <td>{{ucfirst($v->sfname." ".$v->slname)}} [ <a href="{{ url('profile/'.$v->suser_id) }}">Profile</a> ]</td>

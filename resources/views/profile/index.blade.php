@@ -247,7 +247,11 @@ $isStudent = (Auth::user()->is_student == 1)? true : false;
                                   @foreach($futureSchedules AS $v)
                                   <tr>
                                     <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
-                                    <td>{{ucfirst($v->tfname." ".$v->tlname)}} [<a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Profile</a>]</td>
+                                    <td>{{ucfirst($v->tfname." ".$v->tlname)}} [<a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Teacher&nbsp;Profile</a>]
+                                      @if($v->teacher_user_id == $auth->id)
+                                      <br/>[<a href="{{url('schedule/my_schedule/'.date('Y-m-d', strtotime($v->date_time)).'/#lessons-list')}}">Visit {{date('Y-m-d', strtotime($v->date_time))}} from My Calendar to perform Skype call</a>]
+                                      @endif
+                                    </td>
                                     <!-- <td><a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a></td> -->
                                   </tr>
                                   @endforeach
@@ -272,7 +276,7 @@ $isStudent = (Auth::user()->is_student == 1)? true : false;
                                   @foreach($pastSchedules AS $v)
                                   <tr>
                                     <td>{!! $common->getFormattedDateTimeRangeMilitary($v->date_time) !!}</td>
-                                    <td>{{ucfirst($v->tfname." ".$v->tlname)}} [<a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Profile</a>]</td>
+                                    <td>{{ucfirst($v->tfname." ".$v->tlname)}} [<a href="{{ url('teacherProfile/'.$v->tuser_id) }}">Teacher&nbsp;Profile</a>]</td>
                                     <!-- <td><a href="skype:live:{{$v->tskype}}?call">{{$v->tskype}}</a></td> -->
                                     <td>
                                       @if ($v->called == 1)

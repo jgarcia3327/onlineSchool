@@ -79,8 +79,10 @@
                                   [ <a href="skype:live:{{ $schedules[4][$v->student_user_id]->skype }}?call">Skype Call</a> ]
                                 @endif
                               @elseif ( $curTime >= $schedTime - 86400)
-                                <!-- Disable cancellation under 24 hours -->
+                                <!-- Disable cancellation under 24 hours here -->
+                                <button class="btn btn-default" disabled><i>Call</i></button>
                               @else
+                                <button class="btn btn-default" disabled><i>Call</i></button>
                                 [ <a class="text-danger" role="button" data-toggle="collapse" href="#collapse{{$v->id}}" aria-expanded="true" aria-controls="collapse{{$v->id}}">Cancel</a> ]
                                 <div id="collapse{{$v->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$v->id}}">
                                   <form class="call-form" action="{{ url('/schedule/'.$v->id) }}" method="POST">
