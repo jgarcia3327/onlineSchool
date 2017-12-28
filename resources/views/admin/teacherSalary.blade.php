@@ -110,7 +110,7 @@
                           <td>{{ $common->getFormattedDateTimeRange($v->date_time) }}</td>
                           <td>
                             @if($v->student_user_id != null)
-                              {{$v->sfname}} {{$v->slname}} ({{$v->semail}})
+                              {{$v->sfname}} {{$v->slname}} ({{$v->semail}}) [<a href="{{url('/adminCreditDetails/'.$v->student_user_id)}}">Credit&nbsp;Details</a>]
                             @endif
                           </td>
                           @if($v->student_user_id === null)
